@@ -7,7 +7,7 @@ resignationdate: Actual
 company: CINQ Technologies
 description: "Front-end developer"
 languages: [HTML5, CSS3, javascript, java]
-frameworks: [DOJO, The intern!, NodeJS, Git, Scrum]
+frameworks: [DOJO, The intern!, NodeJS, Subversion, Git, Scrum]
 ---
 
-Working in international projects. Communications system maintenance on proprietary protocol. Acting in partnership with staff located in Atlanta - USA, with daily meetings in English. Using Scrum for project management
+Development and maintenance of communications systems over air proprietary protocol. Work together with the team allocated in Atlanta with daily meetings. Scrum as project management

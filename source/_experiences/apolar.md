@@ -8,8 +8,8 @@ resignationdate: 2011-04-01
 company: Apolar Imóveis 
 description: "Full C# Developer"
 languages: [javascript, HTML, JSON, CSS, C#, ASP Classic]
-frameworks: [jQuery, .NET]
-additionInfo: [Subversion, Ajax, WebServices, MySql]
+frameworks: [jQuery, jQueryUI, .NET]
+additionInfo: [Subversion, Team Foundation System (TFS), Ajax, WebServices, MySql]
 ---
 
-Maintenance and development of rental system and real estate sales, legacy systems maintenance.
+Development of a system to real estate sales Legacy system maintenance. Version control with subversion and Team Foundation System (TFS)

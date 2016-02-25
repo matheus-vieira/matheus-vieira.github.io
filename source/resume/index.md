@@ -3,9 +3,8 @@ layout: page
 permalink: /resume/
 ---
 
-## Purpose
-
-Create new and better concepts with design patterns and best practices for application development. Working together with a team focused on better solution for applications, independent of the language used and the plataforma that the system will be used.
+## Goal
+Create new and better concepts using design patterns and best practices for application development. Working together with a team leading them to find better solutions for the projects, regardless of the tools used.
 
 ## Available versions of my curriculum
 [Curriculum English]({{ '/resume/curriculum-en.pdf' }}){: .btn.btn-ghost download=""}
