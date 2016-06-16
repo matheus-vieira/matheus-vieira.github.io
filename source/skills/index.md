@@ -6,7 +6,7 @@ permalink: /skills/
 ## Skills
 
 ### Programming languages
-`C#, VB, PHP, Java, Javascript`
+`C#, VB, PHP, Java, Javascript, C, C++`
 
 ### Markup languages
 `HTML, HTML5, XML`
