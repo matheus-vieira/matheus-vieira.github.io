@@ -19,6 +19,7 @@ permalink: /skills/
 
 ### System architecture, and design patterns:
 `GRASP: Information Specialist, Creator, High cohesion, low coupling.`
+<br />
 `GoF: Singleton, Façade, Factory, Observer, Decorator.`
 
 ### Version control
