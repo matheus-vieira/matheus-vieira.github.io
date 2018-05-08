@@ -11,7 +11,7 @@
         let ret = repository.has_pages;
         ret &= Boolean(repository.homepage);
         ret &= repository.homepage && repository.homepage.includes(baseUrl);
-        ret &= repository.homepage != "baseUrl";
+        ret &= repository.homepage != baseUrl;
         return Boolean(ret);
     }
 
