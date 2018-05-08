@@ -52,6 +52,8 @@ navbar:
     title: Skills
   - slug: blog
     title: Blog
+  - slug: courses
+    title: Courses
 
 collections:
  - graduations
