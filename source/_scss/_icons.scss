@@ -6,7 +6,7 @@ $icon-comment-o: "\e903";
 $icon-comments-o: "\e904";
 $icon-search: "\e906";
 $icon-share: "\e909";
-$icon-google-mail: "\&#x2709;"; //TODO: include in the end2end-icons font family
+$icon-google-mail: "\2709"; //TODO: include in the end2end-icons font family
 $icon-horns: "\U+1F918;";
 $icon-coffe: "☕";
 $icon-google-plus: "\e901";
@@ -17,6 +17,7 @@ $icon-twitter-rounded: "\e90d";
 $icon-feed: "\e90e";
 $icon-github: "\e90f";
 $icon-linkedin: "\e905";
+$icon-instagram: "\9842";
 
 @font-face {
   font-family: $icons-family;
@@ -39,6 +40,7 @@ $icon-linkedin: "\e905";
   line-height: 1;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-size: 200%;
 }
 
 .icon-home:before { content: $icon-home; }
@@ -56,5 +58,6 @@ $icon-linkedin: "\e905";
 .icon-feed:before { content: $icon-feed; }
 .icon-github:before { content: $icon-github; }
 .icon-linkedin:before { content: $icon-linkedin; }
-.icon-horns:before { content: $icon-horns }
-.icon-coffee:before { content: $icon-coffe }
+.icon-horns:before { content: $icon-horns; }
+.icon-coffee:before { content: $icon-coffe; }
+.icon-instagram:before { content: $icon-instagram; }

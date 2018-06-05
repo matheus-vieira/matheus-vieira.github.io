@@ -29,18 +29,19 @@ disqus_shortname: "matheuscostavieira"
 
 # Author settings
 author:
-  name      : Matheus Costa Vieira
-  job       : Software Engineer
-  thumb     : /images/profile.png
-  url       : https://www.end2endsystems.com.br
-  email     : matheus.costa.vieira@gmail.com
-  gplus     : https://plus.google.com/+MatheusCostaVieira
-  facebook  : https://facebook.com/macovieira
-  twitter   : https://twitter.com/macostavieira
-#  instagram : https://instagram.com/macostavieira
-  github    : https://github.com/matheus-vieira
-  linkedin  : https://linkedin.com/in/macostavieira
-  bio       : "I love God, my wife, my son and then I love to create programs!"
+  name       : Matheus Costa Vieira
+  job        : Software Engineer
+  thumb      : /images/profile.png
+  url        : https://www.end2endsystems.com.br
+  email      : matheus.costa.vieira@gmail.com
+  email-opet : matheus.costa.vieira@gmail.com
+  gplus      : https://plus.google.com/+MatheusCostaVieira
+  facebook   : https://facebook.com/macovieira
+  twitter    : https://twitter.com/macostavieira
+  instagram  : https://instagram.com/matheuscostavieira
+  github     : https://github.com/matheus-vieira
+  linkedin   : https://linkedin.com/in/macostavieira
+  bio        : "I love God, my wife, my son and then I love to create programs!"
 
 # navbar pages
 navbar:
@@ -54,6 +55,8 @@ navbar:
     title: Blog
   - slug: courses
     title: Courses
+  - slug: contact
+    title: Contact
 
 collections:
  - graduations
