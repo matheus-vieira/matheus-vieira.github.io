@@ -63,6 +63,7 @@
 
 <form method="POST" action="https://formspree.io/matheus.costa.vieira@gmail.com">
   <input type="hidden" name="_next" value="/contact/thanks/" />
+  <input type="hidden" name="_language" value="en-US" />
   <input name="email" placeholder="Your email" type="email" />
   <textarea name="message" placeholder="Your message"></textarea>
   <button type="submit" class="btn btn-ghost">Send</button>
@@ -97,6 +98,7 @@
           $('.sliding-panel-content,.sliding-panel-fade-screen').toggleClass('is-visible');
           e.preventDefault();
         });
+        $('name="_language"').val(navigator.languages ? (navigator.languages.filter(l => l.length > 2) || navigator.languages)[0] : (navigator.language || navigator.userLanguage))
       });
       </script>
     </main>
