@@ -18,6 +18,7 @@
           $('.sliding-panel-content,.sliding-panel-fade-screen').toggleClass('is-visible');
           e.preventDefault();
         });
+        $('[name="_language"]').val(navigator.languages ? (navigator.languages.filter(l => l.length > 2) || navigator.languages)[0] : (navigator.language || navigator.userLanguage))
       });
       </script>
     </main>
