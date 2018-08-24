@@ -7,8 +7,8 @@ permalink: /resume/
 Create new and better concepts using design patterns and best practices for the development of applications and use automated tests to ensure the system quality
 
 ## Available versions of my curriculum
-[Curriculum English]({{ '/resume/curriculum-en.pdf' }}){: .btn.btn-ghost download=""}
-[Curriculum Português]({{ '/resume/curriculum-pt.pdf' }}){: .btn.btn-ghost download=""}
+[Curriculum English]({{ '/resume/curriculum-en.pdf' }}){: .button.button-ghost download=""}
+[Curriculum Português]({{ '/resume/curriculum-pt.pdf' }}){: .button.button-ghost download=""}
 
 ## [Academic education]({{ '/resume/academic-education/' }})
 Graduation in Informations Systems, post-graduate in Software Archtecture and Engeeniring

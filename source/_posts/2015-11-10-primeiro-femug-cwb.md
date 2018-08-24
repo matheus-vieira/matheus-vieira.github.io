@@ -2,7 +2,7 @@
 layout: post
 title: "Primeiro Femug-CWB"
 date: 2015-11-10 13:04:03
-image: '{{ site.baseurl }}/static/img/posts/femug-cwb-001/primeiro-femug-cwb.png'
+image: '/images/posts/femug-cwb-001/galera.jpg'
 description: "Resenha sobre o primeiro Front-End Meetup Grupo de Curitiba"
 tags: braziljs femug-cwb meetup curitiba
 categories:

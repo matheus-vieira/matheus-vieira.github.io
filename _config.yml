@@ -1,47 +1,50 @@
 # Build settings
-permalink   : /blog/:year/:title/
-markdown    : kramdown
-# highlighter : rouge
-# For local debug
-highlighter : pygments
+permalink: /blog/:year/:title/
+markdown: kramdown
+highlighter: pygments
+plugins: [jekyll-paginate]
 
-paginate: 2 #6
+paginate: 3
 paginate_path: "/blog/page/:num/"
 comments: true
+
+incremental: true
 
 source: source
 destination: _site
 sass:
-  sass_dir: _scss
-  style: expanded # compressed
+  sass_dir: _sass
+  style: compressed # expanded
 
 # SEO settings
 title: mvieira
-description: "An site with some personal informations, resume and blog from Matheus Costa vieira"
-keywords: "Jekyll, personal information, resume, Matheus, Costa, Vieira, Matheus Costa Vieira, blog, web"
-url: https://www.end2endsystems.com.br/
-# baseurl: "/end2end"
+description: "An site with some personal informations, resume and blog from Matheus Costa Vieira"
+keywords: "Jekyll, personal information, resume, Matheus, Costa, Vieira, Matheus Costa Vieira, blog, w"
+url: http://matheus-vieira.github.io
 baseurl: ""
 
 google_analytics: UA-27171689-1
-repo: http://github.com/matheus-vieira/end2end
+repo: https://github.com/matheus-vieira/matheus-vieira.github.io
 disqus_shortname: "matheuscostavieira"
+disqus_site_shortname: "matheuscostavieira"
 
 # Author settings
 author:
-  name       : Matheus Costa Vieira
-  job        : Software Engineer
-  thumb      : /images/profile.png
-  url        : https://www.end2endsystems.com.br
-  email      : matheus.costa.vieira@gmail.com
-  email-opet : matheus.costa.vieira@gmail.com
-  gplus      : https://plus.google.com/+MatheusCostaVieira
-  facebook   : https://facebook.com/macovieira
-  twitter    : https://twitter.com/macostavieira
-  instagram  : https://instagram.com/matheuscostavieira
-  github     : https://github.com/matheus-vieira
-  linkedin   : https://linkedin.com/in/macostavieira
-  bio        : "I love God, my wife, my son and then I love to create programs!"
+  name: Matheus Costa Vieira
+  job: Software Engineer
+  bio: "I love God, my wife, my son and my little daughter (an angel) and then I love to create programs!"
+  thumb: /images/author.png
+  email: matheus.costa.vieira@gmail.com
+  email-prof : matheus.vieira@opet.edu.br
+  url: http://matheus-vieira.github.io
+  github: https://github.com/matheus-vieira
+  twitter: https://twitter.com/macostavieira
+  facebook: https://facebook.com/macovieira
+  linkedin: https://linkedin.com/in/macostavieira
+  gplus: https://plus.google.com/+MatheusCostaVieira
+  instagram: https://instagram.com/matheuscostavieira
+  whatsapp: https://api.whatsapp.com/send?phone=5541988024599&text=E ae!
+  phone: "5541988024599"
 
 # navbar pages
 navbar:
@@ -49,8 +52,6 @@ navbar:
     title: About
   - slug: resume
     title: Resume
-  - slug: skills
-    title: Skills
   - slug: blog
     title: Blog
   - slug: courses
@@ -62,5 +63,4 @@ collections:
  - graduations
  - experiences
 
-
-exclude: ["gulp", "node_modules", "bower", "bower_components", "config.rb", "src", "Gemfile", "Gemfile.lock", ".rvmrc", ".rbenv-version", "package.json", "gulpfile.js", "README.md", "Rakefile", "changelog.md"]
+exclude: ["config.rb", "src", "Gemfile", "Gemfile.lock", "package.json","README.md", "Rakefile"]

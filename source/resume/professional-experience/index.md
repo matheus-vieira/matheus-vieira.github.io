@@ -6,11 +6,10 @@ permalink: /resume/professional-experience/
 
 {% highlight js %}
 function request(file) {
-  fetch(file).then(function(response) {
-    return response.json().then(function(json) {
-      console.log(json);
-    });
-  });
+  const log = console.log;
+  fetch(file)
+    .then(r => r.json())
+    .then(j => log(j));
 }
 {% endhighlight %}
 
