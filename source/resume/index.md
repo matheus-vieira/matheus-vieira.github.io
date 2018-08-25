@@ -14,7 +14,7 @@ Create new and better concepts using design patterns and best practices for the 
 Graduation in Informations Systems, post-graduate in Software Archtecture and Engeeniring
 
 ## [Professional experience]({{ '/resume/professional-experience/' }})
-Actually I'm working for [CINQ Technologies](http://www.cinq.com.br/) and involved with the [FEMUG-CWB](http://femug-cwb.com.br/)
+Actually I'm working for home office and teaching about web technologies at [UniOpet](http://www.opet.com.br/site/)
 
 ## [Skills]({{ '/resume/skills/' }})
 I've have some skills on lead teams, programming languages, SQL and NoSQL databases, design patterns and some other things!
