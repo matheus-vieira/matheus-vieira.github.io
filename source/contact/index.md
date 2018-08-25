@@ -6,7 +6,7 @@ permalink: /contact/
 ## Leave a message
 
 <form id="contact" method="POST" action="https://formspree.io/matheus.costa.vieira@gmail.com">
-  <input type="hidden" name="_next" value="{{ '/contact/thanks/" | prepend: site.baseurl }}" />
+  <input type="hidden" name="_next" value="{{ '/contact/thanks/' | prepend: site.baseurl }}" />
   <input type="hidden" name="_language" value="en-US" />
   <select id="mail-select">
     <option value="{{ site.author.email }}" selected>Personal - {{ site.author.email }}</option>
