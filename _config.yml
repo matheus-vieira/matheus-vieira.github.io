@@ -24,6 +24,7 @@ url: http://matheus-vieira.github.io
 baseurl: ""
 
 google_analytics: UA-27171689-1
+site.google_analytics_container: GTM-TWNMZ5Q
 repo: https://github.com/matheus-vieira/matheus-vieira.github.io
 disqus_shortname: "matheuscostavieira"
 disqus_site_shortname: "matheuscostavieira"
