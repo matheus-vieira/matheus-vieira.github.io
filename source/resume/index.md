@@ -22,7 +22,7 @@ Graduation in Informations Systems, post-graduate in Software Archtecture and En
 
 Unofficially I've started a master degree on [PUCPR - PPGIA](https://www.ppgia.pucpr.br/pt/)
 
-Today I'm still an studend learning about:
+Today I'm still an student learning about:
 
 > * [NodeJS](https://nodejs.org/en/)
 > * [Angular](https://angular.io/)
