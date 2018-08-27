@@ -27,8 +27,8 @@ Today I'm still an student learning about:
 > * [NodeJS](https://nodejs.org/en/)
 > * [Angular](https://angular.io/)
 > * [React](https://reactjs.org/)
-> * [.NET Core (already publish on production!)](https://docs.microsoft.com/pt-br/dotnet/core/)
-> * [Entity Framework Core (already publish on production!)](https://docs.microsoft.com/pt-br/ef/core/)
+> * [.NET Core (already published on production!)](https://docs.microsoft.com/pt-br/dotnet/core/)
+> * [Entity Framework Core (already published on production!)](https://docs.microsoft.com/pt-br/ef/core/)
 
 
 ## [Professional experience]({{ '/resume/professional-experience/' }})
