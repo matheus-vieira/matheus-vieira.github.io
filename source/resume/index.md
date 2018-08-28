@@ -13,8 +13,8 @@ Keeping on mind the problem resolution with the best experience for the user.
 
 ## Available versions of my curriculum
 
-[Curriculum English]({{ '/resume/curriculum-en.pdf' }}){: .button.button-ghost download=""}
-[Curriculum Português]({{ '/resume/curriculum-pt.pdf' }}){: .button.button-ghost download=""}
+[Curriculum English](//drive.google.com/file/d/1nJXj1Y6QpYtZT8c5KCy3k92gGXRxc0Qw/view){: .button.button-ghost target="_blank"}
+[Curriculum Português](//drive.google.com/file/d/1vk4_PeQGuU6S2WtWcCRgWGyDgFSzcm9Z/view){: .button.button-ghost target="_blank"}
 
 ## [Academic education]({{ '/resume/academic-education/' }})
 
