@@ -13,8 +13,8 @@ Keeping on mind the problem resolution with the best experience for the user.
 
 ## Print versions of my curriculum
 
-[English (EN-US)]({{ 'print/en-us'  | prepend: site.baseurl }}){: .button.button-ghost target="_blank"}
-[Português (PT-BR)]({{ 'print/pt-br'  | prepend: site.baseurl }}){: .button.button-ghost target="_blank"}
+[English (EN-US)]({{ 'print/en-us'  | prepend: site.baseurl }}){: .button.button-ghost }
+[Português (PT-BR)]({{ 'print/pt-br'  | prepend: site.baseurl }}){: .button.button-ghost }
 
 ## [{{ site.messages["en-us"].print-resume.title.education }}]({{ '/resume/academic-education/' }})
 

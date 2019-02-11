@@ -1,9 +1,9 @@
-<section class="site-header">
-  <h1 class="logo">{{ site.author.name }}</h1>
-  <nav class="txt-right">
-    <h6>Curitiba- Paraná - Brazil</h6>
-    <h6><a href="tel:5541988024599" title="Call me" target="_blank"><i class="icon icon-phone"></i>+55 41 9 88024599</a></h6>
-    <h6><a href="mailto:{{ site.author.email }}" title="Personal mail" target="_blank"><i class="icon icon-mail"></i>
-        {{ site.author.email }}</a></h6>
-  </nav>
-</section>
+{% assign lang = page.lang | default: "en-us" %}
+<small>
+  <table>
+    <tr><th rowspan="4"><h1>{{ site.author.name }}</h1></th></tr>
+    <tr><th class="txt-right">{{ site.messages[lang].print-resume.location }}</th></tr>
+    <tr><th class="txt-right"><a href="tel:{{ site.author.phone }}" title="Call me" target="_blank"><i class="icon icon-phone"></i> {{ site.author.cellphone }}</a></th></tr>
+    <tr><th class="txt-right"><a href="mailto:{{ site.author.email }}" title="Personal mail" target="_blank"><i class="icon icon-mail"></i> {{ site.author.email }}</a></th></tr>
+  </table>
+</small>

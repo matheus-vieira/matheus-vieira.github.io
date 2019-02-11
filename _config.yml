@@ -46,13 +46,13 @@ author:
   instagram: https://instagram.com/matheuscostavieira
   whatsapp: https://api.whatsapp.com/send?phone=5541988024599&text=E ae!
   phone: "5541988024599"
-  print-pt-br: "Opcionalmente remova o cabeçalho nas opções de impressão"
-  print-en-us: "Optionally remove header in print options"
+  cellphone: "+55 41 9 88024599"
 
 messages:
   pt-br:
     print-alert: "Opcionalmente remova o cabeçalho nas opções de impressão"
     print-resume:
+      location: "Curitiba- Paraná - Brasil"
       title:
         goal: "Objetivo"
         education: "Formação Acadêmica"
@@ -66,6 +66,7 @@ messages:
   en-us:
     print-alert: "Optionally remove header in print options"
     print-resume:
+      location: "Curitiba- Paraná - Brazil"
       title:
         goal: "Goal"
         education: "Academic formation"

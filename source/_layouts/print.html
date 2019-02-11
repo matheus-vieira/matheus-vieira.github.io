@@ -8,15 +8,12 @@
   <noscript><iframe src="https://www.googletagmanager.com/ns.html?id={{ site.google_analytics_container }}"height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <!-- End Google Tag Manager (noscript) -->
   {% assign lang = page.lang | default: "en-us" %}
-  <main class="main-container">
-    <article role="article" class="page card">
-      {% include header.print.html %}
-      {{ content }}
-    </article>
-  </main>
+  
+  {% include header.print.html %}
+  {{ content }}
   <script>
-    // alert('{{ site.messages[lang].print }}');
-    // print();
+    alert('{{ site.messages[lang].print-alert }}');
+    print();
   </script>
 </body>
 </html>
