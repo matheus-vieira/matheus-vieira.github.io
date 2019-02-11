@@ -1,5 +1,5 @@
 ---
-layout: graduation
+layout: graduation-print
 order: 2
 location: "Curitiba - PR / BR"
 institution: TechResult IT Solutions

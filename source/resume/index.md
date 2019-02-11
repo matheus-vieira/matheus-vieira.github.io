@@ -11,12 +11,12 @@ Making use of automated tests to ensure the system quality.
 
 Keeping on mind the problem resolution with the best experience for the user.
 
-## Available versions of my curriculum
+## Print versions of my curriculum
 
-[Curriculum English](//drive.google.com/file/d/1nJXj1Y6QpYtZT8c5KCy3k92gGXRxc0Qw/view){: .button.button-ghost target="_blank"}
-[Curriculum Português](//drive.google.com/file/d/1vk4_PeQGuU6S2WtWcCRgWGyDgFSzcm9Z/view){: .button.button-ghost target="_blank"}
+[English (EN-US)]({{ 'print/en-us'  | prepend: site.baseurl }}){: .button.button-ghost target="_blank"}
+[Português (PT-BR)]({{ 'print/pt-br'  | prepend: site.baseurl }}){: .button.button-ghost target="_blank"}
 
-## [Academic education]({{ '/resume/academic-education/' }})
+## [{{ site.messages["en-us"].print-resume.title.education }}]({{ '/resume/academic-education/' }})
 
 Graduation in Informations Systems, post-graduate in Software Archtecture and Engeeniring and Embedded Systems and Internet of Things
 

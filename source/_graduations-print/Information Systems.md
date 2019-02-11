@@ -1,5 +1,5 @@
 ---
-layout: graduation
+layout: graduation-print
 order: 8
 location: Curitiba - PR / BR
 institution: UP - Universidade Positivo
