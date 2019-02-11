@@ -2,16 +2,22 @@
 layout: print
 ---
 
-<main class="main-container">
+<article role="article" class="page card">
   {% include print/goal.md %}
-  <hr />
+</article>
+<article role="article" class="page card">
   {% include print/graduation.md %}
-  <hr />
+</article>
+<article role="article" class="page card">
   {% include print/courses.md %}
-  <hr />
+</article>
+<article role="article" class="page card">
   {% include print/experiences.md %}
-  <hr />
+</article>
+<article role="article" class="page card">
+  {% include print/skills.md %}
+</article>
   {% comment %}
   {% endcomment %}
   {{ content }}
-</main>
+</article>

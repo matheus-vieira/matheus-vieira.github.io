@@ -10,6 +10,9 @@ course: Bachelor in Information Systems
 en-us:
   name: Bachelor in Information Systems
   description: Course Completion Assignment – HTML5 Study on the future web standard
+pt-br:
+  name: Bacharel em Sistemas de Informação
+  description: Course Completion Assignment – HTML5 Study on the future web standard
 ---
 
 Course Completion Assignment – HTML5 Study on the future web standard

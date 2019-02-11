@@ -59,6 +59,7 @@ messages:
         courses: "Cursos"
         experiences: "Experiência"
         institution: "Instituição"
+        skills: "Conhecimentos"
       goal: "Criar novos e melhores conceitos usando padrões de design e melhores práticas para o desenvolvimento de aplicativos.
 <br /> Fazendo uso de testes automatizados para garantir a qualidade do sistema.
 <br /> Tendo em mente a resolução do problema com a melhor experiência para o usuário."
@@ -71,6 +72,7 @@ messages:
         courses: "Courses"
         experiences: "Experiences"
         institution: "Institution"
+        skills: "Skills"
       goal: "Create new and better concepts using design patterns and best practices for the development of applications.
 <br /> Making use of automated tests to ensure the system quality.
 <br /> Keeping on mind the problem resolution with the best experience for the user."
@@ -91,6 +93,7 @@ navbar:
 collections:
  - graduations
  - experiences
+ - skills
  - graduations-print
  - experiences-print
 
