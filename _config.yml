@@ -48,6 +48,8 @@ author:
   phone: "5541988024599"
   cellphone: "+55 41 9 88024599"
 
+max_experiences: 3
+
 messages:
   pt-br:
     print-alert: "Opcionalmente remova o cabeçalho nas opções de impressão"
@@ -60,6 +62,9 @@ messages:
         experiences: "Experiência"
         institution: "Instituição"
         skills: "Conhecimentos"
+        course: "Curso"
+        company: "Empresa"
+        current: "Atual"
       goal: "Criar novos e melhores conceitos usando padrões de design e melhores práticas para o desenvolvimento de aplicativos.
 <br /> Fazendo uso de testes automatizados para garantir a qualidade do sistema.
 <br /> Tendo em mente a resolução do problema com a melhor experiência para o usuário."
@@ -74,6 +79,9 @@ messages:
         experiences: "Experiences"
         institution: "Institution"
         skills: "Skills"
+        course: "Course"
+        company: "Company"
+        current: "Actual"
       goal: "Create new and better concepts using design patterns and best practices for the development of applications.
 <br /> Making use of automated tests to ensure the system quality.
 <br /> Keeping on mind the problem resolution with the best experience for the user."

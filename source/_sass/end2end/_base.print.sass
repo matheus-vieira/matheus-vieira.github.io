@@ -23,4 +23,29 @@ body
   // padding-top: 5.5em
 
 .card
-  page-break-inside: avoid
+  // page-break-inside: avoid
+  // padding: 0.1em 1.5em
+
+  &:not(:last-child)
+    // margin: 0 0 .3em
+
+th
+  border-bottom: 0px
+  padding: 0
+
+table
+  border-bottom: 1px solid shade($base-border-color, 25%)
+
+.no-border td
+  border-bottom: none
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p
+  margin: 0 0 .5em
+  &:last-child
+    margin: 0 0 .5em

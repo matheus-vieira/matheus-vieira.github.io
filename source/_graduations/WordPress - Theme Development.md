@@ -8,6 +8,10 @@ enddate: 2014-08-21
 type: Individual course
 course: WordPress - Theme Development
 certificate: /images/certificates/desenvolvimentoTemasWordpress.pdf
+en-us:
+  name: WordPress - Theme Development
+pt-br:
+  name: WordPress - Desenvolvimento de Temas
 ---
 
 Create your own website and blog using a simple, easy and excellent aesthetic quality platform.

@@ -1,6 +1,5 @@
 ---
-layout: experience-print
-order: 3
+layout: js
 title: "Descrição do trabalho"
 jobtitle: "System Analyst"
 admissiondate: 2010-08-01

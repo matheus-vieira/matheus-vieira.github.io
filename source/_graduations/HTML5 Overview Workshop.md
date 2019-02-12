@@ -8,6 +8,8 @@ enddate: 2013-04-20
 type: Individual course
 course: HTML5 Overview Workshop Course
 certificate: /images/certificates/HTML5.pdf
+en-us:
+  name: HTML5 Overview Workshop Course
+pt-br:
+  name: Workshop Overview de HTML5
 ---
-
-An overview about HTML5 (new input types, new attributes, geolocation)

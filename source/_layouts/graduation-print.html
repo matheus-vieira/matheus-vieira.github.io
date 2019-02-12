@@ -1,7 +1,0 @@
-{% assign lang = page.lang | default: "en-us" %}
-<div class="well well-sm">
-  {{ site.messages[lang].print-resume.title.institution }}:
-  <strong>{{ page.institution }}</strong>
-  <time datetime="{{ page.startdate }}">{{ page.startdate  | date: "%b, %Y"}}</time>- <time datetime="{{ page.enddate }}">{{ page.enddate  | date: "%B, %Y"}}</time>
-  <p>Course: <strong>{{ page[lang].name }}</strong></p>
-</div>

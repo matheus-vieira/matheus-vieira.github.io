@@ -2,22 +2,10 @@
 layout: print
 ---
 
-<article role="article" class="page card">
-  {% include print/goal.md %}
-</article>
-<article role="article" class="page card">
-  {% include print/graduation.md %}
-</article>
-<article role="article" class="page card">
-  {% include print/courses.md %}
-</article>
-<article role="article" class="page card">
-  {% include print/experiences.md %}
-</article>
-<article role="article" class="page card">
-  {% include print/skills.md %}
-</article>
-  {% comment %}
-  {% endcomment %}
-  {{ content }}
-</article>
+<table class="no-border">
+  <tr><td rowspan="5" width="20%">{% include print/skills.md %}</td></tr>
+  <tr><td><article role="article" class="page card">{% include print/goal.md %}</article></td></tr>
+  <tr><td><article role="article" class="page card">{% include print/graduation.md %}</article></td></tr>
+  <tr><td><article role="article" class="page card">{% include print/experiences.md %}</article></td></tr>
+  <tr><td><article role="article" class="page card">{% include print/courses.md %}</article></td></tr>
+</table>

@@ -1,5 +1,5 @@
 ---
 layout: skills
 skill: .NET Core
-percent: 82.3
+percent: 91.88
 ---
