@@ -11,9 +11,11 @@
 
   {% include header.print.html %}
   {{ content }}
+  {% if site.host != "127.0.0.1" %}
   <script>
-    // alert('{{ site.messages[lang].print-alert }}');
-    // print();
+    alert('{{ site.messages[lang].print-alert }}');
+    print();
   </script>
+{% endif %}
 </body>
 </html>

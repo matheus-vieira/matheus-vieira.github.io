@@ -20,7 +20,7 @@ Keeping on mind the problem resolution with the best experience for the user.
 
 Graduation in Informations Systems, post-graduate in Software Archtecture and Engeeniring and Embedded Systems and Internet of Things
 
-Unofficially I've started a master degree on [PUCPR - PPGIA](https://www.ppgia.pucpr.br/pt/)
+In 2019 I'll start an master degree at [Lactec](http://www.lactec.org.br/submenu-capacitacao/mestrado-profissional/)
 
 Today I'm still an student learning about:
 
@@ -33,7 +33,7 @@ Today I'm still an student learning about:
 
 ## [Professional experience]({{ '/resume/professional-experience/' }})
 
-Actually I'm working home office and teaching about web technologies at [UniOpet](http://www.opet.com.br/site/)
+Actually I'm working for [Gateware](https://www.gateware.com.br/) and my company [End2End Systems]
 
 ## [Skills]({{ '/resume/skills/' }})
 
