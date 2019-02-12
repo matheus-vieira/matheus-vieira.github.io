@@ -1,6 +1,6 @@
 ---
 layout: skills
 type: language
-skill: HTML
+skill: XML
 percent: 95.99
 ---

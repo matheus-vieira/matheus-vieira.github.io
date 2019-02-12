@@ -1,6 +1,6 @@
 ---
 layout: skills
 type: language
-skill: HTML
-percent: 95.99
+skill: COBOL
+percent: 15.3
 ---

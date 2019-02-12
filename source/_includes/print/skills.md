@@ -1,16 +1,23 @@
 {% assign lang = page.lang | default: "en-us" %}
 
-<h2>Skills</h2>
+<h2 class="txt-center">Skills</h2>
 
-{% assign skills = site.skills | sort: "order" %}
+<h6>{{ site.messages[lang].print-resume.title.skills-languages }}</h6>
+{% assign skills = site.skills | sort: "skill" | sort: "percent" | reverse %}
 {% for skill in skills %}
-  {{ skill }}
+  {% if skill.type == "language" %}
+    {{ skill }}
+  {% endif %}
 {% endfor %}
-<hr />
+<h6>{{ site.messages[lang].print-resume.title.skills-framework }}</h6>
 {% for skill in skills %}
-  {{ skill }}
+  {% if skill.type == "framework" %}
+    {{ skill }}
+  {% endif %}
 {% endfor %}
-<hr />
+<h6>{{ site.messages[lang].print-resume.title.skills-others }}</h6>
 {% for skill in skills %}
-  {{ skill }}
+  {% if skill.type == "other" %}
+    {{ skill }}
+  {% endif %}
 {% endfor %}

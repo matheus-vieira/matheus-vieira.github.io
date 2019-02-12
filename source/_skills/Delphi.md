@@ -1,6 +1,6 @@
 ---
 layout: skills
 type: language
-skill: HTML
-percent: 95.99
+skill: Delphi
+percent: 30.3
 ---

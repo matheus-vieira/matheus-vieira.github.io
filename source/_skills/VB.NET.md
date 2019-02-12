@@ -1,6 +1,6 @@
 ---
 layout: skills
 type: language
-skill: HTML
-percent: 95.99
+skill: VB.NET
+percent: 85.3
 ---

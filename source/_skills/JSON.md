@@ -1,6 +1,6 @@
 ---
 layout: skills
 type: language
-skill: HTML
+skill: JSON
 percent: 95.99
 ---

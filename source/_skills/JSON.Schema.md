@@ -1,6 +1,6 @@
 ---
 layout: skills
-type: language
-skill: HTML
+type: other
+skill: JSON Schema
 percent: 95.99
 ---

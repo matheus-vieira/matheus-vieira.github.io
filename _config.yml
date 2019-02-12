@@ -65,6 +65,9 @@ messages:
         course: "Curso"
         company: "Empresa"
         current: "Atual"
+        skills-languages: "Linguagens"
+        skills-framework: "Frameworks"
+        skills-others: "Outras"
       goal: "Criar novos e melhores conceitos usando padrões de design e melhores práticas para o desenvolvimento de aplicativos.
 <br /> Fazendo uso de testes automatizados para garantir a qualidade do sistema.
 <br /> Tendo em mente a resolução do problema com a melhor experiência para o usuário."
@@ -82,6 +85,9 @@ messages:
         course: "Course"
         company: "Company"
         current: "Actual"
+        skills-languages: "Languages"
+        skills-framework: "Frameworks"
+        skills-others: "Others"
       goal: "Create new and better concepts using design patterns and best practices for the development of applications.
 <br /> Making use of automated tests to ensure the system quality.
 <br /> Keeping on mind the problem resolution with the best experience for the user."
@@ -103,7 +109,5 @@ collections:
  - graduations
  - experiences
  - skills
- - graduations-print
- - experiences-print
 
 exclude: ["config.rb", "src", "Gemfile", "Gemfile.lock", "package.json","README.md", "Rakefile"]

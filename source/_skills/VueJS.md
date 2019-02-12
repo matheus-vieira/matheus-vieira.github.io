@@ -1,6 +1,6 @@
 ---
 layout: skills
 type: framework
-skill: .NET Core
-percent: 91.88
+skill: VueJS
+percent: 57.88
 ---

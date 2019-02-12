@@ -1,6 +1,6 @@
 ---
 layout: skills
 type: framework
-skill: .NET Core
-percent: 91.88
+skill: Entity Framework
+percent: 83.55
 ---
