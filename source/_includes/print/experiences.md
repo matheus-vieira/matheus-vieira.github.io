@@ -12,9 +12,9 @@
   {% else %}
     {{ site.messages[lang].print-resume.title.current }}
   {% endif %}
-  <p>{{ list[i][lang].description }}</p>
-  <p>{{ list[i].languages | join: ', ' }}</p>
-  <p>{{ list[i].frameworks | join: ', ' }}</p>
+  <br />{{ list[i][lang].description }}
+  <br />{{ list[i].languages | join: ', ' }}
+  <br />{{ list[i].frameworks | join: ', ' }}
   <p>{{ list[i].additionInfo | join: ', ' }}</p>
 </div>
 {% endfor %}
