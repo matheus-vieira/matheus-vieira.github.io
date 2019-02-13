@@ -20,7 +20,8 @@
 1. Download or clone repo `git clone git@github.com:nandomoreirame/end2end.git`
 2. Enter the folder: `cd end2end/`
 3. Install Ruby gems: `bundle install`
-4. Start Jekyll server: `bundle exec jekyll serve`
+4. Install Minimal Python: `sudo apt install python-minimal`
+5. Start Jekyll server: `bundle exec jekyll serve`
 
 Access, [localhost:4000/end2end](http://localhost:4000/end2end)
 
