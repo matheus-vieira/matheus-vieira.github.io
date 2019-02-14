@@ -5,16 +5,31 @@ permalink: /resume/skills/
 
 ## Skills
 
+{% assign skills = site.skills | sort: "skill" | sort: "percent" | reverse %}
+
 ### Programming languages
 
-`C#`, `VB`, `PHP`, `Java`, `Javascript`, `C`, `C++`
+{% for skill in skills %}
+  {% if skill.type == "language" and skill.sub-type == "programming" %}
+  {{ skill }}
+  {% endif %}
+{% endfor %}
 
 ### Markup languages
 
-`HTML`, `HTML5`, `XML`
+{% for skill in skills %}
+  {% if skill.type == "language" and skill.sub-type == "markup" %}
+  {{ skill }}
+  {% endif %}
+{% endfor %}
 
 ### Libraries and frameworks
 
+{% for skill in skills %}
+  {% if skill.type == "framework" and skill.sub-type == "library" %}
+  {{ skill }}
+  {% endif %}
+{% endfor %}
 `Bootstrap`, `KnockoutJS`, `JQuery`, `Angular JS`, `.NET`, `Entity Framework`, `Silverlight`
 
 ### Unified Modeling Language (UML)

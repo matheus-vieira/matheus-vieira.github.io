@@ -1,6 +1,7 @@
 ---
 layout: skills
 type: other
-skill: JSON Schema
+en-us:
+  skill: JSON Schema
 percent: 95.99
 ---

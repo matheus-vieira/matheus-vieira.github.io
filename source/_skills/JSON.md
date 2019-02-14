@@ -1,6 +1,7 @@
 ---
 layout: skills
 type: language
-skill: JSON
+en-us:
+  skill: JSON
 percent: 95.99
 ---

@@ -1,6 +1,8 @@
 ---
 layout: skills
 type: language
-skill: PHP
+sub-type: programming
+en-us:
+  skill: PHP
 percent: 80.3
 ---

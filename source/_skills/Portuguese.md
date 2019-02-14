@@ -1,6 +1,9 @@
 ---
 layout: skills
 type: idiom
-skill: Portuguese
+en-us:
+  skill: Portuguese
+pt-br:
+  skill: Português
 percent: 99.9
 ---

@@ -1,6 +1,8 @@
 ---
 layout: skills
 type: framework
-skill: AngularJS
+sub-type: library
+en-us:
+  skill: AngularJS
 percent: 53.88
 ---

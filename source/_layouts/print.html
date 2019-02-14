@@ -1,19 +1,18 @@
-<!DOCTYPE html>
+---
+layout: compress
+---
+{% assign lang = page.lang | default: "en-us" %}<!DOCTYPE html>
 <html>
-<head>
-  {% include head.print.html %}
-</head>
+<head>{% include head.print.html %}</head>
 <body>
   <!-- Google Tag Manager (noscript) -->
   <noscript><iframe src="https://www.googletagmanager.com/ns.html?id={{ site.google_analytics_container }}"height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <!-- End Google Tag Manager (noscript) -->
-  {% assign lang = page.lang | default: "en-us" %}
-
   {% include header.print.html %}
   {{ content }}
-  <script>
+  {% if jekyll.environment != "development" %}<script>
     alert('{{ site.messages[lang].print-alert }}');
     print();
-  </script>
+  </script>{% endif %}
 </body>
 </html>

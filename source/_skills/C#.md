@@ -1,6 +1,8 @@
 ---
 layout: skills
 type: language
-skill: C#
+sub-type: programming
+en-us:
+  skill: C#
 percent: 93.3
 ---

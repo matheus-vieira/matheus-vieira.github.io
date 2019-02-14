@@ -1,6 +1,7 @@
 ---
 layout: skills
 type: framework
-skill: Entity Framework
+en-us:
+  skill: Entity Framework
 percent: 83.55
 ---

@@ -1,6 +1,8 @@
 ---
 layout: skills
 type: framework
-skill: Bootstrap
+sub-type: library
+en-us:
+  skill: Bootstrap
 percent: 90.55
 ---

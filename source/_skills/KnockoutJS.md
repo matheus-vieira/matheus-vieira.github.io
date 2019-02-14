@@ -3,6 +3,6 @@ layout: skills
 type: framework
 sub-type: library
 en-us:
-  skill: .NET
-percent: 84.99
+  skill: KnockoutJS
+percent: 53.88
 ---

@@ -1,6 +1,7 @@
 ---
 layout: skills
 type: other
-skill: Design Pattern
+en-us:
+  skill: Design Pattern
 percent: 77.99
 ---

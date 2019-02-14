@@ -1,6 +1,7 @@
 ---
 layout: skills
 type: framework
-skill: VueJS
+en-us:
+  skill: VueJS
 percent: 57.88
 ---

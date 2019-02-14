@@ -1,6 +1,7 @@
 ---
 layout: skills
 type: framework
-skill: Jekyll
+en-us:
+  skill: Jekyll
 percent: 89.3
 ---

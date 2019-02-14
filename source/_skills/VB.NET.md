@@ -1,6 +1,8 @@
 ---
 layout: skills
 type: language
-skill: VB.NET
+sub-type: programming
+en-us:
+  skill: VB.NET
 percent: 85.3
 ---

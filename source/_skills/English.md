@@ -1,6 +1,9 @@
 ---
 layout: skills
 type: idiom
-skill: English
+en-us:
+  skill: English
+pt-br:
+  skill: Inglês
 percent: 75.3
 ---

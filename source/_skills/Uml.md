@@ -1,6 +1,7 @@
 ---
 layout: skills
 type: other
-skill: UML
+en-us:
+  skill: UML
 percent: 60.88
 ---

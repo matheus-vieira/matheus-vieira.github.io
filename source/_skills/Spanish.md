@@ -1,6 +1,9 @@
 ---
 layout: skills
 type: idiom
-skill: Spanish
+en-us:
+  skill: Spanish
+pt-br:
+  skill: Espanhol
 percent: 55.3
 ---

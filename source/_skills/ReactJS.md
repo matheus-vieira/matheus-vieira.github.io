@@ -1,6 +1,7 @@
 ---
 layout: skills
 type: framework
-skill: ReactJS
+en-us:
+  skill: ReactJS
 percent: 60.88
 ---

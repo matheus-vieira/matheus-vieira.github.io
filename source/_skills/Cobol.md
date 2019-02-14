@@ -1,6 +1,8 @@
 ---
 layout: skills
 type: language
-skill: COBOL
+sub-type: programming
+en-us:
+  skill: COBOL
 percent: 15.3
 ---

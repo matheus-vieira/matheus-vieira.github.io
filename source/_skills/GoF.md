@@ -1,6 +1,7 @@
 ---
 layout: skills
 type: other
-skill: GoF
+en-us:
+  skill: GoF
 percent: 56.32
 ---

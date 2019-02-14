@@ -1,6 +1,7 @@
 ---
 layout: skills
 type: other
-skill: GRASP
+en-us:
+  skill: GRASP
 percent: 56.32
 ---

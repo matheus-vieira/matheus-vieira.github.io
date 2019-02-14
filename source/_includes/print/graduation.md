@@ -3,7 +3,7 @@
 <h2>{{ site.messages[lang].print-resume.title.education }}</h2>
 
 {% assign graduations = site.graduations | sort: "order" %}
-{% for g in graduations %}
+{% for g in graduations reversed %}
   {% if g.type != "Individual course" and g.type != "technical" %}
 <div class="well well-sm page">
   {{ site.messages[lang].print-resume.title.institution }}:

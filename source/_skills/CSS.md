@@ -1,6 +1,9 @@
 ---
 layout: skills
 type: language
-skill: CSS (all versions)
+en-us:
+  skill: CSS (all versions)
+pt-br:
+  skill: CSS (todas as versões)
 percent: 68.3
 ---

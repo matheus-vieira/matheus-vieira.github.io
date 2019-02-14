@@ -1,6 +1,8 @@
 ---
 layout: skills
 type: language
-skill: Python
+sub-type: programming
+en-us:
+  skill: Python
 percent: 15.3
 ---

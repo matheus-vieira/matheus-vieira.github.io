@@ -1,6 +1,7 @@
 ---
 layout: skills
 type: other
-skill: UI
+en-us:
+  skill: UX
 percent: 72.88
 ---

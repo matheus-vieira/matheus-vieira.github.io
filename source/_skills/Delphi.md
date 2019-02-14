@@ -1,6 +1,8 @@
 ---
 layout: skills
 type: language
-skill: Delphi
+sub-type: programming
+en-us:
+  skill: Delphi
 percent: 30.3
 ---

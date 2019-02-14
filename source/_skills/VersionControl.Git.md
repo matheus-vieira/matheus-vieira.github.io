@@ -1,6 +1,7 @@
 ---
 layout: skills
 type: other
-skill: Version Control - GIT
+en-us:
+  skill: Version Control - GIT
 percent: 91.88
 ---
