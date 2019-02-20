@@ -3,7 +3,7 @@ layout: page
 permalink: /resume/
 ---
 
-## Goal
+## Goals
 
 Create new and better concepts using design patterns and best practices for the development of applications.
 

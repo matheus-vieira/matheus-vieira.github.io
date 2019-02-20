@@ -10,7 +10,7 @@ gem 'wdm', '>= 0.1.0' if Gem.win_platform?
 #
 # This will help ensure the proper Jekyll version is running.
 # Happy Jekylling!
-gem "jekyll", "~>3.5.0"
+gem "jekyll", "~>3.8.5"
 gem 'rake', '~> 12.3', '>= 12.3.1'
 gem "sass", "~>3.4"
 gem 'json', '~> 2.1'

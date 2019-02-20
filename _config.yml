@@ -9,7 +9,6 @@ paginate_path: "/blog/page/:num/"
 comments: true
 
 incremental: true
-watch: true
 live_reload: true
 
 source: source
