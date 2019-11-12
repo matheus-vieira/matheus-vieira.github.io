@@ -4,5 +4,6 @@ type: language
 sub-type: programming
 en-us:
   skill: JAVA
-percent: 65.3
+percent: "86.12"
+
 ---
