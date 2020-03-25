@@ -10,9 +10,9 @@ layout: compress
   <!-- End Google Tag Manager (noscript) -->
   {% include header.print.html %}
   {{ content }}
-  {% if jekyll.environment != "development" %}<script>
+  <script>
     alert('{{ site.messages[lang].print-alert }}');
     print();
-  </script>{% endif %}
+  </script>
 </body>
 </html>
