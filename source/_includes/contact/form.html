@@ -1,0 +1,8 @@
+<form id="contact" method="POST" action="https://formsubmit.co/matheus.costa.vieira@gmail.com">
+    <input type="hidden" name="_next" value="{{ '/contact/thanks/' | prepend: site.baseurl }}" />
+    <input type="hidden" name="_language" value="en-US" />
+    <input type="email" name="email" placeholder="Your email" required />
+    <input type="text" name="_subject" placeholder="Type a subject!" required />
+    <textarea name="message" placeholder="Your message" required></textarea>
+    <button type="submit" class="btn btn-ghost">Send</button>
+</form>

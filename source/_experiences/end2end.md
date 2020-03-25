@@ -1,8 +1,8 @@
 ---
 layout: js
 jobtitle: "Software Engeenier, CEO, Founder"
-admissiondate: 2018-10-22
-resignationdate:
+admissiondate: 2016-10-22
+resignationdate: 2018-10-22
 company: End2End Systems
 description: "Create innovative software solutions"
 languages: [HTML5, CSS3, javascript, java, C#, PHP, Python, Ruby]

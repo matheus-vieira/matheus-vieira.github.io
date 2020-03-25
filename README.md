@@ -15,7 +15,7 @@
 
 ---
 
-### Start in 4 steps
+## Start in 4 steps
 
 1. Download or clone repo `git clone git@github.com:nandomoreirame/end2end.git`
 2. Enter the folder: `cd end2end/`
@@ -25,14 +25,14 @@
 
 Access, [localhost:4000/end2end](http://localhost:4000/end2end)
 
-### Deploy in Github pages in 2 steps
+## Deploy in Github pages in 2 steps
 
 1. Change the variables `GITHUB_REPONAME` and `GITHUB_REPO_BRANCH` in `Rakefile`
 2. Run `rake` or `rake publish` for build and publish on Github
 
 ---
 
-### Using Rake tasks
+## Using Rake tasks
 
 * Create a new page: `rake page name="contact.md"`
 * Create a new post: `rake post title="TITLE OF THE POST"`

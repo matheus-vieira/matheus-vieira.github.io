@@ -13,7 +13,8 @@ function request(file) {
 }
 {% endhighlight %}
 
-{% assign experiences = site.experiences | sort: "order" %}
-{% for experience in experiences reversed %}
+{% assign experiences = site.experiences | sort: 'admissiondate' %}
+{% assign experiences = experiences | reverse%}
+{% for experience in experiences %}
   {{ experience.output }}
 {% endfor %}

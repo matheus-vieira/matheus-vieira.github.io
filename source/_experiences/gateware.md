@@ -2,7 +2,7 @@
 layout: js
 jobtitle: "Senior software developer"
 admissiondate: 2018-10-22
-resignationdate:
+resignationdate: 2019-04-19
 company: Gateware
 description: "Educar para o pleno desenvolvimento pessoal, exercício da cidadania e formação para o trabalho, oferecendo às crianças, jovens e adultos as condições necessárias à construção e aplicação do conhecimento em benefício da sociedade."
 languages: [HTML5, CSS3, javascript, C#, VB.NET]
