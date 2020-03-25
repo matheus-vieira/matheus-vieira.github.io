@@ -20,7 +20,7 @@ sass:
 # SEO settings
 title: mvieira
 description: "An site with some personal informations, resume and blog from Matheus Costa Vieira"
-keywords: "Jekyll, personal information, resume, Matheus, Costa, Vieira, Matheus Costa Vieira, blog, w"
+keywords: "Jekyll, personal information, resume, Matheus, Costa, Vieira, Matheus Costa Vieira, blog"
 url: http://matheus-vieira.github.io
 baseurl: ""
 
@@ -48,7 +48,6 @@ author:
   bio: "I love God, my wife, my son and my little daughter (an angel) and then I love to create programs!"
   thumb: /images/author.png
   email: matheus.costa.vieira@gmail.com
-  email-prof : matheus.vieira@opet.edu.br
   url: http://matheus-vieira.github.io
   github: https://github.com/matheus-vieira
   twitter: https://twitter.com/macostavieira
