@@ -13,4 +13,6 @@ pt-br:
   name: Engenharia de Software e Arquitetura de Sistemas
 ---
 
+Analysis and Modeling of UML Objects, Software Architecture, Software Engineering and Requirements Engineering, Project Management (PMBOK), Agile Programming Methods, Software Development Metrics, IT Governance Practices, Software Quality, Software Testing and Methodology of Scientific Research
+
 Course Completion Assignment – Software Test Automation - Tests with Selenium and TheIntern
