@@ -10,10 +10,11 @@ gem 'wdm', '>= 0.1.0' if Gem.win_platform?
 #
 # This will help ensure the proper Jekyll version is running.
 # Happy Jekylling!
-gem "jekyll", "~>3.8.5"
-gem 'rake', '~> 12.3', '>= 12.3.1'
-gem "sass", "~>3.4"
-gem 'json', '~> 2.1'
+gem 'jekyll'
+gem 'rake'
+gem 'sass'
+gem 'json'
+
 
 
 # If you want to use GitHub Pages, remove the "gem "jekyll"" above and
@@ -22,10 +23,12 @@ gem 'json', '~> 2.1'
 
 # If you have any plugins, put them here!
 group :jekyll_plugins do
-  gem "bourbon", "~>4.3"
-  gem "jekyll-feed", "~>0.6"
+  gem "bourbon"
+  gem "neat"
+  gem "jekyll-feed"
   gem "jekyll-paginate"
   gem "pygments.rb"
   gem "jekyll-compose"
   gem "kramdown"
+  gem "rouge"
 end
