@@ -19,7 +19,7 @@ sass:
 
 # SEO settings
 title: mvieira
-description: "An site with some personal informations, resume and blog from Matheus Costa Vieira"
+description: "A site with some personal informations, resume and blog from Matheus Costa Vieira"
 keywords: "Jekyll, personal information, resume, Matheus, Costa, Vieira, Matheus Costa Vieira, blog"
 url: http://matheus-vieira.github.io
 baseurl: ""
