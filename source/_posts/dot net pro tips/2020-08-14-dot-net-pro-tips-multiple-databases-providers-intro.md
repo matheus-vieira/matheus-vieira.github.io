@@ -1,0 +1,58 @@
+---
+layout: post
+title: ".NET Pro tips Multiple Databases Providers Introduction"
+date: 2020-08-14 08:20:00
+image: https://upload.wikimedia.org/wikipedia/commons/thumb/e/ee/.NET_Core_Logo.svg/1200px-.NET_Core_Logo.svg.png
+description: "Introduction to pro tips for .NET Core projects with multiple database providers"
+tags: .net-core .net tips efcore
+categories:
+twitter_text: ".NET Pro tips Multiple Databases Providers Introduction"
+username: "Matheus Costa Vieira"
+user_description: Sênior Developer
+email: matheus.costa.vieira@gmail.com
+photo: mvieira.jpg
+---
+
+Seja bem vindo a uma série de artigos relacionado a utilização avançada do framework [.NET Core da Microsoft](https://docs.microsoft.com/pt-br/dotnet/core/).
+
+O objetivo maior aqui é compartilhar conhecimento, com alguma introdução, porém nada que seja igual à própria documentação, que por sinal é muito bem feita e com diversos exemplis úteis.
+
+Nessa série de artigos estarei mostrando um caso de uso onde eu devia conectar em diversos bancos de clientes diversos. Porém cada cliente que disponibilizava a sua infraestrutura para que pudéssemos criar a estrutura do SQL a ser utilizado. Portanto ora estavamos conectando a um MSSqlServer, ora um PostGreSQL, ora MySql.
+
+Para tanto foi necessário pensar em uma estrutura onde se pudesse reaproveitar o código (visto que a estrutura era a mesma) porém necessitamos trabalhar com as particularidades de cada banco.
+
+Antes de entrarmos na estrutura propriamente dita primeiro irei apresentar as estruturas utilizadas.
+
+## Princípios SOLID
+
+Ao desenvolvermos devemos utilizar alguns princípios. Nesse ponto recomendo buscar informações quanto ao [SOLID](https://www.baeldung.com/solid-principles) que é um conjunto de princípios utilizados no desenvolvimento de software.
+
+No SOLID cada letra representa um princípio:
+
+1. Single Responsibility (Princípio da Responsabilidade Única)
+2. Open/Closed (Princípio Aberto/Fechado)
+3. Liskov Substitution (Princípio da Substiruição de Liskov)
+4. Interface Segregation (Princípio da Segregação de Iterface)
+5. Dependency Inversion (Princípio da Inversão de Controlle)
+
+No decorrer dessa série iremos falar bastante desses princípios.
+
+## Conceitos
+
+Além dos princípios será comentado sobre conceitos de programação que orientam a um bom desenvolvimento de software.
+
+### [DRY](https://pt.wikipedia.org/wiki/Don%27t_repeat_yourself) - Don't Repeat Yourself (Não se repita)
+
+Esse conceito está relacionado ao princípio Open/Closed onde criamos código para ser reutilizado em nossa apliação.
+
+### [KISS](https://pt.wikipedia.org/wiki/Princ%C3%ADpio_KISS) - Keep it simple, stupid (Mantenha Simples, seu estúpido)
+
+Esse conceito está relacionado ao princípio Single Responsability onde o objetivo é fazer uma coisa apenas.
+
+### [YAGNI](https://pt.wikipedia.org/wiki/Princ%C3%ADpio_KISS) - You Ain't Gonna Need It (Você não precisa disso)
+
+Esse conceito também está relacionado ao princípio Single Responsability onde o objetivo é fazer uma coisa apenas, porém não tenha coisas desnecessárias.
+
+Para que a leitura não seja cansativo irei dividir em diversas partes esse artigo, mantendo bons exemplos.
+
+{% include posts/pro-tips-multiple-db-providers/related.md %}
