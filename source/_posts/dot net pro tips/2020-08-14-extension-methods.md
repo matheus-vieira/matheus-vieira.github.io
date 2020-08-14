@@ -5,7 +5,7 @@ date: 2020-08-14 08:20:00
 image: https://th.bing.com/th/id/OIP.NsHm5JKrYYAwtKPx1xEF7QHaFj?w=243&h=182&c=7&o=5&pid=1.7
 description: "Introduction to pro tips for .NET projects"
 tags: .net-core .net tips
-categories: dotnet pro tips
+categories: pt-br dotnet-pro-tips
 twitter_text: ".NET Pro tips"
 username: "Matheus Costa Vieira"
 user_description: Sênior Developer
@@ -122,4 +122,4 @@ Agora com nosso código encapsulado podemos melhorar sem precisar alterar a cham
 
 Fique a vontade para implementar a sua versão.
 
-{% include posts/pro-tips-multiple-db-providers/related.md %}
+{% include posts/pro-tips-multiple-db-providers/related-pt-br.md %}

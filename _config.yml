@@ -1,5 +1,5 @@
 # Build settings
-permalink: /blog/:year/:categories/:title/
+permalink: /blog/:categories/:title/
 markdown: kramdown
 highlighter: Rouge
 plugins: [jekyll-paginate]
