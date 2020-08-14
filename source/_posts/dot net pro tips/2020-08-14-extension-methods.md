@@ -5,7 +5,7 @@ date: 2020-08-14 08:20:00
 image: https://th.bing.com/th/id/OIP.NsHm5JKrYYAwtKPx1xEF7QHaFj?w=243&h=182&c=7&o=5&pid=1.7
 description: "Introduction to pro tips for .NET projects"
 tags: .net-core .net tips
-categories:
+categories: dotnet pro tips
 twitter_text: ".NET Pro tips"
 username: "Matheus Costa Vieira"
 user_description: Sênior Developer
