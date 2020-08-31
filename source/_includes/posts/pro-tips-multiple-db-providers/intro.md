@@ -1,0 +1,1 @@
+Esse artigo faz parte de uma série de artigos sobre como utilizar o EFCore com múltiplos providers de banco de dados. Se quiser veja outras partes dessa série em [links relacionados](#related).

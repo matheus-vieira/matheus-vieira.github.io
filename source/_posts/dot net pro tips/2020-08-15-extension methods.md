@@ -13,7 +13,7 @@ email: matheus.costa.vieira@gmail.com
 photo: mvieira.jpg
 ---
 
-Esse artigo faz parte de uma série de artigos sobre como utilizar o EFCore com múltiplos providers de banco de dados que pode ser encontrado em [.NET Pro tips Multiple Databases Providers Introduction]({{ '/blog/pt-br/dotnet-pro-tips/intro/'  | prepend: site.baseurl }})
+{% include posts/pro-tips-multiple-db-providers/intro.md %}
 
 ## O que isso quer dizer?
 
