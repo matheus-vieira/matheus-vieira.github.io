@@ -1,9 +1,9 @@
 ---
 layout: post
-title: ".NET Pro tips Extension Methods"
-date: 2020-08-14 08:20:00
+title: ".NET Pro tips - Métodos de Extensão"
+date: 2020-08-15 10:20:00
 image: https://th.bing.com/th/id/OIP.NsHm5JKrYYAwtKPx1xEF7QHaFj?w=243&h=182&c=7&o=5&pid=1.7
-description: "Introduction to pro tips for .NET projects"
+description: "Utilizando métodos de extensão"
 tags: .net-core .net tips
 categories: pt-br dotnet-pro-tips
 twitter_text: ".NET Pro tips"
