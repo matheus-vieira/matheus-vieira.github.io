@@ -3,6 +3,8 @@ layout: page
 permalink: /resume/skills/
 ---
 
+## Skill
+
 {% assign skills = site.skills | sort: "skill" | sort: "percent" | reverse %}
 
 <article class="page card">
@@ -36,19 +38,9 @@ permalink: /resume/skills/
 </article>
 
 <article class="page card">
-<h2>Unified Modeling Language</h2>
-
-{% for skill in skills %}
-  {% if skill.type == "other" and skill.sub-type == "uml" %}
-  {{ skill }}
-  {% endif %}
-{% endfor %}
-</article>
-
-<article class="page card">
 <h2>System architecture and design patterns</h2>
 
-{% for skill in skills %}
+{% for skill in skills | sort: "order" %}
   {% if skill.type == "other" and skill.sub-type == "architecture" %}
   {{ skill }}
   {% endif %}
@@ -68,23 +60,9 @@ permalink: /resume/skills/
 <article class="page card">
 <h2>Design</h2>
 
-{% for skill in skills %}
+{% for skill in skills | sort 'percent' %}
   {% if skill.type == "other" and skill.sub-type == "design" %}
   {{ skill }}
   {% endif %}
 {% endfor %}
 </article>
-
-## System architecture and design patterns:
-
-<em>GRASP</em>: `Information Specialist`, `Creator`, `High cohesion`, `low coupling.`
-
-<em>GoF</em>: `Singleton`, `Façade`, `Factory`, `Observer`, `Decorator.`
-
-## Version control
-
-`GIT `, `Subversion`, `Team Foundation System`
-
-## Design
-
-`Accessibility`, `Usability`, `User Experience`, `Information Architecture`

@@ -1,7 +1,8 @@
 ---
 layout: skills
 type: other
+sub-type: 'design'
 en-us:
-  skill: UX
+  skill: Information Architecture
 percent: 72.88
 ---

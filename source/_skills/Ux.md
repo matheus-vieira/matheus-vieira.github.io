@@ -1,8 +1,8 @@
 ---
 layout: skills
 type: other
-sub-type: architecture
+sub-type: 'design'
 en-us:
-  skill: UML
+  skill: User Experience
 percent: 60.88
 ---
