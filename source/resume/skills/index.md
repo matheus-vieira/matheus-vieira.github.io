@@ -3,12 +3,12 @@ layout: page
 permalink: /resume/skills/
 ---
 
-## Skill
+## Some professional skills that I learned through years
 
 {% assign skills = site.skills | sort: "skill" | sort: "percent" | reverse %}
 
 <article class="page card">
-<h2>Sponken languages</h2>
+<h2>Spoken languages</h2>
 
 {% for skill in skills %}
   {% if skill.type == "idiom" %}
