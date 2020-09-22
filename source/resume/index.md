@@ -33,7 +33,7 @@ Today I'm still an student learning about:
 
 ## [Professional experience]({{ '/resume/professional-experience/' }})
 
-Actually I'm working for [Gateware](https://www.gateware.com.br/) and my company [End2End Systems]
+Actually I'm working at [Wipro Limited](https://www.wipro.com/) for his client [Mastercard](https://www.mastercard.com.br/pt-br.html) developing API's and also to personal my own company ***End2End Systems***
 
 ## [Skills]({{ '/resume/skills/' }})
 
