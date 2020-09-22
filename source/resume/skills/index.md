@@ -8,6 +8,16 @@ permalink: /resume/skills/
 {% assign skills = site.skills | sort: "skill" | sort: "percent" | reverse %}
 
 <article class="page card">
+<h2>Sponken languages</h2>
+
+{% for skill in skills %}
+  {% if skill.type == "idiom" %}
+  {{ skill }}
+  {% endif %}
+{% endfor %}
+</article>
+
+<article class="page card">
 <h2>Programming languages</h2>
 
 {% for skill in skills %}
