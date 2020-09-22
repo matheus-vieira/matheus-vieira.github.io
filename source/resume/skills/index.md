@@ -50,7 +50,7 @@ permalink: /resume/skills/
 <article class="page card">
 <h2>System architecture and design patterns</h2>
 
-{% for skill in skills | sort: "order" %}
+{% for skill in skills %}
   {% if skill.type == "other" and skill.sub-type == "architecture" %}
   {{ skill }}
   {% endif %}
@@ -70,7 +70,7 @@ permalink: /resume/skills/
 <article class="page card">
 <h2>Design</h2>
 
-{% for skill in skills | sort 'percent' %}
+{% for skill in skills %}
   {% if skill.type == "other" and skill.sub-type == "design" %}
   {{ skill }}
   {% endif %}
