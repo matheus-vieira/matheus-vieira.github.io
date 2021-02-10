@@ -10,6 +10,7 @@ comments: true
 
 incremental: true
 live_reload: true
+host: 0.0.0.0
 
 source: source
 destination: _site

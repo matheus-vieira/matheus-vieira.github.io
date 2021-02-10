@@ -7,7 +7,7 @@ company: Wipro Limited
 description: ""
 languages: [Java]
 frameworks: [JAVA, Spring]
-additionInfo: [GIT, Design Patterns, Threads, Oracle, unit and functional testing]
+additionInfo: [GIT, Design Patterns, Threads, Oracle, unit testing]
 en-us:
   jobtitle: Senior Software Engineer
   description: Maintenance, development and architecture of REST API's for Mastercard client.

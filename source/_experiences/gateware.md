@@ -10,12 +10,12 @@ frameworks: [.NET, .NET Core, Razor Pages, Entity Framework, Entity Framework Co
 additionInfo: [GIT, Design Patterns, Threads, Sql Server, MySQL, PostgreSQL, message queues, unit and functional testing]
 en-us:
   jobtitle: Senior software developer
-  description: Team and Technical leader. Maintenance, development and architecture of Web-based systems. Development / creation of development processes, implementation of Scrum as methodology.
+  description: Team and Technical leader. Maintenance, development and architecture of Web-based systems. Implementation of Scrum as methodology for development process.
 pt-br:
   jobtitle: Desenvolvedor Sênior
-  description: Manutenção, desenvolvimento e arquitetura de sistemas baseado na Web. Desenvolvimento/criação de processos de desenvolvimento, implementação de Scrum como metodologia.
+  description: Líder técnico. Manutenção desenvolvimento de arquiteturas basedas na web. Implementação do Scrum como metodologia para o processo de desenvolvimento
 ---
 
 Team and Technical leader.
 Maintenance, development and architecture of Web-based systems.
-Development / creation of development processes, implementation of Scrum as methodology.
+Implementation of Scrum as methodology for development process.
