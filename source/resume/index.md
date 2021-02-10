@@ -36,7 +36,7 @@ Today I'm still an student learning about:
 
 ## [Professional experience]({{ '/resume/professional-experience/' }})
 
-Actually I'm working at:
+Currently working for companies:
 * [Wipro Limited](https://www.wipro.com/) for his client [Mastercard](https://www.mastercard.com.br/pt-br.html) developing API's with JAVA with Spring,
 * [DataInfo](https://www.datainfo.inf.br/) for his client [Caixa Econômica Federal - CEF](https://www.caixa.gov.br/Paginas/home-caixa.aspx) developing systems with .NET framework
 * ***End2End Systems*** my personal company for any other work.
