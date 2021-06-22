@@ -10,11 +10,11 @@ frameworks: [.NET, .NET MVC, Entity Framework, JAVA, Spring]
 additionInfo: [GIT, Design Patterns, Threads, SqlServer, unit testing]
 en-us:
   jobtitle: Senior Software Engineer
-  description: Maintenance, development and architecture of applications for Caixa Econômica Federal - CEF client.
+  description: Maintenance, development and architecture of .NET-based applications for Caixa Econômica Federal - CEF client.
 pt-br:
   jobtitle: Engenheiro de Software Sênior
-  description: Manutenção, desenvolvimento e arquitetura de aplicações para o cliente Caixa Econômica Federal - CEF
+  description: Manutenção, desenvolvimento e arquitetura de aplicações em .NET para o cliente Caixa Econômica Federal - CEF
 ---
 
 Senior software engineer.
-Maintenance, development and architecture of applications for Mastercard client.
+Maintenance, development and architecture of .NET-based applications for Caixa Econômica Federal - CEF client.
