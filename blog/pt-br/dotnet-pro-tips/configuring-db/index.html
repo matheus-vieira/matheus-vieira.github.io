@@ -1,0 +1,72 @@
+<!DOCTYPE html> <html> <head> <meta charset="utf-8"> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <meta name="viewport" content="width=device-width, initial-scale=1"> <meta http-equiv="Cache-Control" content="only-if-cached"/> <meta http-equiv="Cache-Control" content="max-age=120"/> <title>.NET Pro tips - Configurando banco de Dados</title> <meta name="description" content="Esse artigo faz parte de uma série de artigos sobre como utilizar o EFCore com múltiplos providers de banco de dados. Se quiser veja outras partes dessa séri..."> <link rel="stylesheet" href="/css/main.css"> <link rel="canonical" href="http://localhost:4000/blog/pt-br/dotnet-pro-tips/configuring-db/"> <link rel="alternate" type="application/rss+xml" title="mvieira" href="http://localhost:4000/feed.xml" /> <link rel="shortcut icon" href="/images/favicon.ico" type="image/png"> <!-- Global site tag (gtag.js) - Google Analytics --> <script async src="https://www.googletagmanager.com/gtag/js?id=UA-174941014-1"></script> <script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'UA-174941014-1'); </script> </head> <body> <!-- Google Tag Manager (noscript) --> <noscript><iframe src="https://www.googletagmanager.com/ns.html?id="height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript> <!-- End Google Tag Manager (noscript) --> <header class="site-header"> <div class="container"> <input type="checkbox" id="toggleNavbar"> <h1 class="logo"><a href="/" alt="Matheus Costa Vieira" title="Matheus Costa Vieira">Matheus Costa Vieira</a></h1> <label for="toggleNavbar" role="button" class="toggle-navbar-button"> <i class="icon icon-menu"></i> <i class="icon icon-cross"></i> </label> <nav class="navbar"> <ul> <li><a href="/about" title="About">About</a></li> <li><a href="/resume" title="Resume">Resume</a></li> <li><a href="/blog" title="Blog">Blog</a></li> <li><a href="/courses" title="Courses">Courses</a></li> <li><a href="/contact" title="Contact">Contact</a></li> <li><a href="/feed.xml" target="_blank"><i class="icon icon-rss"></i></a></li> </ul> </nav> </div> </header> <main class="main-container"> <div class="container"> <article role="article" class="post"> <div class="card"> <header class="post-header"> <h1 class="post-title">.NET Pro tips - Configurando banco de Dados</h1> <em class="post-meta"> <time>Aug 31, 2020</time> </em> </header> <div class="post-content"> <figure class="post-thumbnail "> <img src="https://th.bing.com/th/id/OIP.NsHm5JKrYYAwtKPx1xEF7QHaFj?w=243&h=182&c=7&o=5&pid=1.7" alt=".NET Pro tips - Configurando banco de Dados"> </figure> <p>Esse artigo faz parte de uma série de artigos sobre como utilizar o EFCore com múltiplos providers de banco de dados. Se quiser veja outras partes dessa série em <a href="#related">links relacionados</a>.</p> <h2 id="configurando-banco-de-dados-em-um-projeto-net-core">Configurando banco de dados em um projeto .NET Core</h2> <p>Neste ponto assumo que você já é familiarizado com projetos .NET e/ou .NET Core e portanto sabe implementar ou se necessário ler o site <a href="https://docs.microsoft.com/en-us/aspnet/core/?view=aspnetcore-3.1">AS.NET Documentation</a> para saber como iniciar a configuração de um banco de dados.</p> <p>Aqui mostrarei uma possível ideia de implementação de um projeto de acesso a banco de dados.</p> <p>Algo que acaba me incomodando é as pessoas utilizarem exemplos da própria documentação e manter isso por toda a vida do projeto.</p> <p>Primeiro exemplo que quero apresentar é sobre como utilizar o princípio de responsabilidade única ao criarmos um projeto de banco de dados.</p> <p>Sabemos que no método <code>ConfigureServices</code> da classe <code>Startup</code> precisamos, como o nome propõe, configurar nossos serviços, e nosso banco de dados é um serviço de nossa aplicação.</p> <p>Aqui temos um exemplo da própria <a href="https://docs.microsoft.com/en-us/aspnet/core/data/ef-mvc/intro?view=aspnetcore-3.1#register-the-schoolcontext">documentação</a></p><pre><code class="language-csharp">public void ConfigureServices(IServiceCollection services)
+{
+    services.Configure&lt;CookiePolicyOptions&gt;(options =&gt;
+    {
+        options.CheckConsentNeeded = context =&gt; true;
+        options.MinimumSameSitePolicy = SameSiteMode.None;
+    });
+
+    services.AddDbContext&lt;SchoolContext&gt;(options =&gt;
+        options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+    services.AddMvc();
+}
+</code></pre><p><br /> O projeto que possui a classe <code>Startup</code> deve basicamente, se por exemplo o projeto for de uma API:</p> <ul> <li>Carregar o(s) arquivo(s) de configuração</li> <li>Configurar as rotas</li> <li>E solicitar aos serviços para que eles configurem o que for necessário.</li> </ul> <p>O ponto chave do <code>ConfigureServices</code> é a chamada ao método (de extensão) <code>AddDbContext</code>, ao meu ver isso é algo que o próprio projeto de banco de dados deve ser o responsável pela sua configuração.</p> <p>Para isso podemos utilizar um <a href="/blog/pt-br/dotnet-pro-tips/extension-methods">métodos de extensão</a> no projeto que faz sentido.</p> <blockquote> <p>Caso seu sistema possua uma camada de serviço entre a controller e o banco de dados então a classe <code>Startup</code> deve conhecer apenas o a camada de serviço.</p> </blockquote> <p>Um exemplo de método de extensão:</p><pre><code class="language-csharp">namespace ContosoUniversity.Data.Extension
+{
+    public static class RepositoryExtension
+    {
+        public static void UseDataRepository(this IServiceCollection services, IConfiguration configuration)
+        {
+            services.AddDbContext&lt;SchoolContext&gt;(options =&gt;
+                options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
+        }
+    }
+}
+</code></pre><blockquote> <p>Eu acho interessante utilizar o prefixo <code>Use</code>, mas é gosto pessoal, pode usar o nome que desejar.</p> <p>O foco aqui é extender a interface <code>IServiceCollection</code> recebendo a interface <code>IConfiguration</code></p> </blockquote> <p>Agora podemos ver que a responsabilidade da <code>Startup</code> é pedir para o serviço se configurar:</p><pre><code class="language-csharp">// código omitido
+using ContosoUniversity.Data.Extension; // não esqueça de adicionar o using para o método de extensã
+
+// código omitido
+
+public void ConfigureServices(IServiceCollection services)
+{
+    services.Configure&lt;CookiePolicyOptions&gt;(options =&gt;
+    {
+        options.CheckConsentNeeded = context =&gt; true;
+        options.MinimumSameSitePolicy = SameSiteMode.None;
+    });
+
+    services.UseDataRepository(Configuration);
+
+    services.AddMvc();
+}
+</code></pre><p><br /> Toda a complexidade foi removida da classe de inicialização e encapsulada dentro do projeto responsável.</p> <p>Como comentado acima, caso o seu sistema possua uma camada de serviço a implementação deve seguir a mesma ideia.</p><pre><code class="language-csharp">namespace ContosoUniversity.ServiceLayer.Extension
+{
+    public static class ServiceLayerExtension
+    {
+        public static void UseServiceLayer(this IServiceCollection services, IConfiguration configuration)
+        {
+            // qualquer configuraçãp necessária
+            
+            // configurar o acesso ao banco
+            services.UseDataRepository(Configuration);
+        }
+    }
+}
+</code></pre><p><br /> Com isso devemos apenas mudar nossa classe de <code>Startup</code> de forma a chamar o método que ele conhece</p><pre><code class="language-csharp">// código omitido
+using ContosoUniversity.ServiceLayer.Extension; // não esqueça de adicionar o using para o método de extensã
+
+// código omitido
+
+public void ConfigureServices(IServiceCollection services)
+{
+    services.Configure&lt;CookiePolicyOptions&gt;(options =&gt;
+    {
+        options.CheckConsentNeeded = context =&gt; true;
+        options.MinimumSameSitePolicy = SameSiteMode.None;
+    });
+
+    services.UseServiceLayer(Configuration);
+
+    services.AddMvc();
+}
+</code></pre><p><br /> Perceba agora que temos todas as configurações em seus devidos lugares, portanto se ocorrer a necessidade de se reconfigurar algo (seja da camada de serviço ou de banco de dados) será uma configuração transaparente e somente quem é responsável fica sabendo da alteração.</p> <p>Em outras palavras, nossa camada de API não sabe se os dados recebidos por ela e repassado à camada de serviço será gravados efetivamente em um banco de dados, ou se chamará outra API externa, isso não é responsabilidade da API.</p> <h4 id="related">Links para artigos relacionados</h4> <p><a href="/blog/pt-br/dotnet-pro-tips/intro/">.NET Pro tips Multiple Databases Providers Introduction</a></p> <p><a href="/blog/pt-br/dotnet-pro-tips/extension-methods">Parte 1 - Métodos de extensão</a></p> <p><a href="/blog/pt-br/dotnet-pro-tips/configuring-db">Parte 2 - Configurando o banco de dados</a></p> </div> </div> </article> </div> </main> <footer class="site-footer"> <div class="container"> <ul class="social"> <li><a href="mailto:matheus.costa.vieira@gmail.com" title="Personal mail" target="_blank"><i class="icon icon-mail"></i></a></li> <li><a href="https://github.com/matheus-vieira" title="Github Profile" target="_blank"><i class="icon icon-github"></i></a></li> <li><a href="https://twitter.com/macostavieira" title="Twitter Profile" target="_blank"><i class="icon icon-twitter"></i></a></li> <li><a href="https://facebook.com/macovieira" title="Facebook Profile" target="_blank"><i class="icon icon-facebook"></i></a></li> <li><a href="https://linkedin.com/in/macostavieira" title="LinkedIn Profile" target="_blank"><i class="icon icon-linkedin"></i></a></li> <li><a href="https://api.whatsapp.com/send?phone=5541988024599&text=E ae!" title="Send me an whatsapp" target="_blank"><i class="icon icon-whatsapp"></i></a></li> <li><a href="tel:5541988024599" title="Call me" target="_blank"><i class="icon icon-phone"></i></a></li> </ul> <a href="//francescocirillo.com/pages/anti-if-campaign"><img height="60" width="120" src="https://cdn.shopify.com/s/files/1/0257/1675/t/152/assets/banner_ive-joined.gif?15726816304428688971" alt="I have joined Anti-IF Campaign"></a> <p class="txt-medium-gray"> <small>&copy;mvieira 2021 All rights reserved. Made with <a href="http://jekyllrb.com/" target="_blank">Jekyll</a> and ♥</small> </p> </div> </footer> <a href="https://github.com/matheus-vieira/matheus-vieira.github.io" target="_blank" class="github-corner"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#337ab7; color:#fff; position: absolute; top: 0; border: 0; right: 0;"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a> </body> </html>

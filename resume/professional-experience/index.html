@@ -1,0 +1,116 @@
+<!DOCTYPE html> <html> <head> <meta charset="utf-8"> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <meta name="viewport" content="width=device-width, initial-scale=1"> <meta http-equiv="Cache-Control" content="only-if-cached"/> <meta http-equiv="Cache-Control" content="max-age=120"/> <title>Professional experience</title> <meta name="description" content="Here you can find some personal information, resume and blog from Matheus Costa Vieira"> <link rel="stylesheet" href="/css/main.css"> <link rel="canonical" href="http://0.0.0.0:4000/resume/professional-experience/"> <link rel="alternate" type="application/rss+xml" title="mvieira" href="http://0.0.0.0:4000/feed.xml" /> <link rel="shortcut icon" href="/images/favicon.ico" type="image/png"> <!-- Global site tag (gtag.js) - Google Analytics --> <script async src="https://www.googletagmanager.com/gtag/js?id=UA-174941014-1"></script> <script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'UA-174941014-1'); </script> </head> <body> <!-- Google Tag Manager (noscript) --> <noscript><iframe src="https://www.googletagmanager.com/ns.html?id="height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript> <!-- End Google Tag Manager (noscript) --> <header class="site-header"> <div class="container"> <input type="checkbox" id="toggleNavbar"> <h1 class="logo"><a href="/" alt="Matheus Costa Vieira" title="Matheus Costa Vieira">Matheus Costa Vieira</a></h1> <label for="toggleNavbar" role="button" class="toggle-navbar-button"> <i class="icon icon-menu"></i> <i class="icon icon-cross"></i> </label> <nav class="navbar"> <ul> <li><a href="/about" title="About">About</a></li> <li><a href="/resume" title="Resume">Resume</a></li> <li><a href="/blog" title="Blog">Blog</a></li> <li><a href="/courses" title="Courses">Courses</a></li> <li><a href="/contact" title="Contact">Contact</a></li> <li><a href="/feed.xml" target="_blank"><i class="icon icon-rss"></i></a></li> </ul> </nav> </div> </header> <main class="main-container"> <div class="container"> <article role="article" class="page card"> <header class="post-header"> <h1 class="post-title">Professional experience</h1> </header> <div class="post-content"> <figure class="highlight"><pre><code class="language-js" data-lang="js">function request(file) {
+  const log = console.log;
+  fetch(file)
+    .then(r =&gt; r.json())
+    .then(j =&gt; log(j));
+}</code></pre></figure> <figure class="highlight"><pre><code class="language-js" data-lang="js">request(&quot;/experiences/datainfo/&quot;);
+// output
+{
+  &quot;name&quot;: &quot;DataInfo Soluções em TI&quot;,
+  &quot;admissionDate&quot;: &quot;December, 2020&quot;,
+  &quot;resignationdate&quot;: null,
+  &quot;atributions&quot;: &quot;Senior software engineer.Maintenance, development and architecture of .NET-based applications for Caixa Econômica Federal - CEF client.&quot;,
+  &quot;languages&quot;: [&quot;C#&quot;,&quot;Java&quot;],
+  &quot;frameworks&quot;: [&quot;.NET&quot;,&quot;.NET MVC&quot;,&quot;Entity Framework&quot;,&quot;JAVA&quot;,&quot;Spring&quot;],
+  &quot;additionInfo&quot;: [&quot;GIT&quot;,&quot;Design Patterns&quot;,&quot;Threads&quot;,&quot;SqlServer&quot;,&quot;unit testing&quot;]
+}</code></pre></figure> <figure class="highlight"><pre><code class="language-js" data-lang="js">request(&quot;/experiences/wipro/&quot;);
+// output
+{
+  &quot;name&quot;: &quot;Wipro Limited&quot;,
+  &quot;admissionDate&quot;: &quot;April, 2019&quot;,
+  &quot;resignationdate&quot;: null,
+  &quot;atributions&quot;: &quot;Senior software engineer.Maintenance, development and architecture of REST API’s for Mastercard client.&quot;,
+  &quot;languages&quot;: [&quot;Java&quot;],
+  &quot;frameworks&quot;: [&quot;JAVA&quot;,&quot;Spring&quot;],
+  &quot;additionInfo&quot;: [&quot;GIT&quot;,&quot;Design Patterns&quot;,&quot;Threads&quot;,&quot;Oracle&quot;,&quot;unit testing&quot;]
+}</code></pre></figure> <figure class="highlight"><pre><code class="language-js" data-lang="js">request(&quot;/experiences/gateware/&quot;);
+// output
+{
+  &quot;name&quot;: &quot;Gateware&quot;,
+  &quot;admissionDate&quot;: &quot;October, 2018&quot;,
+  &quot;resignationdate&quot;: &quot;April, 2019&quot;,
+  &quot;atributions&quot;: &quot;Team and Technical leader.Maintenance, development and architecture of Web-based systems.Implementation of Scrum as methodology for development process.&quot;,
+  &quot;languages&quot;: [&quot;HTML5&quot;,&quot;CSS3&quot;,&quot;javascript&quot;,&quot;C#&quot;,&quot;VB.NET&quot;],
+  &quot;frameworks&quot;: [&quot;.NET&quot;,&quot;.NET Core&quot;,&quot;Razor Pages&quot;,&quot;Entity Framework&quot;,&quot;Entity Framework Core&quot;,&quot;Bootstrap&quot;],
+  &quot;additionInfo&quot;: [&quot;GIT&quot;,&quot;Design Patterns&quot;,&quot;Threads&quot;,&quot;Sql Server&quot;,&quot;MySQL&quot;,&quot;PostgreSQL&quot;,&quot;message queues&quot;,&quot;unit and functional testing&quot;]
+}</code></pre></figure> <figure class="highlight"><pre><code class="language-js" data-lang="js">request(&quot;/experiences/opet/&quot;);
+// output
+{
+  &quot;name&quot;: &quot;Centro Universitário Unipet&quot;,
+  &quot;admissionDate&quot;: &quot;February, 2017&quot;,
+  &quot;resignationdate&quot;: &quot;December, 2018&quot;,
+  &quot;atributions&quot;: &quot;Teaching about web technologys in a few disciplines&quot;,
+  &quot;languages&quot;: [&quot;HTML5&quot;,&quot;CSS&quot;,&quot;Javascript&quot;,&quot;C#&quot;,&quot;.NET Core&quot;,&quot;PHP&quot;],
+  &quot;frameworks&quot;: [&quot;.NET&quot;,&quot;.NET Core&quot;,&quot;Entity Framework&quot;,&quot;Entity Framework Core&quot;,&quot;Bootstrap&quot;],
+  &quot;additionInfo&quot;: [&quot;GIT&quot;,&quot;Design Patterns&quot;,&quot;Sql Server&quot;,&quot;MySql&quot;,&quot;Ubuntu&quot;,&quot;unit testing&quot;,&quot;functional testing&quot;]
+}</code></pre></figure> <figure class="highlight"><pre><code class="language-js" data-lang="js">request(&quot;/experiences/end2end/&quot;);
+// output
+{
+  &quot;name&quot;: &quot;End2End Systems&quot;,
+  &quot;admissionDate&quot;: &quot;October, 2016&quot;,
+  &quot;resignationdate&quot;: &quot;October, 2018&quot;,
+  &quot;atributions&quot;: &quot;User centered system development, with fast response, accessability, information archtecture, always looking for innovative solutions.Support the software community.&quot;,
+  &quot;languages&quot;: [&quot;HTML5&quot;,&quot;CSS3&quot;,&quot;javascript&quot;,&quot;java&quot;,&quot;C#&quot;,&quot;PHP&quot;,&quot;Python&quot;,&quot;Ruby&quot;],
+  &quot;frameworks&quot;: [&quot;TheIntern!&quot;,&quot;Chimp&quot;,&quot;Jekyll&quot;,&quot;.NET&quot;,&quot;JAVA EE&quot;,&quot;Angular&quot;,&quot;React&quot;,&quot;DOJO&quot;,&quot;.NET&quot;,&quot;.NET Core&quot;,&quot;Entity Framework&quot;,&quot;Entity Framework Core&quot;],
+  &quot;additionInfo&quot;: [&quot;Version Systems&quot;,&quot;Development methodologies&quot;,&quot;Domain Drive Design&quot;,&quot;Design Patterns&quot;,&quot;Threads&quot;,&quot;Databases&quot;,&quot;Jekyll&quot;,&quot;Identity Provider&quot;,&quot;Keycloak&quot;,&quot;.NET&quot;,&quot;.NET Core MVC unit testing&quot;,&quot;functional testing&quot;]
+}</code></pre></figure> <figure class="highlight"><pre><code class="language-js" data-lang="js">request(&quot;/experiences/cinq/&quot;);
+// output
+{
+  &quot;name&quot;: &quot;CINQ Technologies&quot;,
+  &quot;admissionDate&quot;: &quot;August, 2014&quot;,
+  &quot;resignationdate&quot;: &quot;June, 2017&quot;,
+  &quot;atributions&quot;: &quot;Front-end:Development and maintenance of communications systems over air proprietary protocol.Work together with the team allocated in Atlanta with daily meetings.Using Scrum as project management..NET DeveloperWrapper cobol in .NET project to run over regular server&quot;,
+  &quot;languages&quot;: [&quot;HTML5&quot;,&quot;CSS3&quot;,&quot;javascript&quot;,&quot;java&quot;,&quot;C#&quot;],
+  &quot;frameworks&quot;: [&quot;DOJO&quot;,&quot;The intern!&quot;,&quot;NodeJS&quot;,&quot;Subversion&quot;,&quot;Git&quot;,&quot;Scrum&quot;,&quot;.NET&quot;,&quot;WindowsForms&quot;],
+  &quot;additionInfo&quot;: null
+}</code></pre></figure> <figure class="highlight"><pre><code class="language-js" data-lang="js">request(&quot;/experiences/systrack/&quot;);
+// output
+{
+  &quot;name&quot;: &quot;Systrac Soluções E Serviços de Informática&quot;,
+  &quot;admissionDate&quot;: &quot;March, 2012&quot;,
+  &quot;resignationdate&quot;: &quot;June, 2014&quot;,
+  &quot;atributions&quot;: &quot;Team and Technical leader.Technical interviews.Architecture and development of real-time systems for logistics and vehicle tracking, dashboard, data mining.Architecture and development of: real-time systems for logistics and vehicle tracking, dashboard, data miningThreads Design patterns using GRASP (Creator, Information Specialist, Low Coupling, among others) and GoF (Singleton, Composite, Façade, Observer, among other)&quot;,
+  &quot;languages&quot;: [&quot;javascript&quot;,&quot;java&quot;,&quot;PHP&quot;,&quot;c#&quot;,&quot;HTML5&quot;,&quot;CSS3&quot;,&quot;xml&quot;,&quot;JSON&quot;,&quot;css&quot;,&quot;Delphi&quot;],
+  &quot;frameworks&quot;: [&quot;.NET&quot;,&quot;MONO&quot;,&quot;Silverlight&quot;,&quot;WebApi&quot;,&quot;Razor&quot;,&quot;ADO.NET&quot;,&quot;Entity Framework&quot;,&quot;REM Objects&quot;,&quot;ASP.NET MVC&quot;,&quot;Data Abstract&quot;,&quot;Bootstrap&quot;,&quot;KnockoutJS&quot;,&quot;jQuery&quot;,&quot;jQueryUI&quot;],
+  &quot;additionInfo&quot;: [&quot;GIT&quot;,&quot;Subversion&quot;,&quot;Team Foundation System (TFS)&quot;,&quot;Scrum&quot;,&quot;Domain Drive Design&quot;,&quot;Design Patterns (GoF, GRASP)&quot;,&quot;Threads&quot;,&quot;Oracle&quot;,&quot;MySql&quot;,&quot;SqlServer&quot;,&quot;Firebird&quot;]
+}</code></pre></figure> <figure class="highlight"><pre><code class="language-js" data-lang="js">request(&quot;/experiences/softdib/&quot;);
+// output
+{
+  &quot;name&quot;: &quot;Softdib Informática Ltda&quot;,
+  &quot;admissionDate&quot;: &quot;May, 2011&quot;,
+  &quot;resignationdate&quot;: &quot;March, 2012&quot;,
+  &quot;atributions&quot;: &quot;Development of web interface to ERP system made with COBOL. Creation of development standards&quot;,
+  &quot;languages&quot;: [&quot;javascript&quot;,&quot;PHP&quot;,&quot;HTML5&quot;,&quot;CSS3&quot;,&quot;JSON&quot;,&quot;Cobol&quot;],
+  &quot;frameworks&quot;: [&quot;jQuery&quot;,&quot;jQueryUI&quot;],
+  &quot;additionInfo&quot;: [&quot;Ajax&quot;,&quot;WebServices&quot;,&quot;Subversion&quot;,&quot;Scrum&quot;,&quot;MySql&quot;]
+}</code></pre></figure> <figure class="highlight"><pre><code class="language-js" data-lang="js">request(&quot;/experiences/apolar/&quot;);
+// output
+{
+  &quot;name&quot;: &quot;Apolar Imóveis&quot;,
+  &quot;admissionDate&quot;: &quot;August, 2010&quot;,
+  &quot;resignationdate&quot;: &quot;April, 2011&quot;,
+  &quot;atributions&quot;: &quot;Development of a system to real estate sales Legacy system maintenance. Version control with subversion and Team Foundation System (TFS)&quot;,
+  &quot;languages&quot;: [&quot;javascript&quot;,&quot;HTML&quot;,&quot;JSON&quot;,&quot;CSS&quot;,&quot;C#&quot;,&quot;ASP Classic&quot;],
+  &quot;frameworks&quot;: [&quot;jQuery&quot;,&quot;jQueryUI&quot;,&quot;.NET&quot;],
+  &quot;additionInfo&quot;: [&quot;Subversion&quot;,&quot;Team Foundation System (TFS)&quot;,&quot;Ajax&quot;,&quot;WebServices&quot;,&quot;MySql&quot;]
+}</code></pre></figure> <figure class="highlight"><pre><code class="language-js" data-lang="js">request(&quot;/experiences/fbits/&quot;);
+// output
+{
+  &quot;name&quot;: &quot;FBITS Desenvolvimento de Software Ltda&quot;,
+  &quot;admissionDate&quot;: &quot;April, 2009&quot;,
+  &quot;resignationdate&quot;: &quot;July, 2010&quot;,
+  &quot;atributions&quot;: &quot;Maintenance and development of e-commerce, social networking and partnerships&quot;,
+  &quot;languages&quot;: [&quot;javascript&quot;,&quot;HTML&quot;,&quot;CSS&quot;,&quot;C#&quot;],
+  &quot;frameworks&quot;: [&quot;jQuery&quot;,&quot;.NET&quot;],
+  &quot;additionInfo&quot;: [&quot;Ajax&quot;,&quot;WebServices&quot;,&quot;Subversion&quot;,&quot;SqlServer&quot;]
+}</code></pre></figure> <figure class="highlight"><pre><code class="language-js" data-lang="js">request(&quot;/experiences/actuary/&quot;);
+// output
+{
+  &quot;name&quot;: &quot;Actuary Soluções em Informática&quot;,
+  &quot;admissionDate&quot;: &quot;April, 2008&quot;,
+  &quot;resignationdate&quot;: &quot;April, 2009&quot;,
+  &quot;atributions&quot;: &quot;Maintenance and development of actuarial system.&quot;,
+  &quot;languages&quot;: [&quot;HTML5&quot;,&quot;CSS3&quot;,&quot;javascript&quot;,&quot;PHP&quot;],
+  &quot;frameworks&quot;: [&quot;jQuery&quot;],
+  &quot;additionInfo&quot;: [&quot;PostgreSQL&quot;]
+}</code></pre></figure> </div> </article> </div> </main> <footer class="site-footer"> <div class="container"> <ul class="social"> <li><a href="mailto:matheus.costa.vieira@gmail.com" title="Personal mail" target="_blank"><i class="icon icon-mail"></i></a></li> <li><a href="https://github.com/matheus-vieira" title="Github Profile" target="_blank"><i class="icon icon-github"></i></a></li> <li><a href="https://twitter.com/macostavieira" title="Twitter Profile" target="_blank"><i class="icon icon-twitter"></i></a></li> <li><a href="https://facebook.com/macovieira" title="Facebook Profile" target="_blank"><i class="icon icon-facebook"></i></a></li> <li><a href="https://linkedin.com/in/macostavieira" title="LinkedIn Profile" target="_blank"><i class="icon icon-linkedin"></i></a></li> <li><a href="https://api.whatsapp.com/send?phone=5541988024599&text=E ae!" title="Send me an whatsapp" target="_blank"><i class="icon icon-whatsapp"></i></a></li> <li><a href="tel:5541988024599" title="Call me" target="_blank"><i class="icon icon-phone"></i></a></li> </ul> <a href="//francescocirillo.com/pages/anti-if-campaign"><img height="60" width="120" src="https://cdn.shopify.com/s/files/1/0257/1675/t/152/assets/banner_ive-joined.gif?15726816304428688971" alt="I have joined Anti-IF Campaign"></a> <p class="txt-medium-gray"> <small>&copy;mvieira 2021 All rights reserved. Made with <a href="http://jekyllrb.com/" target="_blank">Jekyll</a> and ♥</small> </p> </div> </footer> <a href="https://github.com/matheus-vieira/matheus-vieira.github.io" target="_blank" class="github-corner"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#337ab7; color:#fff; position: absolute; top: 0; border: 0; right: 0;"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a> </body> </html>
