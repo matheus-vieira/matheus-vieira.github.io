@@ -118,6 +118,8 @@ navbar:
     title: Blog
   - slug: courses
     title: Courses
+  - slug: study
+    title: Study
   - slug: contact
     title: Contact
 
