@@ -1,9 +1,9 @@
 ---
 layout: page
-permalink: /study/deutsch/lektion-1/wortschatz
+permalink: /study/deutsch/lekition-1/wortschatz
 ---
 
-## Deutsch - Lektion #1
+## Deutsch - Lekition #2
 
 ### Wortschatz
 

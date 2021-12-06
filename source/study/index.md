@@ -7,4 +7,4 @@ permalink: /study/
 
 At this moment I'm studying:
 
-* Deutsch ({{ '/study/deutsch/' }})
+* [Deutsch]({{ '/study/deutsch/' }})
