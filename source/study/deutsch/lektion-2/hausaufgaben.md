@@ -9,13 +9,13 @@ permalink: /study/deutsch/lektion-2/hausaufgaben
 
 ---
 
-> #### 1. Schreiben Sie negative Sätzen mmit:
+> #### 1. Schreiben Sie negative Sätzen mit:
 
 > ##### A) Hühnchensandwich - Saft.
-> - Ich esse kein Hühnchensandwich und Ich trink keinen Saft. <input type="checkbox" />
+> - Ich esse kein Hühnchensandwich und Ich trinke keinen Saft. <input type="checkbox" />
 
 > ##### B) Brot - Kaffee.
-> - Ich esse kein Brot und Ich trink keinen Kaffee. <input type="checkbox" />
+> - Ich esse kein Brot und Ich trinke keinen Kaffee. <input type="checkbox" />
 
 > ##### C) mögen (mag)  - Schokolade.
 > - Du mag keine Schokolade. <input type="checkbox" />
@@ -24,7 +24,7 @@ permalink: /study/deutsch/lektion-2/hausaufgaben
 
 > #### Beantworten Sie die Frage:
 
-> ##### A) Mags du kein Omelett?
+> ##### A) Magst du kein Omelett?
 > -  Doch, ich mag ein Omelett. <input type="checkbox" />
 
 > ##### B) Magst du kein Bier?
@@ -37,4 +37,4 @@ permalink: /study/deutsch/lektion-2/hausaufgaben
 > -  Doch, ich mag einen Apfelkuchen. <input type="checkbox" />
 
 > ##### F) Trinkst du einen Kaffee?
-> -  Doch, ich trinke einen Kaffee. <input type="checkbox" />
+> -  Ja, ich trinke einen Kaffee. <input type="checkbox" />
