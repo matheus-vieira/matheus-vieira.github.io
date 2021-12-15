@@ -16,3 +16,6 @@ Bisher habe ich die folgenden Lektionen gemacht
 
 2 [Lektion #2]({{ '/study/deutsch/lektion-2/' }})
   * [Hausaufgaben]({{ '/study/deutsch/lektion-2/hausaufgaben' }})
+
+2 [Lektion #2]({{ '/study/deutsch/lektion-3/' }})
+  * [Hausaufgaben]({{ '/study/deutsch/lektion-3/hausaufgaben' }})
