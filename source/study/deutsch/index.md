@@ -22,3 +22,6 @@ Bisher habe ich die folgenden Lektionen gemacht
 
 2 [Lektion #4]({{ '/study/deutsch/lektion-4/' }})
   * [Hausaufgaben]({{ '/study/deutsch/lektion-4/hausaufgaben' }})
+
+2 [Lektion #5]({{ '/study/deutsch/lektion-5/' }})
+  * [Hausaufgaben]({{ '/study/deutsch/lektion-5/hausaufgaben' }})
