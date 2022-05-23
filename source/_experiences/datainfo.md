@@ -12,7 +12,7 @@ en-us:
   jobtitle: Senior Software Engineer
   description: Maintenance, development and architecture of .NET-based applications for Caixa Econômica Federal - CEF client.
 pt-br:
-  jobtitle: Engenheiro de Software Sênior
+  jobtitle: Analista Desenvolvedor
   description: Manutenção, desenvolvimento e arquitetura de aplicações em .NET para o cliente Caixa Econômica Federal - CEF
 ---
 

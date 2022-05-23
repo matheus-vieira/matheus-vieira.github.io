@@ -19,15 +19,15 @@ sass:
   style: compressed # expanded
 
 # SEO settings
-title: mvieira
+title: FileProcessor
 description: "Here you can find some personal information, resume and blog from Matheus Costa Vieira"
 keywords: "Jekyll, personal information, resume, Matheus, Costa, Vieira, Matheus Costa Vieira, blog"
-url: http://matheus-vieira.github.io
+url: https://end2endsystems.github.io/FileProcessor/
 baseurl: ""
 
 google_analytics: UA-174941014-1
 site.google_analytics_container: GTM-TWNMZ5Q
-repo: https://github.com/matheus-vieira/matheus-vieira.github.io
+repo: https://github.com/End2EndSystems/FileProcessor
 disqus_shortname: "matheuscostavieira"
 disqus_site_shortname: "matheuscostavieira"
 
@@ -49,7 +49,7 @@ author:
   bio: "I love God, my wife, my son and my little daughter (an angel) and then I love to create programs!"
   thumb: /images/author.png
   email: matheus.costa.vieira@gmail.com
-  url: http://matheus-vieira.github.io
+  url: http://end2endsystems.github.io
   github: https://github.com/matheus-vieira
   twitter: https://twitter.com/macostavieira
   facebook: https://facebook.com/macovieira
@@ -110,18 +110,8 @@ messages:
 
 # navbar pages
 navbar:
-  - slug: about
-    title: About
-  - slug: resume
-    title: Resume
-  - slug: blog
-    title: Blog
-  - slug: courses
-    title: Courses
-  - slug: study
-    title: Study
-  - slug: contact
-    title: Contact
+  - slug: Data Source
+    title: data-source
 
 collections:
  - graduations
