@@ -278,6 +278,7 @@ GEM
       unf_ext
     unf_ext (0.0.8)
     unicode-display_width (1.8.0)
+    wdm (0.1.1)
     zeitwerk (2.5.1)
 
 PLATFORMS
@@ -296,6 +297,7 @@ DEPENDENCIES
   rake
   rouge
   sass
+  wdm (>= 0.1.0)
 
 BUNDLED WITH
    2.3.11
