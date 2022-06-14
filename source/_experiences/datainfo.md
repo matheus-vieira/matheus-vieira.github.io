@@ -2,7 +2,7 @@
 layout: js
 jobtitle: "Senior software engineer"
 admissiondate: 2020-12-01
-resignationdate:
+resignationdate: 2021-08-06
 company: DataInfo Soluções em TI
 description: ""
 languages: [C#, Java]

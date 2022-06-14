@@ -37,8 +37,7 @@ Today I'm still an student learning about:
 ## [Professional experience]({{ '/resume/professional-experience/' }})
 
 Currently working for companies:
-* [Wipro Limited](https://www.wipro.com/) for his client [Mastercard](https://www.mastercard.com.br/pt-br.html) developing API's with JAVA with Spring,
-* [DataInfo](https://www.datainfo.inf.br/) for his client [Caixa Econômica Federal - CEF](https://www.caixa.gov.br/Paginas/home-caixa.aspx) developing systems with .NET framework
+* [GFT ](https://www.gft.com/br/pt) for his client [Ultimus Fund Solutions](https://www.ultimusfundsolutions.com/) developing API's with .NET Core framework (updgrade com 2.1 to 5.0, willing to update to version 6.0)
 * ***End2End Systems*** my personal company for any other work.
 
 ## [Skills]({{ '/resume/skills/' }})
