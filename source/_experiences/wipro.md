@@ -2,7 +2,7 @@
 layout: js
 jobtitle: "Senior software engineer"
 admissiondate: 2019-04-22
-resignationdate:
+resignationdate: 2021-08-07
 company: Wipro Limited
 description: ""
 languages: [Java]
