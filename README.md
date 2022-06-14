@@ -1,7 +1,7 @@
 # end2end Clean Jekyll theme [![Build Status](https://travis-ci.org/nandomoreirame/end2end.svg?branch=master)](https://travis-ci.org/nandomoreirame/end2end)
 
 * [x] Clean layout
-* [x] Resposive layout
+* [x] Responsive layout
 * [x] Preprocessor SASS
 * [x] CSS minified
 * [x] Pagination
@@ -19,7 +19,7 @@
 2. Enter the folder: `cd end2end/`
 3. Install Ruby gems: `bundle install`
 4. Install Minimal Python: `sudo apt install python2-minimal`
-5. Install burbon: `bourbon install --path source/_sass/` 
+5. Install bourbon: `bourbon install --path source/_sass/` 
 6. Start Jekyll server: `bundle exec jekyll serve`
 
 Access, [localhost:4000/end2end](http://localhost:4000/end2end)
@@ -52,6 +52,6 @@ Access, [localhost:4000/end2end](http://localhost:4000/end2end)
 It is under [the MIT license](/LICENSE).
 
 > :warning:
-  Please remove metas `<meta name="robots" content="noindex">` and `<meta name="googlebot" content="noindex">` in `source/_layouts/default.html`
+  Please remove meta tags`<meta name="robots" content="noindex">` and `<meta name="googlebot" content="noindex">` in `source/_layouts/default.html`
 
 Enjoy :yum:
