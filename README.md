@@ -19,7 +19,8 @@
 2. Enter the folder: `cd end2end/`
 3. Install Ruby gems: `bundle install`
 4. Install Minimal Python: `sudo apt install python2-minimal`
-5. Start Jekyll server: `bundle exec jekyll serve`
+5. Install burbon: `bourbon install --path source/_sass/` 
+6. Start Jekyll server: `bundle exec jekyll serve`
 
 Access, [localhost:4000/end2end](http://localhost:4000/end2end)
 
