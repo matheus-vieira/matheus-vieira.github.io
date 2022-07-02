@@ -19,7 +19,7 @@ sass:
   style: compressed # expanded
 
 # SEO settings
-title: FileProcessor
+title: Matheus Costa Vieira - Personal Page
 description: "Here you can find some personal information, resume and blog from Matheus Costa Vieira"
 keywords: "Jekyll, personal information, resume, Matheus, Costa, Vieira, Matheus Costa Vieira, blog"
 url: http://matheus-vieira.github.io
@@ -44,7 +44,7 @@ compress_html:
 
 # Author settings
 author:
-  name: Matheus Costa Vieira
+  name: mvieira
   job: Software Engineer
   bio: "I love God, my wife, my son and my little daughter (an angel) and then I love to create programs!"
   thumb: /images/author.png
