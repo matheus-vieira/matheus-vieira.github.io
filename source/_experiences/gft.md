@@ -10,11 +10,11 @@ frameworks: [.NET, .NET Core, Entity Framework, Entity Framework Core]
 additionInfo: [SqlServer, GIT, Design Patterns, Threads, Oracle, unit testing]
 en-us:
   jobtitle: Senior Software Engineer
-  description: Maintenance, development and architecture of REST API's for Ultimus Fund Solutions client.
+  description: Technical leader, Maintenance, development and architecture of REST API's for Ultimus Fund Solutions client.
 pt-br:
   jobtitle: Engenheiro de Software Sênior
   description: Manutenção, desenvolvimento e arquitetura APIs Rest para o cliente Ultimus Fund Solutions.
 ---
 
 Senior software engineer.
-Design, maintenance, development and architecture of REST API's for a investiments funds systems used by Ultimus Fund Solutions clients.
+Design, maintenance, development and architecture of REST API's for a investments funds systems used by Ultimus Fund Solutions clients.
