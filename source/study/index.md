@@ -1,10 +1,9 @@
 ---
 layout: page
 permalink: /study/
+title: Study
 ---
 
-## What I'm studying today
-
-At this moment I'm studying:
+# At this moment I'm studying:
 
 * [Deutsch]({{ '/study/deutsch/' }})
