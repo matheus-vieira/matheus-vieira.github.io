@@ -1,8 +1,7 @@
 ---
 layout: page
 permalink: /contact/
+title: Leave a message
 ---
-
-# Leave a message
 
 {% include contact/form.html %}

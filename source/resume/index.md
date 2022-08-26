@@ -1,6 +1,7 @@
 ---
 layout: page
 permalink: /resume/
+title: My Resume
 ---
 
 ## Goals

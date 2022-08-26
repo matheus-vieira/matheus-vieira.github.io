@@ -1,9 +1,8 @@
 ---
 layout: page
 permalink: /courses/
+title: Github Curses Available
 ---
-
-# Github Curses Available
 
 ## [All github repositories]({{ '/repositories' | prepend: site.baseurl }})
 

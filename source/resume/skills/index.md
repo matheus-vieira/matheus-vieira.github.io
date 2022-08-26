@@ -1,6 +1,7 @@
 ---
 layout: page
 permalink: /resume/skills/
+title: Skills
 ---
 
 ## Some professional skills that I learned through years
