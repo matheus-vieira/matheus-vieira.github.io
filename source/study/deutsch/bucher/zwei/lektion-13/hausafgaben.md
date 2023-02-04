@@ -44,7 +44,9 @@ permalink: /study/deutsch/bucher/zwei/lektion-13/hausaufgaben
 (Vocês ainda queriam fazer um bolo)
 
 ##### D) Hat deine Schwester einen Freund?
-> Hatte deine Schwester einen Freund? (Sua irmã tinha um namorado?)
+> Hatte deine Schwester einen Freund? <input type="checkbox" />
+(Sua irmã tinha um namorado?)
 
 ##### E) Was machst du gerne?
-> Was hast du gerne gemacht? (O que você gostava de fazer?)
+> Was hast du gerne gemacht? <input type="checkbox" />
+(O que você gostava de fazer?)
