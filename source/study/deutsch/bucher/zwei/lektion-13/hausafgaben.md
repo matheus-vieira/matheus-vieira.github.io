@@ -1,42 +1,50 @@
 ---
 layout: page
-permalink: /study/deutsch/bucher/zwei/lektion-11/hausaufgaben
+permalink: /study/deutsch/bucher/zwei/lektion-13/hausaufgaben
 ---
 
 ### **Hausaufgaben**
 
 ---
 
-#### 1. Schreiben Sie Über: "Der Ort an dem ich Urlaub machen wil"
+#### 1. Beantworten Sie die Fragen:
 
-> Ich bin so aufgeregt für die Ferien! Ich habe beschlossen, dass ich dieses Jahr den Nordosten Brasiliens erkunden möchte. Ich habe immer von der Schönheit und der reichen Kultur der Region gehört, und ich möchte es selbst erleben. Ich habe bereits über einige erstaunliche Orte recherchiert, aber noch nicht entschieden, welches mein endgültiges Ziel sein wird.
-> \
-> \
-> Ich bin begeistert von der Möglichkeit, weiße Sandstrände und kristallklares Wasser zu besuchen, die lokale Küche zu probieren und über die Geschichte und Traditionen der Region zu lernen. Ich möchte auch die historischen Städte und kleinen Küstenstädtchen kennenlernen und hautnah erleben, wie die Einheimischen leben.
-> \
-> \
-> Ich freue mich darauf, die Freude und Gastfreundschaft der Nordostbewohner zu spüren und Teil der lebhaften Feiern und Feierlichkeiten zu sein, die die Region bekannt sind. Ich möchte mich in die Kultur und die atemberaubende Landschaft des Nordostens versenken und nach Hause zurückkehren, erneuert und voller neuer Erfahrungen.
-> \
-> \
-> Ich kann es kaum erwarten, endlich auf diese unglaubliche Reise zu gehen und diesen wunderbaren Ort kennenzulernen! Ich werde alles tun, was in meiner Macht steht, um die perfekten Ferien im Nordosten Brasiliens zu haben.
+##### A) Möchtest du zum Brunch mitkommen?
+> - Ja, ich möchte gerne zum Brunch mitkommen. <input type="checkbox" />
 
-Alles ist gut? <input type="checkbox" />
+##### A) Möchtest du zum Brunch mitkommen?
+> Ja, ich möchte gerne zum Brunch mitkommen. <input type="checkbox" />
+(Sim, eu gostaria de ir para o brunch)
 
----
+##### B) Wo kann man frisches Gemüse kaufen?
+> Sie können frisches Gemüse auf dem Bauernmarkt oder im Supermarkt kaufen. <input type="checkbox" />
+(Você pode comprar legumes frescos no mercado local ou no supermercado)
 
-#### Beantworten Sie die Fragen:
+##### C) Wollen wir heute zum Biomarkt gehen?
+> Ja, ich bin dafür, heute zum Biomarkt zu gehen. <input type="checkbox" />
+(Sim, eu sou a favor de ir ao mercado orgânico hoje)
 
-##### A) Was machst du Im Flughafen?
-> - Ich warte auf meinen Flug. <input type="checkbox" />
+##### D) Wie hoch ist der Alkoholgehalt dieser Getränke?
+> Ich weiß nicht genau, aber Sie können auf der Verpackung oder auf der Flasche nachsehen. <input type="checkbox" />
+(Eu não sei ao certo, mas você pode verificar na embalagem ou na garrafa)
 
-##### B) Wir teuer ist ein Flugticket nach Kanada?
-> - Er ist € 1258 (eintausendzweihundertachtundfünfizig). <input type="checkbox" />
+##### E) Isst du Müsli und Cerealien zum Frühstück?
+> Ja, ich esse gerne Müsli und Cerealien zum Frühstück. <input type="checkbox" />
+(Sim, eu gosto de comer mingau e cereais para o café da manhã)
 
-##### C) Um wie viel Uhr ist das Flugzeug in Moskau angekommen?
-> - Das Flugzeug ist um 8Uhr im Moskau angekommen. <input type="checkbox" />
+#### 2. Setzen Sie die Sätze ins Präteritum:
 
-##### D) Ist das dein Gepäck?
-> - Nein, das ist Luiz' Gepäck. <input type="checkbox" />
+##### A) Sie sind zum Bauernhof gegangen.
+> Sie gingen zum Bauernhof. <input type="checkbox" />
+(Eles foram a fazenda)
 
-##### E) Wohin fliegst du normalerweise im Urlaub??
-> - Ich fliege normalerweise im Urlaub nach Porto Alegre. <input type="checkbox" />
+##### B) Er ist noch in der Arbeit.
+> Er war noch in der Arbeit. <input type="checkbox" />
+(Ele ainda estava no trabalho)
+##### C) Ihr wollt noch einen Kuchen backen.
+> Ihr wolltet noch einen Kuchen backen. <input type="checkbox" />
+(Vocês ainda queriam fazer um bolo)
+##### D) Hat deine Schwester einen Freund?
+> Hatte deine Schwester einen Freund? (Sua irmã tinha um namorado?)
+##### E) Was machst du gerne?
+> Was hast du gerne gemacht? (O que você gostava de fazer?)
