@@ -32,7 +32,6 @@ permalink: /study/deutsch/bucher/zwei/lektion-19/hausaufgaben
 #### 2. Schreiben Sie einen Dialog zwischen zwei Freunden. Seien Sie so kreativ wie möglich.
 
 > \
-> \
 > Max: Hallo Thomas, wie geht es dir heute?
 > \
 > \
