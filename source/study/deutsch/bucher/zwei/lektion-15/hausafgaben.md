@@ -33,20 +33,20 @@ permalink: /study/deutsch/bucher/zwei/lektion-15/hausaufgaben
 
 ##### A) Welche Art von Bücher liest du in der Bibliothek? (Welche Art von Büchern liest du in der Bibliothek?)
 > Ich lese normalerweise Bücher über Geschichte und Abenteuer in der Bibliothek. <input type="checkbox" />
-Eu normalmente leio livros sobre história e aventura na biblioteca.)
+(Eu normalmente leio livros sobre história e aventura na biblioteca.)
 
 ##### B) Wie oft bist du mit der U-Bahn gefahren? (Wie oft bist du mit der U-Bahn gefahren?)
 > Ich bin ungefähr einmal pro Woche mit der U-Bahn gefahren. <input type="checkbox" />
-Eu dirijo cerca de uma vez por semana de metrô.)
+(Eu dirijo cerca de uma vez por semana de metrô.)
 
 ##### C) Sind deine Schüler jetzt in der Schule? (Sind deine Schüler jetzt in der Schule?)
 > Ja, meine Schüler sind jetzt in der Schule und lernen. <input type="checkbox" />
-Sim, meus alunos estão na escola e estão aprendendo.)
+(Sim, meus alunos estão na escola e estão aprendendo.)
 
 ##### D) Was forscht unser Lehrer im Labor? (Was forscht unser Lehrer im Labor?)
 > Unser Lehrer forscht über alternative Energiequellen im Labor. <input type="checkbox" />
-Nosso professor está pesquisando fontes de energia alternativas no laboratório.)
+(Nosso professor está pesquisando fontes de energia alternativas no laboratório.)
 
 ##### E) Hast du letzte Nacht etwas Besonderes gezeichnet? (Hast du letzte Nacht etwas Besonderes gezeichnet?)
 > Nein, ich habe letzte Nacht nichts besonderes gezeichnet. <input type="checkbox" />
-Não, eu não desenhei nada de especial na noite passada.)
+(Não, eu não desenhei nada de especial na noite passada.)
