@@ -1,6 +1,6 @@
 ---
 layout: page
-permalink: /study/deutsch
+permalink: /study/deutsch/
 ---
 
 {% assign current_year = 'now' | date: '%Y' %}
