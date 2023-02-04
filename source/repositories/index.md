@@ -1,10 +1,8 @@
 ---
 layout: page
 permalink: /repositories/
+title: My Github Public Repositories
 ---
-
-
-# My Github Public Repositories
 
 <div id="ulPages">{% include loading.html %}</div>
 

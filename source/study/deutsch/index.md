@@ -3,25 +3,10 @@ layout: page
 permalink: /study/deutsch
 ---
 
-## Deutsch
+{% assign current_year = 'now' | date: '%Y' %}
 
-Hier werde ich Deutschübungen hinzufügen
+Seit 2021 ({{ current_year | minus: 2021 }} Jahre) studiere ich Deutsch bei [KNN Idiomas](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwjE0tnq7Pv8AhWqH7kGHYFVDb4QFnoECAoQAQ&url=https%3A%2F%2Fwww.knnidiomas.com.br%2F&usg=AOvVaw3cxmvV72cREO-V_XH0ewQE).
 
-### Lektionen
+Einige Lektionen wurden hier hinzugefügt, für mein Wachstum und für die Bewertung des Lehrers.
 
-Bisher habe ich die folgenden Lektionen gemacht
-
-1 [Lektion #1]({{ '/study/deutsch/lektion-1/' }})
-  * [Hausaufgaben]({{ '/study/deutsch/lektion-1/hausaufgaben' }})
-
-2 [Lektion #2]({{ '/study/deutsch/lektion-2/' }})
-  * [Hausaufgaben]({{ '/study/deutsch/lektion-2/hausaufgaben' }})
-
-2 [Lektion #3]({{ '/study/deutsch/lektion-3/' }})
-  * [Hausaufgaben]({{ '/study/deutsch/lektion-3/hausaufgaben' }})
-
-2 [Lektion #4]({{ '/study/deutsch/lektion-4/' }})
-  * [Hausaufgaben]({{ '/study/deutsch/lektion-4/hausaufgaben' }})
-
-2 [Lektion #5]({{ '/study/deutsch/lektion-5/' }})
-  * [Hausaufgaben]({{ '/study/deutsch/lektion-5/hausaufgaben' }})
+Organisiert nach [Büchern / Übungen]({{ '/study/deutsch/bucher/' }}), um den Versuch zu erleichtern, den Zugang zu erleichtern.

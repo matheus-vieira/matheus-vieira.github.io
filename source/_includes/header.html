@@ -1,12 +1,14 @@
 <header class="site-header">
   <div class="container">
-    <input type="checkbox" id="toggleNavbar">
+    <label title="Toggle menu checkbox"></label>
+      <input type="checkbox" id="toggleNavbar">
+    </label>
     <h1 class="logo">
       <a href="{{ '/' | prepend: site.baseurl }}" alt="{{ site.author.name }}" title="{{ site.author.name }}">
         {{ site.author.name }}
       </a>
     </h1>
-    <label for="toggleNavbar" role="button" class="toggle-navbar-button" aria-label="Toggle menu button">
+    <label for="toggleNavbar" role="button" class="toggle-navbar-button" title="Toggle menu button">
       <i class="icon icon-menu"></i>
       <i class="icon icon-cross"></i>
     </label>
@@ -20,7 +22,7 @@
           </li>
         {% endfor %}
         <li>
-          <a href="{{ '/feed.xml' | prepend: site.baseurl }}" target="_blank">
+          <a href="{{ '/feed.xml' | prepend: site.baseurl }}" target="_blank" title="Site Feed">
             <i class="icon icon-rss"></i>
           </a>
         </li>
