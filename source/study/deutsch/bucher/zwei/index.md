@@ -18,3 +18,6 @@ Einige Lektionen, die während des Kurses gelernt wurden
 
 * [Lektion 18 - achtzehn]({{ '/study/deutsch/bucher/zwei/lektion-18/' }})
   * [Hausaufgaben]({{ '/study/deutsch/bucher/zwei/lektion-18/hausaufgaben' }})
+
+* [Lektion 19 - neunzehn]({{ '/study/deutsch/bucher/zwei/lektion-19/' }})
+  * [Hausaufgaben]({{ '/study/deutsch/bucher/zwei/lektion-19/hausaufgaben' }})
