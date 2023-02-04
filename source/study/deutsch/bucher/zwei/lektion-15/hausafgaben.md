@@ -1,6 +1,6 @@
 ---
 layout: page
-permalink: /study/deutsch/bucher/zwei/lektion-13/hausaufgaben
+permalink: /study/deutsch/bucher/zwei/lektion-15/hausaufgaben
 ---
 
 ### **Hausaufgaben**

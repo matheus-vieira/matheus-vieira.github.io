@@ -1,6 +1,6 @@
 ---
 layout: page
-permalink: /study/deutsch/bucher/zwei/lektion-11
+permalink: /study/deutsch/bucher/zwei/lektion-11/
 ---
 
 Relativ zu Lektion 11 Übungen
