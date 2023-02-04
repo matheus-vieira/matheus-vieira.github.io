@@ -37,5 +37,8 @@ Einige Lektionen, die während des Kurses gelernt wurden
 * [Lektion 25 - fünfundzwanzig]({{ '/study/deutsch/bucher/zwei/lektion-25/' }})
   * [Hausaufgaben]({{ '/study/deutsch/bucher/zwei/lektion-25/hausaufgaben' }})
 
-* [Lektion 26 - sechsundzwanzig]({{ '/study/deutsch/bucher/zwei/lektion-26/' }})
-  * [Hausaufgaben]({{ '/study/deutsch/bucher/zwei/lektion-26/hausaufgaben' }})
+* [Lektion 27 - sechsundzwanzig]({{ '/study/deutsch/bucher/zwei/lektion-27/' }})
+  * [Hausaufgaben]({{ '/study/deutsch/bucher/zwei/lektion-27/hausaufgaben' }})
+
+* [Lektion 28 - sechsundzwanzig]({{ '/study/deutsch/bucher/zwei/lektion-28/' }})
+  * [Hausaufgaben]({{ '/study/deutsch/bucher/zwei/lektion-28/hausaufgaben' }})
