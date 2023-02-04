@@ -3,7 +3,7 @@ layout: page
 permalink: /study/deutsch/bucher/zwei/lektion-20/hausaufgaben
 ---
 
-### Lektion 20 **Hausaufgaben**
+> ### Lektion 20 **Hausaufgaben**
 
 ---
 
