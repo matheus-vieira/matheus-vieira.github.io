@@ -10,9 +10,6 @@ permalink: /study/deutsch/bucher/zwei/lektion-13/hausaufgaben
 #### 1. Beantworten Sie die Fragen:
 
 ##### A) Möchtest du zum Brunch mitkommen?
-> - Ja, ich möchte gerne zum Brunch mitkommen. <input type="checkbox" />
-
-##### A) Möchtest du zum Brunch mitkommen?
 > Ja, ich möchte gerne zum Brunch mitkommen. <input type="checkbox" />
 (Sim, eu gostaria de ir para o brunch)
 
@@ -41,10 +38,13 @@ permalink: /study/deutsch/bucher/zwei/lektion-13/hausaufgaben
 ##### B) Er ist noch in der Arbeit.
 > Er war noch in der Arbeit. <input type="checkbox" />
 (Ele ainda estava no trabalho)
+
 ##### C) Ihr wollt noch einen Kuchen backen.
 > Ihr wolltet noch einen Kuchen backen. <input type="checkbox" />
 (Vocês ainda queriam fazer um bolo)
+
 ##### D) Hat deine Schwester einen Freund?
 > Hatte deine Schwester einen Freund? (Sua irmã tinha um namorado?)
+
 ##### E) Was machst du gerne?
 > Was hast du gerne gemacht? (O que você gostava de fazer?)
