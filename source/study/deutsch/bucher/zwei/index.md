@@ -30,3 +30,6 @@ Einige Lektionen, die während des Kurses gelernt wurden
 
 * [Lektion 22 - zweiundzwanzig]({{ '/study/deutsch/bucher/zwei/lektion-22/' }})
   * [Hausaufgaben]({{ '/study/deutsch/bucher/zwei/lektion-22/hausaufgaben' }})
+
+* [Lektion 23 - zweiundzwanzig]({{ '/study/deutsch/bucher/zwei/lektion-23/' }})
+  * [Hausaufgaben]({{ '/study/deutsch/bucher/zwei/lektion-23/hausaufgaben' }})

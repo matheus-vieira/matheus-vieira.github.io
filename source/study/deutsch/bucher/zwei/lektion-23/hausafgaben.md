@@ -7,32 +7,39 @@ permalink: /study/deutsch/bucher/zwei/lektion-23/hausaufgaben
 
 ---
 
-#### 1. Beantworten Sie die Fragen:
+#### 1. Schreiben Sie Sätze mit:
 
 ##### A) verteilen
 > Ich verteile gerne meine Zeitschriften an Freunde. <input type="checkbox" />
 (Distribuo minhas revistas para amigos com prazer)
 
-##### B) austauschen
-> Lass uns unsere Bücher austauschen. <input type="checkbox" />
-(Vamos trocar nossos livros)
+##### A) loslassen
+> Lass endlich los! <input type="checkbox" />
+(Deixe ir!)
 
-##### C) vorsichtig
-> Sei beim Überqueren der Straße vorsichtig. <input type="checkbox" />
-(Seja cauteloso ao atravessar a rua)
+##### B) sich ärgern
+> Ich ärgere mich über meinen Chef. <input type="checkbox" />
+(Eu estou irritado com meu chefe)
 
-##### D) weit weg von
-> Ich möchte weit weg von der Stadt leben. <input type="checkbox" />
-(Eu quero morar longe da cidade)
+##### C) weglaufen 
+> Ich bin weggelaufen, weil ich Angst hatte. <input type="checkbox" />
+(Eu corri porque estava com medo)
 
-##### E) Sammlung
-> Meine Sammlung an Briefmarken ist sehr wertvoll für mich. <input type="checkbox" />
-(Minha coleção de selos é muito valiosa para mim)
+##### D) keine Sorgen
+> Mach dir keine Sorgen, es wird alles gut werden. <input type="checkbox" />
+(Não se preocupe, tudo ficará bem)
 
-##### F) Bargeld 
-> Ich trage immer Bargeld bei mir, für den Fall eines Notfalls. <input type="checkbox" />
-(Eu sempre carrego dinheiro comigo, no caso de emergência)
+##### E) sich Freuen
+> Ich freue mich auf den Urlaub. <input type="checkbox" />
+(Estou animado para as férias)
 
-##### G) um die Ecke
-> Lass uns einen Kaffee trinken gehen, um die Ecke. <input type="checkbox" />
-(Vamos tomar um café, ao virar da esquina)
+##### F) Kinderspiel
+> Dieses Spiel ist nur ein Kinderspiel. <input type="checkbox" />
+
+##### G) plötzlich
+Plötzlich hörte es auf zu regnen. <input type="checkbox" />
+(De repente, parou de chover)
+
+##### H) sich identifizieren
+Ich identifiziere mich vollständig mit meiner Arbeit. <input type="checkbox" />
+(Eu me identifico completamente com meu trabalho)
