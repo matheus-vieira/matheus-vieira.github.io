@@ -1,10 +1,10 @@
 ---
 layout: page
-permalink: /study/deutsch/bucher/vier/lektion-10/frei-sprechen/translate-pt
+permalink: /study/deutsch/bucher/vier/lektion-10/frei-sprechen/translate-pt/
 title: Descubra Florianópolis para suas férias perfeitas
 ---
 
-* [Alemão]({{ '/study/deutsch/bucher/vier/lektion-10/frei-sprechen/' }})
+* [Alemão]({{ '/study/deutsch/bucher/vier/lektion-10/frei-sprechen' }})
 
 ## Introdução
 - Bem-vindo! Hoje mergulhamos na beleza e na diversidade de Florianópolis como o melhor local de férias.
