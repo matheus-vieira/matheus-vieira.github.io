@@ -33,7 +33,7 @@ Some important points during my life:
 > * 2009 - Started my first registered job as a .NET developer.
 > * 2010 - **Got married to *Daniela Priscila Lins*.**
 > * 2011 - My graduation is finally complete.
-> * 2009 - **My second child *Ana Carolina* was born.**
+> * 2013 - **My second child *Ana Carolina* was born.**
 > * 2016 - Graduated in Software Engineering and Systems Architecture.
 > * 2018 - Graduated in Embedded Systems and Internet of Things.
 > * 2019 - Started a master's degree, but I had to stop.
