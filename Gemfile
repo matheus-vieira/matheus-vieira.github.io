@@ -10,14 +10,12 @@ gem 'wdm', '>= 0.1.0' if Gem.win_platform?
 #
 # This will help ensure the proper Jekyll version is running.
 # Happy Jekylling!
-# gem 'jekyll'
+
 gem 'rake'
 gem 'sass'
 gem 'json'
-# gem 'bourbon'
-
-
-
+gem 'faraday-retry'
+gem "webrick"
 
 # If you want to use GitHub Pages, remove the "gem "jekyll"" above and
 # uncomment the line below. To upgrade, run `bundle update github-pages`.
@@ -34,5 +32,3 @@ group :jekyll_plugins do
   gem "kramdown"
   gem "rouge"
 end
-
-gem "webrick", "~> 1.7"

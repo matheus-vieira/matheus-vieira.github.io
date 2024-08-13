@@ -39,6 +39,16 @@ title: Skills
 </article>
 
 <article class="page card">
+<h2>Cloud Providers</h2>
+
+{% for skill in skills %}
+  {% if skill.type == "cloud" %}
+  {{ skill }}
+  {% endif %}
+{% endfor %}
+</article>
+
+<article class="page card">
 <h2>Libraries and frameworks</h2>
 
 {% for skill in skills %}

@@ -1,7 +1,7 @@
 ---
 layout: js
 jobtitle: "Senior software engineer"
-admissiondate: 2021-08-16
+admissiondate: 2021-07-16
 resignationdate: 2022-04-18
 company: Avenue Code
 description: ""

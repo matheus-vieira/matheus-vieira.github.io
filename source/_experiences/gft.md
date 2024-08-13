@@ -5,16 +5,16 @@ admissiondate: 2021-08-16
 resignationdate:
 company: GFT Brasil
 description: ""
-languages: [C#]
+languages: [C#, JavaScript]
 frameworks: [.NET, .NET Core, Entity Framework, Entity Framework Core]
-additionInfo: [SqlServer, GIT, Design Patterns, Threads, Oracle, unit testing]
+additionInfo: [Azure, Azure Functions, Blob Storage, Unqork, SqlServer, GIT, Design Patterns, Threads, Oracle, unit testing]
 en-us:
   jobtitle: Senior Software Engineer
-  description: Technical leader, Maintenance, development and architecture of REST API's for Ultimus Fund Solutions client.
+  description: Responsible for developing and maintaining complete systems, working on both frontend and backend. AngularJS for dynamic frontend and .NET for backend development. Managed SQL and NoSQL databases, NuGet packages creation, and Azure cloud solutions.
 pt-br:
   jobtitle: Engenheiro de Software Sênior
-  description: Manutenção, desenvolvimento e arquitetura APIs Rest para o cliente Ultimus Fund Solutions.
+  description: Responsável por desenvolver e manter sistemas completos, trabalhando tanto no frontend quanto no backend. AngularJS para frontend dinâmico e .NET para desenvolvimento de backend. Bancos de dados SQL e NoSQL, criação de pacotes NuGet e  soluções de nuvem Azure.
 ---
 
-Senior software engineer.
-Design, maintenance, development and architecture of REST API's for a investments funds systems used by Ultimus Fund Solutions clients.
+Full Stack Developer responsible for developing and maintaining complete systems, working on both frontend and backend. Utilized AngularJS for dynamic frontend and .NET for secure backend development. Managed relational databases, integrated NuGet packages, and implemented Azure cloud solutions.
+

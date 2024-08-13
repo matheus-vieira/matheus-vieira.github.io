@@ -9,7 +9,7 @@ paginate_path: "/blog/page/:num/"
 comments: true
 
 incremental: true
-live_reload: true
+live reload: true
 host: 0.0.0.0
 
 source: source
@@ -80,6 +80,7 @@ messages:
         current: "Atual"
         skills-idiom: "Idiomas"
         skills-languages: "Linguagens"
+        skills-cloud: "Provedores de Nuvem"
         skills-framework: "Frameworks"
         skills-others: "Outras"
       goal: "Criar novos e melhores conceitos usando padrões de design e melhores práticas para o desenvolvimento de aplicativos.
@@ -102,6 +103,7 @@ messages:
         current: "Actual"
         skills-idiom: "Speak"
         skills-languages: "Languages"
+        skills-cloud: "Cloud Providers"
         skills-framework: "Frameworks"
         skills-others: "Others"
       goal: "Create new and better concepts using design patterns and best practices for the development of applications.
