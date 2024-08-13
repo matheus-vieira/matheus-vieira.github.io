@@ -25,20 +25,26 @@ In 2019 I've started an master degree at [Lactec](http://www.lactec.org.br/subme
 
 Today I'm still an student learning about:
 
-> * [NodeJS](https://nodejs.org/en/)
-> * [Angular](https://angular.io/)
-> * [React](https://reactjs.org/)
-> * [.NET Core (already published on production!)](https://docs.microsoft.com/pt-br/dotnet/core/)
-> * [Entity Framework Core (already published on production!)](https://docs.microsoft.com/pt-br/ef/core/)
-> * [JAVA](https://www.java.com/pt_BR)
-> * [Spring](https://spring.io)
-> * [Hibernate](hibernate.org)
+> * Languages and frameworks
+>   * [NodeJS](https://nodejs.org/en/)
+>   * [Angular](https://angular.io/)
+>   * [React](https://reactjs.org/)
+>   * [.NET Core (already published on production!)](https://docs.microsoft.com/pt-br/dotnet/core/)
+>   * [Entity Framework Core (already published on production!)](https://docs.microsoft.com/pt-br/ef/core/)
+>   * [JAVA](https://www.java.com/pt_BR)
+>   * [Spring](https://spring.io)
+>   * [Hibernate](hibernate.org)
+>
+> * Cloud Providers
+>   * [Azure](https://azure.microsoft.com/en-us/), currently mostly used
+>   * [AWS](https://aws.amazon.com/)
+>   * [GCP](https://cloud.google.com/)
 
 
 ## [Professional experience]({{ '/resume/professional-experience/' }})
 
 Currently working for companies:
-* [GFT ](https://www.gft.com/br/pt) for his client [Ultimus Fund Solutions](https://www.ultimusfundsolutions.com/) developing API's with .NET Core framework (upgrade from 2.1 to 5.0, willing to update to version 6.0)
+* ***[GFT](https://www.gft.com/br/pt)*** - successfully served numerous clients, both national and international, employing a diverse array of frontend and backend technologies. In summary: AngularJS, C#, Azure services (databases, functions, CI/CD, etc.).
 * ***End2End Systems*** my personal company for any other work.
 
 ## [Skills]({{ '/resume/skills/' }})
