@@ -44,7 +44,7 @@ Today I'm still an student learning about:
 ## [Professional experience]({{ '/resume/professional-experience/' }})
 
 Currently working for companies:
-* ***[GFT](https://www.gft.com/br/pt)*** - successfully served numerous clients, both national and international, employing a diverse array of frontend and backend technologies. In summary: AngularJS, C#, Azure services (databases, functions, CI/CD, etc.).
+* ***[Dell](https://www.dell.com/)*** - responsible for microservices creation to support many applications as client data management.
 * ***End2End Systems*** my personal company for any other work.
 
 ## [Skills]({{ '/resume/skills/' }})

@@ -2,7 +2,7 @@
 layout: js
 jobtitle: "Senior software engineer"
 admissiondate: 2021-08-16
-resignationdate:
+resignationdate: 2024-08-19
 company: GFT Brasil
 description: ""
 languages: [C#, JavaScript]
