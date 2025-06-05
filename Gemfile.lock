@@ -240,9 +240,11 @@ GEM
       sass (>= 3.3)
     net-http (0.4.1)
       uri
+    nokogiri (1.14.3)
+      mini_portile2 (~> 2.8.0)
+      racc (~> 1.4)
     nokogiri (1.16.7)
       mini_portile2 (~> 2.8.2)
-      racc (~> 1.4)
     nokogiri (1.16.7-x64-mingw-ucrt)
       racc (~> 1.4)
     octokit (4.25.1)
@@ -283,7 +285,9 @@ GEM
     unicode-display_width (1.8.0)
     uri (0.13.0)
     wdm (0.2.0)
+    webrick (1.7.0)
     webrick (1.8.1)
+    zeitwerk (2.6.6)
 
 PLATFORMS
   ruby
