@@ -10,10 +10,10 @@ frameworks: [JAVA, Spring]
 additionInfo: [GIT, Design Patterns, Threads, Oracle, unit testing]
 en-us:
   jobtitle: Senior Software Engineer
-  description: Maintenance, development and architecture of REST API's for Mastercard client.
+  description: "<ul><li>Developed Java/Spring REST APIs for Mastercard systems.</li><li>Focused on performance, fault tolerance, and testing.</li></ul>"
 pt-br:
   jobtitle: Engenheiro de Software Sênior
-  description: Manutenção, desenvolvimento e arquitetura APIs Rest para o cliente Mastercard
+  description: "<ul><li>Desenvolvimento de APIs REST Java/Spring para sistemas Mastercard.</li><li>Focado em desempenho, tolerância a falhas e testes.</li></ul>"
 ---
 
 Senior software engineer.

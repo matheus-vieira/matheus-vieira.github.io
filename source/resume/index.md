@@ -40,10 +40,10 @@ Today I'm still an student learning about:
 >   * [AWS](https://aws.amazon.com/)
 >   * [GCP](https://cloud.google.com/)
 
-
 ## [Professional experience]({{ '/resume/professional-experience/' }})
 
 Currently working for companies:
+
 * ***[Dell](https://www.dell.com/)*** - responsible for microservices creation to support many applications as client data management.
 * ***End2End Systems*** my personal company for any other work.
 

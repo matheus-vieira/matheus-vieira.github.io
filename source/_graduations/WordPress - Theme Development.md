@@ -5,7 +5,7 @@ location: "Curitiba - PR / BR"
 institution: Aldeia Coworking
 startdate: 2014-08-18 14:00:00
 enddate: 2014-08-21
-type: Individual course
+type: technical
 course: WordPress - Theme Development
 certificate: /images/certificates/desenvolvimentoTemasWordpress.pdf
 en-us:

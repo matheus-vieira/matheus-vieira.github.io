@@ -10,11 +10,10 @@ frameworks: [.NET, .NET Core, Entity Framework, Entity Framework Core]
 additionInfo: [Azure, Azure Functions, Blob Storage, Unqork, SqlServer, GIT, Design Patterns, Threads, Oracle, unit testing]
 en-us:
   jobtitle: Senior Software Engineer
-  description: Responsible for developing and maintaining complete systems, working on both frontend and backend. AngularJS for dynamic frontend and .NET for backend development. Managed SQL and NoSQL databases, NuGet packages creation, and Azure cloud solutions.
+  description: "<ul><li>Fullstack development with AngularJS and .NET.</li><li>Implemented Azure-based cloud solutions (Functions, Blob Storage, SQL DBs).</li><li>Created scalable ingestion systems using event-driven architecture.</li><li>Developed unit-tested, thread-safe code with high maintainability.</li></ul>"
 pt-br:
   jobtitle: Engenheiro de Software Sênior
-  description: Responsável por desenvolver e manter sistemas completos, trabalhando tanto no frontend quanto no backend. AngularJS para frontend dinâmico e .NET para desenvolvimento de backend. Bancos de dados SQL e NoSQL, criação de pacotes NuGet e  soluções de nuvem Azure.
+  description: "<ul><li>Desenvolvimento fullstack com AngularJS e .NET.</li><li>Soluções em nuvem baseadas em Azure (Funções, Armazenamento de Blobs, Bancos de Dados SQL).</li><li>Sistemas de ingestão escaláveis ​​utilizando arquitetura orientada a eventos.</li><li>Código thread-safe, testado em unidades e com alta manutenibilidade.</li></ul>"
 ---
 
 Full Stack Developer responsible for developing and maintaining complete systems, working on both frontend and backend. Utilized AngularJS for dynamic frontend and .NET for secure backend development. Managed relational databases, integrated NuGet packages, and implemented Azure cloud solutions.
-
