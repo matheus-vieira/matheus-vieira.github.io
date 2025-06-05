@@ -1,0 +1,24 @@
+{% assign lang = page.lang | default: "en-us" %}
+
+<h2>{{ site.messages[lang].print-resume.core-competencies-title }}</h2>
+
+<p>
+<ul>
+    <li><em><strong>{{ site.messages[lang].print-resume.title.backend-development }}</strong></em>: {{
+        site.messages[lang].print-resume.backend-development }}</li>
+    <li><em><strong>{{ site.messages[lang].print-resume.title.frontend-development }}</strong></em>: {{
+        site.messages[lang].print-resume.frontend-development }}</li>
+    <li><em><strong>{{ site.messages[lang].print-resume.title.cloud-devops }}</strong></em>: {{
+        site.messages[lang].print-resume.cloud-devops }}</li>
+    <li><em><strong>{{ site.messages[lang].print-resume.title.databases }}</strong></em>: {{
+        site.messages[lang].print-resume.databases }}</li>
+    <li><em><strong>{{ site.messages[lang].print-resume.title.messaging-caching }}</strong></em>: {{
+        site.messages[lang].print-resume.messaging-caching }}</li>
+    <li><em><strong>{{ site.messages[lang].print-resume.title.testing-quality }}</strong></em>: {{
+        site.messages[lang].print-resume.testing-quality }}</li>
+    <li><em><strong>{{ site.messages[lang].print-resume.title.observability }}</strong></em>: {{
+        site.messages[lang].print-resume.observability }}</li>
+    <li><em><strong>{{ site.messages[lang].print-resume.title.version-control }}</strong></em>: {{
+        site.messages[lang].print-resume.version-control }}</li>
+</ul>
+</p>

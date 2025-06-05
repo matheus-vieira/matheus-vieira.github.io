@@ -10,10 +10,10 @@ frameworks: [.NET, .NET MVC, Entity Framework, JAVA, Spring]
 additionInfo: [GIT, Design Patterns, Threads, SqlServer, unit testing]
 en-us:
   jobtitle: Senior Software Engineer
-  description: Maintenance, development and architecture of .NET-based applications for Caixa Econômica Federal - CEF client.
+  description: "<ul><li>Delivered robust backend systems for Caixa Econômica Federal.</li><li>Worked across .NET MVC and Java Spring ecosystems.</li></ul>"
 pt-br:
   jobtitle: Analista Desenvolvedor
-  description: Manutenção, desenvolvimento e arquitetura de aplicações em .NET para o cliente Caixa Econômica Federal - CEF
+  description: "<ul><li>Desenvolvimento de sistemas de backend robustos para a Caixa Econômica Federal.</li><li>Utilizando os ecossistemas .NET MVC e Java Spring.</li></ul>"
 ---
 
 Senior software engineer.

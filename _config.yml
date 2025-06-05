@@ -9,7 +9,7 @@ paginate_path: "/blog/page/:num/"
 comments: true
 
 incremental: true
-live_reload: true
+live reload: true
 host: 0.0.0.0
 
 source: source
@@ -45,6 +45,7 @@ compress_html:
 # Author settings
 author:
   name: mvieira
+  full-name: Matheus Costa Vieira
   job: Software Engineer
   bio: "I love God, my wife, my son and my little daughter (an angel) and then I love to create programs!"
   thumb: /images/author.png
@@ -67,34 +68,52 @@ messages:
     page-title: Currículo
     print-alert: "Opcionalmente remova o cabeçalho nas opções de impressão"
     print-resume:
-      location: "Curitiba- Paraná - Brasil"
+      location: "Fazenda Rio Grande - Paraná - Brasil"
       title:
-        goal: "Objetivo"
-        education: "Formação Acadêmica"
+        goal: "Resumo Profissional"
+        education: "Formação"
         courses: "Cursos"
-        experiences: "Experiência"
+        experiences: "Experiências Profissionais"
         institution: "Instituição"
         skills: "Conhecimentos"
-        course: "Curso"
+        course: "Certificações e Cursos"
         company: "Empresa"
         current: "Atual"
         skills-idiom: "Idiomas"
         skills-languages: "Linguagens"
+        skills-cloud: "Provedores de Nuvem"
         skills-framework: "Frameworks"
         skills-others: "Outras"
-      goal: "Criar novos e melhores conceitos usando padrões de design e melhores práticas para o desenvolvimento de aplicativos.
-<br /> Fazendo uso de testes automatizados para garantir a qualidade do sistema.
-<br /> Tendo em mente a resolução do problema com a melhor experiência para o usuário."
+        backend-development: "Desenvolvimento Backend"
+        frontend-development: "Desenvolvimento Frontend"
+        cloud-devops: "Nuvem e DevOps"
+        databases: "Banco de Dados"
+        messaging-caching: "Mensageria e Cache"
+        testing-quality: "Teste e Qualidade"
+        observability: "Observabilidade"
+        version-control: "Controle de Versão"
+        professional-goals: "Objetivos Profissionais"
+      core-competencies-title: "Competências Essenciais"
+      goal: "Engenheiro de Software Sênior com muitos anos de experiência em projeto, desenvolvimento e manutenção de sistemas escaláveis ​​e de alto desempenho. Sólida expertise no ecossistema .NET, soluções em nuvem no Azure, frameworks front-end e melhores práticas de arquitetura de software. Experiência comprovada na liderança de equipes técnicas, criação de bibliotecas reutilizáveis, otimização de pipelines de CI/CD e entrega de soluções centradas no usuário, com testes automatizados e observabilidade em mente."
+      backend-development: ".NET 8, .NET Core, Entity Framework Core, C#, Java, VB.NET, Python, COBOL, Delphi"
+      frontend-development: "AngularJS, ReactJS, VueJS, KnockoutJS, JavaScript, HTML5, CSS3, Bootstrap"
+      cloud-devops: "Azure (Functions, Durable Functions, Event Grid, SQL Databases, Blob Storage, Active Directory, AI Search), CI/CD (GitHub Actions, Azure Pipelines)"
+      databases: "SQL Server, Oracle, MongoDB, Elasticsearch"
+      messaging-caching: "RabbitMQ, Redis"
+      testing-quality: "Unit Testing, Automated Testing, Design Patterns, SOLID Principles, GRASP"
+      observability: "Serilog, ELK Stack, Application Insights"
+      version-control: "Git, GitLab, TFS, SVN"
+      professional-goals: "Projetar soluções inovadoras aplicando princípios de design de software e padrões de arquitetura. Entregar aplicações de alta qualidade apoiadas por testes automatizados e com forte foco na experiência do usuário e na resolução de problemas."
   en-us:
     page-title: Resume
     print-alert: "Optionally remove header in print options"
     print-resume:
-      location: "Curitiba- Paraná - Brazil"
+      location: "Fazenda Rio Grande - Paraná - Brazil"
       title:
-        goal: "Goal"
-        education: "Academic formation"
-        courses: "Courses"
-        experiences: "Experiences"
+        goal: "Professional Summary"
+        education: "Education"
+        courses: "Certifications & Courses"
+        experiences: "Professional Experiences"
         institution: "Institution"
         skills: "Skills"
         course: "Course"
@@ -102,11 +121,29 @@ messages:
         current: "Actual"
         skills-idiom: "Speak"
         skills-languages: "Languages"
+        skills-cloud: "Cloud Providers"
         skills-framework: "Frameworks"
         skills-others: "Others"
-      goal: "Create new and better concepts using design patterns and best practices for the development of applications.
-<br /> Making use of automated tests to ensure the system quality.
-<br /> Keeping on mind the problem resolution with the best experience for the user."
+        backend-development: "Backend Development"
+        frontend-development: "Frontend Development"
+        cloud-devops: "Cloud & DevOps"
+        databases: "Databases"
+        messaging-caching: "Messaging & Caching"
+        testing-quality: "Testing & Quality"
+        observability: "Observability"
+        version-control: "Version Control"
+        professional-goals: "Professional Goals"
+      core-competencies-title: "Core Competencies"
+      goal: "Senior Software Engineer with many years of experience in designing, developing, and maintaining scalable and high-performance systems. Strong expertise in .NET ecosystem, cloud solutions on Azure, front-end frameworks, and software architecture best practices. Proven track record in leading technical teams, creating reusable libraries, optimizing CI/CD pipelines, and delivering user-centric solutions with automated testing and observability in mind."
+      backend-development: ".NET 8, .NET Core, Entity Framework Core, C#, Java, VB.NET, Python, COBOL, Delphi"
+      frontend-development: "AngularJS, ReactJS, VueJS, KnockoutJS, JavaScript, HTML5, CSS3, Bootstrap"
+      cloud-devops: "Azure (Functions, Durable Functions, Event Grid, SQL Databases, Blob Storage, Active Directory, AI Search), CI/CD (GitHub Actions, Azure Pipelines)"
+      databases: "SQL Server, Oracle, MongoDB, Elasticsearch"
+      messaging-caching: "RabbitMQ, Redis"
+      testing-quality: "Unit Testing, Automated Testing, Design Patterns, SOLID Principles, GRASP"
+      observability: "Serilog, ELK Stack, Application Insights"
+      version-control: "Git, GitLab, TFS, SVN"
+      professional-goals: "To design innovative solutions by applying software design principles and architecture patterns. To deliver high-quality applications backed by automated testing and a strong focus on user experience and problem-solving."
 
 # navbar pages
 navbar:
@@ -124,8 +161,17 @@ navbar:
     title: Study
 
 collections:
- - graduations
- - experiences
- - skills
+  - graduations
+  - experiences
+  - skills
 
-exclude: ["config.rb", "src", "Gemfile", "Gemfile.lock", "package.json","README.md", "Rakefile"]
+exclude:
+  [
+    "config.rb",
+    "src",
+    "Gemfile",
+    "Gemfile.lock",
+    "package.json",
+    "README.md",
+    "Rakefile",
+  ]

@@ -6,16 +6,16 @@
 {% assign list = list | reverse%}
 {% for i in (0..site.max_experiences) %}
 <div class="page">
-  <em>{{ list[i][lang].jobtitle }}</em> &mdash; <strong>{{ list[i].company }}</strong> &mdash;
-  <time datetime="{{ list[i].admissiondate }}">{{ list[i].admissiondate | date: "%Y" }}</time> &dash;
+  <strong>{{ list[i].company }}</strong> &mdash; <em>{{ list[i][lang].jobtitle }}</em>
+  <br /><time datetime="{{ list[i].admissiondate }}">{{ list[i].admissiondate | date: "%Y" }}</time> &dash;
   {% if list[i].resignationdate %}
   <time datetime="{{ list[i].resignationdate }}">{{ list[i].resignationdate | date: "%Y" }}</time>
   {% else %}
   {{ site.messages[lang].print-resume.title.current }}
   {% endif %}
   <br />{{ list[i][lang].description }}
-  <br />{{ list[i].languages | join: ', ' }}
+  <!-- <br />{{ list[i].languages | join: ', ' }}
   <br />{{ list[i].frameworks | join: ', ' }}
-  <p>{{ list[i].additionInfo | join: ', ' }}</p>
+  <p>{{ list[i].additionInfo | join: ', ' }}</p> -->
 </div>
 {% endfor %}
