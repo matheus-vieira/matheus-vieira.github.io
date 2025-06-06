@@ -8,7 +8,7 @@ tags: .net-core .net tips
 categories: pt-br dotnet-pro-tips
 twitter_text: ".NET Pro tips - Configurando banco de Dados"
 username: "Matheus Costa Vieira"
-user_description: Sênior Developer
+user_description: Senior .NET Backend Engineer
 email: matheus.costa.vieira@gmail.com
 photo: mvieira.jpg
 ---
