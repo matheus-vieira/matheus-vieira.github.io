@@ -1,0 +1,458 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Matheus Costa Vieira - Personal Page</title>
+    <description>Here you can find some personal information, resume and blog from Matheus Costa Vieira</description>
+    <link>http://0.0.0.0:4000/</link>
+    <atom:link href="http://0.0.0.0:4000/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Tue, 13 Aug 2024 11:50:50 -0300</pubDate>
+    <lastBuildDate>Tue, 13 Aug 2024 11:50:50 -0300</lastBuildDate>
+    <generator>Jekyll v3.10.0</generator>
+    
+      <item>
+        <title>.NET Pro tips - Configurando banco de Dados</title>
+        <description>&lt;p&gt;Esse artigo faz parte de uma série de artigos sobre como utilizar o EFCore com múltiplos providers de banco de dados. Se quiser veja outras partes dessa série em &lt;a href=&quot;#related&quot;&gt;links relacionados&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;configurando-banco-de-dados-em-um-projeto-net-core&quot;&gt;Configurando banco de dados em um projeto .NET Core&lt;/h2&gt;
+
+&lt;p&gt;Neste ponto assumo que você já é familiarizado com projetos .NET e/ou .NET Core e portanto sabe implementar ou se necessário ler o site &lt;a href=&quot;https://docs.microsoft.com/en-us/aspnet/core/?view=aspnetcore-3.1&quot;&gt;AS.NET Documentation&lt;/a&gt; para saber como iniciar a configuração de um banco de dados.&lt;/p&gt;
+
+&lt;p&gt;Aqui mostrarei uma possível ideia de implementação de um projeto de acesso a banco de dados.&lt;/p&gt;
+
+&lt;p&gt;Algo que acaba me incomodando é as pessoas utilizarem exemplos da própria documentação e manter isso por toda a vida do projeto.&lt;/p&gt;
+
+&lt;p&gt;Primeiro exemplo que quero apresentar é sobre como utilizar o princípio de responsabilidade única ao criarmos um projeto de banco de dados.&lt;/p&gt;
+
+&lt;p&gt;Sabemos que no método &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ConfigureServices&lt;/code&gt; da classe &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Startup&lt;/code&gt; precisamos, como o nome propõe, configurar nossos serviços, e nosso banco de dados é um serviço de nossa aplicação.&lt;/p&gt;
+
+&lt;p&gt;Aqui temos um exemplo da própria &lt;a href=&quot;https://docs.microsoft.com/en-us/aspnet/core/data/ef-mvc/intro?view=aspnetcore-3.1#register-the-schoolcontext&quot;&gt;documentação&lt;/a&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-csharp highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;ConfigureServices&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;IServiceCollection&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;services&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;services&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Configure&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;CookiePolicyOptions&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;options&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;options&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;CheckConsentNeeded&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;context&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;options&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;MinimumSameSitePolicy&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;SameSiteMode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;None&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
+
+    &lt;span class=&quot;n&quot;&gt;services&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;AddDbContext&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;SchoolContext&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;options&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;options&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;UseSqlServer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Configuration&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;GetConnectionString&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;DefaultConnection&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)));&lt;/span&gt;
+
+    &lt;span class=&quot;n&quot;&gt;services&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;AddMvc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;&lt;br /&gt;
+O projeto que possui a classe &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Startup&lt;/code&gt; deve basicamente, se por exemplo o projeto for de uma API:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Carregar o(s) arquivo(s) de configuração&lt;/li&gt;
+  &lt;li&gt;Configurar as rotas&lt;/li&gt;
+  &lt;li&gt;E solicitar aos serviços para que eles configurem o que for necessário.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;O ponto chave do &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ConfigureServices&lt;/code&gt; é a chamada ao método (de extensão) &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;AddDbContext&lt;/code&gt;, ao meu ver isso é algo que o próprio projeto de banco de dados deve ser o responsável pela sua configuração.&lt;/p&gt;
+
+&lt;p&gt;Para isso podemos utilizar um &lt;a href=&quot;/blog/pt-br/dotnet-pro-tips/extension-methods&quot;&gt;métodos de extensão&lt;/a&gt; no projeto que faz sentido.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Caso seu sistema possua uma camada de serviço entre a controller e o banco de dados então a classe &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Startup&lt;/code&gt; deve conhecer apenas o a camada de serviço.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Um exemplo de método de extensão:&lt;/p&gt;
+
+&lt;div class=&quot;language-csharp highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;namespace&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;ContosoUniversity.Data.Extension&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;RepositoryExtension&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;UseDataRepository&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;IServiceCollection&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;services&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;IConfiguration&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;configuration&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;services&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;AddDbContext&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;SchoolContext&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;options&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&amp;gt;&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;options&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;UseSqlServer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;configuration&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;GetConnectionString&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;DefaultConnection&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)));&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Eu acho interessante utilizar o prefixo &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Use&lt;/code&gt;, mas é gosto pessoal, pode usar o nome que desejar.&lt;/p&gt;
+
+  &lt;p&gt;O foco aqui é extender a interface &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;IServiceCollection&lt;/code&gt; recebendo a interface &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;IConfiguration&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Agora podemos ver que a responsabilidade da &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Startup&lt;/code&gt; é pedir para o serviço se configurar:&lt;/p&gt;
+
+&lt;div class=&quot;language-csharp highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// código omitido&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;using&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;ContosoUniversity.Data.Extension&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// não esqueça de adicionar o using para o método de extensã&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;// código omitido&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;ConfigureServices&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;IServiceCollection&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;services&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;services&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Configure&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;CookiePolicyOptions&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;options&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;options&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;CheckConsentNeeded&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;context&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;options&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;MinimumSameSitePolicy&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;SameSiteMode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;None&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
+
+    &lt;span class=&quot;n&quot;&gt;services&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;UseDataRepository&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Configuration&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+    &lt;span class=&quot;n&quot;&gt;services&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;AddMvc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;&lt;br /&gt;
+Toda a complexidade foi removida da classe de inicialização e encapsulada dentro do projeto responsável.&lt;/p&gt;
+
+&lt;p&gt;Como comentado acima, caso o seu sistema possua uma camada de serviço a implementação deve seguir a mesma ideia.&lt;/p&gt;
+
+&lt;div class=&quot;language-csharp highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;namespace&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;ContosoUniversity.ServiceLayer.Extension&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;ServiceLayerExtension&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;UseServiceLayer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;IServiceCollection&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;services&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;IConfiguration&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;configuration&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;c1&quot;&gt;// qualquer configuraçãp necessária&lt;/span&gt;
+            
+            &lt;span class=&quot;c1&quot;&gt;// configurar o acesso ao banco&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;services&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;UseDataRepository&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Configuration&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;&lt;br /&gt;
+Com isso devemos apenas mudar nossa classe de &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Startup&lt;/code&gt; de forma a chamar o método que ele conhece&lt;/p&gt;
+
+&lt;div class=&quot;language-csharp highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// código omitido&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;using&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;ContosoUniversity.ServiceLayer.Extension&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// não esqueça de adicionar o using para o método de extensã&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;// código omitido&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;ConfigureServices&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;IServiceCollection&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;services&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;services&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Configure&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;CookiePolicyOptions&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;options&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;options&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;CheckConsentNeeded&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;context&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;options&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;MinimumSameSitePolicy&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;SameSiteMode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;None&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
+
+    &lt;span class=&quot;n&quot;&gt;services&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;UseServiceLayer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Configuration&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+    &lt;span class=&quot;n&quot;&gt;services&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;AddMvc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;&lt;br /&gt;
+Perceba agora que temos todas as configurações em seus devidos lugares, portanto se ocorrer a necessidade de se reconfigurar algo (seja da camada de serviço ou de banco de dados) será uma configuração transaparente e somente quem é responsável fica sabendo da alteração.&lt;/p&gt;
+
+&lt;p&gt;Em outras palavras, nossa camada de API não sabe se os dados recebidos por ela e repassado à camada de serviço será gravados efetivamente em um banco de dados, ou se chamará outra API externa, isso não é responsabilidade da API.&lt;/p&gt;
+
+&lt;h4 id=&quot;related&quot;&gt;Links para artigos relacionados&lt;/h4&gt;
+
+&lt;p&gt;&lt;a href=&quot;/blog/pt-br/dotnet-pro-tips/intro/&quot;&gt;.NET Pro tips Multiple Databases Providers Introduction&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/blog/pt-br/dotnet-pro-tips/extension-methods&quot;&gt;Parte 1 - Métodos de extensão&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/blog/pt-br/dotnet-pro-tips/configuring-db&quot;&gt;Parte 2 - Configurando o banco de dados&lt;/a&gt;&lt;/p&gt;
+</description>
+        <pubDate>Mon, 31 Aug 2020 07:20:00 -0300</pubDate>
+        <link>http://0.0.0.0:4000/blog/pt-br/dotnet-pro-tips/configuring-db/</link>
+        <guid isPermaLink="true">http://0.0.0.0:4000/blog/pt-br/dotnet-pro-tips/configuring-db/</guid>
+        
+        <category>.net-core</category>
+        
+        <category>.net</category>
+        
+        <category>tips</category>
+        
+        
+        <category>pt-br</category>
+        
+        <category>dotnet-pro-tips</category>
+        
+      </item>
+    
+      <item>
+        <title>.NET Pro tips - Métodos de Extensão</title>
+        <description>&lt;p&gt;Esse artigo faz parte de uma série de artigos sobre como utilizar o EFCore com múltiplos providers de banco de dados. Se quiser veja outras partes dessa série em &lt;a href=&quot;#related&quot;&gt;links relacionados&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;o-que-isso-quer-dizer&quot;&gt;O que isso quer dizer?&lt;/h2&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;a href=&quot;https://docs.microsoft.com/pt-br/dotnet/csharp/programming-guide/classes-and-structs/extension-methods&quot;&gt;Métodos de extensão&lt;/a&gt;, como o próprio nome diz, adiciona extensões a objetos existentes, evitando alterar códigos existentes (o que facilmente leva a introdução de bugs e complexidade na escrita e leitura de novos códigos)&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Perceba a contribução para os princípios Single Responsibility e Open/Closed do SOLID e com isso atingimos um bom Clean Code.&lt;/p&gt;
+
+&lt;p&gt;Um exemplo simples de utilização seria transformar um texto para algumas convenções de nomenclatura como o CamelCase.&lt;/p&gt;
+
+&lt;p&gt;Nesse exemplo não temos acesso direto à classe &lt;a href=&quot;https://docs.microsoft.com/en-us/dotnet/api/system.string?view=netcore-3.1&quot;&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/a&gt; o que já nos impediria de adicionar um método novo a essa classe.&lt;/p&gt;
+
+&lt;p&gt;Um exemplo de implementação seria:&lt;/p&gt;
+
+&lt;div class=&quot;language-c# highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kt&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;myText&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Hello World&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kt&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;myTextCamelCase&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;char&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;ToLowerInvariant&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;Substring&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+                      &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;Replace&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot; &quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Empty&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;_logger&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;LogInformation&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;myText&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot; ToCamelCase -&amp;gt; &quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;myText&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;ToCamelCase&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;());&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// Output -&amp;gt; Hello World ToCamelCase -&amp;gt; helloWorld&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;&lt;br /&gt;
+Porém isso nos leva a ter que repetir a implementação em qualquer lugar (o que fere o conceito &lt;a href=&quot;https://pt.wikipedia.org/wiki/Don%27t_repeat_yourself&quot;&gt;DRY&lt;/a&gt;). Além de ferir conceitos e princípios temos o problema de falta de clareza no código dificultando a leitura.&lt;/p&gt;
+
+&lt;p&gt;Os métodos de extensão nos ajuda da seguinte forma:&lt;/p&gt;
+
+&lt;div class=&quot;language-c# highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;StringExtension&lt;/span&gt;
+ &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+     &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;string&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;ToCamelCase&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;string&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+     &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+         &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(!&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;IsNullOrEmpty&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Length&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+         &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+             &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;char&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;ToLowerInvariant&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;Substring&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)).&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;Replace&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot; &quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Empty&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+         &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+         &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+     &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+ &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;O que indica ser um método de extensão não é o suffixo &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Extension&lt;/code&gt; no nome da classe e sim a palavra reservada &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;this&lt;/code&gt; antes do primeiro parâmetro e a característica estática.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Assim podemos reutilizar em diversos lugares, apenas utilizando a chamada de um método.&lt;/p&gt;
+
+&lt;div class=&quot;language-c# highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kt&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;myText&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Hello World&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kt&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;myTextCamelCase&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;myText&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;ToCamelCase&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;Console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;WriteLn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;myTextCamelCase&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Note que na chamada do método não existe parâmetro. O parâmtro é a própria variável do tipo string.
+Note também que a leitura é facilitada.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Com a utilização de métodos de extensão podemos reaproveitar código e organizar de forma lógica dentro da nossa aplicação.&lt;/p&gt;
+
+&lt;p&gt;Seguindo nessa mesma lógica podemos alterar no ssa classe e atribuir outras convenções de nomes, nesse caso irei renomear a classe e adicionar métodos para snake case e pascal case&lt;/p&gt;
+
+&lt;div class=&quot;language-c# highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;using&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;System.Linq&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;namespace&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;Helpers.Extensions.String&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;NamingConventionExtension&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;string&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;ToCamelCase&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;string&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(!&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;IsNullOrEmpty&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Length&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+                &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;char&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;ToLowerInvariant&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;Substring&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)).&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;Replace&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot; &quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Empty&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+        &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;string&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;ToSnakeCase&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;string&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;?.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;ToLower&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;Replace&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot; &quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;_&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+        &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;string&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;ToPascalCase&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;string&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;Join&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;Split&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;sc&quot;&gt;&apos;_&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+                    &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;Select&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;w&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;w&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;Trim&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt;
+                    &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;Where&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;w&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;w&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Length&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+                    &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;Select&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;w&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;w&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;Substring&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;ToUpper&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;w&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;Substring&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;ToLower&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()));&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;&lt;br /&gt;
+Utilização:&lt;/p&gt;
+
+&lt;div class=&quot;language-c# highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kt&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;myText&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Hello World&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;_logger&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;LogInformation&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;myText&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot; ToCamelCase -&amp;gt; &quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;myText&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;ToCamelCase&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;());&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// Output -&amp;gt; Hello World ToCamelCase -&amp;gt; helloWorld&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;_logger&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;LogInformation&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;myText&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot; ToPascalCase -&amp;gt; &quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;myText&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;ToPascalCase&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;());&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// Output -&amp;gt; Hello World ToPascalCase -&amp;gt; HelloWorld&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;_logger&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;LogInformation&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;myText&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot; ToSnakeCase -&amp;gt; &quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;myText&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;ToSnakeCase&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;());&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// Output -&amp;gt; Hello World ToSnakeCase -&amp;gt; hello_world&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;&lt;br /&gt;
+Nesse caso a implementação do método está em um projeto auxiliar denomidado Helpers. Isso nos obriga a adicionar &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;using Helpers.Extensions.String;&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Minha prioridade aqui não foi mostrar uma implentação perfeita dos métodos, apenas de como utilizar os métodos de extensão.&lt;/p&gt;
+
+&lt;p&gt;Os métodos de extensão nos ajudam a organizar nosso código por toda a nossa solução. Agrupando responsabilidades ao projeto apropriado.&lt;/p&gt;
+
+&lt;p&gt;Agora com nosso código encapsulado podemos melhorar sem precisar alterar a chamada.&lt;/p&gt;
+
+&lt;p&gt;Fique a vontade para implementar a sua versão.&lt;/p&gt;
+
+&lt;h4 id=&quot;related&quot;&gt;Links para artigos relacionados&lt;/h4&gt;
+
+&lt;p&gt;&lt;a href=&quot;/blog/pt-br/dotnet-pro-tips/intro/&quot;&gt;.NET Pro tips Multiple Databases Providers Introduction&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/blog/pt-br/dotnet-pro-tips/extension-methods&quot;&gt;Parte 1 - Métodos de extensão&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/blog/pt-br/dotnet-pro-tips/configuring-db&quot;&gt;Parte 2 - Configurando o banco de dados&lt;/a&gt;&lt;/p&gt;
+</description>
+        <pubDate>Sat, 15 Aug 2020 07:20:00 -0300</pubDate>
+        <link>http://0.0.0.0:4000/blog/pt-br/dotnet-pro-tips/extension-methods/</link>
+        <guid isPermaLink="true">http://0.0.0.0:4000/blog/pt-br/dotnet-pro-tips/extension-methods/</guid>
+        
+        <category>.net-core</category>
+        
+        <category>.net</category>
+        
+        <category>tips</category>
+        
+        
+        <category>pt-br</category>
+        
+        <category>dotnet-pro-tips</category>
+        
+      </item>
+    
+      <item>
+        <title>.NET Pro tips - Utilizando múltiplos provedores de banco de dados</title>
+        <description>&lt;p&gt;Seja bem vindo a uma série de artigos relacionado a utilização avançada do framework &lt;a href=&quot;https://docs.microsoft.com/pt-br/dotnet/core/&quot;&gt;.NET Core da Microsoft&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;O objetivo maior aqui é compartilhar conhecimento, com alguma introdução, porém nada que seja igual à própria documentação, que por sinal é muito bem feita e com diversos exemplos úteis.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Esse é um projeto em construção portando mais posts virão&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Nessa série de artigos estarei mostrando um caso de uso onde eu devia conectar em diversos bancos de clientes diversos. Porém cada cliente que disponibilizava a sua infraestrutura para que pudéssemos criar a estrutura do SQL a ser utilizado. Portanto ora estavamos conectando a um MSSqlServer, ora um PostGreSQL, ora MySql.&lt;/p&gt;
+
+&lt;p&gt;Para tanto foi necessário pensar em uma estrutura onde se pudesse reaproveitar o código (visto que a estrutura era a mesma) porém necessitamos trabalhar com as particularidades de cada banco.&lt;/p&gt;
+
+&lt;p&gt;Antes de entrarmos na estrutura propriamente dita primeiro irei apresentar as estruturas utilizadas.&lt;/p&gt;
+
+&lt;h2 id=&quot;princípios-solid&quot;&gt;Princípios SOLID&lt;/h2&gt;
+
+&lt;p&gt;Ao desenvolvermos devemos utilizar alguns princípios. Nesse ponto recomendo buscar informações quanto ao &lt;a href=&quot;https://www.baeldung.com/solid-principles&quot;&gt;SOLID&lt;/a&gt; que é um conjunto de princípios utilizados no desenvolvimento de software.&lt;/p&gt;
+
+&lt;p&gt;No SOLID cada letra representa um princípio:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Single Responsibility (Princípio da Responsabilidade Única)&lt;/li&gt;
+  &lt;li&gt;Open/Closed (Princípio Aberto/Fechado)&lt;/li&gt;
+  &lt;li&gt;Liskov Substitution (Princípio da Substiruição de Liskov)&lt;/li&gt;
+  &lt;li&gt;Interface Segregation (Princípio da Segregação de Iterface)&lt;/li&gt;
+  &lt;li&gt;Dependency Inversion (Princípio da Inversão de Controlle)&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;No decorrer dessa série iremos falar bastante desses princípios.&lt;/p&gt;
+
+&lt;h2 id=&quot;conceitos&quot;&gt;Conceitos&lt;/h2&gt;
+
+&lt;p&gt;Além dos princípios será comentado sobre conceitos de programação que orientam a um bom desenvolvimento de software.&lt;/p&gt;
+
+&lt;h3 id=&quot;dry---dont-repeat-yourself-não-se-repita&quot;&gt;&lt;a href=&quot;https://pt.wikipedia.org/wiki/Don%27t_repeat_yourself&quot;&gt;DRY&lt;/a&gt; - Don’t Repeat Yourself (Não se repita)&lt;/h3&gt;
+
+&lt;p&gt;Esse conceito está relacionado ao princípio Open/Closed onde criamos código para ser reutilizado em nossa apliação.&lt;/p&gt;
+
+&lt;h3 id=&quot;kiss---keep-it-simple-stupid-mantenha-simples-seu-estúpido&quot;&gt;&lt;a href=&quot;https://pt.wikipedia.org/wiki/Princ%C3%ADpio_KISS&quot;&gt;KISS&lt;/a&gt; - Keep it simple, stupid (Mantenha Simples, seu estúpido)&lt;/h3&gt;
+
+&lt;p&gt;Esse conceito está relacionado ao princípio Single Responsability onde o objetivo é fazer uma coisa apenas.&lt;/p&gt;
+
+&lt;h3 id=&quot;yagni---you-aint-gonna-need-it-você-não-precisa-disso&quot;&gt;&lt;a href=&quot;https://pt.wikipedia.org/wiki/Princ%C3%ADpio_KISS&quot;&gt;YAGNI&lt;/a&gt; - You Ain’t Gonna Need It (Você não precisa disso)&lt;/h3&gt;
+
+&lt;p&gt;Esse conceito também está relacionado ao princípio Single Responsability onde o objetivo é fazer uma coisa apenas, porém não tenha coisas desnecessárias.&lt;/p&gt;
+
+&lt;p&gt;Para que a leitura não seja cansativo irei dividir em diversas partes esse artigo, mantendo bons exemplos.&lt;/p&gt;
+
+&lt;h4 id=&quot;related&quot;&gt;Links para artigos relacionados&lt;/h4&gt;
+
+&lt;p&gt;&lt;a href=&quot;/blog/pt-br/dotnet-pro-tips/intro/&quot;&gt;.NET Pro tips Multiple Databases Providers Introduction&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/blog/pt-br/dotnet-pro-tips/extension-methods&quot;&gt;Parte 1 - Métodos de extensão&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/blog/pt-br/dotnet-pro-tips/configuring-db&quot;&gt;Parte 2 - Configurando o banco de dados&lt;/a&gt;&lt;/p&gt;
+</description>
+        <pubDate>Fri, 14 Aug 2020 05:20:00 -0300</pubDate>
+        <link>http://0.0.0.0:4000/blog/pt-br/dotnet-pro-tips/intro/</link>
+        <guid isPermaLink="true">http://0.0.0.0:4000/blog/pt-br/dotnet-pro-tips/intro/</guid>
+        
+        
+        <category>pt-br</category>
+        
+        <category>dotnet-pro-tips</category>
+        
+      </item>
+    
+      <item>
+        <title>Welcome to Jekyll!</title>
+        <description>&lt;p&gt;You’ll find this post in your &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;_posts&lt;/code&gt; directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;jekyll serve&lt;/code&gt;, which launches a web server and auto-regenerates your site when a file is updated.&lt;/p&gt;
+
+&lt;p&gt;To add new posts, simply add a file in the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;_posts&lt;/code&gt; directory that follows the convention &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;YYYY-MM-DD-name-of-post.ext&lt;/code&gt; and includes the necessary front matter. Take a look at the source for this post to get an idea about how it works.&lt;/p&gt;
+
+&lt;p&gt;Jekyll also offers powerful support for code snippets:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Hi, &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&apos;Tom&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;#=&amp;gt; prints &apos;Hi, Tom&apos; to STDOUT.&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Check out the &lt;a href=&quot;http://jekyllrb.com&quot;&gt;Jekyll docs&lt;/a&gt; for more info on how to get the most out of Jekyll. File all bugs/feature requests at &lt;a href=&quot;https://github.com/jekyll/jekyll&quot;&gt;Jekyll’s GitHub repo&lt;/a&gt;. If you have questions, you can ask them on &lt;a href=&quot;https://github.com/jekyll/jekyll-help&quot;&gt;Jekyll’s dedicated Help repository&lt;/a&gt;.&lt;/p&gt;
+
+</description>
+        <pubDate>Thu, 26 Nov 2015 10:46:52 -0300</pubDate>
+        <link>http://0.0.0.0:4000/blog/jekyll/update/welcome-to-jekyll/</link>
+        <guid isPermaLink="true">http://0.0.0.0:4000/blog/jekyll/update/welcome-to-jekyll/</guid>
+        
+        
+        <category>jekyll</category>
+        
+        <category>update</category>
+        
+      </item>
+    
+      <item>
+        <title>Primeiro Femug-CWB</title>
+        <description>&lt;p&gt;Pessoal no dia 7 de novembro de 2015 foi organizado o primeiro Meetup do grupo FEMUG-CWB (Curitiba e região), pertencente ao BrazilJS. Nesse encontro, apesar de outros eventos ocorridos na mesma data, alcançamos um bom público que ficou interessado em próximos eventos e vai convidar mais pessoas. Apesar do foco do encontro ser front-end, tivemos a participação de muitos desenvolvedores back-end desejosos pelo conhecimento front-end! :D
+Quanto a programação do evento, ocorreram palestras e um coffe-break onde o pessoal pôde trocar ideia, e realizar aquele famoso networking!&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/posts/femug-cwb-001/galera.jpg&quot; alt=&quot;Organizadores e Participantes&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;No início, tivemos o Fernando Moreira, agitador e idealizador do FEMUG-CWB, mostrando como surgiu a ideia do encontro e o porquê de escolher o formato &lt;a href=&quot;https://github.com/braziljs/femug&quot;&gt;FEMUG&lt;/a&gt;, e deixando também os meios de contato do grupo no Facebook, Slack, etc.&lt;/p&gt;
+
+&lt;p&gt;Após, tivemos uma palestra empolgante com o mestre Cezar Luiz, analista de sistema pela Universidade Positivo (UP), pós-graduando em Apps Móveis e Computação na Nuvem também pela UP, desenvolvedor front-end na Snowman Labs e co-founder do Helpcar, com o tema “&lt;a href=&quot;https://slides.com/cezarluiz/front-end-do-futuro#/&quot;&gt;Front-end, do Futuro?&lt;/a&gt;” Mostrando as novidades envolvendo HTML5 como o doctype, tags, api’s, inputs e atributos e também imagens retina. Ele comentou sobre css3, pré-processadores, mixins e mais um monte de coisa coisas que eu nem sabia imaginava que o css era capaz! 
+Teve ainda uma boa dose de Javascript, com uma boa relação de utilizar o Javascript puro contra o vício de uso da biblioteca jQuery. Muitos puderam ter o contato com diversas novas api’s disponibilizadas pelo Javascript como geolocation, batery, vibration, entre outras. E o ápice da palestra foi quanto as novidades presentes nas novas especificações do ECMASCRIPT como as constantes, let e Template string. Teve tanta coisa que recomendo olharem a apresentação dele!&lt;/p&gt;
+
+&lt;p&gt;Na sequencia o Guilherme Pereira, graduado em Publicidade e Propaganda pela PUPF, pós graduado em Design Centrado no Usuário pela UP e Scrum Master Certificado pela Scrum Alliance como nos mostrou “&lt;a href=&quot;https://pt.slideshare.net/FEMUG-CWB/o-papel-do-front-end-no-mundo-gil&quot;&gt;O papel do front end no mundo ágil&lt;/a&gt;” falando um pouco sobre experiências passadas onde trabalhava apenas como WebDesigner adotando o modelo em cascata para o desenvolvimento de sistemas web. Destacou o contraste deste processo com as novas metodologias ágeis e a melhor definição de papéis na equipe, facilitando a comunicação entre às as, geralmente ariscas (designers e programadores back-end). Explicou como a utilização de uma metodologia ágil e suas entregas incrementais afetam cada membro do time e, no final ainda divulgou uma vaga front-end para o grupo Inlog! Empresa para a qual trabalha atualmente.&lt;/p&gt;
+
+&lt;p&gt;E por último, mas não menos importante, tivemos uma palestra com o tema “&lt;a href=&quot;https://pt.slideshare.net/FEMUG-CWB/testes-automatizados-de-software-54525733&quot;&gt;Testes automatizados de Software – Testes com Selenium, Node e TheIntern&lt;/a&gt;”, com o mero mortal (esse que vos fala) Matheus Vieira, formado em Sistemas de Informação pela UP, pós-graduando em Engenharia de Software pela Universidade Estácio de Sá, que falou um pouco sobre a história da qualidade de software com alguns fatos importantes no Brasil e no mundo, e um pequeno live coding de como automatizar e tornar eficiente tarefas que tomam um grande tempo se realizadas manualmente.&lt;/p&gt;
+
+&lt;p&gt;No live code foi utilizado o selenium para realizar as interações com o navegador, o TheIntern para criar o código Javascript com a lógica da interação e o node para executar o teste criado com o intern. Foi demonstrado um pouco sobre a configuração do TheIntern, como definir os navegadores a serem utilizado utilizados e processos concorrentes.&lt;/p&gt;
+
+&lt;p&gt;No coffee-break, todos os participantes tiveram a oportunidade de tirar algumas dúvidas particulares, trocar experiências e divulgar vagas. Mas o mais legal foi poder encontrar o pessoal que já faz parte do Slack e não se conhecia pessoalmente. Teve até pessoas que se conheciam de lugares que já trabalharam e devido a correria do dia-a-dia e os diferente rumos da vida não se encontravam a algum tempo!&lt;/p&gt;
+
+&lt;p&gt;Para dezembro outro meetup já está sendo organizado, se você tiver algum assunto que domine e queira realizar uma palestra, envie sua talk para (aqui vai o link para palestra), também estamos com um projeto para a gravação e live codings através de &lt;a href=&quot;https://docs.google.com/spreadsheets/d/14j2GF-zqv6tDSej-6fyKRYxm-2QVcFKYPn_rL3WcE_Q/edit#gid=1600912741&quot;&gt;hangouts&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Acesse os nossos canais para mais informações:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://pt.slideshare.net/FEMUG-CWB&quot;&gt;SlideShare&lt;/a&gt;
+&lt;a href=&quot;https://github.com/femug-cwb&quot;&gt;GitHub&lt;/a&gt;
+&lt;a href=&quot;https://www.facebook.com/FEMUG.CWB/&quot;&gt;Facebook&lt;/a&gt;
+&lt;a href=&quot;https://groups.google.com/forum/#!topic/femug-cwb/KhCJbMLBEDM&quot;&gt;Google Groups&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;#Update
+Quer mostrar suas skills em um próximo encontro?
+Acesse &lt;a href=&quot;https://docs.google.com/forms/d/16PqdkOuVro7eBZEqIEfLTScQCUpILeuiX5JF98Z3p2E/viewform?c=0&amp;amp;w=1&quot;&gt;talks&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Quer ser o anfitrião de um encontro?
+Acesse &lt;a href=&quot;https://docs.google.com/forms/d/1J5ODCiLZe2VGufA-UO6_L7qhTg3BEmziQAaUsCWoFhQ/viewform?c=0&amp;amp;w=1&quot;&gt;anfitriões&lt;/a&gt;&lt;/p&gt;
+</description>
+        <pubDate>Tue, 10 Nov 2015 10:04:03 -0300</pubDate>
+        <link>http://0.0.0.0:4000/blog/primeiro-femug-cwb/</link>
+        <guid isPermaLink="true">http://0.0.0.0:4000/blog/primeiro-femug-cwb/</guid>
+        
+        <category>braziljs</category>
+        
+        <category>femug-cwb</category>
+        
+        <category>meetup</category>
+        
+        <category>curitiba</category>
+        
+        
+      </item>
+    
+  </channel>
+</rss>
