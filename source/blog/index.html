@@ -3,6 +3,8 @@ layout: pages
 ---
 
 <section class="post-list">
+  {% include pagination.html %}
+
   {% for post in paginator.posts %}
     {% include article.html %}
   {% endfor %}
