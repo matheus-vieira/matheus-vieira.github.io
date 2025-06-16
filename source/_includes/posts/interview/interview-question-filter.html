@@ -1,0 +1,44 @@
+{% assign questions = site.interview_questions | sort: "order" %}
+
+{%- comment -%}
+Collect all tags from the collection, flatten, and remove duplicates
+{%- endcomment -%}
+{% assign all_tags = "" | split: "" %}
+{% for q in questions %}
+{% if q.tags %}
+{% assign all_tags = all_tags | concat: q.tags %}
+{% endif %}
+{% endfor %}
+{% assign unique_tags = all_tags | uniq | sort %}
+
+<label><strong>{{ include.label }}</strong></label>
+
+<ul id="tagFilter" style="list-style:none; padding:0; margin:0 0 1em 0; columns: 2; -webkit-columns: 2; -moz-columns: 2;">
+  {% for tag in unique_tags %}
+  <li>
+    <label>
+      <input type="checkbox" value="{{ tag }}"> {{ tag }}
+    </label>
+  </li>
+  {% endfor %}
+</ul>
+
+<ul id="questionsList">
+  {% for q in questions %}
+  <li data-tags="{{ q.tags | join: ',' }}">
+    <a href="{{ q.url }}">{{ q.title }}</a>
+  </li>
+  {% endfor %}
+</ul>
+
+<script>
+  const tagFilter = document.getElementById('tagFilter');
+  const questionsList = document.getElementById('questionsList');
+  tagFilter.addEventListener('change', function () {
+    const checked = Array.from(tagFilter.querySelectorAll('input[type="checkbox"]:checked')).map(cb => cb.value);
+    Array.from(questionsList.getElementsByTagName('li')).forEach(function (li) {
+      const tags = li.getAttribute('data-tags') ? li.getAttribute('data-tags').split(',') : [];
+      li.style.display = (checked.length === 0 || checked.some(tag => tags.includes(tag))) ? '' : 'none';
+    });
+  });
+</script>

@@ -161,9 +161,12 @@ navbar:
     title: Study
 
 collections:
-  - graduations
-  - experiences
-  - skills
+  graduations:
+  experiences:
+  skills:
+  interview_questions:
+    output: true
+    permalink: /interview_questions/:name/
 
 exclude:
   [

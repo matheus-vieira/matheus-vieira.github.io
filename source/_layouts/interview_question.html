@@ -1,0 +1,23 @@
+---
+layout: page
+---
+
+<article class="interview-question">
+    <div class="question-content">
+        {{ content }}
+    </div>
+    <nav class="pagination">
+        {% if page.previous %}
+        <a href="{{ page.previous.url }}" class="previous button button-ghost" aria-label="Previous question">&laquo;
+            Previous</a>
+        {% else %}
+        <span class="prev button button-ghost disabled" aria-disabled="true">&laquo; Previous</span>
+        {% endif %}
+        <a href="/blog/pt-br/interview/questoes-para-entrevistas/" class="all-questions button button-ghost" aria-label="All questions">All Questions</a>
+        {% if page.next %}
+        <a href="{{ page.next.url }}" class="next button button-ghost" aria-label="Next question">Next &raquo;</a>
+        {% else %}
+        <span class="next button button-ghost disabled" aria-disabled="true">Next &raquo;</span>
+        {% endif %}
+    </nav>
+</article>
