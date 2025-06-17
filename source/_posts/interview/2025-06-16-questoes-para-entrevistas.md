@@ -32,25 +32,11 @@ Aproveite para revisar, praticar e aprofundar seus conhecimentos nos temas mais 
 
 ---
 
-43. [Bicep & IaC] - Como você usaria Bicep para provisionar um ambiente no Azure? Quais as vantagens dessa abordagem?
-44. [Security] - Descreva em detalhes um conceito chave sobre Security relevante para arquitetura no Azure.
-45. [Terraform vs Bicep] - Descreva em detalhes um conceito chave sobre Terraform vs Bicep relevante para
-arquitetura no Azure.
-46. [Monitoring] - Descreva em detalhes um conceito chave sobre Monitoring relevante para arquitetura no Azure.
-47. [Terraform vs Bicep] - Descreva em detalhes um conceito chave sobre Terraform vs Bicep relevante para
-arquitetura no Azure.
-48. [Environment Strategies] - Descreva em detalhes um conceito chave sobre Environment Strategies relevante para
-arquitetura no Azure.
-49. [Azure Basics] - Explique os principais modelos de serviços na nuvem (IaaS, PaaS, SaaS) e como o Azure
-implementa cada um deles.
-50. [Environment Strategies] - Descreva em detalhes um conceito chave sobre Environment Strategies relevante para
-arquitetura no Azure.
+{%- comment -%}
 51. [Monitoring] - Descreva em detalhes um conceito chave sobre Monitoring relevante para arquitetura no Azure.
-52. [Authentication] - Descreva em detalhes um conceito chave sobre Authentication relevante para arquitetura no
-Azure.
+52. [Authentication] - Descreva em detalhes um conceito chave sobre Authentication relevante para arquitetura no Azure.
 53. [Monitoring] - Descreva em detalhes um conceito chave sobre Monitoring relevante para arquitetura no Azure.
-54. [Bicep & IaC] - Como você usaria Bicep para provisionar um ambiente no Azure? Quais as vantagens dessa
-abordagem?
+54. [Bicep & IaC] - Como você usaria Bicep para provisionar um ambiente no Azure? Quais as vantagens dessa abordagem?
 55. [DevOps] - Descreva em detalhes um conceito chave sobre DevOps relevante para arquitetura no Azure.
 56. [.NET + Azure] - Descreva em detalhes um conceito chave sobre .NET + Azure relevante para arquitetura no Azure.
 57. [DX] - Descreva em detalhes um conceito chave sobre DX relevante para arquitetura no Azure.
@@ -228,3 +214,4 @@ arquitetura no Azure.
 159. [App Registrations] - Descreva em detalhes um conceito chave sobre App Registrations relevante para arquitetura
 no Azure.
 160. [RBAC] - Descreva em detalhes um conceito chave sobre RBAC relevante para arquitetura no Azure.
+{%- endcomment -%}

@@ -13,7 +13,8 @@ Collect all tags from the collection, flatten, and remove duplicates
 
 <label><strong>{{ include.label }}</strong></label>
 
-<ul id="tagFilter" style="list-style:none; padding:0; margin:0 0 1em 0; columns: 2; -webkit-columns: 2; -moz-columns: 2;">
+<ul id="tagFilter"
+  style="list-style:none; padding:0; margin:0 0 1em 0; columns: 2; -webkit-columns: 2; -moz-columns: 2;">
   {% for tag in unique_tags %}
   <li>
     <label>
@@ -23,22 +24,29 @@ Collect all tags from the collection, flatten, and remove duplicates
   {% endfor %}
 </ul>
 
-<ul id="questionsList">
+<hr />
+
+<ol id="questionsList">
   {% for q in questions %}
-  <li data-tags="{{ q.tags | join: ',' }}">
-    <a href="{{ q.url }}">{{ q.title }}</a>
+  {% assign tags = q.tags | join: ', ' %}
+  <li data-tags="{{ tags }}">
+    <a href="{{ q.url }}">{{ q.title }} &mdash; [{{ tags }}]</a>
   </li>
   {% endfor %}
-</ul>
+</ol>
 
 <script>
-  const tagFilter = document.getElementById('tagFilter');
-  const questionsList = document.getElementById('questionsList');
-  tagFilter.addEventListener('change', function () {
-    const checked = Array.from(tagFilter.querySelectorAll('input[type="checkbox"]:checked')).map(cb => cb.value);
-    Array.from(questionsList.getElementsByTagName('li')).forEach(function (li) {
-      const tags = li.getAttribute('data-tags') ? li.getAttribute('data-tags').split(',') : [];
-      li.style.display = (checked.length === 0 || checked.some(tag => tags.includes(tag))) ? '' : 'none';
+  (function () {
+    const tagFilter = document.getElementById('tagFilter');
+    const questionsList = document.getElementById('questionsList');
+    tagFilter.addEventListener('change', function () {
+      const checked = Array.from(tagFilter.querySelectorAll('input[type="checkbox"]:checked')).map(cb => cb.value);
+      Array.from(questionsList.getElementsByTagName('li')).forEach(function (li) {
+        const tags = li.getAttribute('data-tags') ? li.getAttribute('data-tags').split(', ') : [];
+        li.style.display = (checked.length === 0 || checked.some(tag => tags.includes(tag))) ? '' : 'none';
+      });
     });
-  });
+  })();
 </script>
+
+<!-- Nenhuma alteração estrutural necessária, mas garantir que o filtro reconheça as novas tags e ordens. Se necessário, atualizar a lista de tags disponíveis para incluir: Bicep, Terraform, Comparativo, Provisionamento, Segurança, Defense in Depth. -->
