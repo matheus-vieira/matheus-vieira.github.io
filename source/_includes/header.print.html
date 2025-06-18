@@ -1,12 +1,27 @@
 {% assign lang = page.lang | default: "en-us" %}
 <small>
   <article role="article" class="page card">
-    <table>
-      <tr><th rowspan="5"><h1>{{ site.author.full-name }}</h1></th></tr>
-      <tr><th class="txt-right">{{ site.messages[lang].print-resume.location }}</th></tr>
-      <tr><th class="txt-right"><a href="tel:{{ site.author.phone }}" title="Call me" target="_blank"><i class="icon icon-phone"></i> {{ site.author.cellphone }}</a></th></tr>
-      <tr><th class="txt-right"><a href="mailto:{{ site.author.email }}" title="Personal mail" target="_blank"><i class="icon icon-mail"></i> {{ site.author.email }}</a></th></tr>
-      <tr><th class="txt-right"><a href="{{ site.author.linkedin }}" title="LinkedIn" target="_blank"><i class="icon icon-linkedin"></i> {{ site.author.linkedin }}</a></th></tr>
+    <table width="100%">
+      <tr>
+        <th valign="left" style="text-align: left;" rowspan="5">
+          <h1>{{ site.author.full-name }}</h1>
+        </th>
+      </tr>
+      <tr>
+        <th valign="right" style="text-align: right;">{{ site.messages[lang].print-resume.location }}</th>
+      </tr>
+      <tr>
+        <th valign="right" style="text-align: right;"><a href="tel:{{ site.author.phone }}" title="Call me" target="_blank"><i
+              class="icon icon-phone"></i> {{ site.author.cellphone }}</a></th>
+      </tr>
+      <tr>
+        <th valign="right" style="text-align: right;"><a href="mailto:{{ site.author.email }}" title="Personal mail"
+            target="_blank"><i class="icon icon-mail"></i> {{ site.author.email }}</a></th>
+      </tr>
+      <tr>
+        <th valign="right" style="text-align: right;"><a href="{{ site.author.linkedin }}" title="LinkedIn" target="_blank"><i
+              class="icon icon-linkedin"></i> {{ site.author.linkedin }}</a></th>
+      </tr>
     </table>
   </article>
 </small>

@@ -14,13 +14,15 @@ en-us:
     <ul>
       <li>Improved API response times by 30%, enhancing the scalability of large-scale integration platforms.</li>
       <li>Implemented secure authentication with JWT and Azure Active Directory, increasing platform security and compliance.</li>
+      <li>Designed and implemented integration patterns between microservices, ensuring reliability, scalability, and consistency across distributed systems.</li>
     </ul>
 pt-br:
   jobtitle: Engenheiro de Software Sênior
   description: |
     <ul>
-      <li>Tempos de resposta da API aprimorados em 30%, aumentando a escalabilidade de plataformas de integração em larga escala.</li>
-      <li>Implementação de autenticação segura com JWT e Azure Active Directory, aumentando a segurança e a conformidade da plataforma.</li>
+      <li>Melhorei os tempos de resposta das APIs em 30%, aumentando a escalabilidade de plataformas de integração em larga escala.</li>
+      <li>Implementei autenticação segura com JWT e Azure Active Directory, elevando a segurança e a conformidade da plataforma.</li>
+      <li>Desenvolvimento e implementação de integrações entre microsserviços, garantindo confiabilidade, escalabilidade e consistência em sistemas distribuídos.</li>
     </ul>
 ---
 

@@ -21,13 +21,13 @@ en-us:
 pt-br:
   jobtitle: Líder e Desenvolvedor Sênior
   description:  |
-   <ul>
-    <li>Arquitetura de sistemas nativos em nuvem no Azure (.NET, Functions, Event Grid), impulsionando a transformação digital dos clientes.</li>
-    <li>Redução o tempo de resposta do sistema de 5 minutos para menos de 3 segundos, melhorando a satisfação do cliente e a eficiência operacional.</li>
-    <li>Migração de sistemas monolíticos para microsserviços, aumentando a escalabilidade em 70% e melhorando a tolerância a falhas.</li>
-    <li>Automação de pipelines de CI/CD, reduzindo o tempo de implantação em 60% e eliminando erros manuais.</li>
-    <li>Liderança de workshops técnicos e mentorias, elevando a maturidade em engenharia e as práticas de DevOps dos clientes.</li>
-  </ul>
+    <ul>
+      <li>Arquitetura de sistemas nativos em nuvem no Azure (.NET, Functions, Event Grid), impulsionando a transformação digital dos clientes.</li>
+      <li>Redução o tempo de resposta do sistema de 5 minutos para menos de 3 segundos, melhorando a satisfação do cliente e a eficiência operacional.</li>
+      <li>Migração de sistemas monolíticos para microsserviços, aumentando a escalabilidade em 70% e melhorando a tolerância a falhas.</li>
+      <li>Automação de pipelines de CI/CD, reduzindo o tempo de implantação em 60% e eliminando erros manuais.</li>
+      <li>Liderança de workshops técnicos e mentorias, elevando a maturidade em engenharia e as práticas de DevOps dos clientes.</li>
+    </ul>
 ---
 
 # Job Description

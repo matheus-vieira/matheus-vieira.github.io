@@ -14,6 +14,7 @@ en-us:
     <ul>
       <li>Architected APIs supporting millions of daily transactions, improving credit card refund processes' reliability.</li>
       <li>Enhanced system resiliency with robust error handling and scaling patterns in Java and .NET environments.</li>
+      <li>Designed integration flows between microservices, enabling seamless communication, data consistency, and fault tolerance across distributed systems.</li>
     </ul>
 pt-br:
   jobtitle: Engenheiro de Software Sênior
@@ -21,6 +22,7 @@ pt-br:
     <ul>
       <li>APIs arquitetadas que suportam milhões de transações diárias, melhorando a confiabilidade dos processos de reembolso de cartão de crédito.</li>
       <li>Resiliência aprimorada do sistema com tratamento robusto de erros e padrões de escalonamento em ambientes Java e .NET.</li>
+      <li>ReDesenvolvimento de fluxos de integração entre microsserviços, garantindo comunicação eficiente, consistência de dados e tolerância a falhas em ambientes distribuídos.</li>
     </ul>
 ---
 
