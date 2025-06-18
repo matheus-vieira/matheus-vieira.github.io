@@ -14,4 +14,6 @@ pt-br:
   name: DOJO Toolkit 1.9 Fundamentos, Conceito de Interface com Usuário & Arquitetura
 ---
 
+# Overview
+
 Workshop about DOJO toolkit development.

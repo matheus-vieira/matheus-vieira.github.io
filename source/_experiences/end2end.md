@@ -12,22 +12,22 @@ en-us:
   jobtitle: Lead senior software developer
   description: |
     <ul>
-      <li>Delivered scalable, cloud-native solutions using .NET and Azure.</li>
-      <li>Modernized legacy systems, migrated to microservices, and implemented IaC.</li>
-      <li>Reduced response times and improved system performance with caching and optimized queries.</li>
-      <li>Automated CI/CD pipelines, increasing deployment speed and reliability.</li>
-      <li>Led technical mentorship, code reviews, and architecture improvements.</li>
+      <li>Designed and delivered cloud-native systems on Azure (.NET, Functions, Event Grid), driving clients' digital transformation.</li>
+      <li>Reduced system response times from 5 minutes to under 3 seconds, improving customer satisfaction and operational efficiency.</li>
+      <li>Migrated monolithic systems to microservices, increasing scalability by 70% and improving fault tolerance.</li>
+      <li>Automated CI/CD pipelines, reducing deployment time by 60% and eliminating manual errors.</li>
+      <li>Led technical workshops and mentoring, elevating clients’ engineering maturity and DevOps practices.</li>
     </ul>
 pt-br:
   jobtitle: Líder e Desenvolvedor Sênior
   description:  |
-    <ul>
-      <li>Entregou soluções escaláveis e cloud-native com .NET e Azure.</li>
-      <li>Modernizou sistemas legados, migrou para microsserviços e implementou IaC.</li>
-      <li>Reduziu tempos de resposta e otimizou performance com cache e queries eficientes.</li>
-      <li>Automatizou pipelines CI/CD, acelerando e tornando os deploys mais seguros.</li>
-      <li>Liderou mentorias técnicas, revisões de código e melhorias arquiteturais.</li>
-    </ul>
+   <ul>
+    <li>Arquitetura de sistemas nativos em nuvem no Azure (.NET, Functions, Event Grid), impulsionando a transformação digital dos clientes.</li>
+    <li>Redução o tempo de resposta do sistema de 5 minutos para menos de 3 segundos, melhorando a satisfação do cliente e a eficiência operacional.</li>
+    <li>Migração de sistemas monolíticos para microsserviços, aumentando a escalabilidade em 70% e melhorando a tolerância a falhas.</li>
+    <li>Automação de pipelines de CI/CD, reduzindo o tempo de implantação em 60% e eliminando erros manuais.</li>
+    <li>Liderança de workshops técnicos e mentorias, elevando a maturidade em engenharia e as práticas de DevOps dos clientes.</li>
+  </ul>
 ---
 
 # Job Description

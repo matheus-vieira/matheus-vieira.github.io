@@ -12,19 +12,17 @@ en-us:
   jobtitle: Senior Software Engineer
   description: |
     <ul>
-      <li>Architected event-driven ingestion systems using .NET, Azure Functions, and RabbitMQ.</li>
-      <li>Migrated legacy batch processes to microservices, boosting throughput by 50%.</li>
-      <li>Developed APIs and AngularJS front-end applications.</li>
-      <li>Achieved 85% test coverage with automated testing frameworks.</li>
+      <li>Migrated critical batch ingestion pipelines to event-driven microservices, boosting throughput by 50%.</li>
+      <li>Achieved 85%+ automated test coverage, drastically reducing bugs in production.</li>
+      <li>Improved frontend performance and UX by optimizing AngularJS clients integrated with .NET APIs.</li>
     </ul>
 pt-br:
   jobtitle: Engenheiro de Software Sênior
   description: |
     <ul>
-      <li>Arquitetura de sistemas de ingestão orientados a eventos com .NET, Azure Functions e RabbitMQ.</li>
-      <li>Migração de processos batch para microservices, aumentando throughput em 50%.</li>
-      <li>Desenvolvimento de APIs e front-end AngularJS.</li>
-      <li>Implementação de testes automatizados, atingindo 85% de cobertura.</li>
+      <li>Migração de pipelines críticos de ingestão de lotes para microsserviços orientados a eventos, aumentando a produtividade em 50%.</li>
+      <li>Cobertura acima 85% de testes automatizados, reduzindo drasticamente os bugs em produção.</li>
+      <li>Otimização do frontend e UX com a entrega de clientes AngularJS integrados com APIs .NET.</li>
     </ul>
 ---
 

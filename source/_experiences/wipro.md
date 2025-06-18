@@ -12,15 +12,15 @@ en-us:
   jobtitle: Senior Software Engineer
   description: |
     <ul>
-      <li>Architected and developed APIs for credit card refund processing, focusing on scalability and reliability.</li>
-      <li>Worked with .NET and Java to support millions of daily transactions.</li>
+      <li>Architected APIs supporting millions of daily transactions, improving credit card refund processes' reliability.</li>
+      <li>Enhanced system resiliency with robust error handling and scaling patterns in Java and .NET environments.</li>
     </ul>
 pt-br:
   jobtitle: Engenheiro de Software Sênior
   description: |
     <ul>
-      <li>Arquitetura e desenvolvimento de APIs para processamento de reembolsos de cartões, garantindo escalabilidade e confiabilidade.</li>
-      <li>Atuação com .NET e Java, garantindo suporte a milhões de transações diárias.</li>
+      <li>APIs arquitetadas que suportam milhões de transações diárias, melhorando a confiabilidade dos processos de reembolso de cartão de crédito.</li>
+      <li>Resiliência aprimorada do sistema com tratamento robusto de erros e padrões de escalonamento em ambientes Java e .NET.</li>
     </ul>
 ---
 

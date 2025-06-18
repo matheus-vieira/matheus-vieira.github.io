@@ -12,17 +12,15 @@ en-us:
   jobtitle: Senior Software Engineer
   description: |
     <ul>
-      <li>Developed scalable APIs using .NET and MongoDB.</li>
-      <li>Implemented authentication with JWT and Azure Active Directory.</li>
-      <li>Improved API response times by 30% through caching and query optimization.</li>
+      <li>Improved API response times by 30%, enhancing the scalability of large-scale integration platforms.</li>
+      <li>Implemented secure authentication with JWT and Azure Active Directory, increasing platform security and compliance.</li>
     </ul>
 pt-br:
   jobtitle: Engenheiro de Software Sênior
   description: |
     <ul>
-      <li>Desenvolvimento de APIs escaláveis com .NET e MongoDB.</li>
-      <li>Implementação de autenticação com JWT e Azure AD.</li>
-      <li>Otimização de APIs, reduzindo latência em 30%.</li>
+      <li>Tempos de resposta da API aprimorados em 30%, aumentando a escalabilidade de plataformas de integração em larga escala.</li>
+      <li>Implementação de autenticação segura com JWT e Azure Active Directory, aumentando a segurança e a conformidade da plataforma.</li>
     </ul>
 ---
 
