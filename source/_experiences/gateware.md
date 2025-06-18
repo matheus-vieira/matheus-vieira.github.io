@@ -1,21 +1,31 @@
 ---
 layout: js
-jobtitle: "Senior software developer"
+jobtitle: "Senior Software Developer"
 admissiondate: 2018-10-22
 resignationdate: 2019-04-19
 company: Gateware
-description: "Educar para o pleno desenvolvimento pessoal, exercício da cidadania e formação para o trabalho, oferecendo às crianças, jovens e adultos as condições necessárias à construção e aplicação do conhecimento em benefício da sociedade."
-languages: [HTML5, CSS3, javascript, C#, VB.NET]
+description: "Legacy modernization, .NET, architecture, technical leadership, Scrum."
+languages: [HTML5, CSS3, JavaScript, C#, VB.NET]
 frameworks: [.NET, .NET Core, Razor Pages, Entity Framework, Entity Framework Core, Bootstrap]
-additionInfo: [GIT, Design Patterns, Threads, Sql Server, MySQL, PostgreSQL, message queues, unit and functional testing]
+additionInfo: [GIT, Design Patterns, Threads, Sql Server, MySQL, PostgreSQL, message queues, unit and functional testing, Legacy Modernization, Scrum, Mentoring]
 en-us:
-  jobtitle: Senior software developer
-  description: Team and Technical leader. Maintenance, development and architecture of Web-based systems. Implementation of Scrum as methodology for development process.
+  jobtitle: Senior Software Developer
+  description: |
+    <ul>
+      <li>Modernized legacy web services using .NET.</li>
+      <li>Defined architecture and development processes.</li>
+      <li>Mentored junior developers.</li>
+    </ul>
 pt-br:
   jobtitle: Desenvolvedor Sênior
-  description: Líder técnico. Manutenção desenvolvimento de arquiteturas basedas na web. Implementação do Scrum como metodologia para o processo de desenvolvimento
+  description: |
+    <ul>
+      <li>Modernização de web services legados com .NET.</li>
+      <li>Definição de arquitetura e processos de desenvolvimento.</li>
+      <li>Mentoria para desenvolvedores juniores.</li>
+    </ul>
 ---
 
-Team and Technical leader.
-Maintenance, development and architecture of Web-based systems.
-Implementation of Scrum as methodology for development process.
+# Job Description
+
+At Gateware, I worked as a senior software developer and technical leader, driving the modernization of legacy web services using .NET technologies. I defined software architecture and development processes, implemented Scrum for agile delivery, and mentored junior developers. My focus was on delivering maintainable, scalable, and high-quality solutions, fostering a culture of technical excellence and continuous improvement within the team.

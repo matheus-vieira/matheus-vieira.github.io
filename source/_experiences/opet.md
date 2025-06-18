@@ -1,19 +1,29 @@
 ---
 layout: js
-jobtitle: "Teacher"
+jobtitle: "Professor"
 admissiondate: 2017-02-01
 resignationdate: 2018-12-20
-company: Centro Universitário Unipet
-description: "Educar para o pleno desenvolvimento pessoal, exercício da cidadania e formação para o trabalho, oferecendo às crianças, jovens e adultos as condições necessárias à construção e aplicação do conhecimento em benefício da sociedade."
-languages: [HTML5, CSS, Javascript, C#, .NET Core, PHP]
+company: Centro Universitário Opet
+description: "Teaching, C#, PHP, HTML, CSS, JavaScript, cloud, modern systems."
+languages: [HTML5, CSS, JavaScript, C#, .NET Core, PHP]
 frameworks: [.NET, .NET Core, Entity Framework, Entity Framework Core, Bootstrap]
-additionInfo: [GIT, Design Patterns, Sql Server, MySql, Ubuntu, unit testing, functional testing]
+additionInfo: [GIT, Design Patterns, Sql Server, MySql, Ubuntu, unit testing, functional testing, Cloud, Modern Systems, Course Design]
 en-us:
-  jobtitle: Teacher
-  description: Teacher in Visual Programming (C# Basic), Web Development (C# Advanced), Responsive Web Development (HTML, CSS and JS) disciplines.
+  jobtitle: Professor
+  description: |
+    <ul>
+      <li>Taught C#, PHP, HTML, CSS, JavaScript, and cloud computing.</li>
+      <li>Designed hands-on courses focusing on modern system development.</li>
+    </ul>
 pt-br:
   jobtitle: Professor (Ensino tecnológico)
-  description: Professor nas disciplinas Programação Visual (C# Básico), Desenvolvimento para Web (C# Avançado), Desenvolvimento Responsivo Para Web (HTML, CSS e JS).
+  description: |
+    <ul>
+      <li>Ensino de C#, PHP, HTML, CSS, JavaScript e computação em nuvem.</li>
+      <li>Criação de cursos práticos e foco em desenvolvimento de sistemas modernos.</li>
+    </ul>
 ---
 
-Teaching about web technologys in a few disciplines
+# Job Description
+
+At Centro Universitário Opet, I worked as a technology professor, designing and delivering hands-on courses in C#, PHP, HTML, CSS, JavaScript, and cloud computing. I focused on modern system development, preparing students for real-world challenges and fostering a culture of innovation and technical excellence. My role included curriculum design, practical instruction, and mentoring students to develop strong software engineering skills.

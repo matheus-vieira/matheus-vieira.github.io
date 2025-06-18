@@ -12,9 +12,16 @@ function request(file) {
 }
 {% endhighlight %}
 
-{% assign experiences = site.experiences | sort: 'admissiondate' %}
-{% assign experiences = experiences | reverse%}
+---
 
-{% for experience in experiences %}
+{% assign sorted_experiences = site.experiences | sort: 'admissiondate' | reverse %}
+{% assign end2end = sorted_experiences | where_exp: "item", "item.company contains 'End2End'" | first %}
+{% assign other_experiences = sorted_experiences | reject: "company", "End2End Systems" %}
+
+{% if end2end %}
+  {{ end2end.output }}
+{% endif %}
+
+{% for experience in other_experiences %}
   {{ experience.output }}
 {% endfor %}

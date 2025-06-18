@@ -1,0 +1,8 @@
+<h2>{{ site.messages[lang].print-resume.title.skills-languages }}</h2>
+
+{% assign languages = site.languages | sort: "order" %}
+{% for l in languages %}
+<div class="page">
+    <strong>{{ l[lang].name }}</strong> &mdash; {{ l[lang].level }}
+</div>
+{% endfor %}

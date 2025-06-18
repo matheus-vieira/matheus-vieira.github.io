@@ -6,7 +6,7 @@
 {% for g in graduations reversed %}
   {% if g.type == "Individual course" and g.type != "technical" %}
 <div class="page">
-  {{ g[lang].name }}  &mdash; {{ g.institution }} &mdash; (<time datetime="{{ g.startdate }}">{{ g.startdate | date: "%Y" }}</time> &dash; <time datetime="{{ g.enddate }}">{{ g.enddate | date: "%Y" }}</time>)
+  <strong>{{ g[lang].name }}</strong> &mdash; {{ g.institution }} &mdash; (<time datetime="{{ g.startdate }}">{{ g.startdate | date: "%Y" }}</time> &dash; <time datetime="{{ g.enddate }}">{{ g.enddate | date: "%Y" }}</time>)
 </div>
   {% endif %}
 {% endfor %}
