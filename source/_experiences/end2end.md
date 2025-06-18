@@ -9,7 +9,7 @@ languages: [HTML5, CSS3, javascript, java, C#, PHP, Python, Ruby]
 frameworks: [TheIntern!, Chimp, Jekyll, .NET, JAVA EE, Angular, React, DOJO, .NET, .NET Core, Entity Framework, Entity Framework Core]
 additionInfo: [Version Systems, Development methodologies, Domain Drive Design, Design Patterns, Threads, Databases, Jekyll, Identity Provider, Keycloak, .NET, .NET Core MVC unit testing, functional testing]
 en-us:
-  jobtitle: Lead senior software developer
+  jobtitle: Senior Software Engineer
   description: |
     <ul>
       <li>Designed and delivered cloud-native systems on Azure (.NET, Functions, Event Grid), driving clients' digital transformation.</li>
@@ -19,7 +19,7 @@ en-us:
       <li>Led technical workshops and mentoring, elevating clients’ engineering maturity and DevOps practices.</li>
     </ul>
 pt-br:
-  jobtitle: Líder e Desenvolvedor Sênior
+  jobtitle: Engenheiro de Software Sênior
   description:  |
     <ul>
       <li>Arquitetura de sistemas nativos em nuvem no Azure (.NET, Functions, Event Grid), impulsionando a transformação digital dos clientes.</li>

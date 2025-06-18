@@ -5,29 +5,29 @@ layout: page
 {% assign sorted_questions = site.interview_questions | sort: "order" %}
 {% assign current_index = nil %}
 {% for q in sorted_questions %}
-    {% if q.url == page.url %}
-        {% assign current_index = forloop.index0 %}
-    {% endif %}
-    {% endfor %}
+{% if q.url == page.url %}
+{% assign current_index = forloop.index0 %}
+{% endif %}
+{% endfor %}
 {% assign previous_index = current_index | minus: 1 %}
 {% assign next_index = current_index | plus: 1 %}
 {% assign previous_question = sorted_questions[previous_index] %}
 {% assign next_question = sorted_questions[next_index] %}
 
-<article class="interview-question">
-    <header class="question-header">
-        <p class="question-meta">
-            <strong>Question &mdash;</strong>
-            <span class="question-order">{{ page.order }}</span>
-        </p>
-        <p class="question-meta">
+<article role="article" class="post">
+    <div class="card">
+        <header class="post-header">
+            <p>
+            <h2><strong>Question</strong> &mdash; <span class="question-order">{{ page.order }}</span></h2>
+            </p>
             {% if page.tags %}
-            <strong>Tags &mdash;</strong>
-            <span class="question-tags">{{ page.tags | join: ', ' }}</span>
+            <p>
+            <h3><strong>Tags</strong> &mdash; <span class="question-tags">{{ page.tags | join: ', ' }}</span></h3>
+            </p>
             {% endif %}
-        </p>
-    </header>
-    <div class="question-content">
+        </header>
+    </div>
+    <div class="post-content">
         {{ content }}
     </div>
     <nav class="pagination">

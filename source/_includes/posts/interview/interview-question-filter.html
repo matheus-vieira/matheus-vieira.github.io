@@ -30,7 +30,7 @@ Collect all tags from the collection, flatten, and remove duplicates
   {% for q in questions %}
   {% assign tags = q.tags | join: ', ' %}
   <li data-tags="{{ tags }}">
-    <a href="{{ q.url }}">{{ q.title }} &mdash; [{{ tags }}]</a>
+    <a href="{{ q.url }}">{{ q.title }} <small>[{{ tags }}]</small></a>
   </li>
   {% endfor %}
 </ol>
@@ -48,5 +48,3 @@ Collect all tags from the collection, flatten, and remove duplicates
     });
   })();
 </script>
-
-<!-- Nenhuma alteração estrutural necessária, mas garantir que o filtro reconheça as novas tags e ordens. Se necessário, atualizar a lista de tags disponíveis para incluir: Bicep, Terraform, Comparativo, Provisionamento, Segurança, Defense in Depth. -->
