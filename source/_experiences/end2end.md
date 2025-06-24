@@ -1,6 +1,6 @@
 ---
 layout: js
-jobtitle: "Software Engeenier, CEO, Founder"
+jobtitle: "Senior Software Engeenier"
 admissiondate: 2016-10-22
 resignationdate:
 company: End2End Systems

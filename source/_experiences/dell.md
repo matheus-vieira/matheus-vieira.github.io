@@ -4,30 +4,44 @@ jobtitle: "Senior Software Engineer"
 admissiondate: 2022-10-17
 resignationdate: 2025-03-06
 company: Dell Computadores do Brasil LTDA
-description: ".NET 8 ingestion engine, observability, SQL Server + Elasticsearch, technical leadership."
+description: "Microservices architecture, global address system, rule engines, Oracle + Elasticsearch integration, Kubernetes migration."
 languages: [C#]
 frameworks: [.NET, .NET Core, .NET 8, Entity Framework, Entity Framework Core, Serilog, ELK Stack]
-additionInfo: [SqlServer, ElasticSearch, GIT, GITLAB, Design Patterns, Threads, Oracle, unit testing, NuGet, Microservices, CI/CD, Azure, Backpressure, Retry, Distributed Systems]
+additionInfo: [Oracle, ElasticSearch, GIT, GITLAB, Design Patterns, Threads, unit testing, NuGet, Microservices, CI/CD, Kubernetes, Private Cloud, Background Services, MemoryCache, Distributed Systems]
 en-us:
   jobtitle: Senior Software Engineer
   description: |
     <ul>
-      <li>Led the development of a .NET 8 ingestion engine processing 1M+ records/day, enabling data-driven decisions at scale.</li>
-      <li>Reduced code redundancy by 40% through reusable NuGet packages, improving developer efficiency.</li>
-      <li>Achieved sub-200ms latency by integrating SQL Server + Elasticsearch with optimized query pipelines.</li>
-      <li>Decreased incident resolution time by 35% after implementing Serilog + ELK Stack for distributed observability.</li>
+      <li>Architected and developed a global address system supporting multiple countries with 24/7 availability, handling thousands of daily requests across internal systems.</li>
+      <li>Led the complete rewrite of a 10+ year legacy system, implementing flexible architecture using SOLID principles to support multi-country operations without impacting existing functionality.</li>
+      <li>Designed reusable NuGet packages for rule engines and microservices integration, reducing code duplication by 40% and enabling rapid deployment of country-specific business rules.</li>
+      <li>Implemented hybrid data architecture using Oracle + Elasticsearch, achieving optimized caching strategies and sub-200ms response times for address validation services.</li>
+      <li>Successfully migrated applications from private cloud to Kubernetes, improving scalability and resilience while establishing CI/CD practices and comprehensive monitoring with ELK Stack.</li>
     </ul>
 pt-br:
   jobtitle: Engenheiro de Software Sênior
   description: |
     <ul>
-      <li>Liderança no desenvolvimento de um mecanismo de ingestão .NET 8 que processa mais de 1 milhão de registros/dia, permitindo decisões baseadas em dados em escala.</li>
-      <li>Redução a redundância de código em 40% por meio de pacotes NuGet reutilizáveis, melhorando a eficiência do desenvolvedor.</li>
-      <li>Latência abaixo de 200 ms integrando SQL Server + Elasticsearch com pipelines de consulta otimizados.</li>
-      <li>Redução no tempo de resolução de incidentes em 35% após a implementação do Serilog + ELK Stack para observabilidade distribuída.</li>
+      <li>Arquitetei e desenvolvi um sistema global de endereços suportando múltiplos países com disponibilidade 24/7, processando milhares de requisições diárias em sistemas internos.</li>
+      <li>Liderei a reescrita completa de um sistema legado de mais de 10 anos, implementando arquitetura flexível usando princípios SOLID para suportar operações multi-país sem impactar funcionalidades existentes.</li>
+      <li>Projetei pacotes NuGet reutilizáveis para motores de regras e integração entre microsserviços, reduzindo duplicação de código em 40% e permitindo deploy rápido de regras de negócio específicas por país.</li>
+      <li>Implementei arquitetura híbrida de dados usando Oracle + Elasticsearch, alcançando estratégias de cache otimizadas e tempos de resposta abaixo de 200ms para serviços de validação de endereços.</li>
+      <li>Migrei com sucesso aplicações de nuvem privada para Kubernetes, melhorando escalabilidade e resiliência enquanto estabelecia práticas de CI/CD e monitoramento abrangente com ELK Stack.</li>
     </ul>
 ---
 
 # Job Description
 
-At Dell Technologies, I led the development of a high-throughput .NET 8 ingestion engine capable of processing over 1 million records per day, implementing robust retry and backpressure strategies. I designed and published reusable NuGet packages, reducing code duplication by 40% across teams. My work included integrating SQL Server and Elasticsearch for hybrid queries, achieving sub-200ms latency for critical operations. I implemented distributed observability using Serilog and the ELK Stack, enabling proactive monitoring and troubleshooting. Additionally, I provided technical mentorship, led architecture discussions, and conducted code reviews, fostering a culture of engineering excellence and continuous improvement.
+At Dell Technologies, I architected and led the development of a comprehensive microservices ecosystem focused on global address management and rule validation systems. My primary achievement was the complete rewrite of a 10+ year legacy address system, transforming it into a modern, scalable solution supporting multiple countries with 24/7 availability.
+
+## Key Projects and Responsibilities
+
+**Global Address System Architecture**: Designed and implemented a flexible, multi-country address validation system using Elasticsearch as the primary database. The system supported diverse data ingestion methods including CSV files, text files, and external APIs, with each country implementing custom business rules while maintaining a unified data interface.
+
+**Microservices Development**: Built several microservices including rule engines, email validators, and phone number validators, all following a consistent architecture pattern with Oracle databases and Elasticsearch caching layers. Developed reusable NuGet packages that reduced code duplication by 40% across teams.
+
+**Legacy System Modernization**: Successfully migrated a complex Japanese address processing system with intricate character validation rules, implementing incremental modernization strategies and comprehensive automated testing to ensure functionality preservation during the transition.
+
+**Infrastructure and DevOps**: Led the migration from private cloud infrastructure to Kubernetes, collaborating closely with DevOps teams to establish robust CI/CD pipelines, monitoring solutions using ELK Stack, and ensuring high availability for global operations.
+
+**Technical Leadership**: Provided mentorship to development teams, conducted architecture reviews, and established best practices for distributed systems design, focusing on maintainability, scalability, and operational excellence in a 24/7 global environment.
