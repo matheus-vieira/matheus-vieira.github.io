@@ -1,0 +1,440 @@
+<!DOCTYPE html> <html lang="en"> <head> <meta charset="utf-8"> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <meta name="viewport" content="width=device-width, initial-scale=1"> <meta http-equiv="Cache-Control" content="only-if-cached"/> <meta http-equiv="Cache-Control" content="max-age=120"/> <title>Como implementar o padrão Observer de forma eficiente e thread-safe</title> <meta name="description" content="Introdução"> <link rel="stylesheet" href="/css/main.css"> <link rel="canonical" href="http://0.0.0.0:4000/interview_questions/154/"> <link rel="alternate" type="application/rss+xml" title="Matheus Costa Vieira - Personal Page" href="http://0.0.0.0:4000/feed.xml" /> <link rel="shortcut icon" href="/images/favicon.ico" type="image/png"> <!-- Global site tag (gtag.js) - Google Analytics --> <script async src="https://www.googletagmanager.com/gtag/js?id=UA-174941014-1"></script> <script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'UA-174941014-1'); </script> </head> <body> <!-- Google Tag Manager (noscript) --> <noscript><iframe src="https://www.googletagmanager.com/ns.html?id="height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript> <!-- End Google Tag Manager (noscript) --> <header class="site-header"> <div class="container"> <label title="Toggle menu checkbox"></label> <input type="checkbox" id="toggleNavbar"> </label> <h1 class="logo"> <a href="/" alt="mvieira" title="mvieira"> mvieira </a> </h1> <label for="toggleNavbar" role="button" class="toggle-navbar-button" title="Toggle menu button"> <i class="icon icon-menu"></i> <i class="icon icon-cross"></i> </label> <nav class="navbar"> <ul> <li> <a href="/about" title="About"> About </a> </li> <li> <a href="/blog" title="Blog"> Blog </a> </li> <li> <a href="/contact" title="Contact"> Contact </a> </li> <li> <a href="/courses" title="Courses"> Courses </a> </li> <li> <a href="/resume" title="Resume"> Resume </a> </li> <li> <a href="/study" title="Study"> Study </a> </li> <li> <a href="/feed.xml" target="_blank" title="Site Feed"> <i class="icon icon-rss"></i> </a> </li> </ul> </nav> </div> </header> <main class="main-container"> <div class="container"> <article role="article" class="page card"> <header class="post-header"> <h1 class="post-title">Como implementar o padrão Observer de forma eficiente e thread-safe</h1> </header> <div class="post-content"> <article role="article" class="post"> <div class="card"> <header class="post-header"> <p> <h2><strong>Question</strong> &mdash; <span class="question-order">154</span></h2> </p> <p> <h3><strong>Tags</strong> &mdash; <span class="question-tags">design-patterns, observer, gof, behavioral-patterns, events, thread-safety, performance, notifications</span></h3> </p> </header> </div> <div class="post-content"> <h2 id="introdução">Introdução</h2> <p>O padrão Observer é um padrão comportamental que define uma relação de dependência um-para-muitos entre objetos, permitindo que múltiplos objetos sejam automaticamente notificados quando o estado de um objeto observado muda. A implementação eficiente e thread-safe é crucial em ambientes concorrentes modernos.</p> <h2 id="conceito-chave">Conceito-chave</h2> <p>O Observer estabelece um mecanismo de notificação loose-coupled onde o subject (observado) mantém uma lista de observers (observadores) e os notifica automaticamente sobre mudanças de estado. A eficiência e thread-safety são alcançadas através de técnicas como copy-on-iteration, weak references, e mecanismos de sincronização adequados.</p> <h2 id="tópicos-relevantes">Tópicos Relevantes</h2> <h3 id="implementação-básica-thread-safe">Implementação básica thread-safe</h3> <div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Interface do Observer</span>
+<span class="k">public</span> <span class="k">interface</span> <span class="nc">IObserver</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;</span>
+<span class="p">{</span>
+    <span class="k">void</span> <span class="nf">Update</span><span class="p">(</span><span class="n">T</span> <span class="n">data</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// Interface do Subject</span>
+<span class="k">public</span> <span class="k">interface</span> <span class="nc">ISubject</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;</span>
+<span class="p">{</span>
+    <span class="k">void</span> <span class="nf">Subscribe</span><span class="p">(</span><span class="n">IObserver</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;</span> <span class="n">observer</span><span class="p">);</span>
+    <span class="k">void</span> <span class="nf">Unsubscribe</span><span class="p">(</span><span class="n">IObserver</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;</span> <span class="n">observer</span><span class="p">);</span>
+    <span class="k">void</span> <span class="nf">Notify</span><span class="p">(</span><span class="n">T</span> <span class="n">data</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// Implementação thread-safe com ReaderWriterLockSlim</span>
+<span class="k">public</span> <span class="k">class</span> <span class="nc">ThreadSafeSubject</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;</span> <span class="p">:</span> <span class="n">ISubject</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;</span>
+<span class="p">{</span>
+    <span class="k">private</span> <span class="k">readonly</span> <span class="n">HashSet</span><span class="p">&lt;</span><span class="n">IObserver</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;&gt;</span> <span class="n">_observers</span><span class="p">;</span>
+    <span class="k">private</span> <span class="k">readonly</span> <span class="n">ReaderWriterLockSlim</span> <span class="n">_lock</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="nf">ThreadSafeSubject</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="n">_observers</span> <span class="p">=</span> <span class="k">new</span> <span class="n">HashSet</span><span class="p">&lt;</span><span class="n">IObserver</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;&gt;();</span>
+        <span class="n">_lock</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">ReaderWriterLockSlim</span><span class="p">(</span><span class="n">LockRecursionPolicy</span><span class="p">.</span><span class="n">NoRecursion</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">void</span> <span class="nf">Subscribe</span><span class="p">(</span><span class="n">IObserver</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;</span> <span class="n">observer</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">observer</span> <span class="p">==</span> <span class="k">null</span><span class="p">)</span> <span class="k">throw</span> <span class="k">new</span> <span class="nf">ArgumentNullException</span><span class="p">(</span><span class="k">nameof</span><span class="p">(</span><span class="n">observer</span><span class="p">));</span>
+
+        <span class="n">_lock</span><span class="p">.</span><span class="nf">EnterWriteLock</span><span class="p">();</span>
+        <span class="k">try</span>
+        <span class="p">{</span>
+            <span class="n">_observers</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="n">observer</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="k">finally</span>
+        <span class="p">{</span>
+            <span class="n">_lock</span><span class="p">.</span><span class="nf">ExitWriteLock</span><span class="p">();</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">void</span> <span class="nf">Unsubscribe</span><span class="p">(</span><span class="n">IObserver</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;</span> <span class="n">observer</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">observer</span> <span class="p">==</span> <span class="k">null</span><span class="p">)</span> <span class="k">return</span><span class="p">;</span>
+
+        <span class="n">_lock</span><span class="p">.</span><span class="nf">EnterWriteLock</span><span class="p">();</span>
+        <span class="k">try</span>
+        <span class="p">{</span>
+            <span class="n">_observers</span><span class="p">.</span><span class="nf">Remove</span><span class="p">(</span><span class="n">observer</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="k">finally</span>
+        <span class="p">{</span>
+            <span class="n">_lock</span><span class="p">.</span><span class="nf">ExitWriteLock</span><span class="p">();</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">void</span> <span class="nf">Notify</span><span class="p">(</span><span class="n">T</span> <span class="n">data</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">// Copy-on-iteration pattern para thread-safety</span>
+        <span class="n">IObserver</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;[]</span> <span class="n">observersCopy</span><span class="p">;</span>
+        
+        <span class="n">_lock</span><span class="p">.</span><span class="nf">EnterReadLock</span><span class="p">();</span>
+        <span class="k">try</span>
+        <span class="p">{</span>
+            <span class="n">observersCopy</span> <span class="p">=</span> <span class="n">_observers</span><span class="p">.</span><span class="nf">ToArray</span><span class="p">();</span>
+        <span class="p">}</span>
+        <span class="k">finally</span>
+        <span class="p">{</span>
+            <span class="n">_lock</span><span class="p">.</span><span class="nf">ExitReadLock</span><span class="p">();</span>
+        <span class="p">}</span>
+
+        <span class="c1">// Notificar fora do lock para evitar deadlocks</span>
+        <span class="k">foreach</span> <span class="p">(</span><span class="kt">var</span> <span class="n">observer</span> <span class="k">in</span> <span class="n">observersCopy</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="k">try</span>
+            <span class="p">{</span>
+                <span class="n">observer</span><span class="p">.</span><span class="nf">Update</span><span class="p">(</span><span class="n">data</span><span class="p">);</span>
+            <span class="p">}</span>
+            <span class="k">catch</span> <span class="p">(</span><span class="n">Exception</span> <span class="n">ex</span><span class="p">)</span>
+            <span class="p">{</span>
+                <span class="c1">// Log exception mas continue notificando outros observers</span>
+                <span class="n">OnObserverException</span><span class="p">?.</span><span class="nf">Invoke</span><span class="p">(</span><span class="n">observer</span><span class="p">,</span> <span class="n">ex</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">event</span> <span class="n">Action</span><span class="p">&lt;</span><span class="n">IObserver</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;,</span> <span class="n">Exception</span><span class="p">&gt;</span> <span class="n">OnObserverException</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="k">void</span> <span class="nf">Dispose</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="n">_lock</span><span class="p">?.</span><span class="nf">EnterWriteLock</span><span class="p">();</span>
+        <span class="k">try</span>
+        <span class="p">{</span>
+            <span class="n">_observers</span><span class="p">?.</span><span class="nf">Clear</span><span class="p">();</span>
+        <span class="p">}</span>
+        <span class="k">finally</span>
+        <span class="p">{</span>
+            <span class="n">_lock</span><span class="p">?.</span><span class="nf">ExitWriteLock</span><span class="p">();</span>
+            <span class="n">_lock</span><span class="p">?.</span><span class="nf">Dispose</span><span class="p">();</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div> <h3 id="implementação-com-weak-references">Implementação com Weak References</h3> <div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Observer com weak references para evitar vazamentos de memória</span>
+<span class="k">public</span> <span class="k">class</span> <span class="nc">WeakReferenceSubject</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;</span> <span class="p">:</span> <span class="n">ISubject</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;</span>
+<span class="p">{</span>
+    <span class="k">private</span> <span class="k">readonly</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">WeakReference</span><span class="p">&lt;</span><span class="n">IObserver</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;&gt;&gt;</span> <span class="n">_observers</span><span class="p">;</span>
+    <span class="k">private</span> <span class="k">readonly</span> <span class="kt">object</span> <span class="n">_lock</span> <span class="p">=</span> <span class="k">new</span> <span class="kt">object</span><span class="p">();</span>
+
+    <span class="k">public</span> <span class="nf">WeakReferenceSubject</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="n">_observers</span> <span class="p">=</span> <span class="k">new</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">WeakReference</span><span class="p">&lt;</span><span class="n">IObserver</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;&gt;&gt;();</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">void</span> <span class="nf">Subscribe</span><span class="p">(</span><span class="n">IObserver</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;</span> <span class="n">observer</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">observer</span> <span class="p">==</span> <span class="k">null</span><span class="p">)</span> <span class="k">throw</span> <span class="k">new</span> <span class="nf">ArgumentNullException</span><span class="p">(</span><span class="k">nameof</span><span class="p">(</span><span class="n">observer</span><span class="p">));</span>
+
+        <span class="k">lock</span> <span class="p">(</span><span class="n">_lock</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="c1">// Remove referencias mortas antes de adicionar nova</span>
+            <span class="nf">CleanupDeadReferences</span><span class="p">();</span>
+            <span class="n">_observers</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="k">new</span> <span class="n">WeakReference</span><span class="p">&lt;</span><span class="n">IObserver</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;&gt;(</span><span class="n">observer</span><span class="p">));</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">void</span> <span class="nf">Unsubscribe</span><span class="p">(</span><span class="n">IObserver</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;</span> <span class="n">observer</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">observer</span> <span class="p">==</span> <span class="k">null</span><span class="p">)</span> <span class="k">return</span><span class="p">;</span>
+
+        <span class="k">lock</span> <span class="p">(</span><span class="n">_lock</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="p">=</span> <span class="n">_observers</span><span class="p">.</span><span class="n">Count</span> <span class="p">-</span> <span class="m">1</span><span class="p">;</span> <span class="n">i</span> <span class="p">&gt;=</span> <span class="m">0</span><span class="p">;</span> <span class="n">i</span><span class="p">--)</span>
+            <span class="p">{</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">_observers</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="nf">TryGetTarget</span><span class="p">(</span><span class="k">out</span> <span class="kt">var</span> <span class="n">target</span><span class="p">)</span> <span class="p">&amp;&amp;</span> 
+                    <span class="nf">ReferenceEquals</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="n">observer</span><span class="p">))</span>
+                <span class="p">{</span>
+                    <span class="n">_observers</span><span class="p">.</span><span class="nf">RemoveAt</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+                    <span class="k">break</span><span class="p">;</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">void</span> <span class="nf">Notify</span><span class="p">(</span><span class="n">T</span> <span class="n">data</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">List</span><span class="p">&lt;</span><span class="n">IObserver</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;&gt;</span> <span class="n">activeObservers</span><span class="p">;</span>
+
+        <span class="k">lock</span> <span class="p">(</span><span class="n">_lock</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">activeObservers</span> <span class="p">=</span> <span class="k">new</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">IObserver</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;&gt;(</span><span class="n">_observers</span><span class="p">.</span><span class="n">Count</span><span class="p">);</span>
+            
+            <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="p">=</span> <span class="n">_observers</span><span class="p">.</span><span class="n">Count</span> <span class="p">-</span> <span class="m">1</span><span class="p">;</span> <span class="n">i</span> <span class="p">&gt;=</span> <span class="m">0</span><span class="p">;</span> <span class="n">i</span><span class="p">--)</span>
+            <span class="p">{</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">_observers</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="nf">TryGetTarget</span><span class="p">(</span><span class="k">out</span> <span class="kt">var</span> <span class="n">observer</span><span class="p">))</span>
+                <span class="p">{</span>
+                    <span class="n">activeObservers</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="n">observer</span><span class="p">);</span>
+                <span class="p">}</span>
+                <span class="k">else</span>
+                <span class="p">{</span>
+                    <span class="c1">// Remove referência morta</span>
+                    <span class="n">_observers</span><span class="p">.</span><span class="nf">RemoveAt</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+
+        <span class="c1">// Notificar fora do lock</span>
+        <span class="n">Parallel</span><span class="p">.</span><span class="nf">ForEach</span><span class="p">(</span><span class="n">activeObservers</span><span class="p">,</span> <span class="n">observer</span> <span class="p">=&gt;</span>
+        <span class="p">{</span>
+            <span class="k">try</span>
+            <span class="p">{</span>
+                <span class="n">observer</span><span class="p">.</span><span class="nf">Update</span><span class="p">(</span><span class="n">data</span><span class="p">);</span>
+            <span class="p">}</span>
+            <span class="k">catch</span> <span class="p">(</span><span class="n">Exception</span> <span class="n">ex</span><span class="p">)</span>
+            <span class="p">{</span>
+                <span class="n">OnObserverException</span><span class="p">?.</span><span class="nf">Invoke</span><span class="p">(</span><span class="n">observer</span><span class="p">,</span> <span class="n">ex</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">});</span>
+    <span class="p">}</span>
+
+    <span class="k">private</span> <span class="k">void</span> <span class="nf">CleanupDeadReferences</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="p">=</span> <span class="n">_observers</span><span class="p">.</span><span class="n">Count</span> <span class="p">-</span> <span class="m">1</span><span class="p">;</span> <span class="n">i</span> <span class="p">&gt;=</span> <span class="m">0</span><span class="p">;</span> <span class="n">i</span><span class="p">--)</span>
+        <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(!</span><span class="n">_observers</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="nf">TryGetTarget</span><span class="p">(</span><span class="k">out</span> <span class="n">_</span><span class="p">))</span>
+            <span class="p">{</span>
+                <span class="n">_observers</span><span class="p">.</span><span class="nf">RemoveAt</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">event</span> <span class="n">Action</span><span class="p">&lt;</span><span class="n">IObserver</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;,</span> <span class="n">Exception</span><span class="p">&gt;</span> <span class="n">OnObserverException</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div> <h3 id="implementação-com-asyncawait">Implementação com Async/Await</h3> <div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Observer assíncrono</span>
+<span class="k">public</span> <span class="k">interface</span> <span class="nc">IAsyncObserver</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;</span>
+<span class="p">{</span>
+    <span class="n">Task</span> <span class="nf">UpdateAsync</span><span class="p">(</span><span class="n">T</span> <span class="n">data</span><span class="p">,</span> <span class="n">CancellationToken</span> <span class="n">cancellationToken</span> <span class="p">=</span> <span class="k">default</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">public</span> <span class="k">class</span> <span class="nc">AsyncSubject</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;</span> <span class="p">:</span> <span class="n">IDisposable</span>
+<span class="p">{</span>
+    <span class="k">private</span> <span class="k">readonly</span> <span class="n">ConcurrentBag</span><span class="p">&lt;</span><span class="n">IAsyncObserver</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;&gt;</span> <span class="n">_observers</span><span class="p">;</span>
+    <span class="k">private</span> <span class="k">readonly</span> <span class="n">SemaphoreSlim</span> <span class="n">_semaphore</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="nf">AsyncSubject</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="n">_observers</span> <span class="p">=</span> <span class="k">new</span> <span class="n">ConcurrentBag</span><span class="p">&lt;</span><span class="n">IAsyncObserver</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;&gt;();</span>
+        <span class="n">_semaphore</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">SemaphoreSlim</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="m">1</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">async</span> <span class="n">Task</span> <span class="nf">SubscribeAsync</span><span class="p">(</span><span class="n">IAsyncObserver</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;</span> <span class="n">observer</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">observer</span> <span class="p">==</span> <span class="k">null</span><span class="p">)</span> <span class="k">throw</span> <span class="k">new</span> <span class="nf">ArgumentNullException</span><span class="p">(</span><span class="k">nameof</span><span class="p">(</span><span class="n">observer</span><span class="p">));</span>
+
+        <span class="k">await</span> <span class="n">_semaphore</span><span class="p">.</span><span class="nf">WaitAsync</span><span class="p">();</span>
+        <span class="k">try</span>
+        <span class="p">{</span>
+            <span class="n">_observers</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="n">observer</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="k">finally</span>
+        <span class="p">{</span>
+            <span class="n">_semaphore</span><span class="p">.</span><span class="nf">Release</span><span class="p">();</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">async</span> <span class="n">Task</span> <span class="nf">NotifyAsync</span><span class="p">(</span><span class="n">T</span> <span class="n">data</span><span class="p">,</span> <span class="n">CancellationToken</span> <span class="n">cancellationToken</span> <span class="p">=</span> <span class="k">default</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="kt">var</span> <span class="n">observers</span> <span class="p">=</span> <span class="n">_observers</span><span class="p">.</span><span class="nf">ToArray</span><span class="p">();</span>
+        
+        <span class="kt">var</span> <span class="n">tasks</span> <span class="p">=</span> <span class="n">observers</span><span class="p">.</span><span class="nf">Select</span><span class="p">(</span><span class="k">async</span> <span class="n">observer</span> <span class="p">=&gt;</span>
+        <span class="p">{</span>
+            <span class="k">try</span>
+            <span class="p">{</span>
+                <span class="k">await</span> <span class="n">observer</span><span class="p">.</span><span class="nf">UpdateAsync</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">cancellationToken</span><span class="p">);</span>
+            <span class="p">}</span>
+            <span class="k">catch</span> <span class="p">(</span><span class="n">Exception</span> <span class="n">ex</span><span class="p">)</span>
+            <span class="p">{</span>
+                <span class="n">OnObserverException</span><span class="p">?.</span><span class="nf">Invoke</span><span class="p">(</span><span class="n">observer</span><span class="p">,</span> <span class="n">ex</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">});</span>
+
+        <span class="k">await</span> <span class="n">Task</span><span class="p">.</span><span class="nf">WhenAll</span><span class="p">(</span><span class="n">tasks</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">async</span> <span class="n">Task</span> <span class="nf">NotifyAsync</span><span class="p">(</span><span class="n">T</span> <span class="n">data</span><span class="p">,</span> <span class="n">TimeSpan</span> <span class="n">timeout</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">using</span> <span class="p">(</span><span class="kt">var</span> <span class="n">cts</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">CancellationTokenSource</span><span class="p">(</span><span class="n">timeout</span><span class="p">))</span>
+        <span class="p">{</span>
+            <span class="k">await</span> <span class="nf">NotifyAsync</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">cts</span><span class="p">.</span><span class="n">Token</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">event</span> <span class="n">Action</span><span class="p">&lt;</span><span class="n">IAsyncObserver</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;,</span> <span class="n">Exception</span><span class="p">&gt;</span> <span class="n">OnObserverException</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="k">void</span> <span class="nf">Dispose</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="n">_semaphore</span><span class="p">?.</span><span class="nf">Dispose</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div> <h2 id="exemplo-prático">Exemplo Prático</h2> <p>Sistema de monitoramento de preços de ações com diferentes tipos de observers:</p> <div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Modelo de dados</span>
+<span class="k">public</span> <span class="k">class</span> <span class="nc">StockPrice</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="kt">string</span> <span class="n">Symbol</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+    <span class="k">public</span> <span class="kt">decimal</span> <span class="n">Price</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+    <span class="k">public</span> <span class="kt">decimal</span> <span class="n">Change</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+    <span class="k">public</span> <span class="n">DateTime</span> <span class="n">Timestamp</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// Observer para logging</span>
+<span class="k">public</span> <span class="k">class</span> <span class="nc">StockPriceLogger</span> <span class="p">:</span> <span class="n">IObserver</span><span class="p">&lt;</span><span class="n">StockPrice</span><span class="p">&gt;</span>
+<span class="p">{</span>
+    <span class="k">private</span> <span class="k">readonly</span> <span class="n">ILogger</span> <span class="n">_logger</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="nf">StockPriceLogger</span><span class="p">(</span><span class="n">ILogger</span> <span class="n">logger</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">_logger</span> <span class="p">=</span> <span class="n">logger</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">void</span> <span class="nf">Update</span><span class="p">(</span><span class="n">StockPrice</span> <span class="n">data</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">_logger</span><span class="p">.</span><span class="nf">Log</span><span class="p">(</span><span class="s">$"[</span><span class="p">{</span><span class="n">data</span><span class="p">.</span><span class="n">Timestamp</span><span class="p">}</span><span class="s">] </span><span class="p">{</span><span class="n">data</span><span class="p">.</span><span class="n">Symbol</span><span class="p">}</span><span class="s">: $</span><span class="p">{</span><span class="n">data</span><span class="p">.</span><span class="n">Price</span><span class="p">}</span><span class="s"> (</span><span class="p">{</span><span class="n">data</span><span class="p">.</span><span class="n">Change</span><span class="p">:+</span><span class="m">0.00</span><span class="p">;-</span><span class="m">0.00</span><span class="p">;</span><span class="m">0.00</span><span class="p">}</span><span class="s">)"</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// Observer para alertas</span>
+<span class="k">public</span> <span class="k">class</span> <span class="nc">StockPriceAlertService</span> <span class="p">:</span> <span class="n">IAsyncObserver</span><span class="p">&lt;</span><span class="n">StockPrice</span><span class="p">&gt;</span>
+<span class="p">{</span>
+    <span class="k">private</span> <span class="k">readonly</span> <span class="n">INotificationService</span> <span class="n">_notificationService</span><span class="p">;</span>
+    <span class="k">private</span> <span class="k">readonly</span> <span class="n">Dictionary</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">,</span> <span class="kt">decimal</span><span class="p">&gt;</span> <span class="n">_alertThresholds</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="nf">StockPriceAlertService</span><span class="p">(</span><span class="n">INotificationService</span> <span class="n">notificationService</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">_notificationService</span> <span class="p">=</span> <span class="n">notificationService</span><span class="p">;</span>
+        <span class="n">_alertThresholds</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Dictionary</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">,</span> <span class="kt">decimal</span><span class="p">&gt;();</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">void</span> <span class="nf">SetAlert</span><span class="p">(</span><span class="kt">string</span> <span class="n">symbol</span><span class="p">,</span> <span class="kt">decimal</span> <span class="n">threshold</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">_alertThresholds</span><span class="p">[</span><span class="n">symbol</span><span class="p">]</span> <span class="p">=</span> <span class="n">threshold</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">async</span> <span class="n">Task</span> <span class="nf">UpdateAsync</span><span class="p">(</span><span class="n">StockPrice</span> <span class="n">data</span><span class="p">,</span> <span class="n">CancellationToken</span> <span class="n">cancellationToken</span> <span class="p">=</span> <span class="k">default</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">_alertThresholds</span><span class="p">.</span><span class="nf">TryGetValue</span><span class="p">(</span><span class="n">data</span><span class="p">.</span><span class="n">Symbol</span><span class="p">,</span> <span class="k">out</span> <span class="kt">var</span> <span class="n">threshold</span><span class="p">))</span>
+        <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">Math</span><span class="p">.</span><span class="nf">Abs</span><span class="p">(</span><span class="n">data</span><span class="p">.</span><span class="n">Change</span><span class="p">)</span> <span class="p">&gt;=</span> <span class="n">threshold</span><span class="p">)</span>
+            <span class="p">{</span>
+                <span class="kt">var</span> <span class="n">message</span> <span class="p">=</span> <span class="s">$"ALERT: </span><span class="p">{</span><span class="n">data</span><span class="p">.</span><span class="n">Symbol</span><span class="p">}</span><span class="s"> moved </span><span class="p">{</span><span class="n">data</span><span class="p">.</span><span class="n">Change</span><span class="p">:+</span><span class="m">0.00</span><span class="p">;-</span><span class="m">0.00</span><span class="p">;</span><span class="m">0.00</span><span class="p">}</span><span class="s"> to $</span><span class="p">{</span><span class="n">data</span><span class="p">.</span><span class="n">Price</span><span class="p">}</span><span class="s">"</span><span class="p">;</span>
+                <span class="k">await</span> <span class="n">_notificationService</span><span class="p">.</span><span class="nf">SendAlertAsync</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="n">cancellationToken</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// Observer para cache/armazenamento</span>
+<span class="k">public</span> <span class="k">class</span> <span class="nc">StockPriceCache</span> <span class="p">:</span> <span class="n">IObserver</span><span class="p">&lt;</span><span class="n">StockPrice</span><span class="p">&gt;</span>
+<span class="p">{</span>
+    <span class="k">private</span> <span class="k">readonly</span> <span class="n">ConcurrentDictionary</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">,</span> <span class="n">StockPrice</span><span class="p">&gt;</span> <span class="n">_cache</span><span class="p">;</span>
+    <span class="k">private</span> <span class="k">readonly</span> <span class="n">IRepository</span><span class="p">&lt;</span><span class="n">StockPrice</span><span class="p">&gt;</span> <span class="n">_repository</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="nf">StockPriceCache</span><span class="p">(</span><span class="n">IRepository</span><span class="p">&lt;</span><span class="n">StockPrice</span><span class="p">&gt;</span> <span class="n">repository</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">_cache</span> <span class="p">=</span> <span class="k">new</span> <span class="n">ConcurrentDictionary</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">,</span> <span class="n">StockPrice</span><span class="p">&gt;();</span>
+        <span class="n">_repository</span> <span class="p">=</span> <span class="n">repository</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">void</span> <span class="nf">Update</span><span class="p">(</span><span class="n">StockPrice</span> <span class="n">data</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">// Atualizar cache</span>
+        <span class="n">_cache</span><span class="p">.</span><span class="nf">AddOrUpdate</span><span class="p">(</span><span class="n">data</span><span class="p">.</span><span class="n">Symbol</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">oldValue</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="n">data</span><span class="p">);</span>
+
+        <span class="c1">// Persistir de forma assíncrona (fire-and-forget)</span>
+        <span class="n">Task</span><span class="p">.</span><span class="nf">Run</span><span class="p">(</span><span class="k">async</span> <span class="p">()</span> <span class="p">=&gt;</span>
+        <span class="p">{</span>
+            <span class="k">try</span>
+            <span class="p">{</span>
+                <span class="k">await</span> <span class="n">_repository</span><span class="p">.</span><span class="nf">SaveAsync</span><span class="p">(</span><span class="n">data</span><span class="p">);</span>
+            <span class="p">}</span>
+            <span class="k">catch</span> <span class="p">(</span><span class="n">Exception</span> <span class="n">ex</span><span class="p">)</span>
+            <span class="p">{</span>
+                <span class="c1">// Log error but don't throw</span>
+                <span class="n">Console</span><span class="p">.</span><span class="nf">WriteLine</span><span class="p">(</span><span class="s">$"Error saving stock price: </span><span class="p">{</span><span class="n">ex</span><span class="p">.</span><span class="n">Message</span><span class="p">}</span><span class="s">"</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">});</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="n">StockPrice</span> <span class="nf">GetLatestPrice</span><span class="p">(</span><span class="kt">string</span> <span class="n">symbol</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">_cache</span><span class="p">.</span><span class="nf">TryGetValue</span><span class="p">(</span><span class="n">symbol</span><span class="p">,</span> <span class="k">out</span> <span class="kt">var</span> <span class="n">price</span><span class="p">);</span>
+        <span class="k">return</span> <span class="n">price</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// Sistema principal de monitoramento</span>
+<span class="k">public</span> <span class="k">class</span> <span class="nc">StockPriceMonitor</span> <span class="p">:</span> <span class="n">IDisposable</span>
+<span class="p">{</span>
+    <span class="k">private</span> <span class="k">readonly</span> <span class="n">ThreadSafeSubject</span><span class="p">&lt;</span><span class="n">StockPrice</span><span class="p">&gt;</span> <span class="n">_syncSubject</span><span class="p">;</span>
+    <span class="k">private</span> <span class="k">readonly</span> <span class="n">AsyncSubject</span><span class="p">&lt;</span><span class="n">StockPrice</span><span class="p">&gt;</span> <span class="n">_asyncSubject</span><span class="p">;</span>
+    <span class="k">private</span> <span class="k">readonly</span> <span class="n">Timer</span> <span class="n">_priceUpdateTimer</span><span class="p">;</span>
+    <span class="k">private</span> <span class="k">readonly</span> <span class="n">Random</span> <span class="n">_random</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Random</span><span class="p">();</span>
+
+    <span class="k">public</span> <span class="nf">StockPriceMonitor</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="n">_syncSubject</span> <span class="p">=</span> <span class="k">new</span> <span class="n">ThreadSafeSubject</span><span class="p">&lt;</span><span class="n">StockPrice</span><span class="p">&gt;();</span>
+        <span class="n">_asyncSubject</span> <span class="p">=</span> <span class="k">new</span> <span class="n">AsyncSubject</span><span class="p">&lt;</span><span class="n">StockPrice</span><span class="p">&gt;();</span>
+        
+        <span class="c1">// Simular atualizações de preço</span>
+        <span class="n">_priceUpdateTimer</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Timer</span><span class="p">(</span><span class="n">SimulatePriceUpdate</span><span class="p">,</span> <span class="k">null</span><span class="p">,</span> 
+            <span class="n">TimeSpan</span><span class="p">.</span><span class="nf">FromSeconds</span><span class="p">(</span><span class="m">1</span><span class="p">),</span> <span class="n">TimeSpan</span><span class="p">.</span><span class="nf">FromSeconds</span><span class="p">(</span><span class="m">1</span><span class="p">));</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">void</span> <span class="nf">SubscribeSync</span><span class="p">(</span><span class="n">IObserver</span><span class="p">&lt;</span><span class="n">StockPrice</span><span class="p">&gt;</span> <span class="n">observer</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">_syncSubject</span><span class="p">.</span><span class="nf">Subscribe</span><span class="p">(</span><span class="n">observer</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">async</span> <span class="n">Task</span> <span class="nf">SubscribeAsync</span><span class="p">(</span><span class="n">IAsyncObserver</span><span class="p">&lt;</span><span class="n">StockPrice</span><span class="p">&gt;</span> <span class="n">observer</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">await</span> <span class="n">_asyncSubject</span><span class="p">.</span><span class="nf">SubscribeAsync</span><span class="p">(</span><span class="n">observer</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">private</span> <span class="k">async</span> <span class="k">void</span> <span class="nf">SimulatePriceUpdate</span><span class="p">(</span><span class="kt">object</span> <span class="n">state</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="kt">var</span> <span class="n">symbols</span> <span class="p">=</span> <span class="k">new</span><span class="p">[]</span> <span class="p">{</span> <span class="s">"AAPL"</span><span class="p">,</span> <span class="s">"GOOGL"</span><span class="p">,</span> <span class="s">"MSFT"</span><span class="p">,</span> <span class="s">"AMZN"</span> <span class="p">};</span>
+        <span class="kt">var</span> <span class="n">symbol</span> <span class="p">=</span> <span class="n">symbols</span><span class="p">[</span><span class="n">_random</span><span class="p">.</span><span class="nf">Next</span><span class="p">(</span><span class="n">symbols</span><span class="p">.</span><span class="n">Length</span><span class="p">)];</span>
+        
+        <span class="kt">var</span> <span class="n">price</span> <span class="p">=</span> <span class="k">new</span> <span class="n">StockPrice</span>
+        <span class="p">{</span>
+            <span class="n">Symbol</span> <span class="p">=</span> <span class="n">symbol</span><span class="p">,</span>
+            <span class="n">Price</span> <span class="p">=</span> <span class="m">100</span> <span class="p">+</span> <span class="n">_random</span><span class="p">.</span><span class="nf">Next</span><span class="p">(-</span><span class="m">50</span><span class="p">,</span> <span class="m">51</span><span class="p">),</span>
+            <span class="n">Change</span> <span class="p">=</span> <span class="p">(</span><span class="n">_random</span><span class="p">.</span><span class="nf">NextDouble</span><span class="p">()</span> <span class="p">-</span> <span class="m">0.5</span><span class="p">)</span> <span class="p">*</span> <span class="m">10</span><span class="p">,</span>
+            <span class="n">Timestamp</span> <span class="p">=</span> <span class="n">DateTime</span><span class="p">.</span><span class="n">UtcNow</span>
+        <span class="p">};</span>
+
+        <span class="c1">// Notificar observers síncronos</span>
+        <span class="n">_syncSubject</span><span class="p">.</span><span class="nf">Notify</span><span class="p">(</span><span class="n">price</span><span class="p">);</span>
+
+        <span class="c1">// Notificar observers assíncronos</span>
+        <span class="k">await</span> <span class="n">_asyncSubject</span><span class="p">.</span><span class="nf">NotifyAsync</span><span class="p">(</span><span class="n">price</span><span class="p">,</span> <span class="n">TimeSpan</span><span class="p">.</span><span class="nf">FromSeconds</span><span class="p">(</span><span class="m">5</span><span class="p">));</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">void</span> <span class="nf">Dispose</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="n">_priceUpdateTimer</span><span class="p">?.</span><span class="nf">Dispose</span><span class="p">();</span>
+        <span class="n">_syncSubject</span><span class="p">?.</span><span class="nf">Dispose</span><span class="p">();</span>
+        <span class="n">_asyncSubject</span><span class="p">?.</span><span class="nf">Dispose</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// Uso do sistema</span>
+<span class="k">public</span> <span class="k">class</span> <span class="nc">StockMonitoringService</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">async</span> <span class="n">Task</span> <span class="nf">StartMonitoringAsync</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="kt">var</span> <span class="n">monitor</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">StockPriceMonitor</span><span class="p">();</span>
+        <span class="kt">var</span> <span class="n">logger</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">ConsoleLogger</span><span class="p">();</span>
+        <span class="kt">var</span> <span class="n">notificationService</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">EmailNotificationService</span><span class="p">();</span>
+        <span class="kt">var</span> <span class="n">repository</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">SqlStockPriceRepository</span><span class="p">();</span>
+
+        <span class="c1">// Configurar observers</span>
+        <span class="kt">var</span> <span class="n">priceLogger</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">StockPriceLogger</span><span class="p">(</span><span class="n">logger</span><span class="p">);</span>
+        <span class="kt">var</span> <span class="n">alertService</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">StockPriceAlertService</span><span class="p">(</span><span class="n">notificationService</span><span class="p">);</span>
+        <span class="kt">var</span> <span class="n">priceCache</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">StockPriceCache</span><span class="p">(</span><span class="n">repository</span><span class="p">);</span>
+
+        <span class="c1">// Configurar alertas</span>
+        <span class="n">alertService</span><span class="p">.</span><span class="nf">SetAlert</span><span class="p">(</span><span class="s">"AAPL"</span><span class="p">,</span> <span class="m">5.0</span><span class="n">m</span><span class="p">);</span>
+        <span class="n">alertService</span><span class="p">.</span><span class="nf">SetAlert</span><span class="p">(</span><span class="s">"GOOGL"</span><span class="p">,</span> <span class="m">10.0</span><span class="n">m</span><span class="p">);</span>
+
+        <span class="c1">// Registrar observers</span>
+        <span class="n">monitor</span><span class="p">.</span><span class="nf">SubscribeSync</span><span class="p">(</span><span class="n">priceLogger</span><span class="p">);</span>
+        <span class="n">monitor</span><span class="p">.</span><span class="nf">SubscribeSync</span><span class="p">(</span><span class="n">priceCache</span><span class="p">);</span>
+        <span class="k">await</span> <span class="n">monitor</span><span class="p">.</span><span class="nf">SubscribeAsync</span><span class="p">(</span><span class="n">alertService</span><span class="p">);</span>
+
+        <span class="c1">// Manter sistema rodando</span>
+        <span class="n">Console</span><span class="p">.</span><span class="nf">WriteLine</span><span class="p">(</span><span class="s">"Monitoramento iniciado. Pressione qualquer tecla para parar..."</span><span class="p">);</span>
+        <span class="n">Console</span><span class="p">.</span><span class="nf">ReadKey</span><span class="p">();</span>
+
+        <span class="n">monitor</span><span class="p">.</span><span class="nf">Dispose</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div> <h2 id="benefícios">Benefícios</h2> <h3 id="1-thread-safety">1. <strong>Thread-Safety</strong></h3> <ul> <li>ReaderWriterLockSlim para performance otimizada em cenários read-heavy</li> <li>Copy-on-iteration previne modificações concorrentes durante notificação</li> <li>Tratamento de exceções isolado evita corrupção de estado</li> </ul> <h3 id="2-gerenciamento-de-memória">2. <strong>Gerenciamento de Memória</strong></h3> <ul> <li>Weak references previnem vazamentos de memória</li> <li>Cleanup automático de referências mortas</li> <li>Disposable pattern para liberação adequada de recursos</li> </ul> <h3 id="3-performance">3. <strong>Performance</strong></h3> <ul> <li>Paralelização de notificações quando apropriado</li> <li>Minimização de tempo em locks críticos</li> <li>Otimizações para cenários read-heavy vs write-heavy</li> </ul> <h3 id="4-robustez">4. <strong>Robustez</strong></h3> <ul> <li>Tratamento de exceções não afeta outros observers</li> <li>Timeouts para operações assíncronas</li> <li>Cancellation tokens para operações longas</li> </ul> <h3 id="5-flexibilidade">5. <strong>Flexibilidade</strong></h3> <ul> <li>Suporte tanto para operações síncronas quanto assíncronas</li> <li>Diferentes estratégias de notificação</li> <li>Extensibilidade através de interfaces bem definidas</li> </ul> <h2 id="considerações-de-implementação">Considerações de Implementação</h2> <h3 id="escolha-da-estratégia-de-sincronização"><strong>Escolha da estratégia de sincronização:</strong></h3> <ul> <li><code class="language-plaintext highlighter-rouge">lock</code> simples para casos básicos</li> <li><code class="language-plaintext highlighter-rouge">ReaderWriterLockSlim</code> para cenários read-heavy</li> <li><code class="language-plaintext highlighter-rouge">ConcurrentCollection</code> para operações lock-free quando possível</li> </ul> <h3 id="weak-vs-strong-references"><strong>Weak vs Strong References:</strong></h3> <ul> <li>Weak references para prevenir vazamentos de memória</li> <li>Strong references quando lifecycle é controlado explicitamente</li> </ul> <h3 id="notificação-síncrona-vs-assíncrona"><strong>Notificação Síncrona vs Assíncrona:</strong></h3> <ul> <li>Síncrona para operações rápidas e determinísticas</li> <li>Assíncrona para operações I/O ou processamento pesado</li> </ul> <h3 id="tratamento-de-exceções"><strong>Tratamento de Exceções:</strong></h3> <ul> <li>Isolamento de falhas entre observers</li> <li>Logging adequado para debugging</li> <li>Recovery gracioso quando possível</li> </ul> </div> <nav class="pagination"> <a href="/interview_questions/153/" class="previous button button-ghost" aria-label="Previous question">&laquo; Question 153</a> <a href="/blog/pt-br/interview/questoes-para-entrevistas/" class="all-questions button button-ghost" aria-label="All questions">All Questions</a> <a href="/interview_questions/155/" class="next button button-ghost" aria-label="Next question">Question 155 &raquo;</a> </nav> </article> </div> </article> </div> </main> <footer class="site-footer"> <div class="container"> <ul class="social"> <li><a href="mailto:matheus.costa.vieira@gmail.com" title="Personal mail" target="_blank"><i class="icon icon-mail"></i></a></li> <li><a href="https://github.com/matheus-vieira" title="Github Profile" target="_blank"><i class="icon icon-github"></i></a></li> <li><a href="https://twitter.com/macostavieira" title="Twitter Profile" target="_blank"><i class="icon icon-twitter"></i></a></li> <li><a href="https://facebook.com/macovieira" title="Facebook Profile" target="_blank"><i class="icon icon-facebook"></i></a></li> <li><a href="https://linkedin.com/in/macostavieira" title="LinkedIn Profile" target="_blank"><i class="icon icon-linkedin"></i></a></li> <li><a href="https://api.whatsapp.com/send?phone=5541988024599&text=E ae!" title="Send me an whatsapp" target="_blank"><i class="icon icon-whatsapp"></i></a></li> <li><a href="tel:5541988024599" title="Call me" target="_blank"><i class="icon icon-phone"></i></a></li> </ul> <p class="txt-medium-gray"> <small>&copy;mvieira 2025 All rights reserved. Made with <a href="http://jekyllrb.com/" target="_blank">Jekyll</a> and ♥</small> </p> </div> </footer> <a href="https://github.com/matheus-vieira/matheus-vieira.github.io" target="_blank" class="github-corner" title="mvieira github repository"> <svg width="80" height="80" viewBox="0 0 250 250"> <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path> <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" class="octo-arm"></path> <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path> </svg> </a> </body> </html>

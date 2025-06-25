@@ -1,0 +1,294 @@
+<!DOCTYPE html> <html lang="en"> <head> <meta charset="utf-8"> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <meta name="viewport" content="width=device-width, initial-scale=1"> <meta http-equiv="Cache-Control" content="only-if-cached"/> <meta http-equiv="Cache-Control" content="max-age=120"/> <title>RabbitMQ: Handling High Volumes Without Losing Control</title> <meta name="description" content="When you’re building backend systems that need to handle thousands or millions of messages daily, having a robust messaging infrastructure becomes critical. ..."> <link rel="stylesheet" href="/css/main.css"> <link rel="canonical" href="http://0.0.0.0:4000/blog/en-us/dotnet-and-azure-foundations/rabbitmq-handling-high-volumes-without-losing-control/"> <link rel="alternate" type="application/rss+xml" title="Matheus Costa Vieira - Personal Page" href="http://0.0.0.0:4000/feed.xml" /> <link rel="shortcut icon" href="/images/favicon.ico" type="image/png"> <!-- Global site tag (gtag.js) - Google Analytics --> <script async src="https://www.googletagmanager.com/gtag/js?id=UA-174941014-1"></script> <script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'UA-174941014-1'); </script> </head> <body> <!-- Google Tag Manager (noscript) --> <noscript><iframe src="https://www.googletagmanager.com/ns.html?id="height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript> <!-- End Google Tag Manager (noscript) --> <header class="site-header"> <div class="container"> <label title="Toggle menu checkbox"></label> <input type="checkbox" id="toggleNavbar"> </label> <h1 class="logo"> <a href="/" alt="mvieira" title="mvieira"> mvieira </a> </h1> <label for="toggleNavbar" role="button" class="toggle-navbar-button" title="Toggle menu button"> <i class="icon icon-menu"></i> <i class="icon icon-cross"></i> </label> <nav class="navbar"> <ul> <li> <a href="/about" title="About"> About </a> </li> <li> <a href="/blog" title="Blog"> Blog </a> </li> <li> <a href="/contact" title="Contact"> Contact </a> </li> <li> <a href="/courses" title="Courses"> Courses </a> </li> <li> <a href="/resume" title="Resume"> Resume </a> </li> <li> <a href="/study" title="Study"> Study </a> </li> <li> <a href="/feed.xml" target="_blank" title="Site Feed"> <i class="icon icon-rss"></i> </a> </li> </ul> </nav> </div> </header> <main class="main-container"> <div class="container"> <article role="article" class="post"> <div class="card"> <header class="post-header"> <h1 class="post-title">RabbitMQ: Handling High Volumes Without Losing Control</h1> <em class="post-meta"> <time>Jun 20, 2025</time> </em> </header> <div class="post-content"> <figure class="post-thumbnail "> <img src="https://www.rabbitmq.com/img/rabbitmq-logo.svg" alt="RabbitMQ: Handling High Volumes Without Losing Control"> </figure> <p>When you’re building backend systems that need to handle thousands or millions of messages daily, having a robust messaging infrastructure becomes critical. In my experience architecting distributed systems for financial and e-commerce platforms, RabbitMQ has proven to be a reliable workhorse for managing high-volume message processing without losing control over your system’s reliability.</p> <p>Let me share a real-world architecture and practical implementation that has successfully handled peak loads of 100,000+ messages per minute in production.</p> <h2 id="️-the-architecture-financial-transaction-processing">🏗️ The Architecture: Financial Transaction Processing</h2> <p>Here’s a simplified diagram of a financial transaction processing system I’ve implemented:</p> <div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[Web API] → [RabbitMQ Exchange] → [Multiple Queues] → [Worker Services]
+    ↓              ↓                    ↓               ↓
+[Validation]   [Routing]           [Buffering]    [Processing]
+    ↓              ↓                    ↓               ↓
+[Database]     [Dead Letter]       [Retry Logic]   [Notifications]
+</code></pre></div></div> <p><strong>Key Components:</strong></p> <ul> <li><strong>Topic Exchange</strong>: Routes messages based on transaction type and priority</li> <li><strong>Durable Queues</strong>: Ensures message persistence across system restarts</li> <li><strong>Multiple Worker Services</strong>: Horizontal scaling for processing capacity</li> <li><strong>Dead Letter Queues</strong>: Handles failed messages gracefully</li> <li><strong>Circuit Breakers</strong>: Prevents cascade failures</li> </ul> <h2 id="-implementation-net-core-worker-services">🚀 Implementation: .NET Core Worker Services</h2> <p>Here’s how I implement the core components:</p> <h3 id="1-message-publisher-web-api">1. Message Publisher (Web API)</h3> <div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">class</span> <span class="nc">TransactionPublisher</span>
+<span class="p">{</span>
+    <span class="k">private</span> <span class="k">readonly</span> <span class="n">IConnection</span> <span class="n">_connection</span><span class="p">;</span>
+    <span class="k">private</span> <span class="k">readonly</span> <span class="n">IModel</span> <span class="n">_channel</span><span class="p">;</span>
+    
+    <span class="k">public</span> <span class="nf">TransactionPublisher</span><span class="p">(</span><span class="n">IConfiguration</span> <span class="n">config</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="kt">var</span> <span class="n">factory</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">ConnectionFactory</span><span class="p">()</span>
+        <span class="p">{</span>
+            <span class="n">HostName</span> <span class="p">=</span> <span class="n">config</span><span class="p">[</span><span class="s">"RabbitMQ:Host"</span><span class="p">],</span>
+            <span class="n">Port</span> <span class="p">=</span> <span class="n">config</span><span class="p">.</span><span class="n">GetValue</span><span class="p">&lt;</span><span class="kt">int</span><span class="p">&gt;(</span><span class="s">"RabbitMQ:Port"</span><span class="p">),</span>
+            <span class="n">UserName</span> <span class="p">=</span> <span class="n">config</span><span class="p">[</span><span class="s">"RabbitMQ:Username"</span><span class="p">],</span>
+            <span class="n">Password</span> <span class="p">=</span> <span class="n">config</span><span class="p">[</span><span class="s">"RabbitMQ:Password"</span><span class="p">],</span>
+            <span class="n">VirtualHost</span> <span class="p">=</span> <span class="n">config</span><span class="p">[</span><span class="s">"RabbitMQ:VirtualHost"</span><span class="p">]</span>
+        <span class="p">};</span>
+        
+        <span class="n">_connection</span> <span class="p">=</span> <span class="n">factory</span><span class="p">.</span><span class="nf">CreateConnection</span><span class="p">();</span>
+        <span class="n">_channel</span> <span class="p">=</span> <span class="n">_connection</span><span class="p">.</span><span class="nf">CreateModel</span><span class="p">();</span>
+        
+        <span class="c1">// Declare exchange</span>
+        <span class="n">_channel</span><span class="p">.</span><span class="nf">ExchangeDeclare</span><span class="p">(</span>
+            <span class="n">exchange</span><span class="p">:</span> <span class="s">"transactions.topic"</span><span class="p">,</span>
+            <span class="n">type</span><span class="p">:</span> <span class="n">ExchangeType</span><span class="p">.</span><span class="n">Topic</span><span class="p">,</span>
+            <span class="n">durable</span><span class="p">:</span> <span class="k">true</span>
+        <span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">async</span> <span class="n">Task</span> <span class="nf">PublishTransactionAsync</span><span class="p">(</span><span class="n">TransactionRequest</span> <span class="n">transaction</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="kt">var</span> <span class="n">routingKey</span> <span class="p">=</span> <span class="s">$"transaction.</span><span class="p">{</span><span class="n">transaction</span><span class="p">.</span><span class="n">Type</span><span class="p">}</span><span class="s">.</span><span class="p">{</span><span class="n">transaction</span><span class="p">.</span><span class="n">Priority</span><span class="p">}</span><span class="s">"</span><span class="p">;</span>
+        <span class="kt">var</span> <span class="n">message</span> <span class="p">=</span> <span class="n">JsonSerializer</span><span class="p">.</span><span class="nf">Serialize</span><span class="p">(</span><span class="n">transaction</span><span class="p">);</span>
+        <span class="kt">var</span> <span class="n">body</span> <span class="p">=</span> <span class="n">Encoding</span><span class="p">.</span><span class="n">UTF8</span><span class="p">.</span><span class="nf">GetBytes</span><span class="p">(</span><span class="n">message</span><span class="p">);</span>
+
+        <span class="kt">var</span> <span class="n">properties</span> <span class="p">=</span> <span class="n">_channel</span><span class="p">.</span><span class="nf">CreateBasicProperties</span><span class="p">();</span>
+        <span class="n">properties</span><span class="p">.</span><span class="n">Persistent</span> <span class="p">=</span> <span class="k">true</span><span class="p">;</span> <span class="c1">// Message survives broker restart</span>
+        <span class="n">properties</span><span class="p">.</span><span class="n">MessageId</span> <span class="p">=</span> <span class="n">Guid</span><span class="p">.</span><span class="nf">NewGuid</span><span class="p">().</span><span class="nf">ToString</span><span class="p">();</span>
+        <span class="n">properties</span><span class="p">.</span><span class="n">Timestamp</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">AmqpTimestamp</span><span class="p">(</span><span class="n">DateTimeOffset</span><span class="p">.</span><span class="n">UtcNow</span><span class="p">.</span><span class="nf">ToUnixTimeSeconds</span><span class="p">());</span>
+
+        <span class="n">_channel</span><span class="p">.</span><span class="nf">BasicPublish</span><span class="p">(</span>
+            <span class="n">exchange</span><span class="p">:</span> <span class="s">"transactions.topic"</span><span class="p">,</span>
+            <span class="n">routingKey</span><span class="p">:</span> <span class="n">routingKey</span><span class="p">,</span>
+            <span class="n">basicProperties</span><span class="p">:</span> <span class="n">properties</span><span class="p">,</span>
+            <span class="n">body</span><span class="p">:</span> <span class="n">body</span>
+        <span class="p">);</span>
+
+        <span class="c1">// Optional: Confirm publication</span>
+        <span class="n">_channel</span><span class="p">.</span><span class="nf">WaitForConfirmsOrDie</span><span class="p">(</span><span class="n">TimeSpan</span><span class="p">.</span><span class="nf">FromSeconds</span><span class="p">(</span><span class="m">5</span><span class="p">));</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div> <h3 id="2-queue-setup-and-configuration">2. Queue Setup and Configuration</h3> <div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">class</span> <span class="nc">QueueConfiguration</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">static</span> <span class="k">void</span> <span class="nf">ConfigureQueues</span><span class="p">(</span><span class="n">IModel</span> <span class="n">channel</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">// High priority transaction queue</span>
+        <span class="kt">var</span> <span class="n">highPriorityArgs</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Dictionary</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">,</span> <span class="kt">object</span><span class="p">&gt;</span>
+        <span class="p">{</span>
+            <span class="p">{</span><span class="s">"x-message-ttl"</span><span class="p">,</span> <span class="m">300000</span><span class="p">},</span> <span class="c1">// 5 minutes TTL</span>
+            <span class="p">{</span><span class="s">"x-dead-letter-exchange"</span><span class="p">,</span> <span class="s">"transactions.dlx"</span><span class="p">},</span>
+            <span class="p">{</span><span class="s">"x-dead-letter-routing-key"</span><span class="p">,</span> <span class="s">"high-priority.failed"</span><span class="p">},</span>
+            <span class="p">{</span><span class="s">"x-max-retries"</span><span class="p">,</span> <span class="m">3</span><span class="p">}</span>
+        <span class="p">};</span>
+
+        <span class="n">channel</span><span class="p">.</span><span class="nf">QueueDeclare</span><span class="p">(</span>
+            <span class="n">queue</span><span class="p">:</span> <span class="s">"transactions.high-priority"</span><span class="p">,</span>
+            <span class="n">durable</span><span class="p">:</span> <span class="k">true</span><span class="p">,</span>
+            <span class="n">exclusive</span><span class="p">:</span> <span class="k">false</span><span class="p">,</span>
+            <span class="n">autoDelete</span><span class="p">:</span> <span class="k">false</span><span class="p">,</span>
+            <span class="n">arguments</span><span class="p">:</span> <span class="n">highPriorityArgs</span>
+        <span class="p">);</span>
+
+        <span class="c1">// Normal priority transaction queue</span>
+        <span class="kt">var</span> <span class="n">normalPriorityArgs</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Dictionary</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">,</span> <span class="kt">object</span><span class="p">&gt;</span>
+        <span class="p">{</span>
+            <span class="p">{</span><span class="s">"x-message-ttl"</span><span class="p">,</span> <span class="m">600000</span><span class="p">},</span> <span class="c1">// 10 minutes TTL</span>
+            <span class="p">{</span><span class="s">"x-dead-letter-exchange"</span><span class="p">,</span> <span class="s">"transactions.dlx"</span><span class="p">},</span>
+            <span class="p">{</span><span class="s">"x-dead-letter-routing-key"</span><span class="p">,</span> <span class="s">"normal.failed"</span><span class="p">},</span>
+            <span class="p">{</span><span class="s">"x-max-retries"</span><span class="p">,</span> <span class="m">5</span><span class="p">}</span>
+        <span class="p">};</span>
+
+        <span class="n">channel</span><span class="p">.</span><span class="nf">QueueDeclare</span><span class="p">(</span>
+            <span class="n">queue</span><span class="p">:</span> <span class="s">"transactions.normal-priority"</span><span class="p">,</span>
+            <span class="n">durable</span><span class="p">:</span> <span class="k">true</span><span class="p">,</span>
+            <span class="n">exclusive</span><span class="p">:</span> <span class="k">false</span><span class="p">,</span>
+            <span class="n">autoDelete</span><span class="p">:</span> <span class="k">false</span><span class="p">,</span>
+            <span class="n">arguments</span><span class="p">:</span> <span class="n">normalPriorityArgs</span>
+        <span class="p">);</span>
+
+        <span class="c1">// Bind queues to exchange</span>
+        <span class="n">channel</span><span class="p">.</span><span class="nf">QueueBind</span><span class="p">(</span><span class="s">"transactions.high-priority"</span><span class="p">,</span> <span class="s">"transactions.topic"</span><span class="p">,</span> <span class="s">"transaction.*.high"</span><span class="p">);</span>
+        <span class="n">channel</span><span class="p">.</span><span class="nf">QueueBind</span><span class="p">(</span><span class="s">"transactions.normal-priority"</span><span class="p">,</span> <span class="s">"transactions.topic"</span><span class="p">,</span> <span class="s">"transaction.*.normal"</span><span class="p">);</span>
+        <span class="n">channel</span><span class="p">.</span><span class="nf">QueueBind</span><span class="p">(</span><span class="s">"transactions.normal-priority"</span><span class="p">,</span> <span class="s">"transactions.topic"</span><span class="p">,</span> <span class="s">"transaction.*.low"</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div> <h3 id="3-high-performance-consumer">3. High-Performance Consumer</h3> <div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">class</span> <span class="nc">TransactionWorkerService</span> <span class="p">:</span> <span class="n">BackgroundService</span>
+<span class="p">{</span>
+    <span class="k">private</span> <span class="k">readonly</span> <span class="n">ILogger</span><span class="p">&lt;</span><span class="n">TransactionWorkerService</span><span class="p">&gt;</span> <span class="n">_logger</span><span class="p">;</span>
+    <span class="k">private</span> <span class="k">readonly</span> <span class="n">IServiceProvider</span> <span class="n">_serviceProvider</span><span class="p">;</span>
+    <span class="k">private</span> <span class="n">IConnection</span> <span class="n">_connection</span><span class="p">;</span>
+    <span class="k">private</span> <span class="n">IModel</span> <span class="n">_channel</span><span class="p">;</span>
+    <span class="k">private</span> <span class="k">readonly</span> <span class="n">SemaphoreSlim</span> <span class="n">_semaphore</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="nf">TransactionWorkerService</span><span class="p">(</span>
+        <span class="n">ILogger</span><span class="p">&lt;</span><span class="n">TransactionWorkerService</span><span class="p">&gt;</span> <span class="n">logger</span><span class="p">,</span>
+        <span class="n">IServiceProvider</span> <span class="n">serviceProvider</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">_logger</span> <span class="p">=</span> <span class="n">logger</span><span class="p">;</span>
+        <span class="n">_serviceProvider</span> <span class="p">=</span> <span class="n">serviceProvider</span><span class="p">;</span>
+        <span class="n">_semaphore</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">SemaphoreSlim</span><span class="p">(</span><span class="n">Environment</span><span class="p">.</span><span class="n">ProcessorCount</span> <span class="p">*</span> <span class="m">2</span><span class="p">);</span> <span class="c1">// Limit concurrent processing</span>
+    <span class="p">}</span>
+
+    <span class="k">protected</span> <span class="k">override</span> <span class="k">async</span> <span class="n">Task</span> <span class="nf">ExecuteAsync</span><span class="p">(</span><span class="n">CancellationToken</span> <span class="n">stoppingToken</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nf">InitializeRabbitMQ</span><span class="p">();</span>
+
+        <span class="kt">var</span> <span class="n">consumer</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">AsyncEventingBasicConsumer</span><span class="p">(</span><span class="n">_channel</span><span class="p">);</span>
+        <span class="n">consumer</span><span class="p">.</span><span class="n">Received</span> <span class="p">+=</span> <span class="k">async</span> <span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">ea</span><span class="p">)</span> <span class="p">=&gt;</span>
+        <span class="p">{</span>
+            <span class="k">await</span> <span class="n">_semaphore</span><span class="p">.</span><span class="nf">WaitAsync</span><span class="p">(</span><span class="n">stoppingToken</span><span class="p">);</span>
+            
+            <span class="k">try</span>
+            <span class="p">{</span>
+                <span class="k">await</span> <span class="nf">ProcessMessageAsync</span><span class="p">(</span><span class="n">ea</span><span class="p">);</span>
+                <span class="n">_channel</span><span class="p">.</span><span class="nf">BasicAck</span><span class="p">(</span><span class="n">ea</span><span class="p">.</span><span class="n">DeliveryTag</span><span class="p">,</span> <span class="k">false</span><span class="p">);</span>
+            <span class="p">}</span>
+            <span class="k">catch</span> <span class="p">(</span><span class="n">Exception</span> <span class="n">ex</span><span class="p">)</span>
+            <span class="p">{</span>
+                <span class="n">_logger</span><span class="p">.</span><span class="nf">LogError</span><span class="p">(</span><span class="n">ex</span><span class="p">,</span> <span class="s">"Error processing message {MessageId}"</span><span class="p">,</span> <span class="n">ea</span><span class="p">.</span><span class="n">BasicProperties</span><span class="p">.</span><span class="n">MessageId</span><span class="p">);</span>
+                
+                <span class="c1">// Implement retry logic</span>
+                <span class="kt">var</span> <span class="n">shouldRetry</span> <span class="p">=</span> <span class="nf">ShouldRetry</span><span class="p">(</span><span class="n">ea</span><span class="p">);</span>
+                <span class="c1">// if shouldRetry true -&gt; requeue</span>
+                <span class="c1">// if shouldRetry false -&gt; send to DLQ</span>
+                <span class="n">_channel</span><span class="p">.</span><span class="nf">BasicNack</span><span class="p">(</span><span class="n">ea</span><span class="p">.</span><span class="n">DeliveryTag</span><span class="p">,</span> <span class="k">false</span><span class="p">,</span> <span class="n">shouldRetry</span><span class="p">);</span>
+            <span class="p">}</span>
+            <span class="k">finally</span>
+            <span class="p">{</span>
+                <span class="n">_semaphore</span><span class="p">.</span><span class="nf">Release</span><span class="p">();</span>
+            <span class="p">}</span>
+        <span class="p">};</span>
+
+        <span class="n">_channel</span><span class="p">.</span><span class="nf">BasicConsume</span><span class="p">(</span>
+            <span class="n">queue</span><span class="p">:</span> <span class="s">"transactions.high-priority"</span><span class="p">,</span>
+            <span class="n">autoAck</span><span class="p">:</span> <span class="k">false</span><span class="p">,</span> <span class="c1">// Manual acknowledgment for reliability</span>
+            <span class="n">consumer</span><span class="p">:</span> <span class="n">consumer</span>
+        <span class="p">);</span>
+
+        <span class="c1">// Keep the service running</span>
+        <span class="k">while</span> <span class="p">(!</span><span class="n">stoppingToken</span><span class="p">.</span><span class="n">IsCancellationRequested</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="k">await</span> <span class="n">Task</span><span class="p">.</span><span class="nf">Delay</span><span class="p">(</span><span class="m">1000</span><span class="p">,</span> <span class="n">stoppingToken</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">private</span> <span class="k">async</span> <span class="n">Task</span> <span class="nf">ProcessMessageAsync</span><span class="p">(</span><span class="n">BasicDeliverEventArgs</span> <span class="n">ea</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">using</span> <span class="nn">var</span> <span class="n">scope</span> <span class="p">=</span> <span class="n">_serviceProvider</span><span class="p">.</span><span class="nf">CreateScope</span><span class="p">();</span>
+        <span class="kt">var</span> <span class="n">processor</span> <span class="p">=</span> <span class="n">scope</span><span class="p">.</span><span class="n">ServiceProvider</span><span class="p">.</span><span class="n">GetRequiredService</span><span class="p">&lt;</span><span class="n">ITransactionProcessor</span><span class="p">&gt;();</span>
+        
+        <span class="kt">var</span> <span class="n">body</span> <span class="p">=</span> <span class="n">ea</span><span class="p">.</span><span class="n">Body</span><span class="p">.</span><span class="nf">ToArray</span><span class="p">();</span>
+        <span class="kt">var</span> <span class="n">message</span> <span class="p">=</span> <span class="n">Encoding</span><span class="p">.</span><span class="n">UTF8</span><span class="p">.</span><span class="nf">GetString</span><span class="p">(</span><span class="n">body</span><span class="p">);</span>
+        <span class="kt">var</span> <span class="n">transaction</span> <span class="p">=</span> <span class="n">JsonSerializer</span><span class="p">.</span><span class="n">Deserialize</span><span class="p">&lt;</span><span class="n">TransactionRequest</span><span class="p">&gt;(</span><span class="n">message</span><span class="p">);</span>
+
+        <span class="k">await</span> <span class="n">processor</span><span class="p">.</span><span class="nf">ProcessAsync</span><span class="p">(</span><span class="n">transaction</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">private</span> <span class="kt">bool</span> <span class="nf">ShouldRetry</span><span class="p">(</span><span class="n">BasicDeliverEventArgs</span> <span class="n">ea</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">// Check retry count from headers</span>
+        <span class="kt">var</span> <span class="n">retryCount</span> <span class="p">=</span> <span class="n">ea</span><span class="p">.</span><span class="n">BasicProperties</span><span class="p">.</span><span class="n">Headers</span><span class="p">?.</span><span class="nf">ContainsKey</span><span class="p">(</span><span class="s">"x-retry-count"</span><span class="p">)</span> <span class="p">==</span> <span class="k">true</span>
+            <span class="p">?</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">ea</span><span class="p">.</span><span class="n">BasicProperties</span><span class="p">.</span><span class="n">Headers</span><span class="p">[</span><span class="s">"x-retry-count"</span><span class="p">]</span>
+            <span class="p">:</span> <span class="m">0</span><span class="p">;</span>
+
+        <span class="k">return</span> <span class="n">retryCount</span> <span class="p">&lt;</span> <span class="m">3</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div> <h2 id="-monitoring-and-observability">📊 Monitoring and Observability</h2> <p>Monitoring high-volume systems is crucial. Here’s how I implement comprehensive observability:</p> <div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">class</span> <span class="nc">RabbitMQMetrics</span>
+<span class="p">{</span>
+    <span class="k">private</span> <span class="k">readonly</span> <span class="n">ILogger</span><span class="p">&lt;</span><span class="n">RabbitMQMetrics</span><span class="p">&gt;</span> <span class="n">_logger</span><span class="p">;</span>
+    <span class="k">private</span> <span class="k">readonly</span> <span class="n">IMetrics</span> <span class="n">_metrics</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="k">void</span> <span class="nf">RecordMessagePublished</span><span class="p">(</span><span class="kt">string</span> <span class="n">queueName</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">_metrics</span><span class="p">.</span><span class="n">Measure</span><span class="p">.</span><span class="n">Counter</span><span class="p">.</span><span class="nf">Increment</span><span class="p">(</span><span class="s">"rabbitmq.messages.published"</span><span class="p">,</span> 
+            <span class="k">new</span> <span class="nf">MetricTags</span><span class="p">(</span><span class="s">"queue"</span><span class="p">,</span> <span class="n">queueName</span><span class="p">));</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">void</span> <span class="nf">RecordMessageProcessed</span><span class="p">(</span><span class="kt">string</span> <span class="n">queueName</span><span class="p">,</span> <span class="n">TimeSpan</span> <span class="n">processingTime</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">_metrics</span><span class="p">.</span><span class="n">Measure</span><span class="p">.</span><span class="n">Counter</span><span class="p">.</span><span class="nf">Increment</span><span class="p">(</span><span class="s">"rabbitmq.messages.processed"</span><span class="p">,</span>
+            <span class="k">new</span> <span class="nf">MetricTags</span><span class="p">(</span><span class="s">"queue"</span><span class="p">,</span> <span class="n">queueName</span><span class="p">));</span>
+        
+        <span class="n">_metrics</span><span class="p">.</span><span class="n">Measure</span><span class="p">.</span><span class="n">Timer</span><span class="p">.</span><span class="nf">Time</span><span class="p">(</span><span class="s">"rabbitmq.processing.duration"</span><span class="p">,</span>
+            <span class="n">processingTime</span><span class="p">,</span> <span class="k">new</span> <span class="nf">MetricTags</span><span class="p">(</span><span class="s">"queue"</span><span class="p">,</span> <span class="n">queueName</span><span class="p">));</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">void</span> <span class="nf">RecordMessageFailed</span><span class="p">(</span><span class="kt">string</span> <span class="n">queueName</span><span class="p">,</span> <span class="kt">string</span> <span class="n">errorType</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">_metrics</span><span class="p">.</span><span class="n">Measure</span><span class="p">.</span><span class="n">Counter</span><span class="p">.</span><span class="nf">Increment</span><span class="p">(</span><span class="s">"rabbitmq.messages.failed"</span><span class="p">,</span>
+            <span class="k">new</span> <span class="nf">MetricTags</span><span class="p">(</span><span class="s">"queue"</span><span class="p">,</span> <span class="n">queueName</span><span class="p">,</span> <span class="s">"error_type"</span><span class="p">,</span> <span class="n">errorType</span><span class="p">));</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div> <h2 id="️-best-practices-for-high-volume-processing">🛡️ Best Practices for High-Volume Processing</h2> <h3 id="1-connection-management">1. Connection Management</h3> <div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Use connection pooling for high-throughput scenarios</span>
+<span class="k">public</span> <span class="k">class</span> <span class="nc">RabbitMQConnectionPool</span>
+<span class="p">{</span>
+    <span class="k">private</span> <span class="k">readonly</span> <span class="n">ConcurrentQueue</span><span class="p">&lt;</span><span class="n">IConnection</span><span class="p">&gt;</span> <span class="n">_connections</span> <span class="p">=</span> <span class="k">new</span><span class="p">();</span>
+    <span class="k">private</span> <span class="k">readonly</span> <span class="n">SemaphoreSlim</span> <span class="n">_semaphore</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="k">async</span> <span class="n">Task</span><span class="p">&lt;</span><span class="n">IConnection</span><span class="p">&gt;</span> <span class="nf">GetConnectionAsync</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">await</span> <span class="n">_semaphore</span><span class="p">.</span><span class="nf">WaitAsync</span><span class="p">();</span>
+        
+        <span class="k">if</span> <span class="p">(</span><span class="n">_connections</span><span class="p">.</span><span class="nf">TryDequeue</span><span class="p">(</span><span class="k">out</span> <span class="kt">var</span> <span class="n">connection</span><span class="p">)</span> <span class="p">&amp;&amp;</span> <span class="n">connection</span><span class="p">.</span><span class="n">IsOpen</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="k">return</span> <span class="n">connection</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="k">return</span> <span class="nf">CreateNewConnection</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">void</span> <span class="nf">ReturnConnection</span><span class="p">(</span><span class="n">IConnection</span> <span class="n">connection</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">connection</span><span class="p">.</span><span class="n">IsOpen</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">_connections</span><span class="p">.</span><span class="nf">Enqueue</span><span class="p">(</span><span class="n">connection</span><span class="p">);</span>
+        <span class="p">}</span>
+        
+        <span class="n">_semaphore</span><span class="p">.</span><span class="nf">Release</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div> <h3 id="2-batch-processing">2. Batch Processing</h3> <div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">class</span> <span class="nc">BatchTransactionProcessor</span>
+<span class="p">{</span>
+    <span class="k">private</span> <span class="k">readonly</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">TransactionRequest</span><span class="p">&gt;</span> <span class="n">_batch</span> <span class="p">=</span> <span class="k">new</span><span class="p">();</span>
+    <span class="k">private</span> <span class="k">readonly</span> <span class="n">Timer</span> <span class="n">_flushTimer</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="k">async</span> <span class="n">Task</span> <span class="nf">AddToBatchAsync</span><span class="p">(</span><span class="n">TransactionRequest</span> <span class="n">transaction</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">lock</span> <span class="p">(</span><span class="n">_batch</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">_batch</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="n">transaction</span><span class="p">);</span>
+            
+            <span class="k">if</span> <span class="p">(</span><span class="n">_batch</span><span class="p">.</span><span class="n">Count</span> <span class="p">&gt;=</span> <span class="m">100</span><span class="p">)</span> <span class="c1">// Batch size</span>
+            <span class="p">{</span>
+                <span class="n">_</span> <span class="p">=</span> <span class="n">Task</span><span class="p">.</span><span class="nf">Run</span><span class="p">(</span><span class="n">FlushBatchAsync</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">private</span> <span class="k">async</span> <span class="n">Task</span> <span class="nf">FlushBatchAsync</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="n">List</span><span class="p">&lt;</span><span class="n">TransactionRequest</span><span class="p">&gt;</span> <span class="n">currentBatch</span><span class="p">;</span>
+        
+        <span class="k">lock</span> <span class="p">(</span><span class="n">_batch</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">currentBatch</span> <span class="p">=</span> <span class="k">new</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">TransactionRequest</span><span class="p">&gt;(</span><span class="n">_batch</span><span class="p">);</span>
+            <span class="n">_batch</span><span class="p">.</span><span class="nf">Clear</span><span class="p">();</span>
+        <span class="p">}</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="n">currentBatch</span><span class="p">.</span><span class="nf">Any</span><span class="p">())</span>
+        <span class="p">{</span>
+            <span class="k">await</span> <span class="nf">ProcessBatchAsync</span><span class="p">(</span><span class="n">currentBatch</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div> <h2 id="-configuration-for-production">🔧 Configuration for Production</h2> <h3 id="rabbitmq-configuration">RabbitMQ Configuration</h3> <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"RabbitMQ"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"Host"</span><span class="p">:</span><span class="w"> </span><span class="s2">"localhost"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"Port"</span><span class="p">:</span><span class="w"> </span><span class="mi">5672</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"Username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"guest"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"Password"</span><span class="p">:</span><span class="w"> </span><span class="s2">"guest"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"VirtualHost"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"ConnectionPoolSize"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"ChannelPoolSize"</span><span class="p">:</span><span class="w"> </span><span class="mi">50</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"PrefetchCount"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"ConfirmSelect"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"Heartbeat"</span><span class="p">:</span><span class="w"> </span><span class="mi">60</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div> <h3 id="worker-service-scaling">Worker Service Scaling</h3> <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Docker Compose for horizontal scaling</span>
+<span class="na">version</span><span class="pi">:</span> <span class="s1">'</span><span class="s">3.8'</span>
+<span class="na">services</span><span class="pi">:</span>
+  <span class="na">transaction-worker</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">transaction-worker:latest</span>
+    <span class="na">scale</span><span class="pi">:</span> <span class="m">5</span>  <span class="c1"># Multiple instances</span>
+    <span class="na">environment</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">RABBITMQ_HOST=rabbitmq</span>
+      <span class="pi">-</span> <span class="s">WORKER_CONCURRENCY=10</span>
+    <span class="na">depends_on</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">rabbitmq</span>
+</code></pre></div></div> <h2 id="-results-and-benefits">📈 Results and Benefits</h2> <p>In production, this architecture has delivered:</p> <ul> <li><strong>Throughput</strong>: 100,000+ messages/minute during peak hours</li> <li><strong>Latency</strong>: Average processing time under 50ms</li> <li><strong>Reliability</strong>: 99.9% message delivery success rate</li> <li><strong>Scalability</strong>: Linear scaling by adding worker instances</li> <li><strong>Observability</strong>: Complete visibility into message flow and system health</li> </ul> <h2 id="-key-takeaways">🎯 Key Takeaways</h2> <ol> <li><strong>Design for Failure</strong>: Always implement dead letter queues and retry mechanisms</li> <li><strong>Monitor Everything</strong>: Track message flow, processing times, and error rates</li> <li><strong>Scale Horizontally</strong>: Use multiple worker instances rather than increasing single-instance capacity</li> <li><strong>Batch When Possible</strong>: Group operations to improve database and external API efficiency</li> <li><strong>Test Under Load</strong>: Use tools like NBomber or Artillery to validate your architecture</li> </ol> <p>RabbitMQ’s robustness combined with .NET’s performance makes it an excellent choice for building reliable, high-volume messaging systems. The key is designing with failure scenarios in mind and implementing comprehensive monitoring from day one.</p> <p>Want to dive deeper into any specific aspect of this architecture? Feel free to reach out—I’m always happy to discuss distributed systems design!</p> </div> </div> </article> </div> </main> <footer class="site-footer"> <div class="container"> <ul class="social"> <li><a href="mailto:matheus.costa.vieira@gmail.com" title="Personal mail" target="_blank"><i class="icon icon-mail"></i></a></li> <li><a href="https://github.com/matheus-vieira" title="Github Profile" target="_blank"><i class="icon icon-github"></i></a></li> <li><a href="https://twitter.com/macostavieira" title="Twitter Profile" target="_blank"><i class="icon icon-twitter"></i></a></li> <li><a href="https://facebook.com/macovieira" title="Facebook Profile" target="_blank"><i class="icon icon-facebook"></i></a></li> <li><a href="https://linkedin.com/in/macostavieira" title="LinkedIn Profile" target="_blank"><i class="icon icon-linkedin"></i></a></li> <li><a href="https://api.whatsapp.com/send?phone=5541988024599&text=E ae!" title="Send me an whatsapp" target="_blank"><i class="icon icon-whatsapp"></i></a></li> <li><a href="tel:5541988024599" title="Call me" target="_blank"><i class="icon icon-phone"></i></a></li> </ul> <p class="txt-medium-gray"> <small>&copy;mvieira 2025 All rights reserved. Made with <a href="http://jekyllrb.com/" target="_blank">Jekyll</a> and ♥</small> </p> </div> </footer> <a href="https://github.com/matheus-vieira/matheus-vieira.github.io" target="_blank" class="github-corner" title="mvieira github repository"> <svg width="80" height="80" viewBox="0 0 250 250"> <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path> <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" class="octo-arm"></path> <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path> </svg> </a> </body> </html>

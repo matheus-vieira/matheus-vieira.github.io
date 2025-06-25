@@ -1,0 +1,239 @@
+<!DOCTYPE html> <html lang="en"> <head> <meta charset="utf-8"> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <meta name="viewport" content="width=device-width, initial-scale=1"> <meta http-equiv="Cache-Control" content="only-if-cached"/> <meta http-equiv="Cache-Control" content="max-age=120"/> <title>Diferenças entre SQL Server e PostgreSQL e quando usar cada um</title> <meta name="description" content="Introdução"> <link rel="stylesheet" href="/css/main.css"> <link rel="canonical" href="http://0.0.0.0:4000/interview_questions/153/"> <link rel="alternate" type="application/rss+xml" title="Matheus Costa Vieira - Personal Page" href="http://0.0.0.0:4000/feed.xml" /> <link rel="shortcut icon" href="/images/favicon.ico" type="image/png"> <!-- Global site tag (gtag.js) - Google Analytics --> <script async src="https://www.googletagmanager.com/gtag/js?id=UA-174941014-1"></script> <script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'UA-174941014-1'); </script> </head> <body> <!-- Google Tag Manager (noscript) --> <noscript><iframe src="https://www.googletagmanager.com/ns.html?id="height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript> <!-- End Google Tag Manager (noscript) --> <header class="site-header"> <div class="container"> <label title="Toggle menu checkbox"></label> <input type="checkbox" id="toggleNavbar"> </label> <h1 class="logo"> <a href="/" alt="mvieira" title="mvieira"> mvieira </a> </h1> <label for="toggleNavbar" role="button" class="toggle-navbar-button" title="Toggle menu button"> <i class="icon icon-menu"></i> <i class="icon icon-cross"></i> </label> <nav class="navbar"> <ul> <li> <a href="/about" title="About"> About </a> </li> <li> <a href="/blog" title="Blog"> Blog </a> </li> <li> <a href="/contact" title="Contact"> Contact </a> </li> <li> <a href="/courses" title="Courses"> Courses </a> </li> <li> <a href="/resume" title="Resume"> Resume </a> </li> <li> <a href="/study" title="Study"> Study </a> </li> <li> <a href="/feed.xml" target="_blank" title="Site Feed"> <i class="icon icon-rss"></i> </a> </li> </ul> </nav> </div> </header> <main class="main-container"> <div class="container"> <article role="article" class="page card"> <header class="post-header"> <h1 class="post-title">Diferenças entre SQL Server e PostgreSQL e quando usar cada um</h1> </header> <div class="post-content"> <article role="article" class="post"> <div class="card"> <header class="post-header"> <p> <h2><strong>Question</strong> &mdash; <span class="question-order">153</span></h2> </p> <p> <h3><strong>Tags</strong> &mdash; <span class="question-tags">sql-server, postgresql, database, rdbms, comparison, performance, licensing, features</span></h3> </p> </header> </div> <div class="post-content"> <h2 id="introdução">Introdução</h2> <p>SQL Server e PostgreSQL são dois dos principais sistemas de gerenciamento de banco de dados relacionais (RDBMS) do mercado. Enquanto o SQL Server é um produto comercial da Microsoft, o PostgreSQL é um banco de dados open-source. Cada um possui características únicas que os tornam adequados para diferentes cenários e necessidades empresariais.</p> <h2 id="conceito-chave">Conceito-chave</h2> <p>A escolha entre SQL Server e PostgreSQL deve considerar fatores como licenciamento, performance, recursos específicos, ecossistema tecnológico, suporte da comunidade, e requisitos de compliance. Ambos são robustos e adequados para aplicações enterprise, mas diferem significativamente em filosofia, custo e características técnicas.</p> <h2 id="tópicos-relevantes">Tópicos Relevantes</h2> <h3 id="licenciamento-e-custo">Licenciamento e Custo</h3> <p><strong>SQL Server:</strong></p> <ul> <li>Licenciamento comercial da Microsoft</li> <li>Modelos de licenciamento: Core-based, Server+CAL</li> <li>Versões: Express (gratuita com limitações), Standard, Enterprise</li> <li>Custos podem ser significativos para implementações grandes</li> </ul> <p><strong>PostgreSQL:</strong></p> <ul> <li>Completamente open-source (licença PostgreSQL)</li> <li>Gratuito para uso comercial</li> <li>Sem limitações de funcionalidades por licença</li> <li>Custos relacionados apenas a suporte e infraestrutura</li> </ul> <h3 id="performance-e-escalabilidade">Performance e Escalabilidade</h3> <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">-- SQL Server - Recursos avançados de performance</span>
+<span class="c1">-- Columnstore indexes para analytics</span>
+<span class="k">CREATE</span> <span class="n">CLUSTERED</span> <span class="n">COLUMNSTORE</span> <span class="k">INDEX</span> <span class="n">CCI_Sales</span> 
+<span class="k">ON</span> <span class="n">Sales</span><span class="p">.</span><span class="n">SalesOrderDetail</span><span class="p">;</span>
+
+<span class="c1">-- Query hints específicos</span>
+<span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="n">Sales</span><span class="p">.</span><span class="n">Customer</span> <span class="k">WITH</span> <span class="p">(</span><span class="n">NOLOCK</span><span class="p">)</span>
+<span class="k">WHERE</span> <span class="n">CustomerID</span> <span class="o">=</span> <span class="mi">123</span><span class="p">;</span>
+
+<span class="c1">-- Particionamento avançado</span>
+<span class="k">CREATE</span> <span class="k">PARTITION</span> <span class="k">FUNCTION</span> <span class="n">PF_Date</span> <span class="p">(</span><span class="n">datetime2</span><span class="p">)</span>
+<span class="k">AS</span> <span class="k">RANGE</span> <span class="k">RIGHT</span> <span class="k">FOR</span> <span class="k">VALUES</span> 
+<span class="p">(</span><span class="s1">'2023-01-01'</span><span class="p">,</span> <span class="s1">'2023-02-01'</span><span class="p">,</span> <span class="s1">'2023-03-01'</span><span class="p">);</span>
+</code></pre></div></div> <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">-- PostgreSQL - Recursos de performance</span>
+<span class="c1">-- Índices avançados (GiST, GIN, BRIN)</span>
+<span class="k">CREATE</span> <span class="k">INDEX</span> <span class="n">CONCURRENTLY</span> <span class="n">idx_products_search</span> 
+<span class="k">ON</span> <span class="n">products</span> <span class="k">USING</span> <span class="n">GIN</span><span class="p">(</span><span class="n">to_tsvector</span><span class="p">(</span><span class="s1">'english'</span><span class="p">,</span> <span class="n">description</span><span class="p">));</span>
+
+<span class="c1">-- Particionamento declarativo (PostgreSQL 10+)</span>
+<span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">sales_2023</span> <span class="k">PARTITION</span> <span class="k">OF</span> <span class="n">sales</span>
+<span class="k">FOR</span> <span class="k">VALUES</span> <span class="k">FROM</span> <span class="p">(</span><span class="s1">'2023-01-01'</span><span class="p">)</span> <span class="k">TO</span> <span class="p">(</span><span class="s1">'2024-01-01'</span><span class="p">);</span>
+
+<span class="c1">-- Parallel queries automáticas</span>
+<span class="k">SET</span> <span class="n">max_parallel_workers_per_gather</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span>
+</code></pre></div></div> <h3 id="recursos-específicos">Recursos específicos</h3> <p><strong>SQL Server características únicas:</strong></p> <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">-- T-SQL com recursos avançados</span>
+<span class="c1">-- Common Table Expressions recursivas</span>
+<span class="k">WITH</span> <span class="n">HierarchyData</span> <span class="k">AS</span> <span class="p">(</span>
+    <span class="k">SELECT</span> <span class="n">EmployeeID</span><span class="p">,</span> <span class="n">ManagerID</span><span class="p">,</span> <span class="n">Name</span><span class="p">,</span> <span class="mi">0</span> <span class="k">as</span> <span class="k">Level</span>
+    <span class="k">FROM</span> <span class="n">Employees</span>
+    <span class="k">WHERE</span> <span class="n">ManagerID</span> <span class="k">IS</span> <span class="k">NULL</span>
+    
+    <span class="k">UNION</span> <span class="k">ALL</span>
+    
+    <span class="k">SELECT</span> <span class="n">e</span><span class="p">.</span><span class="n">EmployeeID</span><span class="p">,</span> <span class="n">e</span><span class="p">.</span><span class="n">ManagerID</span><span class="p">,</span> <span class="n">e</span><span class="p">.</span><span class="n">Name</span><span class="p">,</span> <span class="n">h</span><span class="p">.</span><span class="k">Level</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="k">FROM</span> <span class="n">Employees</span> <span class="n">e</span>
+    <span class="k">INNER</span> <span class="k">JOIN</span> <span class="n">HierarchyData</span> <span class="n">h</span> <span class="k">ON</span> <span class="n">e</span><span class="p">.</span><span class="n">ManagerID</span> <span class="o">=</span> <span class="n">h</span><span class="p">.</span><span class="n">EmployeeID</span>
+<span class="p">)</span>
+<span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="n">HierarchyData</span><span class="p">;</span>
+
+<span class="c1">-- MERGE statement</span>
+<span class="n">MERGE</span> <span class="n">Sales</span><span class="p">.</span><span class="n">Target</span> <span class="k">AS</span> <span class="n">target</span>
+<span class="k">USING</span> <span class="n">Sales</span><span class="p">.</span><span class="k">Source</span> <span class="k">AS</span> <span class="k">source</span>
+<span class="k">ON</span> <span class="n">target</span><span class="p">.</span><span class="n">ID</span> <span class="o">=</span> <span class="k">source</span><span class="p">.</span><span class="n">ID</span>
+<span class="k">WHEN</span> <span class="n">MATCHED</span> <span class="k">THEN</span>
+    <span class="k">UPDATE</span> <span class="k">SET</span> <span class="n">target</span><span class="p">.</span><span class="n">Amount</span> <span class="o">=</span> <span class="k">source</span><span class="p">.</span><span class="n">Amount</span>
+<span class="k">WHEN</span> <span class="k">NOT</span> <span class="n">MATCHED</span> <span class="k">THEN</span>
+    <span class="k">INSERT</span> <span class="p">(</span><span class="n">ID</span><span class="p">,</span> <span class="n">Amount</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="k">source</span><span class="p">.</span><span class="n">ID</span><span class="p">,</span> <span class="k">source</span><span class="p">.</span><span class="n">Amount</span><span class="p">);</span>
+
+<span class="c1">-- XML nativo</span>
+<span class="k">SELECT</span> <span class="n">customer_data</span><span class="p">.</span><span class="n">value</span><span class="p">(</span><span class="s1">'(/Customer/Name)[1]'</span><span class="p">,</span> <span class="s1">'varchar(50)'</span><span class="p">)</span> <span class="k">as</span> <span class="n">CustomerName</span>
+<span class="k">FROM</span> <span class="n">CustomerXML</span><span class="p">;</span>
+</code></pre></div></div> <p><strong>PostgreSQL características únicas:</strong></p> <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">-- Arrays nativos</span>
+<span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">products</span> <span class="p">(</span>
+    <span class="n">id</span> <span class="nb">SERIAL</span> <span class="k">PRIMARY</span> <span class="k">KEY</span><span class="p">,</span>
+    <span class="n">tags</span> <span class="nb">TEXT</span><span class="p">[],</span>
+    <span class="n">prices</span> <span class="nb">DECIMAL</span><span class="p">[]</span>
+<span class="p">);</span>
+
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">products</span> <span class="p">(</span><span class="n">tags</span><span class="p">,</span> <span class="n">prices</span><span class="p">)</span> 
+<span class="k">VALUES</span> <span class="p">(</span><span class="n">ARRAY</span><span class="p">[</span><span class="s1">'electronics'</span><span class="p">,</span> <span class="s1">'mobile'</span><span class="p">],</span> <span class="n">ARRAY</span><span class="p">[</span><span class="mi">999</span><span class="p">.</span><span class="mi">99</span><span class="p">,</span> <span class="mi">1299</span><span class="p">.</span><span class="mi">99</span><span class="p">]);</span>
+
+<span class="c1">-- JSON/JSONB nativo</span>
+<span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">events</span> <span class="p">(</span>
+    <span class="n">id</span> <span class="nb">SERIAL</span> <span class="k">PRIMARY</span> <span class="k">KEY</span><span class="p">,</span>
+    <span class="k">data</span> <span class="n">JSONB</span>
+<span class="p">);</span>
+
+<span class="k">SELECT</span> <span class="k">data</span><span class="o">-&gt;&gt;</span><span class="s1">'event_type'</span> <span class="k">as</span> <span class="n">event_type</span><span class="p">,</span>
+       <span class="k">data</span><span class="o">-&gt;</span><span class="s1">'user'</span><span class="o">-&gt;&gt;</span><span class="s1">'name'</span> <span class="k">as</span> <span class="n">user_name</span>
+<span class="k">FROM</span> <span class="n">events</span>
+<span class="k">WHERE</span> <span class="k">data</span> <span class="o">@&gt;</span> <span class="s1">'{"status": "active"}'</span><span class="p">;</span>
+
+<span class="c1">-- Window functions avançadas</span>
+<span class="k">SELECT</span> 
+    <span class="n">product_name</span><span class="p">,</span>
+    <span class="n">sales_amount</span><span class="p">,</span>
+    <span class="n">PERCENT_RANK</span><span class="p">()</span> <span class="n">OVER</span> <span class="p">(</span><span class="k">ORDER</span> <span class="k">BY</span> <span class="n">sales_amount</span><span class="p">)</span> <span class="k">as</span> <span class="n">percentile</span><span class="p">,</span>
+    <span class="n">CUME_DIST</span><span class="p">()</span> <span class="n">OVER</span> <span class="p">(</span><span class="k">ORDER</span> <span class="k">BY</span> <span class="n">sales_amount</span><span class="p">)</span> <span class="k">as</span> <span class="n">cumulative_dist</span>
+<span class="k">FROM</span> <span class="n">sales</span><span class="p">;</span>
+
+<span class="c1">-- Extensões customizadas</span>
+<span class="k">CREATE</span> <span class="n">EXTENSION</span> <span class="n">IF</span> <span class="k">NOT</span> <span class="k">EXISTS</span> <span class="n">postgis</span><span class="p">;</span> <span class="c1">-- Para dados geoespaciais</span>
+<span class="k">CREATE</span> <span class="n">EXTENSION</span> <span class="n">IF</span> <span class="k">NOT</span> <span class="k">EXISTS</span> <span class="n">pg_trgm</span><span class="p">;</span> <span class="c1">-- Para busca fuzzy</span>
+</code></pre></div></div> <h3 id="integração-com-ecossistemas">Integração com ecossistemas</h3> <p><strong>SQL Server - Ecossistema Microsoft:</strong></p> <div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Entity Framework Core com SQL Server</span>
+<span class="k">public</span> <span class="k">class</span> <span class="nc">ApplicationDbContext</span> <span class="p">:</span> <span class="n">DbContext</span>
+<span class="p">{</span>
+    <span class="k">protected</span> <span class="k">override</span> <span class="k">void</span> <span class="nf">OnConfiguring</span><span class="p">(</span><span class="n">DbContextOptionsBuilder</span> <span class="n">optionsBuilder</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">optionsBuilder</span><span class="p">.</span><span class="nf">UseSqlServer</span><span class="p">(</span><span class="n">connectionString</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">protected</span> <span class="k">override</span> <span class="k">void</span> <span class="nf">OnModelCreating</span><span class="p">(</span><span class="n">ModelBuilder</span> <span class="n">modelBuilder</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">// Recursos específicos do SQL Server</span>
+        <span class="n">modelBuilder</span><span class="p">.</span><span class="n">Entity</span><span class="p">&lt;</span><span class="n">Customer</span><span class="p">&gt;()</span>
+            <span class="p">.</span><span class="nf">Property</span><span class="p">(</span><span class="n">e</span> <span class="p">=&gt;</span> <span class="n">e</span><span class="p">.</span><span class="n">CustomerData</span><span class="p">)</span>
+            <span class="p">.</span><span class="nf">HasColumnType</span><span class="p">(</span><span class="s">"xml"</span><span class="p">);</span>
+            
+        <span class="n">modelBuilder</span><span class="p">.</span><span class="n">Entity</span><span class="p">&lt;</span><span class="n">Product</span><span class="p">&gt;()</span>
+            <span class="p">.</span><span class="nf">HasIndex</span><span class="p">(</span><span class="n">e</span> <span class="p">=&gt;</span> <span class="n">e</span><span class="p">.</span><span class="n">Description</span><span class="p">)</span>
+            <span class="p">.</span><span class="nf">HasMethod</span><span class="p">(</span><span class="s">"FULLTEXT"</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div> <p><strong>PostgreSQL - Multiplataforma:</strong></p> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Python com PostgreSQL
+</span><span class="kn">import</span> <span class="nn">psycopg2</span>
+<span class="kn">from</span> <span class="nn">sqlalchemy</span> <span class="kn">import</span> <span class="n">create_engine</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="n">pd</span>
+
+<span class="c1"># Conexão direta
+</span><span class="n">conn</span> <span class="o">=</span> <span class="n">psycopg2</span><span class="p">.</span><span class="n">connect</span><span class="p">(</span>
+    <span class="n">host</span><span class="o">=</span><span class="s">"localhost"</span><span class="p">,</span>
+    <span class="n">database</span><span class="o">=</span><span class="s">"myapp"</span><span class="p">,</span>
+    <span class="n">user</span><span class="o">=</span><span class="s">"postgres"</span><span class="p">,</span>
+    <span class="n">password</span><span class="o">=</span><span class="s">"password"</span>
+<span class="p">)</span>
+
+<span class="c1"># Com SQLAlchemy
+</span><span class="n">engine</span> <span class="o">=</span> <span class="n">create_engine</span><span class="p">(</span><span class="s">'postgresql://user:password@localhost/dbname'</span><span class="p">)</span>
+
+<span class="c1"># Aproveitando recursos específicos do PostgreSQL
+</span><span class="n">query</span> <span class="o">=</span> <span class="s">"""
+SELECT 
+    product_name,
+    similarity(product_name, 'smartphone') as similarity_score
+FROM products
+WHERE product_name % 'smartphone'
+ORDER BY similarity_score DESC;
+"""</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">read_sql</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="n">engine</span><span class="p">)</span>
+</code></pre></div></div> <h2 id="exemplo-prático">Exemplo Prático</h2> <p>Comparação de implementação de um sistema de auditoria:</p> <h3 id="sql-server-implementation">SQL Server Implementation</h3> <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">-- Criação de tabela com recursos do SQL Server</span>
+<span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">AuditLog</span> <span class="p">(</span>
+    <span class="n">ID</span> <span class="nb">bigint</span> <span class="k">IDENTITY</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> <span class="k">PRIMARY</span> <span class="k">KEY</span><span class="p">,</span>
+    <span class="n">TableName</span> <span class="n">nvarchar</span><span class="p">(</span><span class="mi">128</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+    <span class="k">Operation</span> <span class="nb">char</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span> <span class="c1">-- I, U, D</span>
+    <span class="n">OldValues</span> <span class="n">xml</span><span class="p">,</span>
+    <span class="n">NewValues</span> <span class="n">xml</span><span class="p">,</span>
+    <span class="n">ChangedBy</span> <span class="n">nvarchar</span><span class="p">(</span><span class="mi">256</span><span class="p">)</span> <span class="k">DEFAULT</span> <span class="n">SUSER_SNAME</span><span class="p">(),</span>
+    <span class="n">ChangedDate</span> <span class="n">datetime2</span> <span class="k">DEFAULT</span> <span class="n">GETUTCDATE</span><span class="p">(),</span>
+    <span class="n">SessionInfo</span> <span class="n">xml</span> <span class="k">DEFAULT</span> <span class="p">(</span>
+        <span class="k">SELECT</span> 
+            <span class="o">@@</span><span class="n">SPID</span> <span class="k">as</span> <span class="n">SessionID</span><span class="p">,</span>
+            <span class="n">APP_NAME</span><span class="p">()</span> <span class="k">as</span> <span class="n">ApplicationName</span><span class="p">,</span>
+            <span class="n">HOST_NAME</span><span class="p">()</span> <span class="k">as</span> <span class="n">HostName</span>
+        <span class="k">FOR</span> <span class="n">XML</span> <span class="n">PATH</span><span class="p">(</span><span class="s1">'Session'</span><span class="p">)</span>
+    <span class="p">)</span>
+<span class="p">);</span>
+
+<span class="c1">-- Trigger de auditoria</span>
+<span class="k">CREATE</span> <span class="k">TRIGGER</span> <span class="n">tr_Customer_Audit</span>
+<span class="k">ON</span> <span class="n">Customers</span>
+<span class="k">AFTER</span> <span class="k">INSERT</span><span class="p">,</span> <span class="k">UPDATE</span><span class="p">,</span> <span class="k">DELETE</span>
+<span class="k">AS</span>
+<span class="k">BEGIN</span>
+    <span class="k">SET</span> <span class="n">NOCOUNT</span> <span class="k">ON</span><span class="p">;</span>
+    
+    <span class="c1">-- INSERT</span>
+    <span class="n">IF</span> <span class="k">EXISTS</span><span class="p">(</span><span class="k">SELECT</span> <span class="mi">1</span> <span class="k">FROM</span> <span class="n">inserted</span><span class="p">)</span> <span class="k">AND</span> <span class="k">NOT</span> <span class="k">EXISTS</span><span class="p">(</span><span class="k">SELECT</span> <span class="mi">1</span> <span class="k">FROM</span> <span class="n">deleted</span><span class="p">)</span>
+    <span class="k">BEGIN</span>
+        <span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">AuditLog</span> <span class="p">(</span><span class="n">TableName</span><span class="p">,</span> <span class="k">Operation</span><span class="p">,</span> <span class="n">NewValues</span><span class="p">)</span>
+        <span class="k">SELECT</span> <span class="s1">'Customers'</span><span class="p">,</span> <span class="s1">'I'</span><span class="p">,</span> 
+               <span class="p">(</span><span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="n">inserted</span> <span class="k">FOR</span> <span class="n">XML</span> <span class="n">PATH</span><span class="p">(</span><span class="s1">'Row'</span><span class="p">))</span>
+    <span class="k">END</span>
+    
+    <span class="c1">-- UPDATE</span>
+    <span class="n">IF</span> <span class="k">EXISTS</span><span class="p">(</span><span class="k">SELECT</span> <span class="mi">1</span> <span class="k">FROM</span> <span class="n">inserted</span><span class="p">)</span> <span class="k">AND</span> <span class="k">EXISTS</span><span class="p">(</span><span class="k">SELECT</span> <span class="mi">1</span> <span class="k">FROM</span> <span class="n">deleted</span><span class="p">)</span>
+    <span class="k">BEGIN</span>
+        <span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">AuditLog</span> <span class="p">(</span><span class="n">TableName</span><span class="p">,</span> <span class="k">Operation</span><span class="p">,</span> <span class="n">OldValues</span><span class="p">,</span> <span class="n">NewValues</span><span class="p">)</span>
+        <span class="k">SELECT</span> <span class="s1">'Customers'</span><span class="p">,</span> <span class="s1">'U'</span><span class="p">,</span>
+               <span class="p">(</span><span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="n">deleted</span> <span class="k">FOR</span> <span class="n">XML</span> <span class="n">PATH</span><span class="p">(</span><span class="s1">'Row'</span><span class="p">)),</span>
+               <span class="p">(</span><span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="n">inserted</span> <span class="k">FOR</span> <span class="n">XML</span> <span class="n">PATH</span><span class="p">(</span><span class="s1">'Row'</span><span class="p">))</span>
+    <span class="k">END</span>
+    
+    <span class="c1">-- DELETE</span>
+    <span class="n">IF</span> <span class="k">NOT</span> <span class="k">EXISTS</span><span class="p">(</span><span class="k">SELECT</span> <span class="mi">1</span> <span class="k">FROM</span> <span class="n">inserted</span><span class="p">)</span> <span class="k">AND</span> <span class="k">EXISTS</span><span class="p">(</span><span class="k">SELECT</span> <span class="mi">1</span> <span class="k">FROM</span> <span class="n">deleted</span><span class="p">)</span>
+    <span class="k">BEGIN</span>
+        <span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">AuditLog</span> <span class="p">(</span><span class="n">TableName</span><span class="p">,</span> <span class="k">Operation</span><span class="p">,</span> <span class="n">OldValues</span><span class="p">)</span>
+        <span class="k">SELECT</span> <span class="s1">'Customers'</span><span class="p">,</span> <span class="s1">'D'</span><span class="p">,</span>
+               <span class="p">(</span><span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="n">deleted</span> <span class="k">FOR</span> <span class="n">XML</span> <span class="n">PATH</span><span class="p">(</span><span class="s1">'Row'</span><span class="p">))</span>
+    <span class="k">END</span>
+<span class="k">END</span><span class="p">;</span>
+</code></pre></div></div> <h3 id="postgresql-implementation">PostgreSQL Implementation</h3> <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">-- Criação de tabela com recursos do PostgreSQL</span>
+<span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">audit_log</span> <span class="p">(</span>
+    <span class="n">id</span> <span class="n">BIGSERIAL</span> <span class="k">PRIMARY</span> <span class="k">KEY</span><span class="p">,</span>
+    <span class="k">table_name</span> <span class="nb">TEXT</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+    <span class="k">operation</span> <span class="nb">CHAR</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+    <span class="n">old_values</span> <span class="n">JSONB</span><span class="p">,</span>
+    <span class="n">new_values</span> <span class="n">JSONB</span><span class="p">,</span>
+    <span class="n">changed_by</span> <span class="nb">TEXT</span> <span class="k">DEFAULT</span> <span class="k">current_user</span><span class="p">,</span>
+    <span class="n">changed_date</span> <span class="n">TIMESTAMPTZ</span> <span class="k">DEFAULT</span> <span class="n">now</span><span class="p">(),</span>
+    <span class="n">session_info</span> <span class="n">JSONB</span> <span class="k">DEFAULT</span> <span class="n">jsonb_build_object</span><span class="p">(</span>
+        <span class="s1">'pid'</span><span class="p">,</span> <span class="n">pg_backend_pid</span><span class="p">(),</span>
+        <span class="s1">'application_name'</span><span class="p">,</span> <span class="n">current_setting</span><span class="p">(</span><span class="s1">'application_name'</span><span class="p">),</span>
+        <span class="s1">'client_addr'</span><span class="p">,</span> <span class="n">inet_client_addr</span><span class="p">()</span>
+    <span class="p">)</span>
+<span class="p">);</span>
+
+<span class="c1">-- Função de auditoria genérica</span>
+<span class="k">CREATE</span> <span class="k">OR</span> <span class="k">REPLACE</span> <span class="k">FUNCTION</span> <span class="n">audit_trigger_function</span><span class="p">()</span>
+<span class="k">RETURNS</span> <span class="k">TRIGGER</span> <span class="k">AS</span> <span class="err">$$</span>
+<span class="k">BEGIN</span>
+    <span class="n">IF</span> <span class="n">TG_OP</span> <span class="o">=</span> <span class="s1">'INSERT'</span> <span class="k">THEN</span>
+        <span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">audit_log</span> <span class="p">(</span><span class="k">table_name</span><span class="p">,</span> <span class="k">operation</span><span class="p">,</span> <span class="n">new_values</span><span class="p">)</span>
+        <span class="k">VALUES</span> <span class="p">(</span><span class="n">TG_TABLE_NAME</span><span class="p">,</span> <span class="s1">'I'</span><span class="p">,</span> <span class="n">row_to_json</span><span class="p">(</span><span class="k">NEW</span><span class="p">)::</span><span class="n">jsonb</span><span class="p">);</span>
+        <span class="k">RETURN</span> <span class="k">NEW</span><span class="p">;</span>
+    <span class="n">ELSIF</span> <span class="n">TG_OP</span> <span class="o">=</span> <span class="s1">'UPDATE'</span> <span class="k">THEN</span>
+        <span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">audit_log</span> <span class="p">(</span><span class="k">table_name</span><span class="p">,</span> <span class="k">operation</span><span class="p">,</span> <span class="n">old_values</span><span class="p">,</span> <span class="n">new_values</span><span class="p">)</span>
+        <span class="k">VALUES</span> <span class="p">(</span><span class="n">TG_TABLE_NAME</span><span class="p">,</span> <span class="s1">'U'</span><span class="p">,</span> 
+                <span class="n">row_to_json</span><span class="p">(</span><span class="k">OLD</span><span class="p">)::</span><span class="n">jsonb</span><span class="p">,</span> 
+                <span class="n">row_to_json</span><span class="p">(</span><span class="k">NEW</span><span class="p">)::</span><span class="n">jsonb</span><span class="p">);</span>
+        <span class="k">RETURN</span> <span class="k">NEW</span><span class="p">;</span>
+    <span class="n">ELSIF</span> <span class="n">TG_OP</span> <span class="o">=</span> <span class="s1">'DELETE'</span> <span class="k">THEN</span>
+        <span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">audit_log</span> <span class="p">(</span><span class="k">table_name</span><span class="p">,</span> <span class="k">operation</span><span class="p">,</span> <span class="n">old_values</span><span class="p">)</span>
+        <span class="k">VALUES</span> <span class="p">(</span><span class="n">TG_TABLE_NAME</span><span class="p">,</span> <span class="s1">'D'</span><span class="p">,</span> <span class="n">row_to_json</span><span class="p">(</span><span class="k">OLD</span><span class="p">)::</span><span class="n">jsonb</span><span class="p">);</span>
+        <span class="k">RETURN</span> <span class="k">OLD</span><span class="p">;</span>
+    <span class="k">END</span> <span class="n">IF</span><span class="p">;</span>
+    <span class="k">RETURN</span> <span class="k">NULL</span><span class="p">;</span>
+<span class="k">END</span><span class="p">;</span>
+<span class="err">$$</span> <span class="k">LANGUAGE</span> <span class="n">plpgsql</span><span class="p">;</span>
+
+<span class="c1">-- Aplicar trigger a qualquer tabela</span>
+<span class="k">CREATE</span> <span class="k">TRIGGER</span> <span class="n">customers_audit_trigger</span>
+    <span class="k">AFTER</span> <span class="k">INSERT</span> <span class="k">OR</span> <span class="k">UPDATE</span> <span class="k">OR</span> <span class="k">DELETE</span> <span class="k">ON</span> <span class="n">customers</span>
+    <span class="k">FOR</span> <span class="k">EACH</span> <span class="k">ROW</span> <span class="k">EXECUTE</span> <span class="k">FUNCTION</span> <span class="n">audit_trigger_function</span><span class="p">();</span>
+
+<span class="c1">-- Consulta avançada com JSONB</span>
+<span class="k">SELECT</span> 
+    <span class="k">table_name</span><span class="p">,</span>
+    <span class="k">operation</span><span class="p">,</span>
+    <span class="n">changed_date</span><span class="p">,</span>
+    <span class="n">new_values</span><span class="o">-&gt;&gt;</span><span class="s1">'customer_name'</span> <span class="k">as</span> <span class="n">customer_name</span><span class="p">,</span>
+    <span class="n">new_values</span><span class="o">-&gt;&gt;</span><span class="s1">'email'</span> <span class="k">as</span> <span class="n">email</span>
+<span class="k">FROM</span> <span class="n">audit_log</span>
+<span class="k">WHERE</span> <span class="k">table_name</span> <span class="o">=</span> <span class="s1">'customers'</span>
+  <span class="k">AND</span> <span class="k">operation</span> <span class="o">=</span> <span class="s1">'I'</span>
+  <span class="k">AND</span> <span class="n">new_values</span> <span class="o">@&gt;</span> <span class="s1">'{"status": "active"}'</span>
+  <span class="k">AND</span> <span class="n">changed_date</span> <span class="o">&gt;=</span> <span class="n">now</span><span class="p">()</span> <span class="o">-</span> <span class="n">interval</span> <span class="s1">'7 days'</span>
+<span class="k">ORDER</span> <span class="k">BY</span> <span class="n">changed_date</span> <span class="k">DESC</span><span class="p">;</span>
+</code></pre></div></div> <h2 id="benefícios">Benefícios</h2> <h3 id="sql-server">SQL Server</h3> <p><strong>Vantagens:</strong></p> <ul> <li>Integração profunda com ecossistema Microsoft</li> <li>Ferramentas administrativas robustas (SSMS, SSRS, SSIS)</li> <li>Suporte empresarial completo da Microsoft</li> <li>Performance excelente para workloads Windows</li> <li>Recursos avançados de BI e Analytics</li> <li>AlwaysOn Availability Groups para alta disponibilidade</li> </ul> <p><strong>Quando usar:</strong></p> <ul> <li>Ambiente predominantemente Microsoft</li> <li>Necessidade de suporte empresarial garantido</li> <li>Integração com Active Directory essencial</li> <li>Uso intensivo de ferramentas Microsoft BI</li> <li>Aplicações .NET que se beneficiam da integração nativa</li> </ul> <h3 id="postgresql">PostgreSQL</h3> <p><strong>Vantagens:</strong></p> <ul> <li>Completamente gratuito e open-source</li> <li>Extensibilidade através de plugins</li> <li>Conformidade rigorosa com padrões SQL</li> <li>Excelente para dados semi-estruturados (JSON)</li> <li>Comunidade ativa e inovadora</li> <li>Multiplataforma (Linux, Windows, macOS)</li> <li>Recursos avançados de geometria e full-text search</li> </ul> <p><strong>Quando usar:</strong></p> <ul> <li>Orçamento limitado ou preferência por open-source</li> <li>Ambiente multi-plataforma</li> <li>Necessidade de tipos de dados avançados</li> <li>Aplicações com dados semi-estruturados</li> <li>Sistemas que se beneficiam de extensões customizadas</li> <li>Projetos que valorizam conformidade com padrões SQL</li> </ul> <h3 id="comparação-de-performance">Comparação de Performance</h3> <p><strong>SQL Server:</strong></p> <ul> <li>Otimizado para Windows</li> <li>Excelente performance em workloads OLTP</li> <li>Columnstore para analytics</li> <li>In-Memory OLTP para cargas críticas</li> </ul> <p><strong>PostgreSQL:</strong></p> <ul> <li>Performance consistente em múltiplas plataformas</li> <li>Excelente para queries complexas</li> <li>Paralelização automática de queries</li> <li>Extensões para casos específicos (TimescaleDB para time-series)</li> </ul> <h3 id="considerações-de-deploy">Considerações de Deploy</h3> <p><strong>SQL Server:</strong></p> <ul> <li>Licenciamento pode ser complexo</li> <li>Custos podem escalar significativamente</li> <li>Dependência do ecossistema Microsoft</li> <li>Ferramentas administrativas amadurecidas</li> </ul> <p><strong>PostgreSQL:</strong></p> <ul> <li>Deploy mais flexível e econômico</li> <li>Maior variedade de opções de hosting</li> <li>Requer mais conhecimento técnico para otimização</li> <li>Comunidade forte mas suporte comercial opcional</li> </ul> </div> <nav class="pagination"> <a href="/interview_questions/152/" class="previous button button-ghost" aria-label="Previous question">&laquo; Question 152</a> <a href="/blog/pt-br/interview/questoes-para-entrevistas/" class="all-questions button button-ghost" aria-label="All questions">All Questions</a> <a href="/interview_questions/154/" class="next button button-ghost" aria-label="Next question">Question 154 &raquo;</a> </nav> </article> </div> </article> </div> </main> <footer class="site-footer"> <div class="container"> <ul class="social"> <li><a href="mailto:matheus.costa.vieira@gmail.com" title="Personal mail" target="_blank"><i class="icon icon-mail"></i></a></li> <li><a href="https://github.com/matheus-vieira" title="Github Profile" target="_blank"><i class="icon icon-github"></i></a></li> <li><a href="https://twitter.com/macostavieira" title="Twitter Profile" target="_blank"><i class="icon icon-twitter"></i></a></li> <li><a href="https://facebook.com/macovieira" title="Facebook Profile" target="_blank"><i class="icon icon-facebook"></i></a></li> <li><a href="https://linkedin.com/in/macostavieira" title="LinkedIn Profile" target="_blank"><i class="icon icon-linkedin"></i></a></li> <li><a href="https://api.whatsapp.com/send?phone=5541988024599&text=E ae!" title="Send me an whatsapp" target="_blank"><i class="icon icon-whatsapp"></i></a></li> <li><a href="tel:5541988024599" title="Call me" target="_blank"><i class="icon icon-phone"></i></a></li> </ul> <p class="txt-medium-gray"> <small>&copy;mvieira 2025 All rights reserved. Made with <a href="http://jekyllrb.com/" target="_blank">Jekyll</a> and ♥</small> </p> </div> </footer> <a href="https://github.com/matheus-vieira/matheus-vieira.github.io" target="_blank" class="github-corner" title="mvieira github repository"> <svg width="80" height="80" viewBox="0 0 250 250"> <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path> <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" class="octo-arm"></path> <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path> </svg> </a> </body> </html>
