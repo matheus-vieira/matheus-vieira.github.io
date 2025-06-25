@@ -14,7 +14,7 @@ I'm {{ current_year | minus: 1984 }} years old, born in Porto Alegre where my lo
 
 In April 2023, we achieved a dream that had been years in the making—we moved to our own home in Fazenda Rio Grande, in Curitiba's metropolitan area. This wasn't just a change of address; it was the realization of a family dream. We finally have **our house, exactly the way my family and I had always envisioned it**.
 
-**Family is everything to me.** I'm married to Daniela Priscila Lins, and we have a beautiful son, Pedro Henrique, who's now 15. We also had a precious daughter, Ana Carolina, who passed away in 2019 but whose memory and values continue to guide everything I do. She remains my beloved angel, and honoring her legacy is part of who I am today.
+**Family is everything to me.** I'm married to Daniela Priscila Lins, and we have a beautiful son, Pedro Henrique, who's now 15. We also had a precious daughter, Ana Carolina, who passed away in 2013 but whose memory and values continue to guide everything I do. She remains my beloved angel, and honoring her legacy is part of who I am today.
 
 ## How Technology Found Me
 
