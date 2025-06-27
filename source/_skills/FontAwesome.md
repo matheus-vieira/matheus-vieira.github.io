@@ -2,6 +2,6 @@
 layout: skills
 type: framework
 en-us:
-  skill: Font Awsome
+  skill: Font Awesome
 percent: 90.55
 ---

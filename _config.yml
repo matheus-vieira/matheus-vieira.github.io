@@ -9,7 +9,7 @@ paginate_path: "/blog/page/:num/"
 comments: true
 
 incremental: true
-live reload: true
+livereload: true
 host: 0.0.0.0
 
 source: source
