@@ -4,6 +4,11 @@ _site
 .jekyll-metadata
 bourbon
 
+# Environment variables
+.env
+.env.local
+.env.*.local
+
 # Ruby stuffs
 /.bundle/
 /vendor/bundle

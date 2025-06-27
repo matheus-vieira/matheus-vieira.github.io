@@ -16,6 +16,7 @@ gem 'sass'
 gem 'json'
 gem 'faraday-retry'
 gem "webrick"
+gem "dotenv"
 
 # If you want to use GitHub Pages, remove the "gem "jekyll"" above and
 # uncomment the line below. To upgrade, run `bundle update github-pages`.
