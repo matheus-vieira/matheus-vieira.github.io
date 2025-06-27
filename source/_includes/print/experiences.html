@@ -4,7 +4,8 @@
 
 {% assign sorted = site.experiences | sort: 'resignationdate' | reverse %}
 {% assign end2end = sorted | where_exp: "item", "item.company contains 'End2End'" | first %}
-{% assign other_experiences = sorted | reject: "company", "End2End Systems" %}
+{% comment %} TODO: Fix reject filter - {% assign other_experiences = sorted | reject: "company", "End2End Systems" %} {% endcomment %}
+{% assign other_experiences = sorted %}
 
 {% assign list = "" | split: "" %}
 {% if end2end %}

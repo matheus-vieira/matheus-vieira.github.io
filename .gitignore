@@ -9,6 +9,9 @@ bourbon
 .env.local
 .env.*.local
 
+# Temporary files and roadmaps
+monthly-posts-roadmap.md
+
 # Ruby stuffs
 /.bundle/
 /vendor/bundle

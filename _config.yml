@@ -6,7 +6,7 @@ host: 0.0.0.0
 permalink: /blog/:categories/:title/
 markdown: kramdown
 highlighter: Rouge
-plugins: [jekyll-paginate, jekyll-sitemap]
+plugins: [jekyll-paginate]
 
 # Performance configurations
 paginate: 10
@@ -56,7 +56,7 @@ url: http://matheus-vieira.github.io
 baseurl: ""
 
 google_analytics: UA-174941014-1
-site.google_analytics_container: GTM-TWNMZ5Q
+google_analytics_container: GTM-TWNMZ5Q
 repo: https://github.com/matheus-vieira/matheus-vieira.github.io
 disqus_shortname: "matheuscostavieira"
 disqus_site_shortname: "matheuscostavieira"

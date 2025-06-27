@@ -1,6 +1,7 @@
 ---
 layout: print
 ---
+{% assign lang = page.lang | default: "en-us" %}
 <section class="main-container">
   <article role="article" class="page card">{% include print/goal.md %}</article>
   <article role="article" class="page card">{% include print/experiences.html %}</article>

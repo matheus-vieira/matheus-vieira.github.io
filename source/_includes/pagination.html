@@ -5,8 +5,10 @@
     {% if paginator.previous_page %}
       {% if paginator.previous_page > 1 %}
         {% assign prev = 'page/' | append: paginator.previous_page %}
+        <li><a class="prev button button-ghost" href="{{ url | append: prev }}" title="Articles new">&laquo; Prev</a></li>
+      {% else %}
+        <li><a class="prev button button-ghost" href="{{ url }}" title="Articles new">&laquo; Prev</a></li>
       {% endif %}
-      <li><a class="prev button button-ghost" href="{{ url | append: prev }}" title="Articles new">&laquo; Prev</a></li>
     {% else %}
       <li><span class="prev button button-ghost disabled">&laquo; Prev</span></li>
     {% endif %}
