@@ -8,8 +8,7 @@ request({{ page.url | replace: 'html', 'json' | jsonify }});
   "resignationDate": {% assign resignationdate = page.resignationdate | date: dateFormat %}{% if resignationdate == 'Actual' %}{{ resignationdate | jsonify }}{% else %}{{ resignationdate | date: dateFormat  | jsonify}}{% endif %},
   "jobTitle": {{ page.jobtitle | jsonify }},
   "languages": {{ page.languages | jsonify }},
-  "frameworks": {{ page.frameworks | jsonify }}{% if page.additionInfo != '' %},
-  "additionInfo": {{ page.additionInfo | jsonify }}{% endif %}
+  "frameworks": {{ page.frameworks | jsonify }}
 }
 {% endhighlight %}
 

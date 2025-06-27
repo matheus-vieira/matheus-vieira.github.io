@@ -1,22 +1,52 @@
-# Build settings
+# Build set# OTIMIZAÇÕES DE PERFORMANCE (CONSERVATIVAS)
+incremental: false  # Build completo é mais rápido
+livereload: true
+host: 0.0.0.0
+# strict_front_matter removido para compatibilidadeERFORMANCE OPTIMIZED
 permalink: /blog/:categories/:title/
 markdown: kramdown
 highlighter: Rouge
-plugins: [jekyll-paginate]
+plugins: [jekyll-paginate, jekyll-sitemap]
 
-paginate: 5
+# Performance configurations
+paginate: 10
 paginate_path: "/blog/page/:num/"
 comments: true
 
-incremental: true
+# OTIMIZAÇÕES DE PERFORMANCE
+incremental: false  # Desabilitar - está mais lento que build completo
 livereload: true
 host: 0.0.0.0
+strict_front_matter: true  # Falha rápido em erros de front matter
+liquid:
+  error_mode: strict  # Falha rápido em erros Liquid
+  strict_filters: true
+  strict_variables: true
 
+# Build otimizado
 source: source
 destination: _site
+safe: false
+profile: false  # Desabilitar em produção
+
+# SASS otimizado
 sass:
   sass_dir: _sass
-  style: compressed # expanded
+  style: compressed
+  load_paths:
+    - _sass
+  cache: true  # Cache SASS
+
+# Compressão HTML otimizada
+compress_html:
+  clippings: all
+  comments: ["<!-- ", " -->"]
+  endings: all
+  ignore:
+    envs: ['development']
+  blanklines: false
+  profile: false
+  startings: [html, head, body]
 
 # SEO settings
 title: Matheus Costa Vieira - Senior Software Engineer, Dad & Husband
@@ -30,17 +60,6 @@ site.google_analytics_container: GTM-TWNMZ5Q
 repo: https://github.com/matheus-vieira/matheus-vieira.github.io
 disqus_shortname: "matheuscostavieira"
 disqus_site_shortname: "matheuscostavieira"
-
-# Compress
-compress_html:
-  clippings: []
-  comments: []
-  endings: []
-  ignore:
-    envs: []
-  blanklines: false
-  profile: false
-  startings: []
 
 # Author settings
 author:
@@ -160,22 +179,48 @@ navbar:
   - slug: study
     title: Study
 
+# EXCLUSÕES OTIMIZADAS PARA PERFORMANCE
+exclude:
+  - "config.rb"
+  - "src"
+  - "Gemfile"
+  - "Gemfile.lock"
+  - "package.json"
+  - "README.md"
+  - "Rakefile"
+  - "node_modules"
+  - "vendor"
+  - ".bundle"
+  - ".git"
+  - ".gitignore"
+  - ".env"
+  - ".env.example"
+  - "*.log"
+  - "*.tmp"
+  - "*.bak"
+  - "DOTENV_README.md"
+  - "install.sh"
+  - "travisGemfile"
+  - "SECURITY.md"
+  - "screenshot.png"
+
+# Keep somente arquivos necessários
+keep_files:
+  - ".git"
+  - ".nojekyll"
+
+# Otimizações de coleções
 collections:
   graduations:
+    output: false  # Não gerar páginas individuais se não necessário
   languages:
+    output: false
   experiences:
+    output: false
   skills:
+    output: false
   interview_questions:
     output: true
     permalink: /interview_questions/:name/
 
-exclude:
-  [
-    "config.rb",
-    "src",
-    "Gemfile",
-    "Gemfile.lock",
-    "package.json",
-    "README.md",
-    "Rakefile",
-  ]
+# timezone: America/Sao_Paulo  # Disabled for Windows compatibility

@@ -1,5 +1,4 @@
 ---
-layout: compress
 ---
 <!DOCTYPE html>
 <html lang="en">
@@ -7,8 +6,13 @@ layout: compress
   {% include head.html %}
 </head>
 <body>
-  <!-- Google Tag Manager (noscript) -->
-  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id={{ site.google_analytics_container }}"height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- Google Tag Manager (noscript) - Temporariamente desabilitado -->
+  {% comment %}
+  {% assign gtm_id = site.google_analytics_container %}
+  {% if gtm_id and gtm_id != empty %}
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id={{ gtm_id }}" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  {% endif %}
+  {% endcomment %}
   <!-- End Google Tag Manager (noscript) -->
   {{ content }}
   {% include github-corner.html %}

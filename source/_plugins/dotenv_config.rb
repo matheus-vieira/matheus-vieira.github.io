@@ -33,7 +33,7 @@ Jekyll::Hooks.register :site, :after_init do |site|
   
   # Analytics
   site.config['google_analytics'] = ENV['GOOGLE_ANALYTICS_ID'] if ENV['GOOGLE_ANALYTICS_ID']
-  site.config['site.google_analytics_container'] = ENV['GOOGLE_TAG_MANAGER_ID'] if ENV['GOOGLE_TAG_MANAGER_ID']
+  site.config['google_analytics_container'] = ENV['GOOGLE_TAG_MANAGER_ID'] if ENV['GOOGLE_TAG_MANAGER_ID']
   
   # Comentários
   site.config['disqus_shortname'] = ENV['DISQUS_SHORTNAME'] if ENV['DISQUS_SHORTNAME']
