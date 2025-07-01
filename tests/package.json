@@ -1,0 +1,45 @@
+{
+  "name": "matheus-vieira-site-tests",
+  "version": "1.0.0",
+  "description": "Comprehensive test suite for Matheus Vieira's personal website",
+  "scripts": {
+    "test": "npm run test:unit && npm run test:functional && npm run test:integration",
+    "test:unit": "jest unit/ --verbose",
+    "test:functional": "playwright test functional/",
+    "test:integration": "playwright test integration/ --config=playwright.integration.config.js",
+    "test:all": "npm run test:build && npm run test:unit && npm run test:functional && npm run test:integration",
+    "test:build": "cd .. && bundle exec jekyll build --source=source --destination=_site --config=_config.yml",
+    "test:serve": "cd .. && bundle exec jekyll serve --source=source --destination=_site --detach",
+    "test:links": "bundle exec htmlproofer ../_site --disable-external",
+    "test:html": "html-validate ../_site/**/*.html",
+    "test:lighthouse": "lhci autorun",
+    "test:accessibility": "axe-core ../_site",
+    "test:ci": "npm run test:build && npm run test:unit && npm run test:functional"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.8.0",
+    "@lhci/cli": "^0.12.0",
+    "@playwright/test": "^1.40.0",
+    "axe-core": "^4.8.0",
+    "cheerio": "^1.0.0-rc.12",
+    "cross-env": "^7.0.3",
+    "html-validate": "^8.7.0",
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0",
+    "jest-html-reporters": "^3.1.6",
+    "jest-junit": "^16.0.0",
+    "js-yaml": "^4.1.0",
+    "lighthouse": "^11.4.0"
+  },
+  "keywords": [
+    "jekyll",
+    "testing",
+    "personal-website",
+    "static-site"
+  ],
+  "author": "Matheus Costa Vieira",
+  "license": "MIT",
+  "dependencies": {
+    "axe-playwright": "^2.1.0"
+  }
+}
