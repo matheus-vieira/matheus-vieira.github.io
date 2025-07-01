@@ -1,8 +1,4 @@
-# Build set# OTIMIZAÇÕES DE PERFORMANCE (CONSERVATIVAS)
-incremental: false  # Build completo é mais rápido
-livereload: true
-host: 0.0.0.0
-# strict_front_matter removido para compatibilidadeERFORMANCE OPTIMIZED
+# PERFORMANCE OPTIMIZED Jekyll Configuration
 permalink: /blog/:categories/:title/
 markdown: kramdown
 highlighter: Rouge
@@ -13,8 +9,8 @@ paginate: 10
 paginate_path: "/blog/page/:num/"
 comments: true
 
-# OTIMIZAÇÕES DE PERFORMANCE
-incremental: false  # Desabilitar - está mais lento que build completo
+# OTIMIZAÇÕES DE PERFORMANCE (CONSERVADAS)
+incremental: false  # Build completo é mais confiável que incremental
 livereload: true
 host: 0.0.0.0
 strict_front_matter: true  # Falha rápido em erros de front matter

@@ -1,4 +1,8 @@
-{% assign questions = site.interview_questions | sort: "order" %}
+{% if site.interview_questions %}
+  {% assign questions = site.interview_questions | sort: "order" %}
+{% else %}
+  {% assign questions = "" | split: "" %}
+{% endif %}
 
 {%- comment -%}
 Collect all tags from the collection, flatten, and remove duplicates
@@ -13,6 +17,7 @@ Collect all tags from the collection, flatten, and remove duplicates
 
 <label><strong>{{ include.label }}</strong></label>
 
+{% if unique_tags.size > 0 %}
 <ul id="tagFilter"
   style="list-style:none; padding:0; margin:0 0 1em 0; columns: 2; -webkit-columns: 2; -moz-columns: 2;">
   {% for tag in unique_tags %}
@@ -25,7 +30,9 @@ Collect all tags from the collection, flatten, and remove duplicates
 </ul>
 
 <hr />
+{% endif %}
 
+{% if questions.size > 0 %}
 <ol id="questionsList">
   {% for q in questions %}
   {% assign tags = q.tags | join: ', ' %}
@@ -34,17 +41,24 @@ Collect all tags from the collection, flatten, and remove duplicates
   </li>
   {% endfor %}
 </ol>
+{% else %}
+<p>No questions available.</p>
+{% endif %}
 
+{% if questions.size > 0 %}
 <script>
   (function () {
     const tagFilter = document.getElementById('tagFilter');
     const questionsList = document.getElementById('questionsList');
-    tagFilter.addEventListener('change', function () {
-      const checked = Array.from(tagFilter.querySelectorAll('input[type="checkbox"]:checked')).map(cb => cb.value);
-      Array.from(questionsList.getElementsByTagName('li')).forEach(function (li) {
-        const tags = li.getAttribute('data-tags') ? li.getAttribute('data-tags').split(', ') : [];
-        li.style.display = (checked.length === 0 || checked.some(tag => tags.includes(tag))) ? '' : 'none';
+    if (tagFilter && questionsList) {
+      tagFilter.addEventListener('change', function () {
+        const checked = Array.from(tagFilter.querySelectorAll('input[type="checkbox"]:checked')).map(cb => cb.value);
+        Array.from(questionsList.getElementsByTagName('li')).forEach(function (li) {
+          const tags = li.getAttribute('data-tags') ? li.getAttribute('data-tags').split(', ') : [];
+          li.style.display = (checked.length === 0 || checked.some(tag => tags.includes(tag))) ? '' : 'none';
+        });
       });
-    });
+    }
   })();
 </script>
+{% endif %}

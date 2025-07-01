@@ -2,7 +2,11 @@
 
 <h2>{{ site.messages[lang].print-resume.title.education }}</h2>
 
-{% assign graduations = site.graduations | sort: "order" %}
+{% if site.graduations %}
+  {% assign graduations = site.graduations | sort: "order" %}
+{% else %}
+  {% assign graduations = "" | split: "" %}
+{% endif %}
 {% for g in graduations reversed %}
   {% if g.type != "Individual course" and g.type != "technical" %}
 <div class="page">

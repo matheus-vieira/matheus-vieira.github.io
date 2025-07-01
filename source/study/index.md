@@ -4,7 +4,7 @@ permalink: /study/
 title: Study
 ---
 
-# At this moment I'm studying:
+## At this moment I'm studying
 
 * [Deutsch]({{ '/study/deutsch/' }})
 * [English]({{ '/study/english/' }})

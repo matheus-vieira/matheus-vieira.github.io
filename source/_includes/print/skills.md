@@ -3,7 +3,11 @@
 <h2 class="txt-center">Skills</h2>
 
 <h6>{{ site.messages[lang].print-resume.title.skills-idiom }}</h6>
-{% assign skills = site.skills | sort: "skill" | sort: "percent" | reverse %}
+{% if site.skills %}
+  {% assign skills = site.skills | sort: "skill" | sort: "percent" | reverse %}
+{% else %}
+  {% assign skills = "" | split: "" %}
+{% endif %}
 {% for skill in skills %}
   {% if skill.type == "idiom" %}
 <small class="print-skill">

@@ -4,7 +4,11 @@ title: Academic Education
 permalink: /resume/academic-education/
 ---
 
-{% assign graduations = site.graduations | sort: "order" %}
-{% for graduation in graduations reversed %}
-  {{ graduation.output }}
-{% endfor %}
+{% if site.graduations %}
+  {% assign graduations = site.graduations | sort: "order" %}
+  {% for graduation in graduations reversed %}
+    {{ graduation.output }}
+  {% endfor %}
+{% else %}
+  No graduations information available.
+{% endif %}

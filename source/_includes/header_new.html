@@ -1,13 +1,13 @@
 <header class="site-header">
   <div class="container">
-    <label title="Toggle menu checkbox"></label>
+    <label title="Toggle menu checkbox">
       <input type="checkbox" id="toggleNavbar">
     </label>
-    <div class="logo">
+    <h1 class="logo">
       <a href="{{ '/' | prepend: site.baseurl }}" alt="{{ site.author.name }}" title="{{ site.author.name }}">
         {{ site.author.name }}
       </a>
-    </div>
+    </h1>
     <label for="toggleNavbar" role="button" class="toggle-navbar-button" title="Toggle menu button">
       <i class="icon icon-menu"></i>
       <i class="icon icon-cross"></i>
@@ -25,6 +25,22 @@
           <a href="{{ '/feed.xml' | prepend: site.baseurl }}" target="_blank" title="Site Feed">
             <i class="icon icon-rss"></i>
           </a>
+        </li>
+        <!-- Language Selector -->
+        <li class="language-selector">
+          {% if page.lang == 'pt-br' %}
+            {% if page.link_en_us %}
+              <a href="{{ page.link_en_us | prepend: site.baseurl }}" title="Switch to English">🇺🇸 EN</a>
+            {% else %}
+              <a href="{{ '/' | prepend: site.baseurl }}" title="Switch to English">🇺🇸 EN</a>
+            {% endif %}
+          {% else %}
+            {% if page.link_pt_br %}
+              <a href="{{ page.link_pt_br | prepend: site.baseurl }}" title="Mudar para Português">🇧🇷 PT</a>
+            {% else %}
+              <a href="{{ '/pt-br' | prepend: site.baseurl }}" title="Mudar para Português">🇧🇷 PT</a>
+            {% endif %}
+          {% endif %}
         </li>
       </ul>
     </nav>
