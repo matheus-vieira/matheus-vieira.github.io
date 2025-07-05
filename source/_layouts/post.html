@@ -13,8 +13,8 @@ layout: pages
     </header>
 
     <div class="post-content">
-      {% if page.image %}
-        <figure class="post-thumbnail {% if page.image %}{% else %}no-image{% endif %}">
+      {% if page.image and page.image != empty %}
+        <figure class="post-thumbnail">
           <img src="{{ page.image }}" alt="{{ page.title }}">
         </figure>
       {% endif %}
