@@ -1,0 +1,52 @@
+
+{% assign filtered_questions = "" | split: "" %}
+{% for q in include.questions %}
+  {% capture item %}
+    {
+      "title": {{ q.title | jsonify }},
+      "options": {{ q.options | jsonify }},
+      "answer": {{ q.answer | jsonify }},
+      "explanation": {{ q.explanation | jsonify }}
+    }
+  {% endcapture %}
+  {% assign filtered_questions = filtered_questions | push: item | compact %}
+{% endfor %}
+{% capture questions_json %}[{{ filtered_questions | join: ',' }}]{% endcapture %}
+{% assign questions_json = questions_json | strip_newlines %}
+
+<script>
+  const questions = {{ questions_json }};
+
+  let correct = 0;
+
+  function renderQuiz() {
+    const container = document.getElementById('quiz-container');
+    container.innerHTML = '';
+    questions.forEach((q, idx) => {
+      const block = document.createElement('div');
+      block.className = 'question-block';
+      block.innerHTML = `<p>${q.title}</p>` +
+        q.options.map((opt, i) =>
+          `<label><input type="radio" name="q${idx}" value="${i}"> ${opt}</label><br>`
+        ).join('');
+      container.appendChild(block);
+    });
+    const btn = document.createElement('button');
+    btn.textContent = 'Submit Answers';
+    btn.onclick = checkAnswers;
+    container.appendChild(btn);
+  }
+
+  function checkAnswers() {
+    correct = 0;
+    questions.forEach((q, idx) => {
+      const selected = document.querySelector(`input[name="q${idx}"]:checked`);
+      if (selected && parseInt(selected.value) === q.answer) correct++;
+    });
+    const percent = Math.round((correct / questions.length) * 100);
+    document.getElementById('quiz-result').innerHTML =
+      `<h2>Your score: ${correct}/${questions.length} (${percent}%)</h2>`;
+  }
+
+  document.addEventListener('DOMContentLoaded', renderQuiz);
+</script>

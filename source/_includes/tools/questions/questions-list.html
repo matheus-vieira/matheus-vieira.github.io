@@ -1,0 +1,7 @@
+
+<ul class="question-list">
+{% assign questions = include.questions %}
+{% for q in questions %}
+    <li><a href="{{ q.url }}">{{ q.title }}</a></li>
+{% endfor %}
+</ul>

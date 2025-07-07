@@ -214,5 +214,23 @@ collections:
   interview_questions:
     output: true
     permalink: /interview_questions/:name/
+  questions_2025_cloud:
+    output: true
+    permalink: /tools/questions/2025/cloud/:name/
+  questions_2025_azure:
+    output: true
+    permalink: /tools/questions/2025/azure/:name/
+  questions_2025_git:
+    output: true
+    permalink: /tools/questions/2025/git/:name/
+  questions_2025_github:
+    output: true
+    permalink: /tools/questions/2025/github/:name/
+  questions_2025_dotnet:
+    output: true
+    permalink: /tools/questions/2025/dotnet/:name/
+  questions_2025_csharp:
+    output: true
+    permalink: /tools/questions/2025/csharp/:name/
 
 # timezone: America/Sao_Paulo  # Disabled for Windows compatibility

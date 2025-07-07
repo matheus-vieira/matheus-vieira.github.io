@@ -1,0 +1,18 @@
+---
+layout: pages
+---
+
+<article class="question-card">
+  <h2>{{ page.title }}</h2>
+  <ol>
+    {% for opt in page.options %}
+      <li>{{ opt }}</li>
+    {% endfor %}
+  </ol>
+  {% if page.explanation %}
+    <details>
+      <p><summary>Explanation</summary></p>
+      <p>{{ page.explanation }}</p>
+    </details>
+  {% endif %}
+</article>
