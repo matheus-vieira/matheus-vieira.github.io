@@ -15,7 +15,7 @@
 {% assign questions_json = questions_json | strip_newlines %}
 
 <script>
-  const questions = {{ questions_json }};
+  const questions = JSON.parse('{{ questions_json | escape }}');
 
   let correct = 0;
 
