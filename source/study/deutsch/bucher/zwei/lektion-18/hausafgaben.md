@@ -1,6 +1,7 @@
 ---
 layout: page
 permalink: /study/deutsch/bucher/zwei/lektion-18/hausaufgaben
+title: Deutsch - Bucher Zwei - Lektion #18 - Hausaufgaben
 ---
 
 > ### Lektion 18 **Hausaufgaben**

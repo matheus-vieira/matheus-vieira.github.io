@@ -1,6 +1,7 @@
 ---
 layout: page
-permalink: /study/deutsch/lektion-1/wortschatz
+permalink: /study/deutsch/bucher-1/lektion-1/wortschatz
+title: Deutsch - Bucher Eins - Lektion #1 - Wortschatz
 ---
 
 ## Deutsch - Lektion #1

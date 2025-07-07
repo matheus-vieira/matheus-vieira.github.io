@@ -1,6 +1,7 @@
 ---
 layout: page
 permalink: /study/deutsch/bucher/zwei/lektion-27/hausaufgaben
+title: Deutsch - Bucher Zwei - Lektion #27 - Hausaufgaben
 ---
 
 > ### Lektion 27 **Hausaufgaben**

@@ -1,7 +1,7 @@
 ---
 layout: page
 permalink: /study/deutsch/bucher/zwei/lektion-26/
-           
+title: Deutsch - Bucher Zwei - Lektion #26
 ---
 
 Relativ zu Lektion 26 Übungen

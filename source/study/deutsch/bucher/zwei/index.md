@@ -1,6 +1,7 @@
 ---
 layout: page
 permalink: /study/deutsch/bucher/zwei/
+title: Deutsch - Bucher Zwei
 ---
 
 ### Lektionen

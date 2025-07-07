@@ -1,6 +1,7 @@
 ---
 layout: page
 permalink: /study/deutsch/bucher/zwei/lektion-21/
+title: Deutsch - Bucher Zwei - Lektion #21
 ---
 
 Relativ zu Lektion 21 Übungen

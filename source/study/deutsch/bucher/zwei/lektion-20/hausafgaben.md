@@ -1,6 +1,7 @@
 ---
 layout: page
 permalink: /study/deutsch/bucher/zwei/lektion-20/hausaufgaben
+title: Deutsch - Bucher Zwei - Lektion #20 - Hausaufgaben
 ---
 
 > ### Lektion 20 **Hausaufgaben**

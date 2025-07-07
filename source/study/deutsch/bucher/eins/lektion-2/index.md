@@ -1,6 +1,7 @@
 ---
 layout: page
-permalink: /study/deutsch/lektion-2
+permalink: /study/deutsch/bucher-1/lektion-2
+title: Deutsch - Bucher Eins - Lektion #2
 ---
 
 ## Deutsch - Lektion #2

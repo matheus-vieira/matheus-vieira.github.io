@@ -1,6 +1,7 @@
 ---
 layout: page
-permalink: /study/deutsch/lektion-4/hausaufgaben
+permalink: /study/deutsch/bucher-1/lektion-4/hausaufgaben
+title: Deutsch - Bucher Eins - Lektion #4 - Hausaufgaben
 ---
 
 ## Deutsch - Lektion #4

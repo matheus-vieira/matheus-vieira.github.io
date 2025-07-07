@@ -1,7 +1,7 @@
 ---
 layout: page
 permalink: /study/deutsch/bucher/zwei/lektion-28/
-           
+title: Deutsch - Bucher Zwei - Lektion #28
 ---
 
 Relativ zu Lektion 28 Übungen

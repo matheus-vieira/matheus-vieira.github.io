@@ -1,8 +1,5 @@
 ---
 layout: page
 permalink: /resume/print/en-us
+title: Resume - mvieira
 ---
-
-# Resume Print (EN-US)
-
-This page is temporarily disabled while fixing multilanguage support.

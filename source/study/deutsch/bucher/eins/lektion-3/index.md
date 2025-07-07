@@ -1,6 +1,7 @@
 ---
 layout: page
-permalink: /study/deutsch/lektion-3
+permalink: /study/deutsch/bucher-1/lektion-3
+title: Deutsch - Bucher Eins - Lektion #3
 ---
 
 ## Deutsch - Lektion #3

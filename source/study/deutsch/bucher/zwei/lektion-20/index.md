@@ -1,6 +1,7 @@
 ---
 layout: page
 permalink: /study/deutsch/bucher/zwei/lektion-20/
+title: Deutsch - Bucher Zwei - Lektion #20
 ---
 
 Relativ zu Lektion 20 Übungen

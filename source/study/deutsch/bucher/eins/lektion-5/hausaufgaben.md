@@ -1,6 +1,7 @@
 ---
 layout: page
-permalink: /study/deutsch/lektion-5/hausaufgaben
+permalink: /study/deutsch/bucher-1/lektion-5/wortschatz
+title: Deutsch - Bucher Eins - Lektion #5 - Wortschats
 ---
 
 ## Deutsch - Lektion #5

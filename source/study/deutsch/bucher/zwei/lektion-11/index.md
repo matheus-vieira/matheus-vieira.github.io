@@ -1,6 +1,7 @@
 ---
 layout: page
 permalink: /study/deutsch/bucher/zwei/lektion-11/
+title: Deutsch - Bucher Zwei - Lektion #11
 ---
 
 Relativ zu Lektion 11 Übungen

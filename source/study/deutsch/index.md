@@ -1,6 +1,7 @@
 ---
 layout: page
 permalink: /study/deutsch/
+title: Deutsch
 ---
 
 {% assign current_year = 'now' | date: '%Y' %}
