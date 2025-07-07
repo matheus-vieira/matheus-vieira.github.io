@@ -8,7 +8,7 @@ title: "Who am I?"
 
 Thanks for reaching out! Let me share a bit about my journey—both personal and professional.
 
-## "Matheus Costa Vieira: A journey of a Dad, a Husband, and a Software Engineer
+## Matheus Costa Vieira: A journey of a Dad, a Husband, and a Software Engineer
 
 I'm {{ current_year | minus: 1984 }} years old, born in Porto Alegre where my love for soccer and Grêmio began. Life took me to Santa Maria during my youth, and in 2008, I moved to Curitiba where I lived for 15 years building my career and family.
 
