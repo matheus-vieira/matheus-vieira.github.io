@@ -1,6 +1,7 @@
 ---
 layout: skills
 type: cloud
+sub-type: cloud
 en-us:
   skill: Azure - CI/CD
   extra: Continuous Integration/Continuous Delivery

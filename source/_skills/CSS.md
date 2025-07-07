@@ -1,6 +1,7 @@
 ---
 layout: skills
 type: language
+sub-type: style
 en-us:
   skill: CSS (all versions)
 pt-br:
