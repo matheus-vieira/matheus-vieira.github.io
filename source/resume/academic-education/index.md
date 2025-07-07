@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Academic Education
-permalink: /resume/academic-education
+permalink: /resume/academic-education/
 ---
 
 {% assign graduations = site.graduations | sort: "order" %}

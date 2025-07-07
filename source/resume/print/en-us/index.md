@@ -1,5 +1,5 @@
 ---
 layout: page
-permalink: /resume/print/en-us
+permalink: /resume/print/en-us/
 title: Resume - mvieira
 ---
