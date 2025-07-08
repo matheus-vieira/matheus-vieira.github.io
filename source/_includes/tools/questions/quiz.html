@@ -3,23 +3,21 @@
 
 {% assign filtered_questions = "" | split: "" %}
 {% for q in include.questions %}
-  {% capture item %}
-    {
-      "title": {{ q.title | jsonify }},
-      "options": {{ q.options | jsonify }},
-      "answer": {{ q.answer | jsonify }},
-      "explanation": {{ q.explanation | jsonify }}
-    }
-  {% endcapture %}
-  {% assign filtered_questions = filtered_questions | push: item | compact %}
+{% capture item %}
+{
+"title": {{ q.title | jsonify }},
+"options": {{ q.options | jsonify }},
+"answer": {{ q.answer | jsonify }},
+"explanation": {{ q.explanation | jsonify }}
+}
+{% endcapture %}
+{% assign filtered_questions = filtered_questions | push: item | compact %}
 {% endfor %}
 {% capture questions_json %}[{{ filtered_questions | join: ',' }}]{% endcapture %}
 {% assign questions_json = questions_json | strip_newlines %}
 
 <script>
-  const questions = JSON.parse('{{ questions_json | escape }}');
-
-  let correct = 0;
+  const questions = {{ questions_json }};
 
   function renderQuiz() {
     const container = document.getElementById('quiz-container');
@@ -27,9 +25,9 @@
     questions.forEach((q, idx) => {
       const block = document.createElement('div');
       block.className = 'question-block';
-      block.innerHTML = `<p>${q.title}</p>` +
+      block.innerHTML = `<h2>${q.title}</h2>` +
         q.options.map((opt, i) =>
-          `<label><input type="radio" name="q${idx}" value="${i}"> ${opt}</label><br>`
+          `<p><label><input type="radio" name="q${idx}" value="${i}"> ${opt}</label></p>`
         ).join('');
       container.appendChild(block);
     });
@@ -40,7 +38,7 @@
   }
 
   function checkAnswers() {
-    correct = 0;
+    let correct = 0;
     questions.forEach((q, idx) => {
       const selected = document.querySelector(`input[name="q${idx}"]:checked`);
       if (selected && parseInt(selected.value) === q.answer) correct++;
