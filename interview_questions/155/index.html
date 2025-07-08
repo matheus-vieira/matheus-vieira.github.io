@@ -1,0 +1,760 @@
+<h2 id="introdução">Introdução</h2>
+
+<p>Progressive Web Apps (PWAs) são aplicações web que combinam o melhor das aplicações web tradicionais com recursos nativos de aplicativos móveis. Elas utilizam tecnologias web modernas para oferecer experiências similares às de aplicativos nativos, incluindo funcionamento offline, notificações push e instalação no dispositivo.</p>
+
+<h2 id="conceito-chave">Conceito-chave</h2>
+
+<p>Uma PWA é construída sobre três pilares fundamentais: ser <strong>Confiável</strong> (funciona offline), <strong>Rápida</strong> (responde rapidamente às interações) e <strong>Envolvente</strong> (oferece experiência imersiva). Isso é alcançado principalmente através de Service Workers, Web App Manifest e HTTPS como requisitos básicos.</p>
+
+<h2 id="tópicos-relevantes">Tópicos Relevantes</h2>
+
+<h3 id="componentes-principais-de-uma-pwa">Componentes principais de uma PWA</h3>
+
+<p><strong>1. Service Worker</strong></p>
+<pre><code class="language-javascript">// sw.js - Service Worker básico
+const CACHE_NAME = 'my-pwa-v1';
+const urlsToCache = [
+  '/',
+  '/styles/main.css',
+  '/script/main.js',
+  '/images/logo.png',
+  '/offline.html'
+];
+
+// Instalação do Service Worker
+self.addEventListener('install', (event) =&gt; {
+  event.waitUntil(
+    caches.open(CACHE_NAME)
+      .then((cache) =&gt; {
+        console.log('Cache aberto');
+        return cache.addAll(urlsToCache);
+      })
+  );
+});
+
+// Interceptação de requisições
+self.addEventListener('fetch', (event) =&gt; {
+  event.respondWith(
+    caches.match(event.request)
+      .then((response) =&gt; {
+        // Retorna do cache se disponível
+        if (response) {
+          return response;
+        }
+
+        return fetch(event.request).catch(() =&gt; {
+          // Fallback para página offline
+          if (event.request.destination === 'document') {
+            return caches.match('/offline.html');
+          }
+        });
+      })
+  );
+});
+
+// Atualização do Service Worker
+self.addEventListener('activate', (event) =&gt; {
+  event.waitUntil(
+    caches.keys().then((cacheNames) =&gt; {
+      return Promise.all(
+        cacheNames.map((cacheName) =&gt; {
+          if (cacheName !== CACHE_NAME) {
+            return caches.delete(cacheName);
+          }
+        })
+      );
+    })
+  );
+});
+</code></pre>
+
+<p><strong>2. Web App Manifest</strong></p>
+<pre><code class="language-json">{
+  "name": "Minha Progressive Web App",
+  "short_name": "MinhaPWA",
+  "description": "Uma aplicação web progressiva exemplar",
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#2196F3",
+  "background_color": "#ffffff",
+  "orientation": "portrait",
+  "scope": "/",
+  "icons": [
+    {
+      "src": "/images/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/images/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "categories": ["productivity", "utilities"],
+  "shortcuts": [
+    {
+      "name": "Nova Tarefa",
+      "url": "/new-task",
+      "icons": [
+        {
+          "src": "/images/new-task-icon.png",
+          "sizes": "96x96"
+        }
+      ]
+    }
+  ]
+}
+</code></pre>
+
+<p><strong>3. Registro do Service Worker</strong></p>
+<pre><code class="language-javascript">// main.js - Registro do Service Worker
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () =&gt; {
+    navigator.serviceWorker.register('/sw.js')
+      .then((registration) =&gt; {
+        console.log('SW registrado com sucesso:', registration);
+        
+        // Verificar por atualizações
+        registration.addEventListener('updatefound', () =&gt; {
+          const newWorker = registration.installing;
+          newWorker.addEventListener('statechange', () =&gt; {
+            if (newWorker.state === 'installed' &amp;&amp; navigator.serviceWorker.controller) {
+              showUpdateAvailable();
+            }
+          });
+        });
+      })
+      .catch((error) =&gt; {
+        console.log('Falha no registro do SW:', error);
+      });
+  });
+}
+
+function showUpdateAvailable() {
+  const updateBanner = document.createElement('div');
+  updateBanner.innerHTML = `
+    &lt;div class="update-banner"&gt;
+      &lt;p&gt;Nova versão disponível!&lt;/p&gt;
+      &lt;button onclick="updateApp()"&gt;Atualizar&lt;/button&gt;
+      &lt;button onclick="dismissUpdate()"&gt;Depois&lt;/button&gt;
+    &lt;/div&gt;
+  `;
+  document.body.appendChild(updateBanner);
+}
+
+function updateApp() {
+  if (navigator.serviceWorker.controller) {
+    navigator.serviceWorker.controller.postMessage({ action: 'skipWaiting' });
+  }
+  window.location.reload();
+}
+</code></pre>
+
+<h3 id="estratégias-de-cache-avançadas">Estratégias de Cache avançadas</h3>
+
+<pre><code class="language-javascript">// Estratégias de cache no Service Worker
+const CACHE_STRATEGIES = {
+  CACHE_FIRST: 'cache-first',
+  NETWORK_FIRST: 'network-first',
+  STALE_WHILE_REVALIDATE: 'stale-while-revalidate',
+  NETWORK_ONLY: 'network-only',
+  CACHE_ONLY: 'cache-only'
+};
+
+// Cache First - para recursos estáticos
+const cacheFirst = async (request) =&gt; {
+  const cache = await caches.open(CACHE_NAME);
+  const cachedResponse = await cache.match(request);
+  
+  if (cachedResponse) {
+    return cachedResponse;
+  }
+  
+  const networkResponse = await fetch(request);
+  cache.put(request, networkResponse.clone());
+  return networkResponse;
+};
+
+// Network First - para dados dinâmicos
+const networkFirst = async (request) =&gt; {
+  const cache = await caches.open(CACHE_NAME);
+  
+  try {
+    const networkResponse = await fetch(request);
+    cache.put(request, networkResponse.clone());
+    return networkResponse;
+  } catch (error) {
+    const cachedResponse = await cache.match(request);
+    if (cachedResponse) {
+      return cachedResponse;
+    }
+    throw error;
+  }
+};
+
+// Stale While Revalidate - para recursos que podem ser atualizados
+const staleWhileRevalidate = async (request) =&gt; {
+  const cache = await caches.open(CACHE_NAME);
+  const cachedResponse = await cache.match(request);
+  
+  const fetchPromise = fetch(request).then((networkResponse) =&gt; {
+    cache.put(request, networkResponse.clone());
+    return networkResponse;
+  });
+  
+  return cachedResponse || fetchPromise;
+};
+
+// Aplicar estratégias baseadas na URL
+self.addEventListener('fetch', (event) =&gt; {
+  const { request } = event;
+  const url = new URL(request.url);
+  
+  if (url.pathname.startsWith('/api/')) {
+    // API calls: Network First
+    event.respondWith(networkFirst(request));
+  } else if (url.pathname.match(/\.(css|js|png|jpg|jpeg|svg)$/)) {
+    // Static assets: Cache First
+    event.respondWith(cacheFirst(request));
+  } else if (url.pathname.startsWith('/data/')) {
+    // Data that can be stale: Stale While Revalidate
+    event.respondWith(staleWhileRevalidate(request));
+  } else {
+    // Default strategy
+    event.respondWith(networkFirst(request));
+  }
+});
+</code></pre>
+
+<h3 id="notificações-push">Notificações Push</h3>
+
+<pre><code class="language-javascript">// Configuração de Push Notifications
+class PushNotificationManager {
+  constructor() {
+    this.publicVapidKey = 'BM8NvVrP9vkGPzDbJQY4nBcvX4Qa_sD7Ds6Eq3PkHBdMR8ZFGvYe5C8mJqb5-Rh1wGpKZc3oF2vM1nN5aE7Q';
+  }
+
+  async requestPermission() {
+    const permission = await Notification.requestPermission();
+    
+    if (permission === 'granted') {
+      console.log('Permissão para notificações concedida');
+      return this.subscribeToPush();
+    } else {
+      console.log('Permissão para notificações negada');
+      return null;
+    }
+  }
+
+  async subscribeToPush() {
+    if (!('serviceWorker' in navigator)) {
+      throw new Error('Service Worker não suportado');
+    }
+
+    const registration = await navigator.serviceWorker.ready;
+    
+    const subscription = await registration.pushManager.subscribe({
+      userVisibleOnly: true,
+      applicationServerKey: this.urlBase64ToUint8Array(this.publicVapidKey)
+    });
+
+    // Enviar subscription para o servidor
+    await this.sendSubscriptionToServer(subscription);
+    return subscription;
+  }
+
+  async sendSubscriptionToServer(subscription) {
+    await fetch('/api/push/subscribe', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(subscription)
+    });
+  }
+
+  urlBase64ToUint8Array(base64String) {
+    const padding = '='.repeat((4 - base64String.length % 4) % 4);
+    const base64 = (base64String + padding)
+      .replace(/-/g, '+')
+      .replace(/_/g, '/');
+
+    const rawData = window.atob(base64);
+    const outputArray = new Uint8Array(rawData.length);
+
+    for (let i = 0; i &lt; rawData.length; ++i) {
+      outputArray[i] = rawData.charCodeAt(i);
+    }
+    return outputArray;
+  }
+}
+
+// No Service Worker - tratamento de notificações
+self.addEventListener('push', (event) =&gt; {
+  const options = {
+    body: 'Nova mensagem disponível!',
+    icon: '/images/notification-icon.png',
+    badge: '/images/notification-badge.png',
+    vibrate: [200, 100, 200],
+    data: {
+      dateOfArrival: Date.now(),
+      primaryKey: 1
+    },
+    actions: [
+      {
+        action: 'explore',
+        title: 'Ver detalhes',
+        icon: '/images/checkmark.png'
+      },
+      {
+        action: 'close',
+        title: 'Fechar',
+        icon: '/images/xmark.png'
+      }
+    ]
+  };
+
+  if (event.data) {
+    const data = event.data.json();
+    options.body = data.message;
+    options.data = data;
+  }
+
+  event.waitUntil(
+    self.registration.showNotification('PWA Notification', options)
+  );
+});
+
+self.addEventListener('notificationclick', (event) =&gt; {
+  event.notification.close();
+
+  if (event.action === 'explore') {
+    event.waitUntil(
+      clients.openWindow('/details')
+    );
+  } else if (event.action === 'close') {
+    // Notification is closed, do nothing
+  } else {
+    // Default action
+    event.waitUntil(
+      clients.openWindow('/')
+    );
+  }
+});
+</code></pre>
+
+<h2 id="exemplo-prático">Exemplo Prático</h2>
+
+<p>Implementação completa de uma PWA de lista de tarefas:</p>
+
+<pre><code class="language-html">&lt;!-- index.html --&gt;
+&lt;!DOCTYPE html&gt;
+&lt;html lang="pt-BR"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Todo PWA&lt;/title&gt;
+    
+    &lt;!-- PWA Meta Tags --&gt;
+    &lt;meta name="theme-color" content="#2196F3"&gt;
+    &lt;meta name="apple-mobile-web-app-capable" content="yes"&gt;
+    &lt;meta name="apple-mobile-web-app-status-bar-style" content="default"&gt;
+    &lt;meta name="apple-mobile-web-app-title" content="Todo PWA"&gt;
+    
+    &lt;!-- Manifest --&gt;
+    &lt;link rel="manifest" href="/manifest.json"&gt;
+    
+    &lt;!-- Icons --&gt;
+    &lt;link rel="apple-touch-icon" href="/images/icon-192x192.png"&gt;
+    
+    &lt;link rel="stylesheet" href="/styles/main.css"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;div id="app"&gt;
+        &lt;header&gt;
+            &lt;h1&gt;Todo PWA&lt;/h1&gt;
+            &lt;button id="installBtn" class="install-btn" style="display: none;"&gt;
+                Instalar App
+            &lt;/button&gt;
+        &lt;/header&gt;
+        
+        &lt;main&gt;
+            &lt;div class="add-todo"&gt;
+                &lt;input type="text" id="todoInput" placeholder="Nova tarefa..."&gt;
+                &lt;button id="addBtn"&gt;Adicionar&lt;/button&gt;
+            &lt;/div&gt;
+            
+            &lt;div class="sync-status" id="syncStatus"&gt;
+                &lt;span class="status-text"&gt;Online&lt;/span&gt;
+            &lt;/div&gt;
+            
+            &lt;ul id="todoList" class="todo-list"&gt;
+                &lt;!-- Tarefas serão inseridas aqui --&gt;
+            &lt;/ul&gt;
+        &lt;/main&gt;
+    &lt;/div&gt;
+
+    &lt;script src="/scripts/db.js"&gt;&lt;/script&gt;
+    &lt;script src="/scripts/sync.js"&gt;&lt;/script&gt;
+    &lt;script src="/scripts/app.js"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+<pre><code class="language-javascript">// scripts/db.js - IndexedDB para persistência offline
+class TodoDB {
+  constructor() {
+    this.dbName = 'TodoPWA';
+    this.version = 1;
+    this.db = null;
+  }
+
+  async init() {
+    return new Promise((resolve, reject) =&gt; {
+      const request = indexedDB.open(this.dbName, this.version);
+      
+      request.onerror = () =&gt; reject(request.error);
+      request.onsuccess = () =&gt; {
+        this.db = request.result;
+        resolve(this.db);
+      };
+      
+      request.onupgradeneeded = (event) =&gt; {
+        const db = event.target.result;
+        
+        if (!db.objectStoreNames.contains('todos')) {
+          const store = db.createObjectStore('todos', { 
+            keyPath: 'id', 
+            autoIncrement: true 
+          });
+          store.createIndex('timestamp', 'timestamp', { unique: false });
+          store.createIndex('synced', 'synced', { unique: false });
+        }
+      };
+    });
+  }
+
+  async addTodo(todo) {
+    const transaction = this.db.transaction(['todos'], 'readwrite');
+    const store = transaction.objectStore('todos');
+    
+    const todoWithMeta = {
+      ...todo,
+      timestamp: Date.now(),
+      synced: false
+    };
+    
+    return store.add(todoWithMeta);
+  }
+
+  async getAllTodos() {
+    const transaction = this.db.transaction(['todos'], 'readonly');
+    const store = transaction.objectStore('todos');
+    
+    return new Promise((resolve, reject) =&gt; {
+      const request = store.getAll();
+      request.onsuccess = () =&gt; resolve(request.result);
+      request.onerror = () =&gt; reject(request.error);
+    });
+  }
+
+  async updateTodo(id, updates) {
+    const transaction = this.db.transaction(['todos'], 'readwrite');
+    const store = transaction.objectStore('todos');
+    
+    const todo = await this.getTodo(id);
+    const updatedTodo = { ...todo, ...updates };
+    
+    return store.put(updatedTodo);
+  }
+
+  async deleteTodo(id) {
+    const transaction = this.db.transaction(['todos'], 'readwrite');
+    const store = transaction.objectStore('todos');
+    return store.delete(id);
+  }
+
+  async getUnsyncedTodos() {
+    const transaction = this.db.transaction(['todos'], 'readonly');
+    const store = transaction.objectStore('todos');
+    const index = store.index('synced');
+    
+    return new Promise((resolve, reject) =&gt; {
+      const request = index.getAll(false);
+      request.onsuccess = () =&gt; resolve(request.result);
+      request.onerror = () =&gt; reject(request.error);
+    });
+  }
+}
+</code></pre>
+
+<pre><code class="language-javascript">// scripts/sync.js - Sincronização em background
+class BackgroundSync {
+  constructor(db) {
+    this.db = db;
+    this.setupBackgroundSync();
+  }
+
+  setupBackgroundSync() {
+    if ('serviceWorker' in navigator &amp;&amp; 'sync' in window.ServiceWorkerRegistration.prototype) {
+      navigator.serviceWorker.ready.then((registration) =&gt; {
+        return registration.sync.register('background-sync');
+      });
+    }
+  }
+
+  async syncData() {
+    if (!navigator.onLine) {
+      console.log('Offline - sync adiado');
+      return;
+    }
+
+    const unsyncedTodos = await this.db.getUnsyncedTodos();
+    
+    for (const todo of unsyncedTodos) {
+      try {
+        await this.syncTodo(todo);
+        await this.db.updateTodo(todo.id, { synced: true });
+      } catch (error) {
+        console.error('Erro ao sincronizar:', error);
+      }
+    }
+  }
+
+  async syncTodo(todo) {
+    const response = await fetch('/api/todos', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(todo)
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    return response.json();
+  }
+}
+
+// No Service Worker
+self.addEventListener('sync', (event) =&gt; {
+  if (event.tag === 'background-sync') {
+    event.waitUntil(
+      // Implementar lógica de sincronização
+      syncPendingData()
+    );
+  }
+});
+
+async function syncPendingData() {
+  // Abrir IndexedDB e sincronizar dados pendentes
+  console.log('Executando sincronização em background');
+}
+</code></pre>
+
+<pre><code class="language-javascript">// scripts/app.js - Aplicação principal
+class TodoApp {
+  constructor() {
+    this.db = new TodoDB();
+    this.backgroundSync = null;
+    this.deferredPrompt = null;
+    
+    this.init();
+  }
+
+  async init() {
+    await this.db.init();
+    this.backgroundSync = new BackgroundSync(this.db);
+    
+    this.setupEventListeners();
+    this.setupInstallPrompt();
+    this.loadTodos();
+    this.updateOnlineStatus();
+    
+    // Registrar Service Worker
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/sw.js');
+    }
+  }
+
+  setupEventListeners() {
+    document.getElementById('addBtn').addEventListener('click', () =&gt; this.addTodo());
+    document.getElementById('todoInput').addEventListener('keypress', (e) =&gt; {
+      if (e.key === 'Enter') this.addTodo();
+    });
+
+    window.addEventListener('online', () =&gt; this.updateOnlineStatus());
+    window.addEventListener('offline', () =&gt; this.updateOnlineStatus());
+  }
+
+  setupInstallPrompt() {
+    window.addEventListener('beforeinstallprompt', (e) =&gt; {
+      e.preventDefault();
+      this.deferredPrompt = e;
+      document.getElementById('installBtn').style.display = 'block';
+    });
+
+    document.getElementById('installBtn').addEventListener('click', () =&gt; {
+      if (this.deferredPrompt) {
+        this.deferredPrompt.prompt();
+        this.deferredPrompt.userChoice.then((result) =&gt; {
+          if (result.outcome === 'accepted') {
+            console.log('PWA instalada');
+          }
+          this.deferredPrompt = null;
+          document.getElementById('installBtn').style.display = 'none';
+        });
+      }
+    });
+  }
+
+  async addTodo() {
+    const input = document.getElementById('todoInput');
+    const text = input.value.trim();
+    
+    if (!text) return;
+
+    const todo = {
+      text,
+      completed: false,
+      createdAt: new Date().toISOString()
+    };
+
+    await this.db.addTodo(todo);
+    input.value = '';
+    this.loadTodos();
+    
+    // Tentar sincronizar imediatamente se online
+    if (navigator.onLine) {
+      this.backgroundSync.syncData();
+    }
+  }
+
+  async loadTodos() {
+    const todos = await this.db.getAllTodos();
+    const todoList = document.getElementById('todoList');
+    
+    todoList.innerHTML = todos.map(todo =&gt; `
+      &lt;li class="todo-item ${todo.completed ? 'completed' : ''}"&gt;
+        &lt;span class="todo-text"&gt;${todo.text}&lt;/span&gt;
+        &lt;div class="todo-actions"&gt;
+          &lt;button onclick="app.toggleTodo(${todo.id})" class="toggle-btn"&gt;
+            ${todo.completed ? '↶' : '✓'}
+          &lt;/button&gt;
+          &lt;button onclick="app.deleteTodo(${todo.id})" class="delete-btn"&gt;
+            🗑️
+          &lt;/button&gt;
+          ${!todo.synced ? '&lt;span class="sync-indicator"&gt;⏳&lt;/span&gt;' : ''}
+        &lt;/div&gt;
+      &lt;/li&gt;
+    `).join('');
+  }
+
+  async toggleTodo(id) {
+    const todos = await this.db.getAllTodos();
+    const todo = todos.find(t =&gt; t.id === id);
+    
+    if (todo) {
+      await this.db.updateTodo(id, { 
+        completed: !todo.completed,
+        synced: false 
+      });
+      this.loadTodos();
+    }
+  }
+
+  async deleteTodo(id) {
+    await this.db.deleteTodo(id);
+    this.loadTodos();
+  }
+
+  updateOnlineStatus() {
+    const statusElement = document.getElementById('syncStatus');
+    const isOnline = navigator.onLine;
+    
+    statusElement.innerHTML = `
+      &lt;span class="status-text ${isOnline ? 'online' : 'offline'}"&gt;
+        ${isOnline ? 'Online' : 'Offline'}
+      &lt;/span&gt;
+    `;
+
+    if (isOnline) {
+      this.backgroundSync.syncData();
+    }
+  }
+}
+
+// Inicializar aplicação
+const app = new TodoApp();
+</code></pre>
+
+<h2 id="benefícios">Benefícios</h2>
+
+<h3 id="1-experiência-offline-completa">1. <strong>Experiência offline completa</strong></h3>
+
+<ul>
+  <li>Funcionalidade mantida sem conexão</li>
+  <li>Sincronização automática quando online</li>
+  <li>Cache inteligente de recursos</li>
+</ul>
+
+<h3 id="2-performance-superior">2. <strong>Performance superior</strong></h3>
+
+<ul>
+  <li>Carregamento instantâneo de recursos cached</li>
+  <li>Lazy loading de recursos não críticos</li>
+  <li>Otimização automática de requests</li>
+</ul>
+
+<h3 id="3-engajamento-nativo">3. <strong>Engajamento nativo</strong></h3>
+
+<ul>
+  <li>Instalação no dispositivo</li>
+  <li>Notificações push</li>
+  <li>Integração com sistema operacional</li>
+</ul>
+
+<h3 id="4-baixo-custo-de-desenvolvimento">4. <strong>Baixo custo de desenvolvimento</strong></h3>
+
+<ul>
+  <li>Uso de tecnologias web existentes</li>
+  <li>Uma base de código para múltiplas plataformas</li>
+  <li>Atualizações automáticas</li>
+</ul>
+
+<h3 id="5-seo-e-descoberta">5. <strong>SEO e descoberta</strong></h3>
+
+<ul>
+  <li>Indexável por motores de busca</li>
+  <li>URLs compartilháveis</li>
+  <li>Progressive enhancement</li>
+</ul>
+
+<h2 id="considerações-de-implementação">Considerações de Implementação</h2>
+
+<h3 id="requisitos-mínimos"><strong>Requisitos mínimos:</strong></h3>
+<ul>
+  <li>HTTPS obrigatório</li>
+  <li>Service Worker funcional</li>
+  <li>Web App Manifest válido</li>
+  <li>Design responsivo</li>
+</ul>
+
+<h3 id="estratégias-de-cache"><strong>Estratégias de cache:</strong></h3>
+<ul>
+  <li>Cache First para recursos estáticos</li>
+  <li>Network First para dados dinâmicos</li>
+  <li>Stale While Revalidate para recursos atualizáveis</li>
+</ul>
+
+<h3 id="limitações"><strong>Limitações:</strong></h3>
+<ul>
+  <li>Suporte limitado em alguns browsers</li>
+  <li>Restrições de iOS Safari</li>
+  <li>Tamanho de cache limitado</li>
+  <li>Complexidade de gerenciamento de estado offline</li>
+</ul>

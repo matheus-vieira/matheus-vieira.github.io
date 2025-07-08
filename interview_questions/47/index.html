@@ -1,0 +1,32 @@
+<h2 id="introdução">Introdução</h2>
+
+<p>A escolha entre Terraform e Bicep impacta diretamente a estratégia de provisionamento e governança de ambientes no Azure.</p>
+
+<h2 id="conceito-chave-modularidade-e-reutilização">Conceito-chave: Modularidade e Reutilização</h2>
+
+<ul>
+  <li><strong>Terraform</strong>: Possui um ecossistema maduro de módulos reutilizáveis, facilitando a padronização e o reuso de componentes em diferentes projetos e provedores.</li>
+  <li><strong>Bicep</strong>: Suporta módulos, mas com foco exclusivo no Azure, promovendo reutilização dentro do ecossistema Microsoft.</li>
+</ul>
+
+<h2 id="tópicos-relevantes">Tópicos Relevantes</h2>
+
+<ul>
+  <li><strong>Módulos reutilizáveis</strong>: Padronização de recursos e ambientes.</li>
+  <li><strong>Repositórios de módulos</strong>: Terraform Registry vs Bicep Module Registry.</li>
+  <li><strong>Governança</strong>: Controle de versões e revisão de código.</li>
+  <li><strong>Integração com pipelines</strong>: Automação de deploys.</li>
+</ul>
+
+<h2 id="exemplo-prático">Exemplo Prático</h2>
+
+<p>Crie um módulo de rede em Terraform e reutilize em múltiplos projetos, inclusive multi-cloud. Em Bicep, crie um módulo para VNet e compartilhe entre times Azure.</p>
+
+<h2 id="quando-usar-cada-um">Quando usar cada um?</h2>
+
+<ul>
+  <li><strong>Terraform</strong>: Projetos multi-cloud, times que buscam máxima reutilização.</li>
+  <li><strong>Bicep</strong>: Projetos 100% Azure, foco em integração nativa.</li>
+</ul>
+
+<p>A modularidade é chave para escalabilidade e governança em IaC.</p>

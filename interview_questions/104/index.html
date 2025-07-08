@@ -1,0 +1,31 @@
+<h2 id="introdução">Introdução</h2>
+
+<p>A escolha entre Service Bus e Event Hub depende dos padrões de comunicação, volume de dados e requisitos de processamento da arquitetura.</p>
+
+<h2 id="conceito-chave">Conceito-chave</h2>
+
+<p><strong>Padrões de Mensageria</strong>: Service Bus implementa padrões tradicionais de mensageria empresarial (request/reply, pub/sub), enquanto Event Hub foca em streaming de eventos de alta throughput para processamento em tempo real.</p>
+
+<h2 id="tópicos-relevantes">Tópicos Relevantes</h2>
+
+<ul>
+  <li>Garantias de entrega (at-least-once vs at-most-once)</li>
+  <li>Ordenação e sessões</li>
+  <li>Escalabilidade e throughput</li>
+  <li>Retenção de dados</li>
+  <li>Modelos de consumo</li>
+</ul>
+
+<h2 id="exemplo-prático">Exemplo Prático</h2>
+
+<p>Use Service Bus para comandos críticos entre microsserviços (processamento de pedidos) e Event Hub para telemetria massiva (logs de IoT, clicks de website) que requer processamento em tempo real.</p>
+
+<h2 id="benefícios">Benefícios</h2>
+
+<ul>
+  <li>Arquitetura otimizada para o caso de uso</li>
+  <li>Performance e custos adequados</li>
+  <li>Padrões de resiliência apropriados</li>
+  <li>Escalabilidade sob demanda</li>
+  <li>Integração simplificada</li>
+</ul>

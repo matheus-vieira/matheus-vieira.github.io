@@ -1,0 +1,56 @@
+<h2 id="introdução">Introdução</h2>
+
+<p>O Bicep é uma linguagem declarativa de Infrastructure as Code (IaC) desenvolvida pela Microsoft para facilitar o provisionamento de recursos no Azure. Utilizar Bicep permite criar, gerenciar e versionar ambientes de nuvem de forma eficiente, segura e reprodutível.</p>
+
+<h2 id="conceito-chave">Conceito-chave</h2>
+
+<p>Bicep abstrai a complexidade dos templates ARM (Azure Resource Manager), oferecendo uma sintaxe mais simples e legível. Com ele, é possível definir toda a infraestrutura como código, promovendo automação, padronização e governança.</p>
+
+<h2 id="tópicos-relevantes">Tópicos Relevantes</h2>
+
+<ul>
+  <li><strong>Sintaxe declarativa</strong>: Define “o que” deve ser criado, não “como”.</li>
+  <li><strong>Reutilização de módulos</strong>: Permite criar componentes reutilizáveis para ambientes padronizados.</li>
+  <li><strong>Integração com DevOps</strong>: Facilita pipelines de CI/CD para provisionamento automatizado.</li>
+  <li><strong>Validação e preview</strong>: Comandos como <code>bicep build</code> e <code>az deployment what-if</code> ajudam a validar e prever mudanças.</li>
+  <li><strong>Versionamento</strong>: Infraestrutura versionada junto ao código-fonte.</li>
+</ul>
+
+<h2 id="exemplo-prático">Exemplo Prático</h2>
+
+<p>Imagine a necessidade de provisionar um ambiente com uma Storage Account e um App Service. Com Bicep, você pode criar um arquivo <code>.bicep</code>:</p>
+
+<pre><code class="language-bicep">resource storage 'Microsoft.Storage/storageAccounts@2022-09-01' = {
+  name: 'minhastorage${uniqueString(resourceGroup().id)}'
+  location: resourceGroup().location
+  sku: {
+    name: 'Standard_LRS'
+  }
+  kind: 'StorageV2'
+}
+
+resource appService 'Microsoft.Web/sites@2022-03-01' = {
+  name: 'meuappservice'
+  location: resourceGroup().location
+  properties: {
+    serverFarmId: 'meuappserviceplan'
+  }
+}
+</code></pre>
+
+<p>Esse arquivo pode ser implantado via Azure CLI:</p>
+
+<pre><code class="language-sh">az deployment group create --resource-group MeuRG --template-file main.bicep
+</code></pre>
+
+<h2 id="vantagens-da-abordagem-bicep">Vantagens da abordagem Bicep</h2>
+
+<ul>
+  <li><strong>Produtividade</strong>: Sintaxe enxuta e fácil de aprender.</li>
+  <li><strong>Manutenção</strong>: Facilidade para atualizar e evoluir ambientes.</li>
+  <li><strong>Governança</strong>: Permite aplicar políticas e controles de compliance.</li>
+  <li><strong>Integração nativa</strong>: Suporte total ao Azure e ARM.</li>
+  <li><strong>Transparência</strong>: Infraestrutura documentada e versionada.</li>
+</ul>
+
+<p>Utilizar Bicep é uma prática recomendada para equipes que buscam automação, padronização e segurança no provisionamento de ambientes Azure.</p>

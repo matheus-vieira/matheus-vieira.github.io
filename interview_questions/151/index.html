@@ -1,0 +1,255 @@
+<h2 id="introdução">Introdução</h2>
+
+<p>Bicep é uma linguagem de domínio específico (DSL) desenvolvida pela Microsoft como uma abstração sobre templates ARM (Azure Resource Manager). Ela oferece uma sintaxe mais limpa e legível para definir infraestrutura como código no Azure, simplificando significativamente o processo de provisionamento de recursos.</p>
+
+<h2 id="conceito-chave">Conceito-chave</h2>
+
+<p>O Bicep funciona como uma linguagem transpilada que converte código Bicep em templates ARM JSON. Isso permite aproveitar toda a funcionalidade do ARM enquanto oferece uma experiência de desenvolvimento muito superior, com sintaxe declarativa mais intuitiva e ferramentas avançadas de desenvolvimento.</p>
+
+<h2 id="tópicos-relevantes">Tópicos Relevantes</h2>
+
+<h3 id="estrutura-básica-de-um-arquivo-bicep">Estrutura básica de um arquivo Bicep</h3>
+
+<pre><code class="language-bicep">// Parâmetros de entrada
+param location string = resourceGroup().location
+param appServicePlanName string
+param webAppName string
+
+// Variáveis computadas
+var appServicePlanSku = 'F1'
+
+// Recursos
+resource appServicePlan 'Microsoft.Web/serverfarms@2021-02-01' = {
+  name: appServicePlanName
+  location: location
+  sku: {
+    name: appServicePlanSku
+    tier: 'Free'
+  }
+}
+
+resource webApp 'Microsoft.Web/sites@2021-02-01' = {
+  name: webAppName
+  location: location
+  properties: {
+    serverFarmId: appServicePlan.id
+  }
+}
+</code></pre>
+
+<h3 id="módulos-e-reutilização">Módulos e reutilização</h3>
+
+<pre><code class="language-bicep">// Módulo para storage account
+module storageAccount 'modules/storage.bicep' = {
+  name: 'storageDeployment'
+  params: {
+    storageAccountName: 'mystorageaccount'
+    location: location
+  }
+}
+</code></pre>
+
+<h3 id="loops-e-condicionais">Loops e condicionais</h3>
+
+<pre><code class="language-bicep">// Loop para criar múltiplos recursos
+resource storageAccounts 'Microsoft.Storage/storageAccounts@2021-04-01' = [for i in range(0, 3): {
+  name: 'storage${i}'
+  location: location
+  kind: 'StorageV2'
+  sku: {
+    name: 'Standard_LRS'
+  }
+}]
+
+// Condicional
+resource publicIP 'Microsoft.Network/publicIPAddresses@2021-02-01' = if (createPublicIP) {
+  name: publicIPName
+  location: location
+}
+</code></pre>
+
+<h2 id="exemplo-prático">Exemplo Prático</h2>
+
+<p>Provisionamento de um ambiente completo com Web App, SQL Database e Application Insights:</p>
+
+<pre><code class="language-bicep">// main.bicep
+targetScope = 'resourceGroup'
+
+@description('Nome do ambiente (dev, staging, prod)')
+param environmentName string = 'dev'
+
+@description('Nome da aplicação')
+param applicationName string
+
+param location string = resourceGroup().location
+
+// Variáveis
+var resourcePrefix = '${applicationName}-${environmentName}'
+var tags = {
+  Environment: environmentName
+  Application: applicationName
+  ManagedBy: 'Bicep'
+}
+
+// App Service Plan
+resource appServicePlan 'Microsoft.Web/serverfarms@2021-02-01' = {
+  name: '${resourcePrefix}-asp'
+  location: location
+  tags: tags
+  sku: {
+    name: environmentName == 'prod' ? 'P1v2' : 'F1'
+    tier: environmentName == 'prod' ? 'PremiumV2' : 'Free'
+  }
+}
+
+// Web App
+resource webApp 'Microsoft.Web/sites@2021-02-01' = {
+  name: '${resourcePrefix}-webapp'
+  location: location
+  tags: tags
+  properties: {
+    serverFarmId: appServicePlan.id
+    httpsOnly: true
+    siteConfig: {
+      minTlsVersion: '1.2'
+      ftpsState: 'Disabled'
+      connectionStrings: [
+        {
+          name: 'DefaultConnection'
+          connectionString: 'Server=${sqlServer.properties.fullyQualifiedDomainName};Database=${sqlDatabase.name};Trusted_Connection=False;Encrypt=True;'
+          type: 'SQLAzure'
+        }
+      ]
+    }
+  }
+  identity: {
+    type: 'SystemAssigned'
+  }
+}
+
+// SQL Server
+resource sqlServer 'Microsoft.Sql/servers@2021-02-01' = {
+  name: '${resourcePrefix}-sql'
+  location: location
+  tags: tags
+  properties: {
+    administratorLogin: 'sqladmin'
+    administratorLoginPassword: 'P@ssw0rd123!'
+  }
+}
+
+// SQL Database
+resource sqlDatabase 'Microsoft.Sql/servers/databases@2021-02-01' = {
+  parent: sqlServer
+  name: '${applicationName}DB'
+  location: location
+  tags: tags
+  sku: {
+    name: environmentName == 'prod' ? 'S2' : 'Basic'
+    tier: environmentName == 'prod' ? 'Standard' : 'Basic'
+  }
+}
+
+// Application Insights
+resource appInsights 'Microsoft.Insights/components@2020-02-02' = {
+  name: '${resourcePrefix}-ai'
+  location: location
+  tags: tags
+  kind: 'web'
+  properties: {
+    Application_Type: 'web'
+  }
+}
+
+// Key Vault para secrets
+resource keyVault 'Microsoft.KeyVault/vaults@2021-04-01-preview' = {
+  name: '${resourcePrefix}-kv'
+  location: location
+  tags: tags
+  properties: {
+    sku: {
+      family: 'A'
+      name: 'standard'
+    }
+    tenantId: tenant().tenantId
+    accessPolicies: [
+      {
+        tenantId: tenant().tenantId
+        objectId: webApp.identity.principalId
+        permissions: {
+          secrets: ['get', 'list']
+        }
+      }
+    ]
+  }
+}
+
+// Outputs
+output webAppUrl string = 'https://${webApp.properties.defaultHostName}'
+output sqlServerName string = sqlServer.name
+output keyVaultName string = keyVault.name
+</code></pre>
+
+<h3 id="deployment-com-azure-cli">Deployment com Azure CLI</h3>
+
+<pre><code class="language-bash"># Criar resource group
+az group create --name myapp-dev-rg --location eastus
+
+# Deploy do Bicep
+az deployment group create \
+  --resource-group myapp-dev-rg \
+  --template-file main.bicep \
+  --parameters environmentName=dev applicationName=myapp
+</code></pre>
+
+<h2 id="benefícios">Benefícios</h2>
+
+<h3 id="1-sintaxe-mais-limpa-e-legível">1. <strong>Sintaxe mais limpa e legível</strong></h3>
+<ul>
+  <li>Redução significativa de código comparado ao ARM JSON</li>
+  <li>Sintaxe mais próxima de linguagens de programação modernas</li>
+  <li>Melhor legibilidade e manutenibilidade</li>
+</ul>
+
+<h3 id="2-tooling-superior">2. <strong>Tooling superior</strong></h3>
+<ul>
+  <li>IntelliSense avançado no VS Code</li>
+  <li>Validação em tempo real</li>
+  <li>Debugging e error reporting melhorados</li>
+  <li>Extension oficial da Microsoft</li>
+</ul>
+
+<h3 id="3-modularidade-e-reutilização">3. <strong>Modularidade e reutilização</strong></h3>
+<ul>
+  <li>Sistema de módulos nativo</li>
+  <li>Facilita a criação de bibliotecas de componentes</li>
+  <li>Promove boas práticas de arquitetura</li>
+</ul>
+
+<h3 id="4-segurança-aprimorada">4. <strong>Segurança aprimorada</strong></h3>
+<ul>
+  <li>Validação de tipos em tempo de compilação</li>
+  <li>Prevenção de configurações inseguras</li>
+  <li>Integração com Azure Policy</li>
+</ul>
+
+<h3 id="5-compatibilidade-total-com-arm">5. <strong>Compatibilidade total com ARM</strong></h3>
+<ul>
+  <li>Compila para ARM templates padrão</li>
+  <li>Aproveita toda funcionalidade existente</li>
+  <li>Facilita migração de templates ARM existentes</li>
+</ul>
+
+<h3 id="6-versionamento-e-governança">6. <strong>Versionamento e governança</strong></h3>
+<ul>
+  <li>Integração natural com controle de versão</li>
+  <li>Facilita code reviews</li>
+  <li>Suporte a GitOps workflows</li>
+</ul>
+
+<h3 id="7-performance-de-deployment">7. <strong>Performance de deployment</strong></h3>
+<ul>
+  <li>Deployments incrementais inteligentes</li>
+  <li>Detecção automática de mudanças</li>
+  <li>Otimização de dependências entre recursos</li>
+</ul>

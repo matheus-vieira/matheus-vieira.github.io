@@ -1,0 +1,536 @@
+<h2 id="introdução">Introdução</h2>
+
+<p>O padrão Observer é um padrão comportamental que define uma relação de dependência um-para-muitos entre objetos, permitindo que múltiplos objetos sejam automaticamente notificados quando o estado de um objeto observado muda. A implementação eficiente e thread-safe é crucial em ambientes concorrentes modernos.</p>
+
+<h2 id="conceito-chave">Conceito-chave</h2>
+
+<p>O Observer estabelece um mecanismo de notificação loose-coupled onde o subject (observado) mantém uma lista de observers (observadores) e os notifica automaticamente sobre mudanças de estado. A eficiência e thread-safety são alcançadas através de técnicas como copy-on-iteration, weak references, e mecanismos de sincronização adequados.</p>
+
+<h2 id="tópicos-relevantes">Tópicos Relevantes</h2>
+
+<h3 id="implementação-básica-thread-safe">Implementação básica thread-safe</h3>
+
+<pre><code class="language-csharp">// Interface do Observer
+public interface IObserver&lt;T&gt;
+{
+    void Update(T data);
+}
+
+// Interface do Subject
+public interface ISubject&lt;T&gt;
+{
+    void Subscribe(IObserver&lt;T&gt; observer);
+    void Unsubscribe(IObserver&lt;T&gt; observer);
+    void Notify(T data);
+}
+
+// Implementação thread-safe com ReaderWriterLockSlim
+public class ThreadSafeSubject&lt;T&gt; : ISubject&lt;T&gt;
+{
+    private readonly HashSet&lt;IObserver&lt;T&gt;&gt; _observers;
+    private readonly ReaderWriterLockSlim _lock;
+
+    public ThreadSafeSubject()
+    {
+        _observers = new HashSet&lt;IObserver&lt;T&gt;&gt;();
+        _lock = new ReaderWriterLockSlim(LockRecursionPolicy.NoRecursion);
+    }
+
+    public void Subscribe(IObserver&lt;T&gt; observer)
+    {
+        if (observer == null) throw new ArgumentNullException(nameof(observer));
+
+        _lock.EnterWriteLock();
+        try
+        {
+            _observers.Add(observer);
+        }
+        finally
+        {
+            _lock.ExitWriteLock();
+        }
+    }
+
+    public void Unsubscribe(IObserver&lt;T&gt; observer)
+    {
+        if (observer == null) return;
+
+        _lock.EnterWriteLock();
+        try
+        {
+            _observers.Remove(observer);
+        }
+        finally
+        {
+            _lock.ExitWriteLock();
+        }
+    }
+
+    public void Notify(T data)
+    {
+        // Copy-on-iteration pattern para thread-safety
+        IObserver&lt;T&gt;[] observersCopy;
+        
+        _lock.EnterReadLock();
+        try
+        {
+            observersCopy = _observers.ToArray();
+        }
+        finally
+        {
+            _lock.ExitReadLock();
+        }
+
+        // Notificar fora do lock para evitar deadlocks
+        foreach (var observer in observersCopy)
+        {
+            try
+            {
+                observer.Update(data);
+            }
+            catch (Exception ex)
+            {
+                // Log exception mas continue notificando outros observers
+                OnObserverException?.Invoke(observer, ex);
+            }
+        }
+    }
+
+    public event Action&lt;IObserver&lt;T&gt;, Exception&gt; OnObserverException;
+
+    public void Dispose()
+    {
+        _lock?.EnterWriteLock();
+        try
+        {
+            _observers?.Clear();
+        }
+        finally
+        {
+            _lock?.ExitWriteLock();
+            _lock?.Dispose();
+        }
+    }
+}
+</code></pre>
+
+<h3 id="implementação-com-weak-references">Implementação com Weak References</h3>
+
+<pre><code class="language-csharp">// Observer com weak references para evitar vazamentos de memória
+public class WeakReferenceSubject&lt;T&gt; : ISubject&lt;T&gt;
+{
+    private readonly List&lt;WeakReference&lt;IObserver&lt;T&gt;&gt;&gt; _observers;
+    private readonly object _lock = new object();
+
+    public WeakReferenceSubject()
+    {
+        _observers = new List&lt;WeakReference&lt;IObserver&lt;T&gt;&gt;&gt;();
+    }
+
+    public void Subscribe(IObserver&lt;T&gt; observer)
+    {
+        if (observer == null) throw new ArgumentNullException(nameof(observer));
+
+        lock (_lock)
+        {
+            // Remove referencias mortas antes de adicionar nova
+            CleanupDeadReferences();
+            _observers.Add(new WeakReference&lt;IObserver&lt;T&gt;&gt;(observer));
+        }
+    }
+
+    public void Unsubscribe(IObserver&lt;T&gt; observer)
+    {
+        if (observer == null) return;
+
+        lock (_lock)
+        {
+            for (int i = _observers.Count - 1; i &gt;= 0; i--)
+            {
+                if (_observers[i].TryGetTarget(out var target) &amp;&amp; 
+                    ReferenceEquals(target, observer))
+                {
+                    _observers.RemoveAt(i);
+                    break;
+                }
+            }
+        }
+    }
+
+    public void Notify(T data)
+    {
+        List&lt;IObserver&lt;T&gt;&gt; activeObservers;
+
+        lock (_lock)
+        {
+            activeObservers = new List&lt;IObserver&lt;T&gt;&gt;(_observers.Count);
+            
+            for (int i = _observers.Count - 1; i &gt;= 0; i--)
+            {
+                if (_observers[i].TryGetTarget(out var observer))
+                {
+                    activeObservers.Add(observer);
+                }
+                else
+                {
+                    // Remove referência morta
+                    _observers.RemoveAt(i);
+                }
+            }
+        }
+
+        // Notificar fora do lock
+        Parallel.ForEach(activeObservers, observer =&gt;
+        {
+            try
+            {
+                observer.Update(data);
+            }
+            catch (Exception ex)
+            {
+                OnObserverException?.Invoke(observer, ex);
+            }
+        });
+    }
+
+    private void CleanupDeadReferences()
+    {
+        for (int i = _observers.Count - 1; i &gt;= 0; i--)
+        {
+            if (!_observers[i].TryGetTarget(out _))
+            {
+                _observers.RemoveAt(i);
+            }
+        }
+    }
+
+    public event Action&lt;IObserver&lt;T&gt;, Exception&gt; OnObserverException;
+}
+</code></pre>
+
+<h3 id="implementação-com-asyncawait">Implementação com Async/Await</h3>
+
+<pre><code class="language-csharp">// Observer assíncrono
+public interface IAsyncObserver&lt;T&gt;
+{
+    Task UpdateAsync(T data, CancellationToken cancellationToken = default);
+}
+
+public class AsyncSubject&lt;T&gt; : IDisposable
+{
+    private readonly ConcurrentBag&lt;IAsyncObserver&lt;T&gt;&gt; _observers;
+    private readonly SemaphoreSlim _semaphore;
+
+    public AsyncSubject()
+    {
+        _observers = new ConcurrentBag&lt;IAsyncObserver&lt;T&gt;&gt;();
+        _semaphore = new SemaphoreSlim(1, 1);
+    }
+
+    public async Task SubscribeAsync(IAsyncObserver&lt;T&gt; observer)
+    {
+        if (observer == null) throw new ArgumentNullException(nameof(observer));
+
+        await _semaphore.WaitAsync();
+        try
+        {
+            _observers.Add(observer);
+        }
+        finally
+        {
+            _semaphore.Release();
+        }
+    }
+
+    public async Task NotifyAsync(T data, CancellationToken cancellationToken = default)
+    {
+        var observers = _observers.ToArray();
+        
+        var tasks = observers.Select(async observer =&gt;
+        {
+            try
+            {
+                await observer.UpdateAsync(data, cancellationToken);
+            }
+            catch (Exception ex)
+            {
+                OnObserverException?.Invoke(observer, ex);
+            }
+        });
+
+        await Task.WhenAll(tasks);
+    }
+
+    public async Task NotifyAsync(T data, TimeSpan timeout)
+    {
+        using (var cts = new CancellationTokenSource(timeout))
+        {
+            await NotifyAsync(data, cts.Token);
+        }
+    }
+
+    public event Action&lt;IAsyncObserver&lt;T&gt;, Exception&gt; OnObserverException;
+
+    public void Dispose()
+    {
+        _semaphore?.Dispose();
+    }
+}
+</code></pre>
+
+<h2 id="exemplo-prático">Exemplo Prático</h2>
+
+<p>Sistema de monitoramento de preços de ações com diferentes tipos de observers:</p>
+
+<pre><code class="language-csharp">// Modelo de dados
+public class StockPrice
+{
+    public string Symbol { get; set; }
+    public decimal Price { get; set; }
+    public decimal Change { get; set; }
+    public DateTime Timestamp { get; set; }
+}
+
+// Observer para logging
+public class StockPriceLogger : IObserver&lt;StockPrice&gt;
+{
+    private readonly ILogger _logger;
+
+    public StockPriceLogger(ILogger logger)
+    {
+        _logger = logger;
+    }
+
+    public void Update(StockPrice data)
+    {
+        _logger.Log($"[{data.Timestamp}] {data.Symbol}: ${data.Price} ({data.Change:+0.00;-0.00;0.00})");
+    }
+}
+
+// Observer para alertas
+public class StockPriceAlertService : IAsyncObserver&lt;StockPrice&gt;
+{
+    private readonly INotificationService _notificationService;
+    private readonly Dictionary&lt;string, decimal&gt; _alertThresholds;
+
+    public StockPriceAlertService(INotificationService notificationService)
+    {
+        _notificationService = notificationService;
+        _alertThresholds = new Dictionary&lt;string, decimal&gt;();
+    }
+
+    public void SetAlert(string symbol, decimal threshold)
+    {
+        _alertThresholds[symbol] = threshold;
+    }
+
+    public async Task UpdateAsync(StockPrice data, CancellationToken cancellationToken = default)
+    {
+        if (_alertThresholds.TryGetValue(data.Symbol, out var threshold))
+        {
+            if (Math.Abs(data.Change) &gt;= threshold)
+            {
+                var message = $"ALERT: {data.Symbol} moved {data.Change:+0.00;-0.00;0.00} to ${data.Price}";
+                await _notificationService.SendAlertAsync(message, cancellationToken);
+            }
+        }
+    }
+}
+
+// Observer para cache/armazenamento
+public class StockPriceCache : IObserver&lt;StockPrice&gt;
+{
+    private readonly ConcurrentDictionary&lt;string, StockPrice&gt; _cache;
+    private readonly IRepository&lt;StockPrice&gt; _repository;
+
+    public StockPriceCache(IRepository&lt;StockPrice&gt; repository)
+    {
+        _cache = new ConcurrentDictionary&lt;string, StockPrice&gt;();
+        _repository = repository;
+    }
+
+    public void Update(StockPrice data)
+    {
+        // Atualizar cache
+        _cache.AddOrUpdate(data.Symbol, data, (key, oldValue) =&gt; data);
+
+        // Persistir de forma assíncrona (fire-and-forget)
+        Task.Run(async () =&gt;
+        {
+            try
+            {
+                await _repository.SaveAsync(data);
+            }
+            catch (Exception ex)
+            {
+                // Log error but don't throw
+                Console.WriteLine($"Error saving stock price: {ex.Message}");
+            }
+        });
+    }
+
+    public StockPrice GetLatestPrice(string symbol)
+    {
+        _cache.TryGetValue(symbol, out var price);
+        return price;
+    }
+}
+
+// Sistema principal de monitoramento
+public class StockPriceMonitor : IDisposable
+{
+    private readonly ThreadSafeSubject&lt;StockPrice&gt; _syncSubject;
+    private readonly AsyncSubject&lt;StockPrice&gt; _asyncSubject;
+    private readonly Timer _priceUpdateTimer;
+    private readonly Random _random = new Random();
+
+    public StockPriceMonitor()
+    {
+        _syncSubject = new ThreadSafeSubject&lt;StockPrice&gt;();
+        _asyncSubject = new AsyncSubject&lt;StockPrice&gt;();
+        
+        // Simular atualizações de preço
+        _priceUpdateTimer = new Timer(SimulatePriceUpdate, null, 
+            TimeSpan.FromSeconds(1), TimeSpan.FromSeconds(1));
+    }
+
+    public void SubscribeSync(IObserver&lt;StockPrice&gt; observer)
+    {
+        _syncSubject.Subscribe(observer);
+    }
+
+    public async Task SubscribeAsync(IAsyncObserver&lt;StockPrice&gt; observer)
+    {
+        await _asyncSubject.SubscribeAsync(observer);
+    }
+
+    private async void SimulatePriceUpdate(object state)
+    {
+        var symbols = new[] { "AAPL", "GOOGL", "MSFT", "AMZN" };
+        var symbol = symbols[_random.Next(symbols.Length)];
+        
+        var price = new StockPrice
+        {
+            Symbol = symbol,
+            Price = 100 + _random.Next(-50, 51),
+            Change = (_random.NextDouble() - 0.5) * 10,
+            Timestamp = DateTime.UtcNow
+        };
+
+        // Notificar observers síncronos
+        _syncSubject.Notify(price);
+
+        // Notificar observers assíncronos
+        await _asyncSubject.NotifyAsync(price, TimeSpan.FromSeconds(5));
+    }
+
+    public void Dispose()
+    {
+        _priceUpdateTimer?.Dispose();
+        _syncSubject?.Dispose();
+        _asyncSubject?.Dispose();
+    }
+}
+
+// Uso do sistema
+public class StockMonitoringService
+{
+    public async Task StartMonitoringAsync()
+    {
+        var monitor = new StockPriceMonitor();
+        var logger = new ConsoleLogger();
+        var notificationService = new EmailNotificationService();
+        var repository = new SqlStockPriceRepository();
+
+        // Configurar observers
+        var priceLogger = new StockPriceLogger(logger);
+        var alertService = new StockPriceAlertService(notificationService);
+        var priceCache = new StockPriceCache(repository);
+
+        // Configurar alertas
+        alertService.SetAlert("AAPL", 5.0m);
+        alertService.SetAlert("GOOGL", 10.0m);
+
+        // Registrar observers
+        monitor.SubscribeSync(priceLogger);
+        monitor.SubscribeSync(priceCache);
+        await monitor.SubscribeAsync(alertService);
+
+        // Manter sistema rodando
+        Console.WriteLine("Monitoramento iniciado. Pressione qualquer tecla para parar...");
+        Console.ReadKey();
+
+        monitor.Dispose();
+    }
+}
+</code></pre>
+
+<h2 id="benefícios">Benefícios</h2>
+
+<h3 id="1-thread-safety">1. <strong>Thread-Safety</strong></h3>
+
+<ul>
+  <li>ReaderWriterLockSlim para performance otimizada em cenários read-heavy</li>
+  <li>Copy-on-iteration previne modificações concorrentes durante notificação</li>
+  <li>Tratamento de exceções isolado evita corrupção de estado</li>
+</ul>
+
+<h3 id="2-gerenciamento-de-memória">2. <strong>Gerenciamento de Memória</strong></h3>
+
+<ul>
+  <li>Weak references previnem vazamentos de memória</li>
+  <li>Cleanup automático de referências mortas</li>
+  <li>Disposable pattern para liberação adequada de recursos</li>
+</ul>
+
+<h3 id="3-performance">3. <strong>Performance</strong></h3>
+
+<ul>
+  <li>Paralelização de notificações quando apropriado</li>
+  <li>Minimização de tempo em locks críticos</li>
+  <li>Otimizações para cenários read-heavy vs write-heavy</li>
+</ul>
+
+<h3 id="4-robustez">4. <strong>Robustez</strong></h3>
+
+<ul>
+  <li>Tratamento de exceções não afeta outros observers</li>
+  <li>Timeouts para operações assíncronas</li>
+  <li>Cancellation tokens para operações longas</li>
+</ul>
+
+<h3 id="5-flexibilidade">5. <strong>Flexibilidade</strong></h3>
+
+<ul>
+  <li>Suporte tanto para operações síncronas quanto assíncronas</li>
+  <li>Diferentes estratégias de notificação</li>
+  <li>Extensibilidade através de interfaces bem definidas</li>
+</ul>
+
+<h2 id="considerações-de-implementação">Considerações de Implementação</h2>
+
+<h3 id="escolha-da-estratégia-de-sincronização"><strong>Escolha da estratégia de sincronização:</strong></h3>
+<ul>
+  <li><code>lock</code> simples para casos básicos</li>
+  <li><code>ReaderWriterLockSlim</code> para cenários read-heavy</li>
+  <li><code>ConcurrentCollection</code> para operações lock-free quando possível</li>
+</ul>
+
+<h3 id="weak-vs-strong-references"><strong>Weak vs Strong References:</strong></h3>
+<ul>
+  <li>Weak references para prevenir vazamentos de memória</li>
+  <li>Strong references quando lifecycle é controlado explicitamente</li>
+</ul>
+
+<h3 id="notificação-síncrona-vs-assíncrona"><strong>Notificação Síncrona vs Assíncrona:</strong></h3>
+<ul>
+  <li>Síncrona para operações rápidas e determinísticas</li>
+  <li>Assíncrona para operações I/O ou processamento pesado</li>
+</ul>
+
+<h3 id="tratamento-de-exceções"><strong>Tratamento de Exceções:</strong></h3>
+<ul>
+  <li>Isolamento de falhas entre observers</li>
+  <li>Logging adequado para debugging</li>
+  <li>Recovery gracioso quando possível</li>
+</ul>
