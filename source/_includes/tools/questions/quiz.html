@@ -25,7 +25,7 @@
     questions.forEach((q, idx) => {
       const block = document.createElement('div');
       block.className = 'question-block';
-      block.innerHTML = `<h2>${q.title}</h2>` +
+      block.innerHTML = `<h2>${idx +1}. ${q.title}</h2>` +
         q.options.map((opt, i) =>
           `<p><label><input type="radio" name="q${idx}" value="${i}"> ${opt}</label></p>`
         ).join('');
