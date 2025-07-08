@@ -7,5 +7,5 @@ options:
 - Only for importing namespaces
 - Creating variables
 answer: 1
-explanation: The 'using' statement serves two purposes: importing namespaces and ensuring automatic disposal of resources that implement IDisposable, providing proper resource management.
+explanation: "The 'using' statement serves two purposes: importing namespaces and ensuring automatic disposal of resources that implement IDisposable, providing proper resource management."
 ---
