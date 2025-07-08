@@ -10,26 +10,32 @@ title: Deutsch - Bucher Eins - Lektion #5 - Wortschats
 
 ---
 
-> #### 1. Beantworten Sie die Fragen:
-
+> #### 1. Beantworten Sie die Fragen
+>
 > ##### A) Was kaufst du jeden Tag?
-> - Ich kauf jeden Tag ein Brot. <input type="checkbox" />
-
+>
+> - [ ] Ich kauf jeden Tag ein Brot.
+>
 > ##### B) Was magst du lieber: ein kleines Haus oder eine große Wohnung?
-> - Ich mag lieber ein kleines Haus. <input type="checkbox" />
-
+>
+> - [ ] Ich mag lieber ein kleines Haus.
+>
 > ##### C) Was möchtest du heute Abend essen?
-> - Ich möchte Abendessen eine Pasta. <input type="checkbox" />
-
+>
+> - [ ] Ich möchte Abendessen eine Pasta.
+>
 > ##### D) Was trinkst du abends nicht?
-> - Ich trinke abends Kaffee nicht. <input type="checkbox" />
-
+>
+> - [ ] Ich trinke abends Kaffee nicht.
+>
 > ##### E) Ich habe ein Auto und ein Fahrrad. Was möchtest du habe?
-> - Ich möchte ein Auto und ein Fahrrad. <input type="checkbox" />
+>
+> - [ ] Ich möchte ein Auto und ein Fahrrad.
 
 ---
 
-> #### 2. Schreiben Sie Sätze mit:
-
+> #### 2. Schreiben Sie Sätze mit
+>
 > ##### E) mögen / essen
-> - Ich mögen esse Pasta. <input type="checkbox" />
+>
+> - [ ] Ich mögen esse Pasta.
