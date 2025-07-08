@@ -1,11 +1,12 @@
----
+
 layout: question
-title: What is Azure DevOps primarily used for?
+title: Which Azure service should you use for real-time stream data processing?
 options:
-- Virtual machine monitoring
-- Application lifecycle management and CI/CD
-- Data analytics and reporting
-- Database administration
-answer: 2
-explanation: "Azure DevOps provides a complete set of development tools for planning, developing, testing, and deploying applications. It includes version control, CI/CD pipelines, project management, and testing tools."
+- Azure Logic Apps
+- Azure Synapse Analytics
+- Azure Stream Analytics
+- Azure Data Factory
+answer: 3
+explanation: "Azure Stream Analytics is an event-processing engine that enables real-time analytics on multiple streams of data from sources such as IoT devices and logs."
+difficulty: easy
 ---

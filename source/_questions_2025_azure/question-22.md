@@ -1,12 +1,12 @@
----
-layout: question
-title: Which Azure service provides DNS hosting?
-options:
-- Azure Load Balancer
-- Azure Application Gateway
-- Azure Traffic Manager
-- Azure DNS
-answer: 4
-explanation: "Azure DNS provides authoritative DNS hosting using Microsoft Azure infrastructure, offering fast performance and high availability."
----
 
+layout: question
+title: What service in Azure helps to securely store and manage secrets, keys, and certificates?
+options:
+- Azure Key Vault
+- Azure Identity Protection
+- Azure Information Protection
+- Azure Security Center
+answer: 1
+explanation: "Azure Key Vault is designed to securely store and manage sensitive information such as secrets, encryption keys, and certificates."
+difficulty: easy
+---

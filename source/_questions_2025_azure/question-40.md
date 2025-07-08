@@ -1,12 +1,12 @@
----
-layout: question
-title: What is Azure Monitor?
-options:
-- Storage service
-- Compute service
-- Monitoring and analytics service
-- Database service
-answer: 3
-explanation: "Azure Monitor provides comprehensive monitoring for applications and infrastructure with metrics, logs, and alerts."
----
 
+layout: question
+title: Which Azure service should you use for real-time stream data processing?
+options:
+- Azure Synapse Analytics
+- Azure Data Factory
+- Azure Stream Analytics
+- Azure Logic Apps
+answer: 3
+explanation: "Azure Stream Analytics is an event-processing engine that enables real-time analytics on multiple streams of data from sources such as IoT devices and logs."
+difficulty: easy
+---

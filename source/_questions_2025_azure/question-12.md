@@ -1,12 +1,12 @@
----
-layout: question
-title: Which Azure service provides DNS hosting?
-options:
-- Azure Application Gateway
-- Azure Load Balancer
-- Azure DNS
-- Azure Traffic Manager
-answer: 3
-explanation: "Azure DNS provides authoritative DNS hosting using Microsoft Azure infrastructure, offering fast performance and high availability."
----
 
+layout: question
+title: Which Azure monitoring service provides full observability across applications and infrastructure?
+options:
+- Azure Monitor
+- Azure Policy
+- Azure Service Health
+- Azure Advisor
+answer: 1
+explanation: "Azure Monitor collects and analyzes telemetry data to provide full-stack monitoring, allowing you to diagnose and resolve issues across applications and infrastructure."
+difficulty: hard
+---

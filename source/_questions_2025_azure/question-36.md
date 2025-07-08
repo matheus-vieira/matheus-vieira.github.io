@@ -1,12 +1,12 @@
----
-layout: question
-title: What is Azure Cosmos DB?
-options:
-- Storage account
-- Network service
-- Virtual machine service
-- NoSQL database service
-answer: 4
-explanation: "Azure Cosmos DB is a globally distributed, multi-model NoSQL database service that provides high availability and low latency access to data."
----
 
+layout: question
+title: Which Azure monitoring service provides full observability across applications and infrastructure?
+options:
+- Azure Service Health
+- Azure Monitor
+- Azure Policy
+- Azure Advisor
+answer: 2
+explanation: "Azure Monitor collects and analyzes telemetry data to provide full-stack monitoring, allowing you to diagnose and resolve issues across applications and infrastructure."
+difficulty: hard
+---

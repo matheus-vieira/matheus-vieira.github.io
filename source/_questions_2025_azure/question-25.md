@@ -1,12 +1,12 @@
----
-layout: question
-title: What is Azure Monitor?
-options:
-- Database service
-- Compute service
-- Storage service
-- Monitoring and analytics service
-answer: 4
-explanation: "Azure Monitor provides comprehensive monitoring for applications and infrastructure with metrics, logs, and alerts."
----
 
+layout: question
+title: Which Azure monitoring service provides full observability across applications and infrastructure?
+options:
+- Azure Service Health
+- Azure Monitor
+- Azure Advisor
+- Azure Policy
+answer: 2
+explanation: "Azure Monitor collects and analyzes telemetry data to provide full-stack monitoring, allowing you to diagnose and resolve issues across applications and infrastructure."
+difficulty: easy
+---

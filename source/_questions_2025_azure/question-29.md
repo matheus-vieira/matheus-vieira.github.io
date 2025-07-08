@@ -1,12 +1,12 @@
----
-layout: question
-title: Which Azure service provides serverless computing?
-options:
-- Azure Storage
-- Azure VMs
-- Azure SQL
-- Azure Functions
-answer: 4
-explanation: "Azure Functions is a serverless compute service that lets you run event-triggered code without managing infrastructure."
----
 
+layout: question
+title: Which Azure monitoring service provides full observability across applications and infrastructure?
+options:
+- Azure Monitor
+- Azure Service Health
+- Azure Advisor
+- Azure Policy
+answer: 1
+explanation: "Azure Monitor collects and analyzes telemetry data to provide full-stack monitoring, allowing you to diagnose and resolve issues across applications and infrastructure."
+difficulty: medium
+---

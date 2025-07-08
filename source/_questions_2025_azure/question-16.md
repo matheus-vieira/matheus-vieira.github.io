@@ -1,12 +1,12 @@
----
-layout: question
-title: What is Azure Cosmos DB?
-options:
-- Virtual machine service
-- Network service
-- Storage account
-- NoSQL database service
-answer: 4
-explanation: "Azure Cosmos DB is a globally distributed, multi-model NoSQL database service that provides high availability and low latency access to data."
----
 
+layout: question
+title: Which Azure service should you use for real-time stream data processing?
+options:
+- Azure Logic Apps
+- Azure Synapse Analytics
+- Azure Data Factory
+- Azure Stream Analytics
+answer: 4
+explanation: "Azure Stream Analytics is an event-processing engine that enables real-time analytics on multiple streams of data from sources such as IoT devices and logs."
+difficulty: easy
+---

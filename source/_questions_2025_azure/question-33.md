@@ -1,12 +1,12 @@
----
-layout: question
-title: What is Azure Key Vault used for?
-options:
-- File storage
-- Virtual machine management
-- Database hosting
-- Secrets and key management
-answer: 4
-explanation: "Azure Key Vault is a cloud service for securely storing and accessing secrets, keys, and certificates."
----
 
+layout: question
+title: What Azure service is best suited for hosting a microservices-based architecture using containers?
+options:
+- Azure Functions
+- Azure App Service
+- Azure Logic Apps
+- Azure Kubernetes Service (AKS)
+answer: 4
+explanation: "AKS is a managed Kubernetes service in Azure designed specifically for running containerized applications in a microservices architecture."
+difficulty: hard
+---

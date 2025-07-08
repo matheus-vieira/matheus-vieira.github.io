@@ -1,12 +1,12 @@
----
-layout: question
-title: What is Azure Cosmos DB?
-options:
-- Network service
-- NoSQL database service
-- Virtual machine service
-- Storage account
-answer: 2
-explanation: "Azure Cosmos DB is a globally distributed, multi-model NoSQL database service that provides high availability and low latency access to data."
----
 
+layout: question
+title: Which Azure service allows you to manage infrastructure as code using a domain-specific language?
+options:
+- Azure Blueprints
+- Azure DevOps
+- Bicep
+- Azure Resource Graph
+answer: 3
+explanation: "Bicep is a domain-specific language (DSL) for deploying Azure resources declaratively and is designed to simplify the authoring experience compared to JSON-based ARM templates."
+difficulty: medium
+---
