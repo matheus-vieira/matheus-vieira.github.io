@@ -2,6 +2,7 @@
 layout: page
 permalink: /study/deutsch/bucher-1/lektion-2/hausaufgaben
 title: Deutsch - Bucher Eins - Lektion #2 - Hausaufgaben
+excerpt: ""
 ---
 
 ## Deutsch - Lektion #3

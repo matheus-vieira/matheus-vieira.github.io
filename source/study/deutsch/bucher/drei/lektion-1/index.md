@@ -2,6 +2,7 @@
 layout: page
 permalink: /study/deutsch/bucher/drei/
 title: Lektion 3
+excerpt: ""
 ---
 
 Relativ zu Lektion 11 Übungen

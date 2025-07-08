@@ -2,6 +2,7 @@
 layout: page
 permalink: /study/deutsch/bucher/zwei/lektion-13/hausaufgaben
 title: Deutsch - Bucher Zwei - Lektion #13 - Hausaufgaben
+excerpt: ""
 ---
 
 > ### Lektion 13 **Hausaufgaben**

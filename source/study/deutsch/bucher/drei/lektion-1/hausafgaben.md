@@ -2,6 +2,7 @@
 layout: page
 permalink: /study/deutsch/bucher/drei/lektion-1/hausaufgaben
 title: Lektion 1 **Hausaufgaben**
+excerpt: ""
 ---
 
 #### 1. Wir möchten mehr über Sie erfahren. Erzählen Sie: "Der interessanteste Film, den ich gesehen habe"

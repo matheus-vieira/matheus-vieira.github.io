@@ -2,6 +2,7 @@
 layout: page
 permalink: /study/deutsch/bucher-1/lektion-1
 title: Deutsch - Bucher Eins - Lektion #1
+excerpt: ""
 ---
 
 ## Deutsch - Lektion #1

@@ -2,6 +2,7 @@
 layout: page
 permalink: /study/deutsch/bucher/eins/
 title: Deutsch - Bucher Eins
+excerpt: ""
 ---
 
 ### Lektionen

@@ -2,6 +2,7 @@
 layout: page
 permalink: /study/deutsch/bucher/zwei/lektion-15/hausaufgaben
 title: Deutsch - Bucher Zwei - Lektion #15 - Hausaufgaben
+excerpt: ""
 ---
 
 > ### Lektion 15 **Hausaufgaben**

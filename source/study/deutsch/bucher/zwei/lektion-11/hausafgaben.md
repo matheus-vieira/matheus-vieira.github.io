@@ -2,6 +2,7 @@
 layout: page
 permalink: /study/deutsch/bucher/zwei/lektion-11/hausaufgaben
 title: Deutsch - Bucher Zwei - Lektion #11 - Hausaufgaben
+excerpt: ""
 ---
 
 > ### Lektion 11 **Hausaufgaben**
@@ -25,19 +26,24 @@ Alles ist gut? <input type="checkbox" />
 
 ---
 
-#### Beantworten Sie die Fragen:
+#### Beantworten Sie die Fragen
 
 ##### A) Was machst du Im Flughafen?
+
 > - Ich warte auf meinen Flug. <input type="checkbox" />
 
 ##### B) Wir teuer ist ein Flugticket nach Kanada?
+
 > - Er ist € 1258 (eintausendzweihundertachtundfünfizig). <input type="checkbox" />
 
 ##### C) Um wie viel Uhr ist das Flugzeug in Moskau angekommen?
+
 > - Das Flugzeug ist um 8Uhr im Moskau angekommen. <input type="checkbox" />
 
 ##### D) Ist das dein Gepäck?
+
 > - Nein, das ist Luiz' Gepäck. <input type="checkbox" />
 
 ##### E) Wohin fliegst du normalerweise im Urlaub??
+
 > - Ich fliege normalerweise im Urlaub nach Porto Alegre. <input type="checkbox" />

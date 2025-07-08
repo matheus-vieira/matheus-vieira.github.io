@@ -2,6 +2,7 @@
 layout: page
 title: Tools
 permalink: /tools
+excerpt: "Tools that I developed to use on this personal page"
 ---
 
 ## Here you can find some useful tools

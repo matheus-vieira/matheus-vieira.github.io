@@ -2,6 +2,7 @@
 layout: page
 permalink: /resume/skills/
 title: Skills
+excerpt: "Skill I granted through the years"
 ---
 
 ## Some professional skills that I learned through years

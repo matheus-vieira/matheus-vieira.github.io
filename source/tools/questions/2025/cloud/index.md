@@ -2,6 +2,7 @@
 layout: page
 title: Cloud Questions 2025
 permalink: /tools/questions/2025/cloud/
+excerpt: "Questions for Cloud"
 ---
 
 [Take the quiz]({{ '/tools/questions/2025/cloud/quiz/'  | prepend: site.baseurl }}){: .button.button-ghost }

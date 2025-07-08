@@ -2,6 +2,7 @@
 layout: page
 permalink: /study/deutsch/bucher/
 title: Study
+excerpt: ""
 ---
 
 # Liste der Bücher:

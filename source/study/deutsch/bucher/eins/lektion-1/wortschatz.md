@@ -2,6 +2,7 @@
 layout: page
 permalink: /study/deutsch/bucher-1/lektion-1/wortschatz
 title: Deutsch - Bucher Eins - Lektion #1 - Wortschatz
+excerpt: ""
 ---
 
 ## Deutsch - Lektion #1

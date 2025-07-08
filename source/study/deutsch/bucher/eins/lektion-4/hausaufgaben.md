@@ -2,6 +2,7 @@
 layout: page
 permalink: /study/deutsch/bucher-1/lektion-4/hausaufgaben
 title: Deutsch - Bucher Eins - Lektion #4 - Hausaufgaben
+excerpt: ""
 ---
 
 ## Deutsch - Lektion #4

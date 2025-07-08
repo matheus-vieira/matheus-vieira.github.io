@@ -2,6 +2,7 @@
 layout: page
 permalink: /study/deutsch/bucher/zwei/lektion-23/
 title: Deutsch - Bucher Zwei - Lektion #23
+excerpt: ""
 ---
 
 Relativ zu Lektion 23 Übungen
