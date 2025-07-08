@@ -2,7 +2,9 @@
 
 {% assign languages = site.languages | sort: "order" %}
 {% for l in languages %}
-<div class="page">
-    <strong>{{ l[lang].name }}</strong> &mdash; {{ l[lang].level }}
+<div itemprop="knowsLanguage" itemscope itemtype="https://schema.org/Language">
+  <p>
+    <strong itemprop="name">{{ l[lang].name }}</strong>: <span itemprop="proficiencyLevel">{{ l[lang].level }}</span>
+  </p>
 </div>
 {% endfor %}

@@ -81,6 +81,8 @@ max_experiences: 4
 messages:
   pt-br:
     page-title: Currículo
+    header-container: Cabeçalho do Currículo de Matheus Costa Vieira
+    main-container: Conteúdo principal do currículo
     print-alert: "Opcionalmente remova o cabeçalho nas opções de impressão"
     print-resume:
       location: "São Paulo - SP - Brasil"
@@ -121,6 +123,8 @@ messages:
       professional-goals: "Projetar soluções inovadoras aplicando princípios de design de software e padrões de arquitetura. Entregar aplicações de alta qualidade apoiadas por testes automatizados e com forte foco na experiência do usuário e na resolução de problemas."
   en-us:
     page-title: Resume
+    header-container: Resume Header for Matheus Costa Vieira
+    main-container: Main content of the resume
     print-alert: "Optionally remove header in print options"
     print-resume:
       location: "São Paulo - SP - Brazil"

@@ -1,0 +1,24 @@
+{% assign lang = page.lang | default: "en-us" %}
+
+<h2>{{ site.messages[lang].print-resume.title.courses }}</h2>
+
+{% if site.graduations %}
+  {% assign graduations = site.graduations | sort: "order" %}
+{% else %}
+  {% assign graduations = "" | split: "" %}
+{% endif %}
+{% for g in graduations reversed %}
+  {% if g.type == "Individual course" and g.type != "technical" %}
+  <div itemscope itemtype="https://schema.org/Course">
+    <p>
+      <strong itemprop="name">{{ g[lang].name }}</strong> - 
+      <span itemprop="provider">{{ g.institution }}</span>
+      (<time itemprop="startDate" datetime="{{ g.startdate }}">{{ g.startdate | date: "%Y" }}</time>
+      {% if g.enddate %}
+        - <time itemprop="endDate" datetime="{{ g.enddate }}">{{ g.enddate | date: "%Y" }}</time>
+      {% endif %}
+      )
+    </p>
+  </div>
+  {% endif %}
+{% endfor %}

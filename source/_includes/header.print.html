@@ -1,27 +1,21 @@
 {% assign lang = page.lang | default: "en-us" %}
-<small>
-  <article role="article" class="page card">
-    <table width="100%">
-      <tr>
-        <th valign="left" style="text-align: left;" rowspan="5">
-          <h1>{{ site.author.full-name }}</h1>
-        </th>
-      </tr>
-      <tr>
-        <th valign="right" style="text-align: right;">{{ site.messages[lang].print-resume.location }}</th>
-      </tr>
-      <tr>
-        <th valign="right" style="text-align: right;"><a href="tel:{{ site.author.phone }}" title="Call me" target="_blank"><i
-              class="icon icon-phone"></i> {{ site.author.cellphone }}</a></th>
-      </tr>
-      <tr>
-        <th valign="right" style="text-align: right;"><a href="mailto:{{ site.author.email }}" title="Personal mail"
-            target="_blank"><i class="icon icon-mail"></i> {{ site.author.email }}</a></th>
-      </tr>
-      <tr>
-        <th valign="right" style="text-align: right;"><a href="{{ site.author.linkedin }}" title="LinkedIn" target="_blank"><i
-              class="icon icon-linkedin"></i> {{ site.author.linkedin }}</a></th>
-      </tr>
-    </table>
-  </article>
-</small>
+<section class="resume-header-grid" aria-label="{{ site.messages[lang].header-container }}">
+  <div class="resume-header-name">
+    <h1 itemprop="name">{{ site.author.full-name }}</h1>
+  </div>
+  <div class="resume-header-contacts">
+    <p itemprop="address">{{ site.messages[lang].print-resume.location }}</p>
+    <p>
+      <strong>Phone:</strong>
+      <a href="tel:{{ site.author.cellphone | strip }}" itemprop="telephone">{{ site.author.cellphone | strip }}</a>
+    </p>
+    <p>
+      <strong>Email:</strong>
+      <a href="mailto:{{ site.author.email }}" itemprop="email">{{ site.author.email }}</a>
+    </p>
+    <p>
+      <strong>LinkedIn:</strong>
+      <a href="{{ site.author.linkedin }}" itemprop="sameAs">LinkedIn Profile</a>
+    </p>
+  </div>
+</section>

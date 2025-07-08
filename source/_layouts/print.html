@@ -1,18 +1,93 @@
 ---
 layout: compress
 ---
-{% assign lang = page.lang | default: "en-us" %}<!DOCTYPE html>
-<html>
-<head>{% include head.print.html %}</head>
+{% assign lang = page.lang | default: "en-us" %}
+<!DOCTYPE html>
+<html lang="{{ lang }}">
+
+<head>
+  {% include head.print.html %}
+  <style>
+    .resume-header-grid {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      grid-template-rows: auto auto auto;
+      gap: 0.2em 0;
+    }
+
+    .resume-header-name {
+      grid-column: 1 / 2;
+      grid-row: 2 / 4;
+      align-self: center;
+    }
+
+    .resume-header-name h1 {
+      margin: 0;
+      font-weight: bold;
+    }
+
+    .resume-header-contacts {
+      grid-column: 2 / 3;
+      grid-row: 3 / 4;
+      text-align: right;
+      align-self: start;
+    }
+
+    .resume-header-contacts p {
+      margin: 0;
+    }
+
+    .button:focus {
+      outline: 2px solid #005fcc;
+      outline-offset: 2px;
+    }
+  </style>
+</head>
+
 <body>
+
   <!-- Google Tag Manager (noscript) -->
-  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id={{ site.google_analytics_container }}"height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id={{ site.google_analytics_container }}" height="0"
+      width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <!-- End Google Tag Manager (noscript) -->
-  {% include header.print.html %}
-  {{ content }}
+  <main itemscope itemtype="https://schema.org/Person" lang="{{ lang }}">
+    <div style="margin: 1em 0;">
+      <button type="button" onclick="downloadTxt()" class="button button-ghost" aria-label="Download as TXT">Download TXT</button>
+      <button type="button" onclick="printMain()" class="button button-ghost" aria-label="Print page">Print</button>
+    </div>
+    <section id="resume" lang="{{ lang }}">
+      {% include header.print.html %}
+      {{ content }}
+    </section>
+  </main>
+
   <script>
-    alert('{{ site.messages[lang].print-alert }}');
-    print();
+    function downloadTxt() {
+      var main = document.querySelector('main');
+      var text = main.innerText;
+      var blob = new Blob([text], { type: 'text/plain' });
+      var link = document.createElement('a');
+      link.href = window.URL.createObjectURL(blob);
+      link.download = 'resume.txt';
+      link.click();
+    }
+
+    function printMain() {
+      alert('{{ site.messages[lang].print-alert }}');
+      var main = document.querySelector('#resume').cloneNode(true);
+      var printWindow = window.open('', '', 'width=800,height=600');
+      printWindow.document.write('<html lang="{{ lang }}"><head><title>{{ page.title }}</title>');
+      document.querySelectorAll('style,link[rel="stylesheet"]').forEach(function (style) {
+        printWindow.document.write(style.outerHTML);
+      });
+      printWindow.document.write('</head><body>');
+      printWindow.document.write(main.outerHTML);
+      printWindow.document.write('</body></html>');
+      printWindow.document.close();
+      printWindow.focus();
+      printWindow.print();
+    }
   </script>
 </body>
+
 </html>
