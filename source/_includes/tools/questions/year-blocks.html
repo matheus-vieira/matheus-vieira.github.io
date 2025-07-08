@@ -1,0 +1,15 @@
+<div class="question-subjects">
+  {% for subject in include.subjects %}
+    {% assign label = subject | capitalize %}
+    {% if subject == "dotnet" %}
+      {% assign label = "NET" %}
+    {% elsif subject == "csharp" %}
+      {% assign label = "C#" %}
+    {% endif %}
+    {% assign is_even = forloop.index0 | modulo: 2 %}
+    <a href="{{ '/tools/questions/' | append: include.year | append: '/' | append: subject | append: '/quiz/' | relative_url }}"
+       class="button{% if is_even == 0 %} button-ghost{% endif %}">
+      {{ label }}
+    </a>
+  {% endfor %}
+</div>
