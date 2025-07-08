@@ -1,0 +1,74 @@
+<p>A automação de pipelines de CI/CD com GitHub Actions é uma prática moderna que acelera entregas, garante qualidade e reduz erros em projetos hospedados no Azure.</p>
+
+<h3 id="github-actions--conceito-chave-pipeline-de-cicd-para-azure">[GitHub Actions] — Conceito-chave: Pipeline de CI/CD para Azure</h3>
+
+<p>GitHub Actions permite criar fluxos de trabalho automatizados (workflows) que integram, testam e fazem deploy de aplicações diretamente a partir do repositório GitHub para o Azure, utilizando arquivos YAML versionados junto ao código.</p>
+
+<h4 id="o-que-é-um-pipeline-de-cicd-com-github-actions">O que é um pipeline de CI/CD com GitHub Actions?</h4>
+
+<p>Um pipeline de CI/CD (Integração Contínua e Entrega Contínua) automatiza etapas como build, testes, validação e deploy de aplicações. Com GitHub Actions, você define essas etapas em um arquivo <code>.github/workflows/main.yml</code> (ou nome similar), especificando jobs, triggers e ações a serem executadas.</p>
+
+<h4 id="por-que-usar-github-actions-para-deploy-em-azure">Por que usar GitHub Actions para deploy em Azure?</h4>
+
+<ul>
+  <li><strong>Integração nativa</strong>: GitHub Actions possui ações oficiais para Azure, facilitando autenticação e deploy.</li>
+  <li><strong>Automação ponta a ponta</strong>: Desde o commit até o deploy, todo o fluxo é automatizado e auditável.</li>
+  <li><strong>Escalabilidade e flexibilidade</strong>: Suporta múltiplos ambientes, branches e estratégias de deploy (blue/green, canary, etc.).</li>
+  <li><strong>Segurança</strong>: Permite uso de secrets e integração com Azure para autenticação segura.</li>
+</ul>
+
+<h4 id="github-actions--pipeline-de-cicd-para-azure---exemplo-prático">[GitHub Actions] — Pipeline de CI/CD para Azure - Exemplo prático</h4>
+
+<p>Suponha que você queira automatizar o deploy de uma aplicação Node.js para o Azure App Service. O pipeline pode ser definido assim:</p>
+
+<pre><code class="language-yaml">name: CI/CD para Azure App Service
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Instalar dependências
+        run: npm install
+
+      - name: Rodar testes
+        run: npm test
+
+      - name: Build da aplicação
+        run: npm run build
+
+      - name: Login no Azure
+        uses: azure/login@v2
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Deploy para Azure App Service
+        uses: azure/webapps-deploy@v3
+        with:
+          app-name: 'meu-app-service'
+          slot-name: 'production'
+          package: '.'
+</code></pre>
+
+<p><strong>Explicação dos principais pontos:</strong></p>
+
+<ul>
+  <li>O workflow é disparado a cada push na branch <code>main</code>.</li>
+  <li>O código é baixado, dependências instaladas, testes executados e a aplicação é buildada.</li>
+  <li>O login no Azure é feito usando um secret seguro (<code>AZURE_CREDENTIALS</code>), geralmente criado via Azure Service Principal.</li>
+  <li>O deploy é realizado usando a ação oficial do Azure para App Service.</li>
+</ul>
+
+<p>Esse padrão pode ser adaptado para outros tipos de aplicações e serviços Azure (Functions, Containers, Static Web Apps, etc.), promovendo entregas rápidas, seguras e auditáveis.</p>

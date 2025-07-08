@@ -1,0 +1,117 @@
+<p>Esse artigo faz parte de uma série de artigos sobre como utilizar o EFCore com múltiplos providers de banco de dados. Se quiser veja outras partes dessa série em <a href="#related">links relacionados</a>.</p>
+
+<h2 id="o-que-isso-quer-dizer">O que isso quer dizer?</h2>
+
+<blockquote>
+  <p><a href="https://docs.microsoft.com/pt-br/dotnet/csharp/programming-guide/classes-and-structs/extension-methods">Métodos de extensão</a>, como o próprio nome diz, adiciona extensões a objetos existentes, evitando alterar códigos existentes (o que facilmente leva a introdução de bugs e complexidade na escrita e leitura de novos códigos)</p>
+</blockquote>
+
+<p>Perceba a contribução para os princípios Single Responsibility e Open/Closed do SOLID e com isso atingimos um bom Clean Code.</p>
+
+<p>Um exemplo simples de utilização seria transformar um texto para algumas convenções de nomenclatura como o CamelCase.</p>
+
+<p>Nesse exemplo não temos acesso direto à classe <a href="https://docs.microsoft.com/en-us/dotnet/api/system.string?view=netcore-3.1"><code>string</code></a> o que já nos impediria de adicionar um método novo a essa classe.</p>
+
+<p>Um exemplo de implementação seria:</p>
+
+<pre><code class="language-c#">var myText = "Hello World";
+var myTextCamelCase = (char.ToLowerInvariant(str[0]) + str.Substring(1))
+                      .Replace(" ", string.Empty);
+_logger.LogInformation(myText + " ToCamelCase -&gt; " + myText.ToCamelCase());
+// Output -&gt; Hello World ToCamelCase -&gt; helloWorld
+</code></pre>
+<p><br />
+Porém isso nos leva a ter que repetir a implementação em qualquer lugar (o que fere o conceito <a href="https://pt.wikipedia.org/wiki/Don%27t_repeat_yourself">DRY</a>). Além de ferir conceitos e princípios temos o problema de falta de clareza no código dificultando a leitura.</p>
+
+<p>Os métodos de extensão nos ajuda da seguinte forma:</p>
+
+<pre><code class="language-c#"> public static class StringExtension
+ {
+     public static string ToCamelCase(this string str)
+     {
+         if(!string.IsNullOrEmpty(str) &amp;&amp; str.Length &gt; 1)
+         {
+             return (char.ToLowerInvariant(str[0]) + str.Substring(1)).Replace(" ", string.Empty);
+         }
+         return str;
+     }
+ }
+</code></pre>
+
+<blockquote>
+  <p>O que indica ser um método de extensão não é o suffixo <code>Extension</code> no nome da classe e sim a palavra reservada <code>this</code> antes do primeiro parâmetro e a característica estática.</p>
+</blockquote>
+
+<p>Assim podemos reutilizar em diversos lugares, apenas utilizando a chamada de um método.</p>
+
+<pre><code class="language-c#">var myText = "Hello World";
+var myTextCamelCase = myText.ToCamelCase();
+Console.WriteLn(myTextCamelCase);
+</code></pre>
+
+<blockquote>
+  <p>Note que na chamada do método não existe parâmetro. O parâmtro é a própria variável do tipo string.
+Note também que a leitura é facilitada.</p>
+</blockquote>
+
+<p>Com a utilização de métodos de extensão podemos reaproveitar código e organizar de forma lógica dentro da nossa aplicação.</p>
+
+<p>Seguindo nessa mesma lógica podemos alterar no ssa classe e atribuir outras convenções de nomes, nesse caso irei renomear a classe e adicionar métodos para snake case e pascal case</p>
+
+<pre><code class="language-c#">using System.Linq;
+
+namespace Helpers.Extensions.String
+{
+    public static class NamingConventionExtension
+    {
+        public static string ToCamelCase(this string str)
+        {
+            if (!string.IsNullOrEmpty(str) &amp;&amp; str.Length &gt; 1)
+                return (char.ToLowerInvariant(str[0]) + str.Substring(1)).Replace(" ", string.Empty);
+            return str;
+        }
+
+        public static string ToSnakeCase(this string str)
+        {
+            return str?.ToLower().Replace(" ", "_");
+        }
+
+        public static string ToPascalCase(this string str)
+        {
+            return string.Join("", str.Split('_')
+                    .Select(w =&gt; w.Trim())
+                    .Where(w =&gt; w.Length &gt; 0)
+                    .Select(w =&gt; w.Substring(0, 1).ToUpper() + w.Substring(1).ToLower()));
+        }
+    }
+}
+</code></pre>
+<p><br />
+Utilização:</p>
+
+<pre><code class="language-c#">var myText = "Hello World";
+_logger.LogInformation(myText + " ToCamelCase -&gt; " + myText.ToCamelCase());
+// Output -&gt; Hello World ToCamelCase -&gt; helloWorld
+_logger.LogInformation(myText + " ToPascalCase -&gt; " + myText.ToPascalCase());
+// Output -&gt; Hello World ToPascalCase -&gt; HelloWorld
+_logger.LogInformation(myText + " ToSnakeCase -&gt; " + myText.ToSnakeCase());
+// Output -&gt; Hello World ToSnakeCase -&gt; hello_world
+</code></pre>
+<p><br />
+Nesse caso a implementação do método está em um projeto auxiliar denomidado Helpers. Isso nos obriga a adicionar <code>using Helpers.Extensions.String;</code></p>
+
+<p>Minha prioridade aqui não foi mostrar uma implentação perfeita dos métodos, apenas de como utilizar os métodos de extensão.</p>
+
+<p>Os métodos de extensão nos ajudam a organizar nosso código por toda a nossa solução. Agrupando responsabilidades ao projeto apropriado.</p>
+
+<p>Agora com nosso código encapsulado podemos melhorar sem precisar alterar a chamada.</p>
+
+<p>Fique a vontade para implementar a sua versão.</p>
+
+<h4 id="related">Links para artigos relacionados</h4>
+
+<p><a href="/blog/pt-br/dotnet-pro-tips/intro/">.NET Pro tips Multiple Databases Providers Introduction</a></p>
+
+<p><a href="/blog/pt-br/dotnet-pro-tips/extension-methods">Parte 1 - Métodos de extensão</a></p>
+
+<p><a href="/blog/pt-br/dotnet-pro-tips/configuring-db">Parte 2 - Configurando o banco de dados</a></p>
