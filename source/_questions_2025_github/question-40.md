@@ -1,11 +1,12 @@
 ---
 layout: question
-title: Which GitHub feature provides code review capabilities?
+title: What are GitHub Discussions?
 options:
-- Wikis
-- Pull Request reviews
-- Issues
-- Projects
-answer: 2
-explanation: Pull Request reviews allow team members to examine code changes, leave comments, suggest improvements, and approve or request changes before the code is merged.
+- Community conversation platform
+- Code debates
+- Chat application
+- Meeting scheduler
+answer: 1
+explanation: "GitHub Discussions provides a space for community conversations, Q&A, and knowledge sharing within repositories."
 ---
+

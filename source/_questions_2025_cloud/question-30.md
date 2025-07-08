@@ -1,11 +1,12 @@
 ---
 layout: question
-title: Which cloud security model emphasizes 'never trust, always verify'?
+title: What is serverless architecture?
 options:
-- Zero Trust
-- Perimeter security
-- Multi-factor authentication
-- Role-based access
-answer: 1
-explanation: Zero Trust security model operates on the principle of 'never trust, always verify', requiring authentication and authorization for every access request regardless of location or user credentials.
+- Physical server management
+- Dedicated server hosting
+- Cloud provider manages server infrastructure
+- No servers involved
+answer: 3
+explanation: "Serverless architecture allows developers to run code without managing servers, as the cloud provider handles all infrastructure management."
 ---
+

@@ -1,11 +1,11 @@
 ---
 layout: question
-title: What is the purpose of GitHub Pages?
+title: Which file is automatically displayed on a repository's main page?
 options:
-- Code storage
-- Database hosting
-- Email services
-- Static website hosting directly from repositories
-answer: 4
-explanation: GitHub Pages is a static site hosting service that takes HTML, CSS, and JavaScript files from a repository and publishes them as a website, ideal for documentation and project pages.
+- main.txt
+- README.md
+- description.doc
+- index.html
+answer: 2
+explanation: "README.md is automatically displayed on the repository's main page, providing information about the project, installation instructions, usage examples, and other relevant details."
 ---

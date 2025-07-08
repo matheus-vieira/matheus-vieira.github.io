@@ -1,11 +1,11 @@
 ---
 layout: question
-title: What is Azure DevOps primarily used for?
+title: Which Azure service provides container orchestration?
 options:
-- Application lifecycle management and CI/CD
-- Virtual machine monitoring
-- Data analytics and reporting
-- Database administration
-answer: 1
-explanation: Azure DevOps provides a complete set of development tools for planning, developing, testing, and deploying applications. It includes version control, CI/CD pipelines, project management, and testing tools.
+- Azure Container Instances
+- Azure Service Fabric
+- Azure Batch
+- Azure Kubernetes Service (AKS)
+answer: 4
+explanation: "Azure Kubernetes Service (AKS) provides managed Kubernetes container orchestration, making it easy to deploy and manage containerized applications at scale."
 ---

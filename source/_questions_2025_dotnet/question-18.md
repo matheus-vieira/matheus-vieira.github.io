@@ -1,11 +1,12 @@
 ---
 layout: question
-title: Which .NET technology is used for building desktop applications with modern UI?
+title: What is minimal APIs in .NET?
 options:
-- WPF (Windows Presentation Foundation)
-- ASP.NET
-- SignalR
-- Entity Framework
-answer: 1
-explanation: WPF is a UI framework for building Windows desktop applications with rich, modern user interfaces. It supports data binding, styling, templates, and multimedia integration.
+- Reduced functionality APIs
+- Microservice APIs
+- Mobile APIs
+- Simplified way to create APIs with minimal code
+answer: 4
+explanation: "Minimal APIs provide a simplified approach to create HTTP APIs with minimal dependencies and configuration."
 ---
+

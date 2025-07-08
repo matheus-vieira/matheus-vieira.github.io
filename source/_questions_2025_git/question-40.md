@@ -1,11 +1,12 @@
 ---
 layout: question
-title: Which command shows the current status of the working directory and staging area?
+title: What does 'git bisect' help with?
 options:
-- git log
-- git diff
-- git info
-- git status
+- Split repository
+- Cut files
+- Divide branches
+- Find bug-introducing commit
 answer: 4
-explanation: git status shows the current state of the working directory and staging area, displaying which files are modified, staged for commit, or untracked.
+explanation: "Git bisect uses binary search to help find the commit that introduced a bug by testing different commits."
 ---
+

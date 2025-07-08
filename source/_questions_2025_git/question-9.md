@@ -1,11 +1,11 @@
 ---
 layout: question
-title: What is a Git remote?
+title: Which command undoes the last commit but keeps the changes in the working directory?
 options:
-- A commit message
-- A merge conflict
-- A reference to a repository hosted elsewhere
-- A local branch
-answer: 3
-explanation: A Git remote is a reference to a repository hosted elsewhere (like GitHub, GitLab). It allows you to synchronize your local repository with repositories on other servers.
+- git revert HEAD
+- git reset --soft HEAD~1
+- git reset --hard HEAD~1
+- git delete HEAD~1
+answer: 2
+explanation: "git reset --soft HEAD~1 moves the HEAD pointer back one commit but keeps the changes in the staging area, allowing you to modify and recommit them."
 ---

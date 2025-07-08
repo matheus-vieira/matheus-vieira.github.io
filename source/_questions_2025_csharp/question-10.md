@@ -1,11 +1,11 @@
 ---
 layout: question
-title: Which C# feature allows you to add methods to existing types without modifying them?
+title: What is the primary purpose of delegates in C#?
 options:
-- Polymorphism
-- Overloading
-- Extension methods
-- Inheritance
-answer: 3
-explanation: Extension methods allow you to add new methods to existing types without modifying their source code or creating derived types. They are defined as static methods in static classes.
+- Data storage
+- String manipulation
+- Memory allocation
+- Type-safe function pointers
+answer: 4
+explanation: "Delegates are type-safe function pointers that can hold references to both static and instance methods. They enable callbacks, event handling, and functional programming patterns."
 ---

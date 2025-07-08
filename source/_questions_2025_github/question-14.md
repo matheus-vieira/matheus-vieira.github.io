@@ -1,11 +1,12 @@
 ---
 layout: question
-title: What is GitHub Actions?
+title: What is GitHub Packages?
 options:
-- A messaging system
-- CI/CD automation platform
-- A database service
-- A code editor
-answer: 2
-explanation: GitHub Actions is a CI/CD platform that allows you to automate workflows, including building, testing, and deploying code directly from your GitHub repository.
+- Archive service
+- Shipping service
+- Code packaging
+- Package hosting service
+answer: 4
+explanation: "GitHub Packages is a package hosting service that allows you to host your packages alongside your code."
 ---
+

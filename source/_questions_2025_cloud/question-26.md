@@ -1,11 +1,12 @@
 ---
 layout: question
-title: Which cloud characteristic ensures you only pay for resources you use?
+title: What is Infrastructure as Code (IaC)?
 options:
-- Measured service
-- Rapid elasticity
-- Broad network access
-- Resource pooling
-answer: 1
-explanation: Measured service is the cloud characteristic that provides transparency and control over resource usage, enabling pay-as-you-go pricing models where you only pay for what you consume.
+- Physical hardware management
+- Database administration
+- Manual server setup
+- Managing infrastructure through code
+answer: 4
+explanation: "Infrastructure as Code (IaC) is the practice of managing and provisioning computing infrastructure through machine-readable definition files."
 ---
+

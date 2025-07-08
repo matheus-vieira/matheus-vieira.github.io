@@ -1,11 +1,11 @@
 ---
 layout: question
-title: Which file is used to specify files that Git should ignore?
+title: What is the difference between 'git pull' and 'git fetch'?
 options:
-- .gitignore
-- .exclude
-- .gitexclude
-- .ignore
+- git pull fetches and merges, git fetch only downloads
+- No difference, they are identical
+- git fetch is faster than git pull
+- git pull works offline, git fetch requires internet
 answer: 1
-explanation: The .gitignore file specifies intentionally untracked files that Git should ignore. It contains patterns matching files and directories that should not be tracked by version control.
+explanation: "git fetch downloads changes from the remote repository without merging them, while git pull performs a fetch followed by a merge, updating your current branch with remote changes."
 ---

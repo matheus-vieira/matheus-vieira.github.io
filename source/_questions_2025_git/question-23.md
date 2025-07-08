@@ -1,11 +1,12 @@
 ---
 layout: question
-title: What does 'git merge' do?
+title: What is a Git hook?
 options:
-- Deletes a branch
-- Combines changes from different branches
-- Creates a new repository
-- Reverts commits
+- Fishing tool
+- Script triggered by Git events
+- Branch connection
+- Remote link
 answer: 2
-explanation: Git merge combines changes from different branches. It integrates commits from one branch into another, typically merging a feature branch into the main branch.
+explanation: "Git hooks are scripts that run automatically when certain Git events occur, like committing or pushing."
 ---
+

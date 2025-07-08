@@ -1,11 +1,11 @@
 ---
 layout: question
-title: What is GitHub Actions?
+title: Which GitHub feature is used for project management and tracking tasks?
 options:
-- CI/CD automation platform
-- A code editor
-- A messaging system
-- A database service
-answer: 1
-explanation: GitHub Actions is a CI/CD platform that allows you to automate workflows, including building, testing, and deploying code directly from your GitHub repository.
+- Repositories
+- Branches
+- Commits
+- Issues
+answer: 4
+explanation: "GitHub Issues provide a way to track bugs, enhancements, and other tasks. They can be assigned to users, labeled, and organized into milestones for project management."
 ---

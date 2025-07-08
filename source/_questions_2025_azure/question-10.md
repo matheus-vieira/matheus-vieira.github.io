@@ -1,11 +1,11 @@
 ---
 layout: question
-title: Which Azure service is designed for real-time data processing?
+title: What is Azure DevOps primarily used for?
 options:
-- Azure Data Factory
-- Azure Storage
-- Azure SQL Database
-- Azure Stream Analytics
-answer: 4
-explanation: Azure Stream Analytics is a real-time analytics service designed to process and analyze streaming data from various sources like IoT devices, applications, and sensors.
+- Virtual machine monitoring
+- Application lifecycle management and CI/CD
+- Data analytics and reporting
+- Database administration
+answer: 2
+explanation: "Azure DevOps provides a complete set of development tools for planning, developing, testing, and deploying applications. It includes version control, CI/CD pipelines, project management, and testing tools."
 ---

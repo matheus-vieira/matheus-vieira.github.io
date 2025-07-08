@@ -1,11 +1,11 @@
 ---
 layout: question
-title: What is the primary purpose of a Content Delivery Network (CDN) in cloud architecture?
+title: Which technology is commonly used for containerization in cloud deployments?
 options:
-- Improve content delivery speed and reduce latency
-- User authentication
-- Database management
-- Data encryption
+- Docker and Kubernetes
+- Physical servers
+- Desktop applications
+- Virtual machines only
 answer: 1
-explanation: A CDN distributes content across geographically dispersed servers, reducing latency and improving content delivery speed by serving users from the nearest edge location.
+explanation: "Docker provides containerization technology while Kubernetes orchestrates and manages containers at scale, making them essential tools for modern cloud deployments."
 ---

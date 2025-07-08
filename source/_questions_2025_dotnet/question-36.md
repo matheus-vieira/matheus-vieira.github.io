@@ -1,11 +1,12 @@
 ---
 layout: question
-title: Which .NET feature enables automatic memory management?
+title: What is Blazor?
 options:
-- Stack allocation only
-- Manual memory allocation
-- Memory pooling
-- Garbage Collection
+- Testing framework
+- Database technology
+- Logging library
+- Framework for building web UIs with C#
 answer: 4
-explanation: Garbage Collection is an automatic memory management feature that automatically reclaims memory used by objects that are no longer reachable, preventing memory leaks and simplifying memory management.
+explanation: "Blazor is a framework for building interactive web UIs using C# instead of JavaScript, running on WebAssembly or server-side."
 ---
+

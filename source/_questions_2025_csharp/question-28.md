@@ -1,11 +1,12 @@
 ---
 layout: question
-title: Which C# feature introduced pattern matching capabilities?
+title: What is pattern matching in C#?
 options:
-- switch expressions
-- while loops
-- if-else statements
-- for loops
-answer: 1
-explanation: Switch expressions, introduced in C# 8.0, provide powerful pattern matching capabilities, allowing more concise and expressive conditional logic compared to traditional switch statements.
+- String pattern search
+- Regular expressions
+- Technique for checking value shapes and extracting data
+- File pattern matching
+answer: 3
+explanation: "Pattern matching allows you to test if a value has a certain shape and extract information from the value when it does."
 ---
+

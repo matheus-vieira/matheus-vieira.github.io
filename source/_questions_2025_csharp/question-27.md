@@ -1,11 +1,12 @@
 ---
 layout: question
-title: What is the purpose of async/await in C#?
+title: What is record type in C#?
 options:
-- Memory management
-- Exception handling
-- Asynchronous programming without blocking threads
-- Synchronous programming only
-answer: 3
-explanation: async/await enables asynchronous programming, allowing methods to run without blocking the calling thread. This improves application responsiveness and scalability.
+- Immutable reference type with value semantics
+- Performance metric
+- Audio recording
+- Database record
+answer: 1
+explanation: "Record types provide a concise syntax for creating reference types with immutable properties and value-based equality."
 ---
+

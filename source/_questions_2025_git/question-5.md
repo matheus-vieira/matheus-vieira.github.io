@@ -1,11 +1,11 @@
 ---
 layout: question
-title: What is the difference between 'git pull' and 'git fetch'?
+title: Which command shows the commit history?
 options:
-- git fetch is faster than git pull
-- No difference, they are identical
-- git pull works offline, git fetch requires internet
-- git pull fetches and merges, git fetch only downloads
+- git diff
+- git status
+- git show
+- git log
 answer: 4
-explanation: git fetch downloads changes from the remote repository without merging them, while git pull performs a fetch followed by a merge, updating your current branch with remote changes.
+explanation: "The 'git log' command displays the commit history, showing commit hashes, authors, dates, and commit messages. Various options can customize the output format."
 ---

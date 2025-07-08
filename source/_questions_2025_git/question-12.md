@@ -1,11 +1,12 @@
 ---
 layout: question
-title: Which Git command is used to create a new branch?
+title: What does 'git cherry-pick' do?
 options:
-- git create <branch-name>
-- git make <branch-name>
-- git new <branch-name>
-- git branch <branch-name>
+- Choose remote
+- Pick repository
+- Select files
+- Apply specific commit to current branch
 answer: 4
-explanation: The 'git branch <branch-name>' command creates a new branch. You can also use 'git checkout -b <branch-name>' to create and switch to the new branch in one command.
+explanation: "Git cherry-pick applies the changes from a specific commit to your current branch without merging the entire branch."
 ---
+

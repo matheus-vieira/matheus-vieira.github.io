@@ -1,11 +1,12 @@
 ---
 layout: question
-title: What are GitHub Releases used for?
+title: What is GitHub Packages?
 options:
-- User authentication
-- Packaging and distributing software versions
-- Temporary code storage
-- Code compilation
-answer: 2
-explanation: GitHub Releases allow you to package software, release notes, and binary files for distribution. They provide a way to mark specific points in your repository's history as release versions.
+- Package hosting service
+- Shipping service
+- Code packaging
+- Archive service
+answer: 1
+explanation: "GitHub Packages is a package hosting service that allows you to host your packages alongside your code."
 ---
+

@@ -1,11 +1,11 @@
 ---
 layout: question
-title: What does 'git rebase' do?
+title: Which file is used to specify files that Git should ignore?
 options:
-- Creates a new repository
-- Merges two repositories
-- Deletes all commits
-- Reapplies commits on top of another base tip
-answer: 4
-explanation: Git rebase reapplies commits on top of another base tip, creating a linear project history. It's an alternative to merging that results in a cleaner commit history.
+- .gitignore
+- .ignore
+- .exclude
+- .gitexclude
+answer: 1
+explanation: "The .gitignore file specifies intentionally untracked files that Git should ignore. It contains patterns matching files and directories that should not be tracked by version control."
 ---

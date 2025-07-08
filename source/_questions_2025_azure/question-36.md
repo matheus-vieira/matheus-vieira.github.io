@@ -1,11 +1,12 @@
 ---
 layout: question
-title: Which Azure service is best for hosting a relational database?
+title: What is Azure Cosmos DB?
 options:
-- Azure SQL Database
-- Azure Redis Cache
-- Azure Cosmos DB
-- Azure Table Storage
-answer: 1
-explanation: Azure SQL Database is a fully managed relational database service based on SQL Server engine. It provides high availability, automatic backups, and built-in intelligence for optimal performance.
+- Storage account
+- Network service
+- Virtual machine service
+- NoSQL database service
+answer: 4
+explanation: "Azure Cosmos DB is a globally distributed, multi-model NoSQL database service that provides high availability and low latency access to data."
 ---
+

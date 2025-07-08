@@ -1,11 +1,11 @@
 ---
 layout: question
-title: What is the purpose of Azure Virtual Network (VNet)?
+title: Which Azure service provides serverless compute functionality?
 options:
-- Manage user identities
-- Store files and documents
-- Provide isolated network environment in Azure
-- Monitor application performance
-answer: 3
-explanation: Azure Virtual Network (VNet) provides an isolated network environment in Azure where you can securely connect Azure resources, control network traffic, and extend your on-premises network to the cloud.
+- Azure Service Fabric
+- Azure Functions
+- Azure Container Instances
+- Azure Virtual Machines
+answer: 2
+explanation: "Azure Functions is a serverless compute service that allows you to run code on-demand without having to explicitly provision or manage infrastructure. It automatically scales based on demand."
 ---

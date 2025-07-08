@@ -1,11 +1,11 @@
 ---
 layout: question
-title: Which .NET component provides a unified programming model across different platforms?
+title: Which .NET tool is used for building and managing projects from the command line?
 options:
-- .NET Framework only
-- ASP.NET Core only
-- .NET Standard
-- Visual Studio
-answer: 3
-explanation: .NET Standard is a specification that defines a set of APIs that all .NET implementations must provide, ensuring code compatibility across different .NET platforms like .NET Core, .NET Framework, and Xamarin.
+- .NET CLI (Command Line Interface)
+- IIS Manager
+- Visual Studio only
+- SQL Server Management Studio
+answer: 1
+explanation: "The .NET CLI is a cross-platform toolchain for developing .NET applications. It provides commands for creating, building, running, and publishing .NET applications from the command line."
 ---

@@ -1,11 +1,12 @@
 ---
 layout: question
-title: What is the primary purpose of a Content Delivery Network (CDN) in cloud architecture?
+title: What is a cloud service mesh?
 options:
-- Improve content delivery speed and reduce latency
-- User authentication
-- Database management
-- Data encryption
-answer: 1
-explanation: A CDN distributes content across geographically dispersed servers, reducing latency and improving content delivery speed by serving users from the nearest edge location.
+- Virtual machine cluster
+- Storage network
+- Infrastructure layer for microservices communication
+- Database connection pool
+answer: 3
+explanation: "A service mesh is a dedicated infrastructure layer that facilitates service-to-service communications in microservices architectures."
 ---
+

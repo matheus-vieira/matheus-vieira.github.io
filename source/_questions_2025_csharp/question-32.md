@@ -1,11 +1,12 @@
 ---
 layout: question
-title: Which access modifier makes a member accessible only within the same assembly?
+title: What is record type in C#?
 options:
-- internal
-- public
-- protected
-- private
-answer: 1
-explanation: The 'internal' access modifier makes members accessible only within the same assembly. It provides more access than private but less than public, being assembly-scoped.
+- Audio recording
+- Performance metric
+- Database record
+- Immutable reference type with value semantics
+answer: 4
+explanation: "Record types provide a concise syntax for creating reference types with immutable properties and value-based equality."
 ---
+

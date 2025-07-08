@@ -1,11 +1,12 @@
 ---
 layout: question
-title: What is the difference between value types and reference types in C#?
+title: What is nullable reference types in C#?
 options:
-- There is no difference between them
-- Value types are slower than reference types
-- Reference types are always immutable
-- Value types store data directly, reference types store memory addresses
+- Reference types only
+- Value types only
+- Types that can be null by default
+- Feature to help avoid null reference exceptions
 answer: 4
-explanation: Value types (int, char, bool, struct) store data directly in memory stack, while reference types (class, interface, delegate) store references to memory addresses on the heap where the actual data is stored.
+explanation: "Nullable reference types is a feature that helps developers avoid null reference exceptions by making the compiler aware of null possibilities."
 ---
+

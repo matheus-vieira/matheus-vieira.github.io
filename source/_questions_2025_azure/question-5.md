@@ -1,11 +1,11 @@
 ---
 layout: question
-title: What is Azure Active Directory (Azure AD) primarily used for?
+title: Which Azure storage type is optimized for big data analytics?
 options:
-- Database hosting
-- File storage and sharing
-- Identity and access management
-- Virtual machine management
+- Azure Queue Storage
+- Azure Table Storage
+- Azure Data Lake Storage
+- Azure Blob Storage
 answer: 3
-explanation: Azure Active Directory (Azure AD) is Microsoft's cloud-based identity and access management service. It helps employees sign in and access resources in external resources and internal resources.
+explanation: "Azure Data Lake Storage is specifically designed for big data analytics workloads. It provides hierarchical namespace, fine-grained access control, and is optimized for analytics frameworks like Apache Spark and Hadoop."
 ---

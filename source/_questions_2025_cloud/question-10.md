@@ -1,11 +1,11 @@
 ---
 layout: question
-title: Which cloud security model emphasizes 'never trust, always verify'?
+title: What is the primary purpose of a Content Delivery Network (CDN) in cloud architecture?
 options:
-- Zero Trust
-- Role-based access
-- Perimeter security
-- Multi-factor authentication
+- Improve content delivery speed and reduce latency
+- User authentication
+- Database management
+- Data encryption
 answer: 1
-explanation: Zero Trust security model operates on the principle of 'never trust, always verify', requiring authentication and authorization for every access request regardless of location or user credentials.
+explanation: "A CDN distributes content across geographically dispersed servers, reducing latency and improving content delivery speed by serving users from the nearest edge location."
 ---

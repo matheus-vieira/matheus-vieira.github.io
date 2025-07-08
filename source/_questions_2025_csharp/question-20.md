@@ -1,11 +1,12 @@
 ---
 layout: question
-title: Which C# feature allows you to add methods to existing types without modifying them?
+title: What are tuples in C#?
 options:
-- Overloading
-- Polymorphism
-- Inheritance
-- Extension methods
+- Exception type
+- Loop construct
+- Array type
+- Lightweight data structure for multiple values
 answer: 4
-explanation: Extension methods allow you to add new methods to existing types without modifying their source code or creating derived types. They are defined as static methods in static classes.
+explanation: "Tuples provide a lightweight way to have a data structure that holds multiple values without creating a separate class."
 ---
+

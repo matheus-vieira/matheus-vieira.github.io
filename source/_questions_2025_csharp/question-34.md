@@ -1,11 +1,12 @@
 ---
 layout: question
-title: Which C# feature allows multiple inheritance of contracts?
+title: What is the 'var' keyword in C#?
 options:
-- Enums
-- Classes
-- Interfaces
-- Structs
-answer: 3
-explanation: Interfaces allow multiple inheritance in C#. A class can implement multiple interfaces, inheriting their contracts (method signatures) but not implementation, providing flexibility in design.
+- Implicit type declaration
+- Virtual method
+- Variant type
+- Variable declaration
+answer: 1
+explanation: "The 'var' keyword enables implicit typing, where the compiler determines the type based on the assigned value."
 ---
+

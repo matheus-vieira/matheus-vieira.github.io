@@ -1,11 +1,11 @@
 ---
 layout: question
-title: What is the difference between .NET Core and .NET Framework?
+title: Which .NET feature enables automatic memory management?
 options:
-- .NET Core is cross-platform and open-source, .NET Framework is Windows-only
-- .NET Framework is newer than .NET Core
-- .NET Core only supports web applications
-- No difference, they are identical
+- Garbage Collection
+- Stack allocation only
+- Memory pooling
+- Manual memory allocation
 answer: 1
-explanation: .NET Core is cross-platform, open-source, and modular, while .NET Framework is Windows-only and monolithic. .NET Core offers better performance and modern development practices.
+explanation: "Garbage Collection is an automatic memory management feature that automatically reclaims memory used by objects that are no longer reachable, preventing memory leaks and simplifying memory management."
 ---

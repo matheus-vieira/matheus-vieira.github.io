@@ -1,11 +1,11 @@
 ---
 layout: question
-title: What is the difference between 'const' and 'readonly' in C#?
+title: Which C# feature allows multiple inheritance of contracts?
 options:
-- readonly can only be used with strings
-- const is compile-time constant, readonly is runtime constant
-- No difference, they are identical
-- const is runtime constant, readonly is compile-time
-answer: 2
-explanation: const values are compile-time constants and must be assigned at declaration, while readonly values are runtime constants that can be assigned in constructors or at declaration.
+- Interfaces
+- Structs
+- Enums
+- Classes
+answer: 1
+explanation: "Interfaces allow multiple inheritance in C#. A class can implement multiple interfaces, inheriting their contracts (method signatures) but not implementation, providing flexibility in design."
 ---

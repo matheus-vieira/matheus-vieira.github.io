@@ -1,11 +1,11 @@
 ---
 layout: question
-title: What is Entity Framework in the .NET ecosystem?
+title: Which .NET technology is used for building desktop applications with modern UI?
 options:
-- A web server
-- A logging library
-- An Object-Relational Mapping (ORM) framework
-- A testing framework
-answer: 3
-explanation: Entity Framework is an ORM framework that enables .NET developers to work with databases using .NET objects, eliminating the need for most data-access code that developers usually need to write.
+- WPF (Windows Presentation Foundation)
+- ASP.NET
+- SignalR
+- Entity Framework
+answer: 1
+explanation: "WPF is a UI framework for building Windows desktop applications with rich, modern user interfaces. It supports data binding, styling, templates, and multimedia integration."
 ---

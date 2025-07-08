@@ -1,11 +1,11 @@
 ---
 layout: question
-title: What is a Pull Request in GitHub?
+title: Which GitHub feature provides code review capabilities?
 options:
-- A request to create a new account
-- A proposal to merge changes from one branch to another
-- A request to delete a repository
-- A request to download code
-answer: 2
-explanation: A Pull Request is a feature that allows developers to notify team members about changes they've made to a branch, facilitating code review and discussion before merging changes.
+- Projects
+- Wikis
+- Issues
+- Pull Request reviews
+answer: 4
+explanation: "Pull Request reviews allow team members to examine code changes, leave comments, suggest improvements, and approve or request changes before the code is merged."
 ---

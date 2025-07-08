@@ -1,11 +1,12 @@
 ---
 layout: question
-title: What is Entity Framework in the .NET ecosystem?
+title: What is hot reload in .NET?
 options:
-- An Object-Relational Mapping (ORM) framework
-- A logging library
-- A web server
-- A testing framework
+- Apply code changes without restart
+- Performance optimization
+- System restart
+- Memory cleanup
 answer: 1
-explanation: Entity Framework is an ORM framework that enables .NET developers to work with databases using .NET objects, eliminating the need for most data-access code that developers usually need to write.
+explanation: "Hot reload allows developers to apply code changes to a running application without needing to restart or lose application state."
 ---
+

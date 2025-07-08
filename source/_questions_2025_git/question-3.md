@@ -1,11 +1,11 @@
 ---
 layout: question
-title: What does 'git merge' do?
+title: Which Git command is used to create a new branch?
 options:
-- Deletes a branch
-- Reverts commits
-- Creates a new repository
-- Combines changes from different branches
+- git create <branch-name>
+- git make <branch-name>
+- git new <branch-name>
+- git branch <branch-name>
 answer: 4
-explanation: Git merge combines changes from different branches. It integrates commits from one branch into another, typically merging a feature branch into the main branch.
+explanation: "The 'git branch <branch-name>' command creates a new branch. You can also use 'git checkout -b <branch-name>' to create and switch to the new branch in one command."
 ---

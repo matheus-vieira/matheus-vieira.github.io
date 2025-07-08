@@ -1,11 +1,11 @@
 ---
 layout: question
-title: Which Azure service is best for hosting a relational database?
+title: What is Azure Active Directory (Azure AD) primarily used for?
 options:
-- Azure Cosmos DB
-- Azure SQL Database
-- Azure Table Storage
-- Azure Redis Cache
-answer: 2
-explanation: Azure SQL Database is a fully managed relational database service based on SQL Server engine. It provides high availability, automatic backups, and built-in intelligence for optimal performance.
+- Identity and access management
+- Virtual machine management
+- File storage and sharing
+- Database hosting
+answer: 1
+explanation: "Azure Active Directory (Azure AD) is Microsoft's cloud-based identity and access management service. It helps employees sign in and access resources in external resources and internal resources."
 ---

@@ -1,11 +1,12 @@
 ---
 layout: question
-title: What is the difference between .NET Core and .NET Framework?
+title: What is SignalR?
 options:
-- .NET Core only supports web applications
-- .NET Core is cross-platform and open-source, .NET Framework is Windows-only
-- No difference, they are identical
-- .NET Framework is newer than .NET Core
-answer: 2
-explanation: .NET Core is cross-platform, open-source, and modular, while .NET Framework is Windows-only and monolithic. .NET Core offers better performance and modern development practices.
+- Digital signature library
+- Signal processing
+- Hardware interface
+- Real-time web communication library
+answer: 4
+explanation: "SignalR is a library that simplifies adding real-time web functionality to applications, enabling server-to-client communication."
 ---
+

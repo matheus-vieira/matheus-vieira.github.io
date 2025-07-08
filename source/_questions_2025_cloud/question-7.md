@@ -1,11 +1,11 @@
 ---
 layout: question
-title: What is the main advantage of microservices architecture in cloud environments?
+title: Which cloud characteristic ensures you only pay for resources you use?
 options:
-- Monolithic application structure
-- Single point of failure
-- Reduced development complexity
-- Independent deployment and scaling of services
+- Rapid elasticity
+- Resource pooling
+- Broad network access
+- Measured service
 answer: 4
-explanation: Microservices architecture allows independent deployment, scaling, and development of individual services, improving maintainability, scalability, and fault tolerance in cloud environments.
+explanation: "Measured service is the cloud characteristic that provides transparency and control over resource usage, enabling pay-as-you-go pricing models where you only pay for what you consume."
 ---

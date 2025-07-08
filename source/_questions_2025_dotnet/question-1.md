@@ -7,5 +7,5 @@ options:
 - A web server
 - A database system
 answer: 2
-explanation: The CLR is the execution environment in .NET that provides services like memory management, garbage collection, exception handling, type safety, and security. It manages the execution of .NET applications.
+explanation: "The CLR is the execution environment in .NET that provides services like memory management, garbage collection, exception handling, type safety, and security. It manages the execution of .NET applications."
 ---

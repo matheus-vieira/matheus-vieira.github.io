@@ -1,11 +1,12 @@
 ---
 layout: question
-title: Which Azure storage type is optimized for big data analytics?
+title: Which Azure service provides serverless computing?
 options:
-- Azure Queue Storage
-- Azure Table Storage
-- Azure Data Lake Storage
-- Azure Blob Storage
-answer: 3
-explanation: Azure Data Lake Storage is specifically designed for big data analytics workloads. It provides hierarchical namespace, fine-grained access control, and is optimized for analytics frameworks like Apache Spark and Hadoop.
+- Azure Storage
+- Azure SQL
+- Azure VMs
+- Azure Functions
+answer: 4
+explanation: "Azure Functions is a serverless compute service that lets you run event-triggered code without managing infrastructure."
 ---
+

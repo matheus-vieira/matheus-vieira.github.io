@@ -1,11 +1,11 @@
 ---
 layout: question
-title: Which Azure service provides serverless compute functionality?
+title: Which Azure service is designed for real-time data processing?
 options:
-- Azure Container Instances
-- Azure Virtual Machines
-- Azure Functions
-- Azure Service Fabric
-answer: 3
-explanation: Azure Functions is a serverless compute service that allows you to run code on-demand without having to explicitly provision or manage infrastructure. It automatically scales based on demand.
+- Azure Data Factory
+- Azure Storage
+- Azure SQL Database
+- Azure Stream Analytics
+answer: 4
+explanation: "Azure Stream Analytics is a real-time analytics service designed to process and analyze streaming data from various sources like IoT devices, applications, and sensors."
 ---

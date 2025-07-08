@@ -1,11 +1,11 @@
 ---
 layout: question
-title: Which .NET tool is used for building and managing projects from the command line?
+title: What is Entity Framework in the .NET ecosystem?
 options:
-- .NET CLI (Command Line Interface)
-- IIS Manager
-- Visual Studio only
-- SQL Server Management Studio
-answer: 1
-explanation: The .NET CLI is a cross-platform toolchain for developing .NET applications. It provides commands for creating, building, running, and publishing .NET applications from the command line.
+- A web server
+- A testing framework
+- A logging library
+- An Object-Relational Mapping (ORM) framework
+answer: 4
+explanation: "Entity Framework is an ORM framework that enables .NET developers to work with databases using .NET objects, eliminating the need for most data-access code that developers usually need to write."
 ---

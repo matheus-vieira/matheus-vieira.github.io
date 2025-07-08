@@ -1,11 +1,12 @@
 ---
 layout: question
-title: Which LINQ method would you use to transform each element in a collection?
+title: What is nullable reference types in C#?
 options:
-- Select
-- GroupBy
-- Where
-- OrderBy
+- Feature to help avoid null reference exceptions
+- Types that can be null by default
+- Reference types only
+- Value types only
 answer: 1
-explanation: The Select method is used for projection/transformation, allowing you to transform each element in a collection into a new form or extract specific properties from objects.
+explanation: "Nullable reference types is a feature that helps developers avoid null reference exceptions by making the compiler aware of null possibilities."
 ---
+

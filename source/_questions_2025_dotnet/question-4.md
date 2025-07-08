@@ -1,11 +1,11 @@
 ---
 layout: question
-title: Which .NET technology is best suited for building cross-platform web applications?
+title: What is the primary purpose of NuGet in the .NET ecosystem?
 options:
-- WPF
-- WinForms
-- ASP.NET Core
-- ASP.NET Web Forms
+- Database management
+- User interface design
+- Package management and dependency resolution
+- Code compilation
 answer: 3
-explanation: ASP.NET Core is a cross-platform, open-source framework for building modern web applications and APIs. It runs on Windows, macOS, and Linux, providing high performance and flexibility.
+explanation: "NuGet is the package manager for .NET that allows developers to easily share, discover, and consume reusable code packages. It handles dependency resolution and package installation."
 ---

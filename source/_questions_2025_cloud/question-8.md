@@ -1,11 +1,11 @@
 ---
 layout: question
-title: Which technology is commonly used for containerization in cloud deployments?
+title: What is the main advantage of microservices architecture in cloud environments?
 options:
-- Physical servers
-- Desktop applications
-- Virtual machines only
-- Docker and Kubernetes
-answer: 4
-explanation: Docker provides containerization technology while Kubernetes orchestrates and manages containers at scale, making them essential tools for modern cloud deployments.
+- Single point of failure
+- Independent deployment and scaling of services
+- Reduced development complexity
+- Monolithic application structure
+answer: 2
+explanation: "Microservices architecture allows independent deployment, scaling, and development of individual services, improving maintainability, scalability, and fault tolerance in cloud environments."
 ---

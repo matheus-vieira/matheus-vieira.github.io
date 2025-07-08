@@ -1,11 +1,11 @@
 ---
 layout: question
-title: Which cloud service model provides the most control over the underlying infrastructure?
+title: Which cloud security model emphasizes 'never trust, always verify'?
 options:
-- Infrastructure as a Service (IaaS)
-- Software as a Service (SaaS)
-- Function as a Service (FaaS)
-- Platform as a Service (PaaS)
+- Zero Trust
+- Role-based access
+- Perimeter security
+- Multi-factor authentication
 answer: 1
-explanation: Infrastructure as a Service (IaaS) provides the most control over the underlying infrastructure, allowing users to manage operating systems, middleware, and applications while the cloud provider manages the physical hardware.
+explanation: "Zero Trust security model operates on the principle of 'never trust, always verify', requiring authentication and authorization for every access request regardless of location or user credentials."
 ---

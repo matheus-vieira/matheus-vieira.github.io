@@ -1,11 +1,12 @@
 ---
 layout: question
-title: What is a Pull Request in GitHub?
+title: What is GitHub Copilot?
 options:
-- A request to delete a repository
-- A request to download code
-- A request to create a new account
-- A proposal to merge changes from one branch to another
-answer: 4
-explanation: A Pull Request is a feature that allows developers to notify team members about changes they've made to a branch, facilitating code review and discussion before merging changes.
+- AI-powered code assistant
+- Flight simulator
+- Repository pilot
+- Auto-pilot feature
+answer: 1
+explanation: "GitHub Copilot is an AI-powered code completion tool that suggests code and entire functions in real-time."
 ---
+

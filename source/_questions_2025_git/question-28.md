@@ -1,11 +1,12 @@
 ---
 layout: question
-title: Which command undoes the last commit but keeps the changes in the working directory?
+title: What is a Git hook?
 options:
-- git reset --hard HEAD~1
-- git reset --soft HEAD~1
-- git delete HEAD~1
-- git revert HEAD
-answer: 2
-explanation: git reset --soft HEAD~1 moves the HEAD pointer back one commit but keeps the changes in the staging area, allowing you to modify and recommit them.
+- Fishing tool
+- Remote link
+- Script triggered by Git events
+- Branch connection
+answer: 3
+explanation: "Git hooks are scripts that run automatically when certain Git events occur, like committing or pushing."
 ---
+

@@ -1,11 +1,11 @@
 ---
 layout: question
-title: Which Azure service provides container orchestration?
+title: What is the main advantage of Azure App Service?
 options:
-- Azure Batch
-- Azure Container Instances
-- Azure Service Fabric
-- Azure Kubernetes Service (AKS)
-answer: 4
-explanation: Azure Kubernetes Service (AKS) provides managed Kubernetes container orchestration, making it easy to deploy and manage containerized applications at scale.
+- Platform-as-a-Service for web applications
+- Data storage optimization
+- Network load balancing
+- Virtual machine provisioning
+answer: 1
+explanation: "Azure App Service is a Platform-as-a-Service (PaaS) offering that enables you to build and host web apps, mobile backends, and RESTful APIs without managing infrastructure."
 ---

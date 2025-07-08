@@ -1,11 +1,12 @@
 ---
 layout: question
-title: What is the purpose of the 'using' statement in C#?
+title: What is pattern matching in C#?
 options:
-- Automatic resource disposal and namespace imports
-- Defining classes
-- Only for importing namespaces
-- Creating variables
-answer: 1
-explanation: "The 'using' statement serves two purposes: importing namespaces and ensuring automatic disposal of resources that implement IDisposable, providing proper resource management."
+- Regular expressions
+- String pattern search
+- File pattern matching
+- Technique for checking value shapes and extracting data
+answer: 4
+explanation: "Pattern matching allows you to test if a value has a certain shape and extract information from the value when it does."
 ---
+

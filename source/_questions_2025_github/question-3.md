@@ -1,11 +1,11 @@
 ---
 layout: question
-title: Which GitHub feature is used for project management and tracking tasks?
+title: What is a Pull Request in GitHub?
 options:
-- Branches
-- Repositories
-- Commits
-- Issues
-answer: 4
-explanation: GitHub Issues provide a way to track bugs, enhancements, and other tasks. They can be assigned to users, labeled, and organized into milestones for project management.
+- A request to download code
+- A proposal to merge changes from one branch to another
+- A request to create a new account
+- A request to delete a repository
+answer: 2
+explanation: "A Pull Request is a feature that allows developers to notify team members about changes they've made to a branch, facilitating code review and discussion before merging changes."
 ---

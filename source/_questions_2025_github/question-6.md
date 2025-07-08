@@ -1,11 +1,11 @@
 ---
 layout: question
-title: Which file is automatically displayed on a repository's main page?
+title: What does 'forking' a repository mean in GitHub?
 options:
-- main.txt
-- description.doc
-- README.md
-- index.html
-answer: 3
-explanation: README.md is automatically displayed on the repository's main page, providing information about the project, installation instructions, usage examples, and other relevant details.
+- Deleting a repository
+- Making a repository private
+- Renaming a repository
+- Creating a personal copy of someone else's repository
+answer: 4
+explanation: "Forking creates a personal copy of someone else's repository in your GitHub account, allowing you to freely experiment with changes without affecting the original project."
 ---

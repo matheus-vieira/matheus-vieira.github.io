@@ -1,11 +1,11 @@
 ---
 layout: question
-title: Which command undoes the last commit but keeps the changes in the working directory?
+title: What does 'git rebase' do?
 options:
-- git delete HEAD~1
-- git reset --soft HEAD~1
-- git reset --hard HEAD~1
-- git revert HEAD
-answer: 2
-explanation: git reset --soft HEAD~1 moves the HEAD pointer back one commit but keeps the changes in the staging area, allowing you to modify and recommit them.
+- Creates a new repository
+- Merges two repositories
+- Deletes all commits
+- Reapplies commits on top of another base tip
+answer: 4
+explanation: "Git rebase reapplies commits on top of another base tip, creating a linear project history. It's an alternative to merging that results in a cleaner commit history."
 ---

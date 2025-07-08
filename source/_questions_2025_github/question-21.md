@@ -1,11 +1,12 @@
 ---
 layout: question
-title: What is the primary purpose of GitHub?
+title: What are GitHub Codespaces?
 options:
-- Git repository hosting and collaboration platform
-- File storage service
-- Email hosting
-- Social media platform
-answer: 1
-explanation: GitHub is a web-based platform that provides Git repository hosting and collaboration features for software development, including issue tracking, code review, and project management tools.
+- Code storage
+- Code formatting
+- Code review
+- Cloud development environments
+answer: 4
+explanation: "GitHub Codespaces provides instant, cloud-based development environments accessible from anywhere."
 ---
+

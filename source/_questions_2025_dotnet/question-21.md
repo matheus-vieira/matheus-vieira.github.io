@@ -1,11 +1,12 @@
 ---
 layout: question
-title: What is the Common Language Runtime (CLR) in .NET?
+title: What is Blazor?
 options:
-- A web server
-- A database system
-- The execution environment that manages .NET applications
-- A code editor
+- Database technology
+- Logging library
+- Framework for building web UIs with C#
+- Testing framework
 answer: 3
-explanation: The CLR is the execution environment in .NET that provides services like memory management, garbage collection, exception handling, type safety, and security. It manages the execution of .NET applications.
+explanation: "Blazor is a framework for building interactive web UIs using C# instead of JavaScript, running on WebAssembly or server-side."
 ---
+

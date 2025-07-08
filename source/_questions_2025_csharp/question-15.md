@@ -1,11 +1,12 @@
 ---
 layout: question
-title: What is the difference between 'const' and 'readonly' in C#?
+title: What are tuples in C#?
 options:
-- No difference, they are identical
-- readonly can only be used with strings
-- const is compile-time constant, readonly is runtime constant
-- const is runtime constant, readonly is compile-time
+- Array type
+- Exception type
+- Lightweight data structure for multiple values
+- Loop construct
 answer: 3
-explanation: const values are compile-time constants and must be assigned at declaration, while readonly values are runtime constants that can be assigned in constructors or at declaration.
+explanation: "Tuples provide a lightweight way to have a data structure that holds multiple values without creating a separate class."
 ---
+

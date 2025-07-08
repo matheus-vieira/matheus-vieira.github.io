@@ -1,11 +1,12 @@
 ---
 layout: question
-title: What is cloud elasticity?
+title: What is serverless architecture?
 options:
-- The ability to store data permanently
-- The ability to backup data
-- The ability to scale resources up or down automatically
-- The ability to encrypt data
-answer: 3
-explanation: Cloud elasticity refers to the ability to automatically scale computing resources up or down based on demand, ensuring optimal performance and cost efficiency.
+- No servers involved
+- Dedicated server hosting
+- Physical server management
+- Cloud provider manages server infrastructure
+answer: 4
+explanation: "Serverless architecture allows developers to run code without managing servers, as the cloud provider handles all infrastructure management."
 ---
+

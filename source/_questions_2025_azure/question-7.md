@@ -1,11 +1,11 @@
 ---
 layout: question
-title: What is the main advantage of Azure App Service?
+title: Which Azure service is best for hosting a relational database?
 options:
-- Data storage optimization
-- Network load balancing
-- Platform-as-a-Service for web applications
-- Virtual machine provisioning
-answer: 3
-explanation: Azure App Service is a Platform-as-a-Service (PaaS) offering that enables you to build and host web apps, mobile backends, and RESTful APIs without managing infrastructure.
+- Azure SQL Database
+- Azure Table Storage
+- Azure Cosmos DB
+- Azure Redis Cache
+answer: 1
+explanation: "Azure SQL Database is a fully managed relational database service based on SQL Server engine. It provides high availability, automatic backups, and built-in intelligence for optimal performance."
 ---

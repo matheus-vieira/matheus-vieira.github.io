@@ -1,11 +1,12 @@
 ---
 layout: question
-title: What is the main characteristic of cloud computing?
+title: What is Infrastructure as Code (IaC)?
 options:
-- On-demand self-service and resource pooling
-- Physical hardware ownership
-- Local data storage only
-- Limited scalability
-answer: 1
-explanation: Cloud computing is characterized by on-demand self-service, resource pooling, rapid elasticity, measured service, and broad network access. Users can provision resources as needed without human interaction.
+- Database administration
+- Managing infrastructure through code
+- Manual server setup
+- Physical hardware management
+answer: 2
+explanation: "Infrastructure as Code (IaC) is the practice of managing and provisioning computing infrastructure through machine-readable definition files."
 ---
+

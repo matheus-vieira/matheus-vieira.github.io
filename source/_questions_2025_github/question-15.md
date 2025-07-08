@@ -1,11 +1,12 @@
 ---
 layout: question
-title: What does 'forking' a repository mean in GitHub?
+title: What are GitHub Discussions?
 options:
-- Deleting a repository
-- Making a repository private
-- Renaming a repository
-- Creating a personal copy of someone else's repository
-answer: 4
-explanation: Forking creates a personal copy of someone else's repository in your GitHub account, allowing you to freely experiment with changes without affecting the original project.
+- Community conversation platform
+- Code debates
+- Chat application
+- Meeting scheduler
+answer: 1
+explanation: "GitHub Discussions provides a space for community conversations, Q&A, and knowledge sharing within repositories."
 ---
+

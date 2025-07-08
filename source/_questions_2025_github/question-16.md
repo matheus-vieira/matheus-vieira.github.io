@@ -1,11 +1,12 @@
 ---
 layout: question
-title: Which file is automatically displayed on a repository's main page?
+title: What are GitHub Codespaces?
 options:
-- main.txt
-- README.md
-- description.doc
-- index.html
-answer: 2
-explanation: README.md is automatically displayed on the repository's main page, providing information about the project, installation instructions, usage examples, and other relevant details.
+- Code review
+- Code storage
+- Cloud development environments
+- Code formatting
+answer: 3
+explanation: "GitHub Codespaces provides instant, cloud-based development environments accessible from anywhere."
 ---
+

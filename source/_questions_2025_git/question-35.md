@@ -1,11 +1,12 @@
 ---
 layout: question
-title: What is the difference between 'git pull' and 'git fetch'?
+title: What does 'git bisect' help with?
 options:
-- git fetch is faster than git pull
-- git pull works offline, git fetch requires internet
-- No difference, they are identical
-- git pull fetches and merges, git fetch only downloads
-answer: 4
-explanation: git fetch downloads changes from the remote repository without merging them, while git pull performs a fetch followed by a merge, updating your current branch with remote changes.
+- Find bug-introducing commit
+- Cut files
+- Split repository
+- Divide branches
+answer: 1
+explanation: "Git bisect uses binary search to help find the commit that introduced a bug by testing different commits."
 ---
+

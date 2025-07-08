@@ -1,11 +1,12 @@
 ---
 layout: question
-title: What is the purpose of GitHub Pages?
+title: What is GitHub Copilot?
 options:
-- Email services
-- Database hosting
-- Code storage
-- Static website hosting directly from repositories
-answer: 4
-explanation: GitHub Pages is a static site hosting service that takes HTML, CSS, and JavaScript files from a repository and publishes them as a website, ideal for documentation and project pages.
+- Auto-pilot feature
+- Repository pilot
+- AI-powered code assistant
+- Flight simulator
+answer: 3
+explanation: "GitHub Copilot is an AI-powered code completion tool that suggests code and entire functions in real-time."
 ---
+

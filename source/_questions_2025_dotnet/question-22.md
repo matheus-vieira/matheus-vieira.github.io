@@ -1,11 +1,12 @@
 ---
 layout: question
-title: Which .NET component provides a unified programming model across different platforms?
+title: What is SignalR?
 options:
-- .NET Framework only
-- Visual Studio
-- ASP.NET Core only
-- .NET Standard
-answer: 4
-explanation: .NET Standard is a specification that defines a set of APIs that all .NET implementations must provide, ensuring code compatibility across different .NET platforms like .NET Core, .NET Framework, and Xamarin.
+- Real-time web communication library
+- Signal processing
+- Digital signature library
+- Hardware interface
+answer: 1
+explanation: "SignalR is a library that simplifies adding real-time web functionality to applications, enabling server-to-client communication."
 ---
+

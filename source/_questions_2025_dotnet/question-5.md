@@ -1,11 +1,11 @@
 ---
 layout: question
-title: What is the purpose of the Global Assembly Cache (GAC) in .NET Framework?
+title: Which .NET technology is best suited for building cross-platform web applications?
 options:
-- Share assemblies across multiple applications
-- Store temporary files
-- Manage user settings
-- Handle network connections
-answer: 1
-explanation: The GAC is a machine-wide code cache that stores assemblies specifically designated to be shared by several applications on the computer. It provides versioning, security, and integrity checking.
+- WPF
+- ASP.NET Web Forms
+- ASP.NET Core
+- WinForms
+answer: 3
+explanation: "ASP.NET Core is a cross-platform, open-source framework for building modern web applications and APIs. It runs on Windows, macOS, and Linux, providing high performance and flexibility."
 ---

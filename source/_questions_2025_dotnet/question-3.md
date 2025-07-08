@@ -1,11 +1,11 @@
 ---
 layout: question
-title: What is the primary purpose of NuGet in the .NET ecosystem?
+title: Which .NET component provides a unified programming model across different platforms?
 options:
-- Code compilation
-- User interface design
-- Package management and dependency resolution
-- Database management
+- ASP.NET Core only
+- Visual Studio
+- .NET Standard
+- .NET Framework only
 answer: 3
-explanation: NuGet is the package manager for .NET that allows developers to easily share, discover, and consume reusable code packages. It handles dependency resolution and package installation.
+explanation: ".NET Standard is a specification that defines a set of APIs that all .NET implementations must provide, ensuring code compatibility across different .NET platforms like .NET Core, .NET Framework, and Xamarin."
 ---

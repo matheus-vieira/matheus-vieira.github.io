@@ -1,11 +1,12 @@
 ---
 layout: question
-title: What is Azure Active Directory (Azure AD) primarily used for?
+title: What is Azure Monitor?
 options:
-- File storage and sharing
-- Identity and access management
-- Database hosting
-- Virtual machine management
-answer: 2
-explanation: Azure Active Directory (Azure AD) is Microsoft's cloud-based identity and access management service. It helps employees sign in and access resources in external resources and internal resources.
+- Monitoring and analytics service
+- Storage service
+- Compute service
+- Database service
+answer: 1
+explanation: "Azure Monitor provides comprehensive monitoring for applications and infrastructure with metrics, logs, and alerts."
 ---
+

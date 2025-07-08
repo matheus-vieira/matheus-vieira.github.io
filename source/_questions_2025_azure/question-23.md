@@ -1,11 +1,12 @@
 ---
 layout: question
-title: What is the purpose of Azure Virtual Network (VNet)?
+title: What is Azure Key Vault used for?
 options:
-- Provide isolated network environment in Azure
-- Store files and documents
-- Manage user identities
-- Monitor application performance
-answer: 1
-explanation: Azure Virtual Network (VNet) provides an isolated network environment in Azure where you can securely connect Azure resources, control network traffic, and extend your on-premises network to the cloud.
+- Virtual machine management
+- Database hosting
+- File storage
+- Secrets and key management
+answer: 4
+explanation: "Azure Key Vault is a cloud service for securely storing and accessing secrets, keys, and certificates."
 ---
+

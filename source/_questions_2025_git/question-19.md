@@ -1,11 +1,12 @@
 ---
 layout: question
-title: What is a Git remote?
+title: What is Git LFS?
 options:
-- A commit message
-- A merge conflict
-- A local branch
-- A reference to a repository hosted elsewhere
+- Local File Storage
+- Linux File System
+- Live File Sync
+- Large File Storage extension
 answer: 4
-explanation: A Git remote is a reference to a repository hosted elsewhere (like GitHub, GitLab). It allows you to synchronize your local repository with repositories on other servers.
+explanation: "Git LFS (Large File Storage) is an extension that handles large files by storing them outside the main repository."
 ---
+

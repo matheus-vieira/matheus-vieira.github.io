@@ -1,11 +1,11 @@
 ---
 layout: question
-title: Which .NET feature enables automatic memory management?
+title: What is the purpose of the Global Assembly Cache (GAC) in .NET Framework?
 options:
-- Manual memory allocation
-- Memory pooling
-- Garbage Collection
-- Stack allocation only
-answer: 3
-explanation: Garbage Collection is an automatic memory management feature that automatically reclaims memory used by objects that are no longer reachable, preventing memory leaks and simplifying memory management.
+- Share assemblies across multiple applications
+- Handle network connections
+- Manage user settings
+- Store temporary files
+answer: 1
+explanation: "The GAC is a machine-wide code cache that stores assemblies specifically designated to be shared by several applications on the computer. It provides versioning, security, and integrity checking."
 ---

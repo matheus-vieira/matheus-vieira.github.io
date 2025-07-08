@@ -1,11 +1,12 @@
 ---
 layout: question
-title: What is the primary purpose of NuGet in the .NET ecosystem?
+title: What is minimal APIs in .NET?
 options:
-- User interface design
-- Code compilation
-- Package management and dependency resolution
-- Database management
-answer: 3
-explanation: NuGet is the package manager for .NET that allows developers to easily share, discover, and consume reusable code packages. It handles dependency resolution and package installation.
+- Simplified way to create APIs with minimal code
+- Microservice APIs
+- Reduced functionality APIs
+- Mobile APIs
+answer: 1
+explanation: "Minimal APIs provide a simplified approach to create HTTP APIs with minimal dependencies and configuration."
 ---
+

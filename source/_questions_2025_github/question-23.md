@@ -1,11 +1,12 @@
 ---
 layout: question
-title: Which GitHub feature is used for project management and tracking tasks?
+title: What are GitHub Secrets?
 options:
-- Issues
-- Commits
-- Repositories
-- Branches
+- Encrypted environment variables
+- Hidden repositories
+- Private commits
+- Secret files
 answer: 1
-explanation: GitHub Issues provide a way to track bugs, enhancements, and other tasks. They can be assigned to users, labeled, and organized into milestones for project management.
+explanation: "GitHub Secrets are encrypted environment variables used to store sensitive information for GitHub Actions workflows."
 ---
+

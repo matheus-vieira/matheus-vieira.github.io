@@ -1,11 +1,12 @@
 ---
 layout: question
-title: What is the primary benefit of Azure Resource Groups?
+title: What is Azure Cosmos DB?
 options:
-- Logical container for grouping related Azure resources
-- Physical location for storing data
-- Network security boundary
-- Backup storage location
-answer: 1
-explanation: Azure Resource Groups are logical containers that group related Azure resources together. They help organize resources, apply policies, manage permissions, and simplify deployment and management operations.
+- Storage account
+- Virtual machine service
+- NoSQL database service
+- Network service
+answer: 3
+explanation: "Azure Cosmos DB is a globally distributed, multi-model NoSQL database service that provides high availability and low latency access to data."
 ---
+

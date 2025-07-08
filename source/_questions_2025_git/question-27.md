@@ -1,11 +1,12 @@
 ---
 layout: question
-title: What does 'git rebase' do?
+title: What does 'git cherry-pick' do?
 options:
-- Reapplies commits on top of another base tip
-- Creates a new repository
-- Merges two repositories
-- Deletes all commits
+- Apply specific commit to current branch
+- Pick repository
+- Choose remote
+- Select files
 answer: 1
-explanation: Git rebase reapplies commits on top of another base tip, creating a linear project history. It's an alternative to merging that results in a cleaner commit history.
+explanation: "Git cherry-pick applies the changes from a specific commit to your current branch without merging the entire branch."
 ---
+

@@ -1,11 +1,11 @@
 ---
 layout: question
-title: Which access modifier makes a member accessible only within the same assembly?
+title: Which C# feature allows you to add methods to existing types without modifying them?
 options:
-- protected
-- public
-- private
-- internal
-answer: 4
-explanation: The 'internal' access modifier makes members accessible only within the same assembly. It provides more access than private but less than public, being assembly-scoped.
+- Polymorphism
+- Overloading
+- Extension methods
+- Inheritance
+answer: 3
+explanation: "Extension methods allow you to add new methods to existing types without modifying their source code or creating derived types. They are defined as static methods in static classes."
 ---

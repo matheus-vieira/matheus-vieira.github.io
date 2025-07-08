@@ -1,11 +1,11 @@
 ---
 layout: question
-title: Which GitHub feature provides code review capabilities?
+title: What are GitHub Releases used for?
 options:
-- Projects
-- Wikis
-- Issues
-- Pull Request reviews
-answer: 4
-explanation: Pull Request reviews allow team members to examine code changes, leave comments, suggest improvements, and approve or request changes before the code is merged.
+- Temporary code storage
+- Packaging and distributing software versions
+- User authentication
+- Code compilation
+answer: 2
+explanation: "GitHub Releases allow you to package software, release notes, and binary files for distribution. They provide a way to mark specific points in your repository's history as release versions."
 ---

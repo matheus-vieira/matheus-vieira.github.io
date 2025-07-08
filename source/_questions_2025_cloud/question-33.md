@@ -1,11 +1,12 @@
 ---
 layout: question
-title: What is the primary benefit of auto-scaling in cloud environments?
+title: What is edge computing?
 options:
-- Automatic resource adjustment based on demand
-- Reduced security risks
-- Better user interface design
-- Improved data encryption
+- Processing data closer to its source
+- Database optimization
+- Central data processing
+- Network security
 answer: 1
-explanation: Auto-scaling automatically adjusts computing resources based on current demand, ensuring optimal performance during peak times while reducing costs during low-demand periods.
+explanation: "Edge computing brings computation and data storage closer to the location where it is needed to improve response times and save bandwidth."
 ---
+

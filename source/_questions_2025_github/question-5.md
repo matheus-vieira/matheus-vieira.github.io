@@ -1,11 +1,11 @@
 ---
 layout: question
-title: What does 'forking' a repository mean in GitHub?
+title: What is GitHub Actions?
 options:
-- Renaming a repository
-- Deleting a repository
-- Making a repository private
-- Creating a personal copy of someone else's repository
-answer: 4
-explanation: Forking creates a personal copy of someone else's repository in your GitHub account, allowing you to freely experiment with changes without affecting the original project.
+- A messaging system
+- CI/CD automation platform
+- A database service
+- A code editor
+answer: 2
+explanation: "GitHub Actions is a CI/CD platform that allows you to automate workflows, including building, testing, and deploying code directly from your GitHub repository."
 ---

@@ -1,11 +1,12 @@
 ---
 layout: question
-title: What is the primary purpose of Git?
+title: What is a Git stash?
 options:
-- Database management
-- File compression
-- Distributed version control system
-- Web server hosting
+- Archive file
+- Backup location
+- Temporary storage for uncommitted changes
+- Hidden folder
 answer: 3
-explanation: Git is a distributed version control system that tracks changes in source code during software development. It allows multiple developers to collaborate efficiently and maintains a complete history of changes.
+explanation: "Git stash temporarily saves your uncommitted changes so you can work on something else and come back later."
 ---
+

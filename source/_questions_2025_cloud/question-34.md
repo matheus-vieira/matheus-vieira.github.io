@@ -1,11 +1,12 @@
 ---
 layout: question
-title: Which deployment model involves sharing infrastructure among multiple organizations?
+title: What is a cloud service mesh?
 options:
-- Community cloud
-- Hybrid cloud
-- Public cloud
-- Private cloud
-answer: 1
-explanation: Community cloud is shared by several organizations with common interests or requirements. It provides benefits of cloud computing while maintaining some level of privacy and control.
+- Database connection pool
+- Storage network
+- Virtual machine cluster
+- Infrastructure layer for microservices communication
+answer: 4
+explanation: "A service mesh is a dedicated infrastructure layer that facilitates service-to-service communications in microservices architectures."
 ---
+

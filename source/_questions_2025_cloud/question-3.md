@@ -1,11 +1,11 @@
 ---
 layout: question
-title: What is the primary benefit of auto-scaling in cloud environments?
+title: Which cloud service model provides the most control over the underlying infrastructure?
 options:
-- Improved data encryption
-- Better user interface design
-- Reduced security risks
-- Automatic resource adjustment based on demand
+- Software as a Service (SaaS)
+- Function as a Service (FaaS)
+- Platform as a Service (PaaS)
+- Infrastructure as a Service (IaaS)
 answer: 4
-explanation: Auto-scaling automatically adjusts computing resources based on current demand, ensuring optimal performance during peak times while reducing costs during low-demand periods.
+explanation: "Infrastructure as a Service (IaaS) provides the most control over the underlying infrastructure, allowing users to manage operating systems, middleware, and applications while the cloud provider manages the physical hardware."
 ---

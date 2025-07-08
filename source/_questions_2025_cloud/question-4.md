@@ -1,11 +1,11 @@
 ---
 layout: question
-title: Which deployment model involves sharing infrastructure among multiple organizations?
+title: What is the primary benefit of auto-scaling in cloud environments?
 options:
-- Public cloud
-- Hybrid cloud
-- Community cloud
-- Private cloud
+- Reduced security risks
+- Improved data encryption
+- Automatic resource adjustment based on demand
+- Better user interface design
 answer: 3
-explanation: Community cloud is shared by several organizations with common interests or requirements. It provides benefits of cloud computing while maintaining some level of privacy and control.
+explanation: "Auto-scaling automatically adjusts computing resources based on current demand, ensuring optimal performance during peak times while reducing costs during low-demand periods."
 ---

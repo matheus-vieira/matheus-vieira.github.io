@@ -1,11 +1,12 @@
 ---
 layout: question
-title: What is the main advantage of microservices architecture in cloud environments?
+title: What is cloud-native architecture?
 options:
-- Independent deployment and scaling of services
-- Single point of failure
-- Reduced development complexity
-- Monolithic application structure
+- Applications designed specifically for cloud environments
+- On-premises applications
+- Traditional monolithic applications
+- Legacy system migration
 answer: 1
-explanation: Microservices architecture allows independent deployment, scaling, and development of individual services, improving maintainability, scalability, and fault tolerance in cloud environments.
+explanation: "Cloud-native architecture refers to applications designed and built specifically to leverage cloud computing frameworks and services."
 ---
+

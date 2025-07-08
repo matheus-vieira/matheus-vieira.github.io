@@ -1,11 +1,12 @@
 ---
 layout: question
-title: Which Azure service is designed for real-time data processing?
+title: What is Azure Monitor?
 options:
-- Azure Data Factory
-- Azure Storage
-- Azure Stream Analytics
-- Azure SQL Database
-answer: 3
-explanation: Azure Stream Analytics is a real-time analytics service designed to process and analyze streaming data from various sources like IoT devices, applications, and sensors.
+- Compute service
+- Database service
+- Storage service
+- Monitoring and analytics service
+answer: 4
+explanation: "Azure Monitor provides comprehensive monitoring for applications and infrastructure with metrics, logs, and alerts."
 ---
+

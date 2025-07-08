@@ -1,11 +1,11 @@
 ---
 layout: question
-title: Which C# feature allows multiple inheritance of contracts?
+title: What is the purpose of the 'using' statement in C#?
 options:
-- Enums
-- Structs
-- Classes
-- Interfaces
-answer: 4
-explanation: Interfaces allow multiple inheritance in C#. A class can implement multiple interfaces, inheriting their contracts (method signatures) but not implementation, providing flexibility in design.
+- Automatic resource disposal and namespace imports
+- Defining classes
+- Only for importing namespaces
+- Creating variables
+answer: 1
+explanation: "The 'using' statement serves two purposes: importing namespaces and ensuring automatic disposal of resources that implement IDisposable, providing proper resource management."
 ---

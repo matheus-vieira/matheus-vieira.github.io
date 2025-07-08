@@ -1,11 +1,11 @@
 ---
 layout: question
-title: Which .NET technology is used for building desktop applications with modern UI?
+title: What is the difference between .NET Core and .NET Framework?
 options:
-- ASP.NET
-- Entity Framework
-- SignalR
-- WPF (Windows Presentation Foundation)
-answer: 4
-explanation: WPF is a UI framework for building Windows desktop applications with rich, modern user interfaces. It supports data binding, styling, templates, and multimedia integration.
+- .NET Core only supports web applications
+- .NET Core is cross-platform and open-source, .NET Framework is Windows-only
+- No difference, they are identical
+- .NET Framework is newer than .NET Core
+answer: 2
+explanation: ".NET Core is cross-platform, open-source, and modular, while .NET Framework is Windows-only and monolithic. .NET Core offers better performance and modern development practices."
 ---

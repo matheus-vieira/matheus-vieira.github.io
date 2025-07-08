@@ -1,11 +1,11 @@
 ---
 layout: question
-title: What is the purpose of the 'using' statement in C#?
+title: Which access modifier makes a member accessible only within the same assembly?
 options:
-- Only for importing namespaces
-- Defining classes
-- Automatic resource disposal and namespace imports
-- Creating variables
+- public
+- protected
+- internal
+- private
 answer: 3
-explanation: "The 'using' statement serves two purposes: importing namespaces and ensuring automatic disposal of resources that implement IDisposable, providing proper resource management."
+explanation: "The 'internal' access modifier makes members accessible only within the same assembly. It provides more access than private but less than public, being assembly-scoped."
 ---

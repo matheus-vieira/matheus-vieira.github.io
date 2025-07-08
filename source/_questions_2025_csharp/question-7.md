@@ -1,11 +1,11 @@
 ---
 layout: question
-title: What is the purpose of async/await in C#?
+title: Which LINQ method would you use to transform each element in a collection?
 options:
-- Memory management
-- Exception handling
-- Synchronous programming only
-- Asynchronous programming without blocking threads
-answer: 4
-explanation: async/await enables asynchronous programming, allowing methods to run without blocking the calling thread. This improves application responsiveness and scalability.
+- OrderBy
+- Select
+- GroupBy
+- Where
+answer: 2
+explanation: "The Select method is used for projection/transformation, allowing you to transform each element in a collection into a new form or extract specific properties from objects."
 ---

@@ -1,11 +1,12 @@
 ---
 layout: question
-title: Which command shows the commit history?
+title: What is Git LFS?
 options:
-- git show
-- git status
-- git log
-- git diff
-answer: 3
-explanation: The 'git log' command displays the commit history, showing commit hashes, authors, dates, and commit messages. Various options can customize the output format.
+- Local File Storage
+- Live File Sync
+- Linux File System
+- Large File Storage extension
+answer: 4
+explanation: "Git LFS (Large File Storage) is an extension that handles large files by storing them outside the main repository."
 ---
+

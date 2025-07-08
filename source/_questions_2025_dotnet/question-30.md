@@ -1,11 +1,12 @@
 ---
 layout: question
-title: Which .NET tool is used for building and managing projects from the command line?
+title: What is dependency injection in .NET?
 options:
-- .NET CLI (Command Line Interface)
-- IIS Manager
-- Visual Studio only
-- SQL Server Management Studio
-answer: 1
-explanation: The .NET CLI is a cross-platform toolchain for developing .NET applications. It provides commands for creating, building, running, and publishing .NET applications from the command line.
+- File injection
+- Code injection attack
+- Database dependency
+- Design pattern for loose coupling
+answer: 4
+explanation: "Dependency injection is a design pattern that achieves loose coupling by injecting dependencies rather than creating them directly."
 ---
+

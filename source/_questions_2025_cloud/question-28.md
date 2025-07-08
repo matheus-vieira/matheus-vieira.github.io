@@ -1,11 +1,12 @@
 ---
 layout: question
-title: Which technology is commonly used for containerization in cloud deployments?
+title: What is edge computing?
 options:
-- Virtual machines only
-- Physical servers
-- Docker and Kubernetes
-- Desktop applications
-answer: 3
-explanation: Docker provides containerization technology while Kubernetes orchestrates and manages containers at scale, making them essential tools for modern cloud deployments.
+- Network security
+- Processing data closer to its source
+- Database optimization
+- Central data processing
+answer: 2
+explanation: "Edge computing brings computation and data storage closer to the location where it is needed to improve response times and save bandwidth."
 ---
+

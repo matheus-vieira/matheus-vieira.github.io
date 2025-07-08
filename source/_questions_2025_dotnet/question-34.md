@@ -1,11 +1,12 @@
 ---
 layout: question
-title: Which .NET technology is best suited for building cross-platform web applications?
+title: What is hot reload in .NET?
 options:
-- ASP.NET Core
-- WinForms
-- ASP.NET Web Forms
-- WPF
+- Apply code changes without restart
+- System restart
+- Performance optimization
+- Memory cleanup
 answer: 1
-explanation: ASP.NET Core is a cross-platform, open-source framework for building modern web applications and APIs. It runs on Windows, macOS, and Linux, providing high performance and flexibility.
+explanation: "Hot reload allows developers to apply code changes to a running application without needing to restart or lose application state."
 ---
+

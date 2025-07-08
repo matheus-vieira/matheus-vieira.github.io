@@ -1,11 +1,11 @@
 ---
 layout: question
-title: What are GitHub Releases used for?
+title: Which GitHub feature allows you to propose changes to a repository you don't have write access to?
 options:
-- Code compilation
-- User authentication
-- Temporary code storage
-- Packaging and distributing software versions
-answer: 4
-explanation: GitHub Releases allow you to package software, release notes, and binary files for distribution. They provide a way to mark specific points in your repository's history as release versions.
+- Repository cloning
+- Issue creation
+- Fork and Pull Request
+- Direct commit
+answer: 3
+explanation: "To contribute to repositories you don't have write access to, you fork the repository, make changes in your fork, and then create a pull request to propose merging your changes."
 ---

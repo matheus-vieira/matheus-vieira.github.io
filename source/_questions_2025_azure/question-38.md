@@ -1,11 +1,12 @@
 ---
 layout: question
-title: Which Azure service provides container orchestration?
+title: What is Azure Key Vault used for?
 options:
-- Azure Batch
-- Azure Service Fabric
-- Azure Container Instances
-- Azure Kubernetes Service (AKS)
-answer: 4
-explanation: Azure Kubernetes Service (AKS) provides managed Kubernetes container orchestration, making it easy to deploy and manage containerized applications at scale.
+- File storage
+- Secrets and key management
+- Database hosting
+- Virtual machine management
+answer: 2
+explanation: "Azure Key Vault is a cloud service for securely storing and accessing secrets, keys, and certificates."
 ---
+
