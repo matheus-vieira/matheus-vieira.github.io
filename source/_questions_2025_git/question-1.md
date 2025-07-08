@@ -1,0 +1,16 @@
+---
+layout: question
+title: Diferenças between SQL Server and PostgreSQL and when use cada um
+options:
+- Option A related to Diferenças between SQL Server and PostgreSQL and w...
+- Option C describing Diferenças between SQL Server and PostgreSQL and w...
+- Option D about Diferenças between SQL Server and PostgreSQL and w...
+- Option B explaining Diferenças between SQL Server and PostgreSQL and w...
+answer: 1
+explanation: Introdução SQL Server and PostgreSQL são dois of the principais systems
+  of management of banco of data relacionais (RDBMS) of the mercado. While o SQL Server
+  é um produto comercial of the Microsoft, o PostgreSQL é um banco of data open-source.
+  Cada um possui características únicas that os tornam adequados to diferentes cenários
+  and necessidades empresariais. Conceito-chave To escolha between SQL Server and
+  PostgreSQL deve considerar fatores as licenciamento, performance, resources específi...
+---

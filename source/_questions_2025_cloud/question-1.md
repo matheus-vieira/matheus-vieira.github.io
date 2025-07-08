@@ -1,10 +1,11 @@
 ---
 layout: question
-title: What is IaaS?
+title: Technical question about the topic
 options:
-  - Infrastructure as a Service
-  - Internet as a Service
-  - Integration as a Service
-answer: 0
-explanation: "IaaS stands for Infrastructure as a Service."
+- Option D about Technical question about the topic...
+- Option C describing Technical question about the topic...
+- Option B explaining Technical question about the topic...
+- Option A related to Technical question about the topic...
+answer: 2
+explanation: 'Resource Groups are importantes? - Organização: Allows separar ambientes (produção, homologação, development) and projetos, facilitando a localização and o management dos resources...'
 ---

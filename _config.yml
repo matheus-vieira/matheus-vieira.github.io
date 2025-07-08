@@ -214,6 +214,9 @@ collections:
   interview_questions:
     output: true
     permalink: /interview_questions/:name/
+  interview_questions_pt_br:
+    output: true
+    permalink: /interview_questions/:name/
   questions_2025_cloud:
     output: true
     permalink: /tools/questions/2025/cloud/:name/

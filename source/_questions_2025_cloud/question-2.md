@@ -1,10 +1,11 @@
 ---
 layout: question
-title: What is IaaS?
+title: Technical question about the topic
 options:
-  - Infrastructure as a Service
-  - Internet as a Service
-  - Integration as a Service
-answer: 0
-explanation: "IaaS stands for Infrastructure as a Service."
+- Option A related to Technical question about the topic...
+- Option C describing Technical question about the topic...
+- Option D about Technical question about the topic...
+- Option B explaining Technical question about the topic...
+answer: 3
+explanation: 'a separação of ambientes is importante? - Isolamento of Falhas: Problemas in Dev or Test não afetam o ambiente of produção. - security*: Allows aplicar policies of access and compliance específicas to cada ambiente...'
 ---
