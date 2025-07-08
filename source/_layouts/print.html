@@ -68,7 +68,7 @@ layout: compress
       var blob = new Blob([text], { type: 'text/plain' });
       var link = document.createElement('a');
       link.href = window.URL.createObjectURL(blob);
-      link.download = 'resume.txt';
+      link.download = '{{ page.title }}.txt';
       link.click();
     }
 
