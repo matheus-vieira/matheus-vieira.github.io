@@ -1,11 +1,11 @@
 ---
 layout: question
-title: Technical question about the topic
+title: Which cloud service model provides the most control over the underlying infrastructure?
 options:
-- Option A related to Technical question about the topic...
-- Option C describing Technical question about the topic...
-- Option D about Technical question about the topic...
-- Option B explaining Technical question about the topic...
-answer: 3
-explanation: 'a separação of ambientes is importante? - Isolamento of Falhas: Problemas in Dev or Test não afetam o ambiente of produção. - security*: Allows aplicar policies of access and compliance específicas to cada ambiente...'
+- Infrastructure as a Service (IaaS)
+- Software as a Service (SaaS)
+- Function as a Service (FaaS)
+- Platform as a Service (PaaS)
+answer: 1
+explanation: Infrastructure as a Service (IaaS) provides the most control over the underlying infrastructure, allowing users to manage operating systems, middleware, and applications while the cloud provider manages the physical hardware.
 ---

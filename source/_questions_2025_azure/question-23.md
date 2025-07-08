@@ -1,11 +1,11 @@
 ---
 layout: question
-title: Technical question about the topic
+title: What is the purpose of Azure Virtual Network (VNet)?
 options:
-- Option A related to Technical question about the topic...
-- Option C describing Technical question about the topic...
-- Option B explaining Technical question about the topic...
-- Option D about Technical question about the topic...
-answer: 3
-explanation: 'This azure question tests understanding of key concepts and best practices.'
+- Provide isolated network environment in Azure
+- Store files and documents
+- Manage user identities
+- Monitor application performance
+answer: 1
+explanation: Azure Virtual Network (VNet) provides an isolated network environment in Azure where you can securely connect Azure resources, control network traffic, and extend your on-premises network to the cloud.
 ---

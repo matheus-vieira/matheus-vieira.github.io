@@ -1,11 +1,11 @@
 ---
 layout: question
-title: Technical question about the topic
+title: Which file is automatically displayed on a repository's main page?
 options:
-- Option C describing Technical question about the topic...
-- Option D about Technical question about the topic...
-- Option B explaining Technical question about the topic...
-- Option A related to Technical question about the topic...
+- main.txt
+- description.doc
+- README.md
+- index.html
 answer: 3
-explanation: 'a criptografia is importante? - Confidencialidade: Protege informações sensíveis contra access não autorizado, mesmo in caso of comprometimento físico or lógico...'
+explanation: README.md is automatically displayed on the repository's main page, providing information about the project, installation instructions, usage examples, and other relevant details.
 ---

@@ -1,11 +1,11 @@
 ---
 layout: question
-title: Technical question about the topic
+title: Which Azure service provides serverless compute functionality?
 options:
-- Option A related to Technical question about the topic...
-- Option C describing Technical question about the topic...
-- Option D about Technical question about the topic...
-- Option B explaining Technical question about the topic...
-answer: 1
-explanation: 'Managed Identity is importante to security? - Elimina segredos in código: Remove a necessidade of armazenar credenciais sensíveis in arquivos, variáveis of ambiente or pipelines, reduzindo riscos of vazamento...'
+- Azure Service Fabric
+- Azure Functions
+- Azure Container Instances
+- Azure Virtual Machines
+answer: 2
+explanation: Azure Functions is a serverless compute service that allows you to run code on-demand without having to explicitly provision or manage infrastructure. It automatically scales based on demand.
 ---

@@ -1,11 +1,11 @@
 ---
 layout: question
-title: Technical question about the topic
+title: What is a Pull Request in GitHub?
 options:
-- Option C describing Technical question about the topic...
-- Option B explaining Technical question about the topic...
-- Option D about Technical question about the topic...
-- Option A related to Technical question about the topic...
-answer: 4
-explanation: 'a separação of ambientes is importante? - Isolamento of Falhas: Problemas in Dev or Test não afetam o ambiente of produção. - security*: Allows aplicar policies of access and compliance específicas to cada ambiente...'
+- A request to create a new account
+- A proposal to merge changes from one branch to another
+- A request to delete a repository
+- A request to download code
+answer: 2
+explanation: A Pull Request is a feature that allows developers to notify team members about changes they've made to a branch, facilitating code review and discussion before merging changes.
 ---

@@ -1,11 +1,11 @@
 ---
 layout: question
-title: Technical question about the topic
+title: Which Azure service provides container orchestration?
 options:
-- Option C describing Technical question about the topic...
-- Option A related to Technical question about the topic...
-- Option B explaining Technical question about the topic...
-- Option D about Technical question about the topic...
+- Azure Service Fabric
+- Azure Batch
+- Azure Kubernetes Service (AKS)
+- Azure Container Instances
 answer: 3
-explanation: 'This azure question tests understanding of key concepts and best practices.'
+explanation: Azure Kubernetes Service (AKS) provides managed Kubernetes container orchestration, making it easy to deploy and manage containerized applications at scale.
 ---

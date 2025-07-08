@@ -1,11 +1,11 @@
 ---
 layout: question
-title: Technical question about the topic
+title: Which access modifier makes a member accessible only within the same assembly?
 options:
-- Option D about Technical question about the topic...
-- Option C describing Technical question about the topic...
-- Option A related to Technical question about the topic...
-- Option B explaining Technical question about the topic...
+- protected
+- public
+- private
+- internal
 answer: 4
-explanation: 'a separação of ambientes is importante? - Isolamento of Falhas: Problemas in Dev or Test não afetam o ambiente of produção. - security*: Allows aplicar policies of access and compliance específicas to cada ambiente...'
+explanation: The 'internal' access modifier makes members accessible only within the same assembly. It provides more access than private but less than public, being assembly-scoped.
 ---

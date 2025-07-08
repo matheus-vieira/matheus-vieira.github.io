@@ -1,11 +1,11 @@
 ---
 layout: question
-title: Technical question about the topic
+title: What are GitHub Releases used for?
 options:
-- Option B explaining Technical question about the topic...
-- Option D about Technical question about the topic...
-- Option A related to Technical question about the topic...
-- Option C describing Technical question about the topic...
-answer: 2
-explanation: 'a automation with Azure CLI is importante? - Repetibilidade: Allows criar ambientes idênticos in diferentes regiões, times or fases of the projeto, garantindo consistência...'
+- Code compilation
+- User authentication
+- Temporary code storage
+- Packaging and distributing software versions
+answer: 4
+explanation: GitHub Releases allow you to package software, release notes, and binary files for distribution. They provide a way to mark specific points in your repository's history as release versions.
 ---

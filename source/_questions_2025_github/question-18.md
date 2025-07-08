@@ -1,16 +1,11 @@
 ---
 layout: question
-title: 'Developer Experience: Concept key relevante to architecture in the Azure'
+title: Which GitHub feature allows you to propose changes to a repository you don't have write access to?
 options:
-- 'Option A related to Developer Experience: Concept key relevante to arc...'
-- 'Option D about Developer Experience: Concept key relevante to arc...'
-- 'Option C describing Developer Experience: Concept key relevante to arc...'
-- 'Option B explaining Developer Experience: Concept key relevante to arc...'
-answer: 1
-explanation: 'Introdução To experiência of the desenvolvedor (Developer Experience
-  - DX) é um of the pilares to to entrega of software of alta quality and velocidade
-  in environments of cloud as o Azure. Conceito-chave **Dev Portal and Tools Integradas**:
-  O Azure Developer Portal, aliado to tools as Azure CLI, VS Code Extensions and integration
-  with repositórios Github, proporciona um ecossistema unificado to development, tests
-  and deploy, facilitando to vida of the desenvolvedor. Tópicos Relevantes -...'
+- Repository cloning
+- Issue creation
+- Fork and Pull Request
+- Direct commit
+answer: 3
+explanation: To contribute to repositories you don't have write access to, you fork the repository, make changes in your fork, and then create a pull request to propose merging your changes.
 ---

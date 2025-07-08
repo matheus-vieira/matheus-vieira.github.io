@@ -1,11 +1,11 @@
 ---
 layout: question
-title: Technical question about the topic
+title: What is Azure DevOps primarily used for?
 options:
-- Option B explaining Technical question about the topic...
-- Option A related to Technical question about the topic...
-- Option D about Technical question about the topic...
-- Option C describing Technical question about the topic...
-answer: 2
-explanation: 'a automation with Azure CLI is importante? - Repetibilidade: Allows criar ambientes idênticos in diferentes regiões, times or fases of the projeto, garantindo consistência...'
+- Application lifecycle management and CI/CD
+- Virtual machine monitoring
+- Data analytics and reporting
+- Database administration
+answer: 1
+explanation: Azure DevOps provides a complete set of development tools for planning, developing, testing, and deploying applications. It includes version control, CI/CD pipelines, project management, and testing tools.
 ---

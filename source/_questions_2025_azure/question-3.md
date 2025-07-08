@@ -1,11 +1,11 @@
 ---
 layout: question
-title: Technical question about the topic
+title: What is the purpose of Azure Virtual Network (VNet)?
 options:
-- Option B explaining Technical question about the topic...
-- Option A related to Technical question about the topic...
-- Option D about Technical question about the topic...
-- Option C describing Technical question about the topic...
-answer: 2
-explanation: 'RBAC is importante? - security*: Garante que cada usuário tenha apenas as permissões necessárias to executar suas tarefas, reduzindo riscos of acessos indevidos...'
+- Manage user identities
+- Store files and documents
+- Provide isolated network environment in Azure
+- Monitor application performance
+answer: 3
+explanation: Azure Virtual Network (VNet) provides an isolated network environment in Azure where you can securely connect Azure resources, control network traffic, and extend your on-premises network to the cloud.
 ---

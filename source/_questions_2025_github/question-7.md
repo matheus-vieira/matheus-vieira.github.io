@@ -1,11 +1,11 @@
 ---
 layout: question
-title: Technical question about the topic
+title: What is the purpose of GitHub Pages?
 options:
-- Option C describing Technical question about the topic...
-- Option A related to Technical question about the topic...
-- Option B explaining Technical question about the topic...
-- Option D about Technical question about the topic...
-answer: 3
-explanation: 'dos principais pontos: - O workflow is disparado a cada push in the branch main. - O código is baixado, dependências instaladas, testes executados and a application is buildada. - O login in the Azure is feito using um secret seguro (AZURE_CREDENTIALS), geralmente criado via Azure Service Princip...'
+- Code storage
+- Database hosting
+- Email services
+- Static website hosting directly from repositories
+answer: 4
+explanation: GitHub Pages is a static site hosting service that takes HTML, CSS, and JavaScript files from a repository and publishes them as a website, ideal for documentation and project pages.
 ---

@@ -1,11 +1,11 @@
 ---
 layout: question
-title: Technical question about the topic
+title: Which GitHub feature allows you to propose changes to a repository you don't have write access to?
 options:
-- Option D about Technical question about the topic...
-- Option B explaining Technical question about the topic...
-- Option A related to Technical question about the topic...
-- Option C describing Technical question about the topic...
-answer: 1
-explanation: 'a escalabilidade automática is importante? - Alta disponibilidade: Garante que a application continue responsiva mesmo durante picos inesperados of access...'
+- Direct commit
+- Repository cloning
+- Fork and Pull Request
+- Issue creation
+answer: 3
+explanation: To contribute to repositories you don't have write access to, you fork the repository, make changes in your fork, and then create a pull request to propose merging your changes.
 ---

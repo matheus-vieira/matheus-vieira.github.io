@@ -1,11 +1,11 @@
 ---
 layout: question
-title: Technical question about the topic
+title: What is the main advantage of Azure App Service?
 options:
-- Option D about Technical question about the topic...
-- Option B explaining Technical question about the topic...
-- Option C describing Technical question about the topic...
-- Option A related to Technical question about the topic...
+- Data storage optimization
+- Virtual machine provisioning
+- Network load balancing
+- Platform-as-a-Service for web applications
 answer: 4
-explanation: 'a incidentes to mitigar riscos. Tópicos Relevantes - identity and Access: Uso of Azure AD, RBAC, MFA and policies of access condicional. - Criptografia: Dados in repouso and in trânsito protegidos por criptografia forte (Azure Key Vault, TLS)...'
+explanation: Azure App Service is a Platform-as-a-Service (PaaS) offering that enables you to build and host web apps, mobile backends, and RESTful APIs without managing infrastructure.
 ---

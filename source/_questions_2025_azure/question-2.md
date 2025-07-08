@@ -1,11 +1,11 @@
 ---
 layout: question
-title: Technical question about the topic
+title: Which Azure service provides serverless compute functionality?
 options:
-- Option A related to Technical question about the topic...
-- Option B explaining Technical question about the topic...
-- Option C describing Technical question about the topic...
-- Option D about Technical question about the topic...
+- Azure Container Instances
+- Azure Virtual Machines
+- Azure Functions
+- Azure Service Fabric
 answer: 3
-explanation: 'a separação of ambientes is importante? - Isolamento of Falhas: Problemas in Dev or Test não afetam o ambiente of produção. - security*: Allows aplicar policies of access and compliance específicas to cada ambiente...'
+explanation: Azure Functions is a serverless compute service that allows you to run code on-demand without having to explicitly provision or manage infrastructure. It automatically scales based on demand.
 ---

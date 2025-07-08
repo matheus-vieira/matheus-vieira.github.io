@@ -1,11 +1,11 @@
 ---
 layout: question
-title: Technical question about the topic
+title: What is Azure Active Directory (Azure AD) primarily used for?
 options:
-- Option C describing Technical question about the topic...
-- Option B explaining Technical question about the topic...
-- Option D about Technical question about the topic...
-- Option A related to Technical question about the topic...
-answer: 4
-explanation: 'Managed Identity is importante? - Elimina Segredos in Código: Remove a necessidade of armazenar senhas, chaves or strings of conexão in arquivos of configuration or variáveis of ambiente...'
+- Database hosting
+- File storage and sharing
+- Identity and access management
+- Virtual machine management
+answer: 3
+explanation: Azure Active Directory (Azure AD) is Microsoft's cloud-based identity and access management service. It helps employees sign in and access resources in external resources and internal resources.
 ---

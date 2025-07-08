@@ -1,11 +1,11 @@
 ---
 layout: question
-title: Technical question about the topic
+title: Which Azure storage type is optimized for big data analytics?
 options:
-- Option B explaining Technical question about the topic...
-- Option C describing Technical question about the topic...
-- Option A related to Technical question about the topic...
-- Option D about Technical question about the topic...
-answer: 4
-explanation: 'a automation of ambientes of development is importante? - Onboarding Rápido: Novos desenvolvedores conseguem iniciar rapidamente, without depender of configurações manuais or documentação extensa...'
+- Azure Data Lake Storage
+- Azure Blob Storage
+- Azure Queue Storage
+- Azure Table Storage
+answer: 1
+explanation: Azure Data Lake Storage is specifically designed for big data analytics workloads. It provides hierarchical namespace, fine-grained access control, and is optimized for analytics frameworks like Apache Spark and Hadoop.
 ---

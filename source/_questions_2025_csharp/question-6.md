@@ -1,16 +1,11 @@
 ---
 layout: question
-title: 'RBAC: Concept key relevante to architecture in the Azure'
+title: Which LINQ method would you use to transform each element in a collection?
 options:
-- 'Option A related to RBAC: Concept key relevante to architecture in the...'
-- 'Option C describing RBAC: Concept key relevante to architecture in the...'
-- 'Option D about RBAC: Concept key relevante to architecture in the...'
-- 'Option B explaining RBAC: Concept key relevante to architecture in the...'
-answer: 1
-explanation: 'Introdução RBAC in the Azure oferece control granular through of custom
-  roles, allowing organizations to implement least privilege principles with precisão.
-  Conceito-chave **Custom Roles and Fine-Grained Permissions**: Criação of roles personalizadas
-  that combinam permissions específicas to atender requisitos únicos of security and
-  governance organizacional. Tópicos Relevantes - Custom role definitions - Permission
-  inheritance - Scope management (subscription, resource group, resource) ...'
+- GroupBy
+- OrderBy
+- Select
+- Where
+answer: 3
+explanation: The Select method is used for projection/transformation, allowing you to transform each element in a collection into a new form or extract specific properties from objects.
 ---

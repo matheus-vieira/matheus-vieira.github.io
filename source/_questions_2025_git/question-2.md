@@ -1,17 +1,11 @@
 ---
 layout: question
-title: O that são Progressive Web Apps (PWAs) and as implementá-las
+title: Which Git command is used to create a new branch?
 options:
-- Option A related to O that são Progressive Web Apps (PWAs) and as impl...
-- Option D about O that são Progressive Web Apps (PWAs) and as impl...
-- Option C describing O that são Progressive Web Apps (PWAs) and as impl...
-- Option B explaining O that são Progressive Web Apps (PWAs) and as impl...
+- git branch <branch-name>
+- git create <branch-name>
+- git make <branch-name>
+- git new <branch-name>
 answer: 1
-explanation: 'Introdução Progressive Web Apps (PWAs) são applications web that combinam
-  o melhor of the applications web tradicionais with resources nativos of aplicativos
-  móveis. Elas utilizam technologies web modernas to offer experiências similares
-  to the of aplicativos nativos, incluindo funcionamento offline, notifications push
-  and instalação in the dispositivo. Conceito-chave Uma PWA é construída about três
-  pilares fundamentais: be **Confiável** (funciona offline), **Rápida** (responde
-  rapidly to ...'
+explanation: The 'git branch <branch-name>' command creates a new branch. You can also use 'git checkout -b <branch-name>' to create and switch to the new branch in one command.
 ---

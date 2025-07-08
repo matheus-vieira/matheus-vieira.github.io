@@ -1,11 +1,11 @@
 ---
 layout: question
-title: Technical question about the topic
+title: What is the Common Language Runtime (CLR) in .NET?
 options:
-- Option B explaining Technical question about the topic...
-- Option A related to Technical question about the topic...
-- Option D about Technical question about the topic...
-- Option C describing Technical question about the topic...
+- A code editor
+- The execution environment that manages .NET applications
+- A web server
+- A database system
 answer: 2
-explanation: 'Resource Groups are importantes? - Organização: Allows separar ambientes (produção, homologação, development) and projetos, facilitando a localização and o management dos resources...'
+explanation: The CLR is the execution environment in .NET that provides services like memory management, garbage collection, exception handling, type safety, and security. It manages the execution of .NET applications.
 ---

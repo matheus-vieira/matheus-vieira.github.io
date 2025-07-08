@@ -1,11 +1,11 @@
 ---
 layout: question
-title: Technical question about the topic
+title: What does 'forking' a repository mean in GitHub?
 options:
-- Option A related to Technical question about the topic...
-- Option C describing Technical question about the topic...
-- Option B explaining Technical question about the topic...
-- Option D about Technical question about the topic...
+- Renaming a repository
+- Deleting a repository
+- Making a repository private
+- Creating a personal copy of someone else's repository
 answer: 4
-explanation: 'Managed Identity is importante? - Elimina Segredos in Código: Remove a necessidade of armazenar senhas, chaves or strings of conexão in arquivos of configuration or variáveis of ambiente...'
+explanation: Forking creates a personal copy of someone else's repository in your GitHub account, allowing you to freely experiment with changes without affecting the original project.
 ---

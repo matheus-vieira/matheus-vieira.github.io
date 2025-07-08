@@ -1,16 +1,11 @@
 ---
 layout: question
-title: '.NET + Azure: Concept key relevante to architecture in the Azure'
+title: What is the purpose of GitHub Pages?
 options:
-- 'Option D about .NET + Azure: Concept key relevante to architectur...'
-- 'Option C describing .NET + Azure: Concept key relevante to architectur...'
-- 'Option B explaining .NET + Azure: Concept key relevante to architectur...'
-- 'Option A related to .NET + Azure: Concept key relevante to architectur...'
-answer: 4
-explanation: 'Introdução To integration between .NET and Azure é fundamental to arquiteturas
-  modernas, permitindo o development of applications escaláveis, seguras and eficientes
-  in the cloud Microsoft. Conceito-chave Azure** App Service with .NET**: O Azure
-  App Service é uma platform PaaS that permite hospedar applications .NET (incluindo
-  ASP.NET Core) of forma gerenciada, with scalability automática, integration contínua
-  and resources avançados of security. Tópicos Relevantes - Deploy contínuo via ...'
+- Static website hosting directly from repositories
+- Database hosting
+- Email services
+- Code storage
+answer: 1
+explanation: GitHub Pages is a static site hosting service that takes HTML, CSS, and JavaScript files from a repository and publishes them as a website, ideal for documentation and project pages.
 ---

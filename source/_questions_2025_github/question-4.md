@@ -1,11 +1,11 @@
 ---
 layout: question
-title: Technical question about the topic
+title: What is GitHub Actions?
 options:
-- Option C describing Technical question about the topic...
-- Option A related to Technical question about the topic...
-- Option D about Technical question about the topic...
-- Option B explaining Technical question about the topic...
-answer: 3
-explanation: 'a automation of ambientes of development is importante? - Onboarding Rápido: Novos desenvolvedores conseguem iniciar rapidamente, without depender of configurações manuais or documentação extensa...'
+- CI/CD automation platform
+- A code editor
+- A messaging system
+- A database service
+answer: 1
+explanation: GitHub Actions is a CI/CD platform that allows you to automate workflows, including building, testing, and deploying code directly from your GitHub repository.
 ---

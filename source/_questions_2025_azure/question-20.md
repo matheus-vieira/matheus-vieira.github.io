@@ -1,11 +1,11 @@
 ---
 layout: question
-title: Technical question about the topic
+title: Which Azure service is designed for real-time data processing?
 options:
-- Option A related to Technical question about the topic...
-- Option C describing Technical question about the topic...
-- Option B explaining Technical question about the topic...
-- Option D about Technical question about the topic...
-answer: 4
-explanation: 'CI/CD is importante? - Qualidade: Reduz erros humanos, garante testes automatizados and validações of security. - Agilidade: Acelera entregas and feedback, reduzindo time-to-market...'
+- Azure Storage
+- Azure SQL Database
+- Azure Stream Analytics
+- Azure Data Factory
+answer: 3
+explanation: Azure Stream Analytics is a real-time analytics service designed to process and analyze streaming data from various sources like IoT devices, applications, and sensors.
 ---

@@ -1,17 +1,11 @@
 ---
 layout: question
-title: Describe in detalhes um concept key about Devops relevante to architecture
-  in the Azure.
+title: Which file is automatically displayed on a repository's main page?
 options:
-- Option C describing Describe in detalhes um concept key about Devops r...
-- Option A related to Describe in detalhes um concept key about Devops r...
-- Option D about Describe in detalhes um concept key about Devops r...
-- Option B explaining Describe in detalhes um concept key about Devops r...
+- main.txt
+- README.md
+- description.doc
+- index.html
 answer: 2
-explanation: 'Introdução Devops é uma approach cultural and técnica that visa integrate
-  development and operações to entregar software of forma mais rápida, confiável and
-  segura. In the Azure, Devops é potencializado by tools and practices modernas. Conceito-chave:
-  Integration Contínua and continuous delivery (CI/CD) CI/CD automatiza o ciclo of
-  vida of applications, since o commit until o deploy in production. In the Azure,
-  tools as Azure Devops and Github Actions permitem create pipelines robustos, wit...'
+explanation: README.md is automatically displayed on the repository's main page, providing information about the project, installation instructions, usage examples, and other relevant details.
 ---

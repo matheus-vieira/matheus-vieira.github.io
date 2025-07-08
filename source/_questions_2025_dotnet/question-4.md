@@ -1,16 +1,11 @@
 ---
 layout: question
-title: '.NET + Azure: Concept key relevante to architecture in the Azure'
+title: Which .NET technology is best suited for building cross-platform web applications?
 options:
-- 'Option B explaining .NET + Azure: Concept key relevante to architectur...'
-- 'Option D about .NET + Azure: Concept key relevante to architectur...'
-- 'Option A related to .NET + Azure: Concept key relevante to architectur...'
-- 'Option C describing .NET + Azure: Concept key relevante to architectur...'
+- WPF
+- WinForms
+- ASP.NET Core
+- ASP.NET Web Forms
 answer: 3
-explanation: 'Introdução To integration between .NET and Azure oferece um ecossistema
-  complete to development of applications modernas and escaláveis in the cloud. Conceito-chave
-  Azure** SDK to .NET**: Set of libraries that facilita to integration of applications
-  .NET with services Azure, oferecendo APIs consistentes, authentication simplificada
-  and melhor produtividade of the desenvolvedor. Tópicos Relevantes - Libraries cliente
-  to diferentes services Azure - Authentication and authorization integra...'
+explanation: ASP.NET Core is a cross-platform, open-source framework for building modern web applications and APIs. It runs on Windows, macOS, and Linux, providing high performance and flexibility.
 ---

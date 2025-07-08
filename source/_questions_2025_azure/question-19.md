@@ -1,11 +1,11 @@
 ---
 layout: question
-title: Technical question about the topic
+title: What is Azure DevOps primarily used for?
 options:
-- Option C describing Technical question about the topic...
-- Option D about Technical question about the topic...
-- Option B explaining Technical question about the topic...
-- Option A related to Technical question about the topic...
-answer: 4
-explanation: 'A decisão entre Service Bus and Event Hub impacta diretamente a arquitetura of integration and processamento of dados. [Service Bus vs Event Hub] — Conceito-chave: Confiabilidade vs. Escalabilidade Ambos are services of mensageria, mas with propós...'
+- Virtual machine monitoring
+- Application lifecycle management and CI/CD
+- Data analytics and reporting
+- Database administration
+answer: 2
+explanation: Azure DevOps provides a complete set of development tools for planning, developing, testing, and deploying applications. It includes version control, CI/CD pipelines, project management, and testing tools.
 ---

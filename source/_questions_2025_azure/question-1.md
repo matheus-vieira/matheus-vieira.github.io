@@ -1,11 +1,11 @@
 ---
 layout: question
-title: Technical question about the topic
+title: What is the primary benefit of Azure Resource Groups?
 options:
-- Option B explaining Technical question about the topic...
-- Option D about Technical question about the topic...
-- Option A related to Technical question about the topic...
-- Option C describing Technical question about the topic...
-answer: 4
-explanation: 'Resource Groups are importantes? - Organização: Allows separar ambientes (produção, homologação, development) and projetos, facilitando a localização and o management dos resources...'
+- Logical container for grouping related Azure resources
+- Physical location for storing data
+- Network security boundary
+- Backup storage location
+answer: 1
+explanation: Azure Resource Groups are logical containers that group related Azure resources together. They help organize resources, apply policies, manage permissions, and simplify deployment and management operations.
 ---

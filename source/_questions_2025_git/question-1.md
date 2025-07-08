@@ -1,16 +1,11 @@
 ---
 layout: question
-title: Diferenças between SQL Server and PostgreSQL and when use cada um
+title: What is the primary purpose of Git?
 options:
-- Option A related to Diferenças between SQL Server and PostgreSQL and w...
-- Option C describing Diferenças between SQL Server and PostgreSQL and w...
-- Option D about Diferenças between SQL Server and PostgreSQL and w...
-- Option B explaining Diferenças between SQL Server and PostgreSQL and w...
-answer: 1
-explanation: Introdução SQL Server and PostgreSQL são dois of the principais systems
-  of management of banco of data relacionais (RDBMS) of the mercado. While o SQL Server
-  é um produto comercial of the Microsoft, o PostgreSQL é um banco of data open-source.
-  Cada um possui características únicas that os tornam adequados to diferentes cenários
-  and necessidades empresariais. Conceito-chave To escolha between SQL Server and
-  PostgreSQL deve considerar fatores as licenciamento, performance, resources específi...
+- File compression
+- Web server hosting
+- Database management
+- Distributed version control system
+answer: 4
+explanation: Git is a distributed version control system that tracks changes in source code during software development. It allows multiple developers to collaborate efficiently and maintains a complete history of changes.
 ---

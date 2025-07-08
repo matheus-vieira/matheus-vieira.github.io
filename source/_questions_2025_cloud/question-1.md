@@ -1,11 +1,11 @@
 ---
 layout: question
-title: Technical question about the topic
+title: What is the main characteristic of cloud computing?
 options:
-- Option D about Technical question about the topic...
-- Option C describing Technical question about the topic...
-- Option B explaining Technical question about the topic...
-- Option A related to Technical question about the topic...
-answer: 2
-explanation: 'Resource Groups are importantes? - Organização: Allows separar ambientes (produção, homologação, development) and projetos, facilitando a localização and o management dos resources...'
+- Physical hardware ownership
+- Limited scalability
+- On-demand self-service and resource pooling
+- Local data storage only
+answer: 3
+explanation: Cloud computing is characterized by on-demand self-service, resource pooling, rapid elasticity, measured service, and broad network access. Users can provision resources as needed without human interaction.
 ---

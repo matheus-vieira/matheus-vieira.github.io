@@ -1,11 +1,11 @@
 ---
 layout: question
-title: Technical question about the topic
+title: What is the primary purpose of GitHub?
 options:
-- Option A related to Technical question about the topic...
-- Option C describing Technical question about the topic...
-- Option B explaining Technical question about the topic...
-- Option D about Technical question about the topic...
-answer: 2
-explanation: 'o Azure SDK to .NET is importante? - Produtividade: APIs modernas, documentação clara and integration with ferramentas of the ecossistema .NET (Visual Studio, Azure DevOps, etc.)...'
+- Email hosting
+- File storage service
+- Social media platform
+- Git repository hosting and collaboration platform
+answer: 4
+explanation: GitHub is a web-based platform that provides Git repository hosting and collaboration features for software development, including issue tracking, code review, and project management tools.
 ---

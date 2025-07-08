@@ -1,11 +1,11 @@
 ---
 layout: question
-title: Technical question about the topic
+title: What is the primary purpose of GitHub?
 options:
-- Option A related to Technical question about the topic...
-- Option C describing Technical question about the topic...
-- Option B explaining Technical question about the topic...
-- Option D about Technical question about the topic...
-answer: 4
-explanation: 'Resource Groups are importantes? - Organização: Allows separar ambientes (produção, homologação, development) and projetos, facilitando a localização and o management dos resources...'
+- Social media platform
+- Git repository hosting and collaboration platform
+- Email hosting
+- File storage service
+answer: 2
+explanation: GitHub is a web-based platform that provides Git repository hosting and collaboration features for software development, including issue tracking, code review, and project management tools.
 ---

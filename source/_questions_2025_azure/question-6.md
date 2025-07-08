@@ -1,11 +1,11 @@
 ---
 layout: question
-title: Technical question about the topic
+title: Which Azure service is best for hosting a relational database?
 options:
-- Option D about Technical question about the topic...
-- Option A related to Technical question about the topic...
-- Option B explaining Technical question about the topic...
-- Option C describing Technical question about the topic...
+- Azure Cosmos DB
+- Azure SQL Database
+- Azure Table Storage
+- Azure Redis Cache
 answer: 2
-explanation: 'a criptografia is importante? - Confidencialidade: Protege informações sensíveis contra access não autorizado, mesmo in caso of comprometimento físico or lógico...'
+explanation: Azure SQL Database is a fully managed relational database service based on SQL Server engine. It provides high availability, automatic backups, and built-in intelligence for optimal performance.
 ---

@@ -1,17 +1,11 @@
 ---
 layout: question
-title: 'CLI Commands: Concept key relevante to architecture in the Azure'
+title: What is the difference between 'const' and 'readonly' in C#?
 options:
-- 'Option A related to CLI Commands: Concept key relevante to architectur...'
-- 'Option B explaining CLI Commands: Concept key relevante to architectur...'
-- 'Option D about CLI Commands: Concept key relevante to architectur...'
-- 'Option C describing CLI Commands: Concept key relevante to architectur...'
-answer: 1
-explanation: 'Introdução Azure CLI and PowerShell oferecem capacidades avançadas of
-  automation, scripting and integration that aceleram operações and reduzem errors
-  manuais. Conceito-chave **Cross-Platform Automation**: Azure CLI (cross-platform)
-  and Azure PowerShell fornecem APIs consistentes to automation, with support to JSON/YAML
-  output and pipeline integration. Tópicos Relevantes - Cross-platform compatibility
-  - Output formatting JSON(, Yaml, table) - Pipeline integration - Extension ecosystem
-  -...'
+- readonly can only be used with strings
+- const is compile-time constant, readonly is runtime constant
+- No difference, they are identical
+- const is runtime constant, readonly is compile-time
+answer: 2
+explanation: const values are compile-time constants and must be assigned at declaration, while readonly values are runtime constants that can be assigned in constructors or at declaration.
 ---
