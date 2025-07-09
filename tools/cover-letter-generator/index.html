@@ -1,0 +1,102 @@
+<p>Fill in the fields below or connect your information automatically to generate up to 4 personalized cover letter
+    versions.</p>
+
+<form id="coverLetterForm">
+    <fieldset>
+        <legend>Job Information</legend>
+        <label for="companyName">Company Name:</label>
+        <input type="text" id="companyName" name="companyName" required="" />
+        <small>e.g., "Acme Corp"</small><br />
+
+        <label for="jobTitle">Job Title:</label>
+        <input type="text" id="jobTitle" name="jobTitle" required="" />
+        <small>e.g., "Senior Backend Developer"</small><br />
+
+        <label for="jobLink">Job Link or Description:</label>
+        <input type="url" id="jobLink" name="jobLink" />
+        <small>Paste the job posting link or a brief description.</small><br />
+    </fieldset>
+
+    <fieldset>
+        <legend>Recruiter Information</legend>
+        <label for="recruiterName">Recruiter's Name:</label>
+        <input type="text" id="recruiterName" name="recruiterName" />
+        <small>Optional. e.g., "Sarah Johnson"</small><br />
+    </fieldset>
+
+    <fieldset>
+        <legend>Your Profile</legend>
+        <label for="yourName">Your Name:</label>
+        <input type="text" id="yourName" name="yourName" required="" /><br />
+
+        <label for="yourLinkedin">LinkedIn Profile URL:</label>
+        <input type="url" id="yourLinkedin" name="yourLinkedin" /><br />
+
+        <label for="resumeLink">Online Resume Link:</label>
+        <input type="url" id="resumeLink" name="resumeLink" />
+        <small>Google Drive, GitHub, etc. (publicly accessible)</small><br />
+
+        <label for="resumeSummary">Resume Summary:</label>
+        <textarea id="resumeSummary" name="resumeSummary" rows="4" placeholder="Paste your professional summary or highlights here"></textarea><br />
+    </fieldset>
+
+    <fieldset>
+        <legend>Additional Details</legend>
+        <label for="extraNotes">Additional Notes:</label>
+        <textarea id="extraNotes" name="extraNotes" rows="3" placeholder="Anything else to highlight? (Optional)"></textarea><br />
+    </fieldset>
+
+    <button type="button" id="generatePrompt">Generate AI Prompt</button>
+</form>
+
+<hr />
+
+<h2>Prompt for AI</h2>
+<textarea id="aiPrompt" rows="12" style="width:100%;" readonly="" placeholder="Your prompt will appear here..."></textarea>
+<p><button type="button" onclick="copyPrompt()">Copy Prompt</button></p>
+
+<script>
+    document.getElementById('generatePrompt').addEventListener('click', function () {
+        // Collect form data
+        const companyName = document.getElementById('companyName').value.trim();
+        const jobTitle = document.getElementById('jobTitle').value.trim();
+        const jobLink = document.getElementById('jobLink').value.trim();
+        const recruiterName = document.getElementById('recruiterName').value.trim();
+        const yourName = document.getElementById('yourName').value.trim();
+        const yourLinkedin = document.getElementById('yourLinkedin').value.trim();
+        const resumeLink = document.getElementById('resumeLink').value.trim();
+        const resumeSummary = document.getElementById('resumeSummary').value.trim();
+        const extraNotes = document.getElementById('extraNotes').value.trim();
+
+        // Build the prompt
+        let prompt = `I want you to act as an expert cover letter writer for senior technology professionals. Use a blend of my writing style and professional vocabulary. Generate 4 versions of the cover letter with distinct styles: personal, technical, cultural, and storytelling. Use natural language, impactful results, and elegant closing statements.\n\n`;
+
+        prompt += `Job Information:\n`;
+        prompt += `- Company: ${companyName}\n`;
+        prompt += `- Job Title: ${jobTitle}\n`;
+        if (jobLink) prompt += `- Job Link/Description: ${jobLink}\n`;
+
+        if (recruiterName) prompt += `Recruiter: ${recruiterName}\n`;
+
+        prompt += `\nMy Profile:\n`;
+        prompt += `- Name: ${yourName}\n`;
+        if (yourLinkedin) prompt += `- LinkedIn: ${yourLinkedin}\n`;
+        if (resumeLink) prompt += `- Resume: ${resumeLink}\n`;
+        if (resumeSummary) prompt += `- Summary: ${resumeSummary}\n`;
+
+        if (extraNotes) prompt += `\nAdditional Notes:\n${extraNotes}\n`;
+
+        prompt += `\nPlease fill in the cover letter data based on the information above.`;
+
+        document.getElementById('aiPrompt').value = prompt;
+    });
+
+    window.copyPrompt = function () {
+        const promptField = document.getElementById('aiPrompt');
+        promptField.select();
+        document.execCommand('copy');
+        promptField.setSelectionRange(0, 0); // Deselect
+        alert('Prompt copied to clipboard!');
+    };
+</script>
+

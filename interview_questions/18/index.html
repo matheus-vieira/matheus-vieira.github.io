@@ -1,0 +1,23 @@
+<p>A escolha entre Azure Service Bus e Event Hub é fundamental para arquiteturas orientadas a eventos e integração de sistemas.</p>
+
+<h3 id="service-bus-vs-event-hub--conceito-chave-padrão-de-mensageria-vs-ingestão-de-eventos">[Service Bus vs Event Hub] — Conceito-chave: Padrão de Mensageria vs. Ingestão de Eventos</h3>
+
+<p>Cada serviço atende a cenários distintos de comunicação assíncrona, escalabilidade e confiabilidade.</p>
+
+<h4 id="o-que-são-service-bus-e-event-hub">O que são Service Bus e Event Hub?</h4>
+
+<ul>
+  <li><strong>Azure Service Bus</strong>: Focado em mensageria empresarial, garante entrega ordenada, suporte a filas, tópicos (pub/sub), dead-lettering e transações.</li>
+  <li><strong>Azure Event Hub</strong>: Otimizado para ingestão massiva de eventos em tempo real, alta taxa de throughput e processamento paralelo, ideal para telemetria, logs e IoT.</li>
+</ul>
+
+<h4 id="quando-usar-cada-um">Quando usar cada um?</h4>
+
+<ul>
+  <li><strong>Service Bus</strong>: Integração de sistemas críticos, workflows, processamento de pedidos, cenários que exigem confiabilidade e ordenação.</li>
+  <li><strong>Event Hub</strong>: Coleta de grandes volumes de eventos, ingestão de logs, telemetria, cenários de big data e analytics.</li>
+</ul>
+
+<h4 id="service-bus-vs-event-hub--exemplo-prático">[Service Bus vs Event Hub] — Exemplo prático</h4>
+
+<p>Uma fintech pode usar Service Bus para orquestrar transações entre microserviços bancários, enquanto utiliza Event Hub para coletar e processar milhões de eventos de dispositivos IoT em tempo real.</p>

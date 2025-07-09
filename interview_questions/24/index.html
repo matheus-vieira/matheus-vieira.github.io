@@ -1,0 +1,23 @@
+<h2 id="introdução">Introdução</h2>
+
+<p>A arquitetura de microserviços permite construir sistemas distribuídos, escaláveis e resilientes, sendo amplamente adotada em soluções modernas no Azure.</p>
+
+<h2 id="conceito-chave-comunicação-assíncrona-com-azure-service-bus">Conceito-chave: Comunicação Assíncrona com Azure Service Bus</h2>
+
+<p>A comunicação assíncrona entre microserviços é essencial para desacoplamento, escalabilidade e tolerância a falhas. O Azure Service Bus é um serviço de mensageria robusto que facilita esse padrão.</p>
+
+<h2 id="tópicos-relevantes">Tópicos Relevantes</h2>
+
+<ul>
+  <li><strong>Desacoplamento:</strong> Microserviços comunicam-se via mensagens, reduzindo dependências diretas.</li>
+  <li><strong>Escalabilidade:</strong> Mensagens podem ser processadas em paralelo, permitindo elasticidade.</li>
+  <li><strong>Resiliência:</strong> Fila de mensagens garante entrega mesmo em caso de falhas temporárias.</li>
+  <li><strong>Padrões:</strong> Suporte a pub/sub, dead-letter, retry policies e ordenação.</li>
+  <li><strong>Monitoramento:</strong> Integração com Azure Monitor e Application Insights.</li>
+</ul>
+
+<h2 id="exemplo-prático">Exemplo Prático</h2>
+
+<p>Em um sistema de e-commerce, o microserviço de pedidos publica mensagens em um tópico do Service Bus ao receber um novo pedido. Microserviços de estoque, faturamento e notificação assinam esse tópico e processam as mensagens de forma independente, garantindo escalabilidade e resiliência.</p>
+
+<p>Esse padrão é fundamental para sistemas distribuídos robustos e altamente disponíveis no Azure.</p>

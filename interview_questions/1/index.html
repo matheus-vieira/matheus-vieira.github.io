@@ -1,0 +1,23 @@
+<p>Resource Groups são a base do gerenciamento de recursos no Azure, promovendo organização, segurança, automação e governança em arquiteturas cloud modernas.</p>
+
+<h3 id="resource-management--conceito-chave-resource-groups">[Resource Management] — Conceito-chave: Resource Groups</h3>
+
+<p>Um conceito fundamental de Resource Management no Azure é o Resource Group. Ele é essencial para a organização, gerenciamento e governança de recursos em qualquer arquitetura na nuvem.</p>
+
+<h4 id="o-que-é-um-resource-group">O que é um Resource Group?</h4>
+
+<p>Um Resource Group é um contêiner lógico que agrupa recursos relacionados de uma solução Azure. Isso inclui máquinas virtuais, bancos de dados, contas de armazenamento, funções, redes virtuais, entre outros. Todos os recursos de um grupo compartilham o mesmo ciclo de vida, permissões e políticas.</p>
+
+<h4 id="por-que-resource-groups-são-importantes">Por que Resource Groups são importantes?</h4>
+
+<ul>
+  <li><strong>Organização</strong>: Permite separar ambientes (produção, homologação, desenvolvimento) e projetos, facilitando a localização e o gerenciamento dos recursos.</li>
+  <li><strong>Gerenciamento de Acesso</strong>: Permite aplicar políticas de controle de acesso (RBAC) em nível de grupo, garantindo que apenas pessoas autorizadas possam gerenciar ou visualizar determinados recursos.</li>
+  <li><strong>Automação e Deploy</strong>: Facilita o deployment automatizado de soluções completas usando ARM Templates, Bicep ou Terraform, pois todos os recursos podem ser criados, atualizados ou removidos em conjunto.</li>
+  <li><strong>Monitoramento e Custos</strong>: Permite monitorar métricas, logs e custos por grupo, facilitando a análise de consumo e a identificação de gargalos ou desperdícios.</li>
+  <li><strong>Ciclo de Vida</strong>: Ao deletar um Resource Group, todos os recursos contidos nele são removidos automaticamente, simplificando a limpeza de ambientes temporários.</li>
+</ul>
+
+<h4 id="resource-management--conceito-chave-resource-groups---exemplo-prático">[Resource Management] — Conceito-chave: Resource Groups - Exemplo prático</h4>
+
+<p>Ao criar uma solução de e-commerce no Azure, você pode agrupar todas as funções, bancos de dados, filas e serviços relacionados ao ambiente de produção em um único Resource Group chamado ecommerce-prod-rg. Isso facilita o gerenciamento, auditoria e automação do ambiente.</p>
