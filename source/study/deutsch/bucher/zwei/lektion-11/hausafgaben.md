@@ -3,6 +3,7 @@ layout: page
 permalink: /study/deutsch/bucher/zwei/lektion-11/hausaufgaben
 title: Deutsch - Bucher Zwei - Lektion #11 - Hausaufgaben
 excerpt: ""
+description: ""
 ---
 
 > ### Lektion 11 **Hausaufgaben**

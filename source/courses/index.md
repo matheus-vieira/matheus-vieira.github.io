@@ -2,6 +2,8 @@
 layout: page
 permalink: /courses/
 title: Github Curses Available
+excerpt: ""
+description: ""
 ---
 
 ## [All github repositories]({{ '/repositories' | prepend: site.baseurl }})

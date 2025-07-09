@@ -3,6 +3,7 @@ layout: page
 title: Professional experience
 permalink: /resume/professional-experience/
 excerpt: "All my professional experiences"
+description: ""
 ---
 
 {% assign sorted_experiences = site.experiences | sort: 'admissiondate' | reverse %}

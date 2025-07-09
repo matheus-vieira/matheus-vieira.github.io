@@ -3,6 +3,7 @@ layout: page
 permalink: /resume/
 title: My Resume
 excerpt: "Resume for Matheus Costa Vieira"
+description: ""
 ---
 
 ## Professional Objectives

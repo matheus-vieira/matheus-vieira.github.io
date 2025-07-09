@@ -3,6 +3,7 @@ layout: page
 permalink: /study/deutsch/bucher/zwei/lektion-19/hausaufgaben
 title: Deutsch - Bucher Zwei - Lektion #19 - Hausaufgaben
 excerpt: ""
+description: ""
 ---
 
 > ### Lektion 19 **Hausaufgaben**

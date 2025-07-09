@@ -3,6 +3,7 @@ layout: page
 title: GitHub Questions 2025
 permalink: /tools/questions/2025/github/
 excerpt: "Questions for Github"
+description: ""
 ---
 
 [Take the quiz]({{ '/tools/questions/2025/github/quiz/'  | prepend: site.baseurl }}){: .button.button-ghost }

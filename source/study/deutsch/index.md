@@ -3,6 +3,7 @@ layout: page
 permalink: /study/deutsch/
 title: Deutsch
 excerpt: ""
+description: ""
 ---
 
 {% assign current_year = 'now' | date: '%Y' %}

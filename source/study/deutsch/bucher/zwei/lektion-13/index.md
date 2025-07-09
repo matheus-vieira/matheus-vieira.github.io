@@ -3,6 +3,7 @@ layout: page
 permalink: /study/deutsch/bucher/zwei/lektion-13/
 title: Deutsch - Bucher Zwei - Lektion #13
 excerpt: ""
+description: ""
 ---
 
 Relativ zu Lektion 11 Übungen

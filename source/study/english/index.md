@@ -3,6 +3,7 @@ layout: page
 permalink: /study/english/
 title: English Studies
 excerpt: ""
+description: ""
 ---
 
 Under construction

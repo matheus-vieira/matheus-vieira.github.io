@@ -2,6 +2,8 @@
 layout: page
 permalink: /study/deutsch/bucher/zwei/lektion-25/
 title: Deutsch - Bucher Zwei - Lektion #25
+excerpt: ""
+description: ""
 ---
 
 Relativ zu Lektion 25 Übungen

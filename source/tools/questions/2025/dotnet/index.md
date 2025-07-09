@@ -3,6 +3,7 @@ layout: page
 title: .NET Questions 2025
 permalink: /tools/questions/2025/dotnet/
 excerpt: "Questions for .NET"
+description: ""
 ---
 
 [Take the quiz]({{ '/tools/questions/2025/dotnet/quiz/'  | prepend: site.baseurl }}){: .button.button-ghost }

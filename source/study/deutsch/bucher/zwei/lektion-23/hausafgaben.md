@@ -3,6 +3,7 @@ layout: page
 permalink: /study/deutsch/bucher/zwei/lektion-23/hausaufgaben
 title: Deutsch - Bucher Zwei - Lektion #23 - Hausaufgaben
 excerpt: ""
+description: ""
 ---
 
 > ### Lektion 23 **Hausaufgaben**

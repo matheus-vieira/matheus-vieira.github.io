@@ -2,6 +2,8 @@
 layout: page
 permalink: /study/deutsch/bucher/zwei/lektion-26/hausaufgaben
 title: Deutsch - Bucher Zwei - Lektion #26 - Hausaufgaben
+excerpt: ""
+description: ""
 ---
 
 > ### Lektion 26 **Hausaufgaben**

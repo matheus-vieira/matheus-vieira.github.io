@@ -3,6 +3,7 @@ layout: page
 permalink: /study/deutsch/bucher-1/lektion-1/hausafgaben
 title: Deutsch - Bucher Eins - Lektion #1 - Hausaufgaben
 excerpt: ""
+description: ""
 ---
 
 > #### 1. Bilden Sie Fragen aus den Sätzen:

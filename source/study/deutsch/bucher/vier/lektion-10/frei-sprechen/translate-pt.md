@@ -3,6 +3,7 @@ layout: page
 permalink: /study/deutsch/bucher/vier/lektion-10/frei-sprechen/translate-pt/
 title: Descubra Florianópolis para suas férias perfeitas
 excerpt: ""
+description: ""
 ---
 
 * [Alemão]({{ '/study/deutsch/bucher/vier/lektion-10/frei-sprechen' }})

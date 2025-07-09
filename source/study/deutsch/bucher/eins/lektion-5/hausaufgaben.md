@@ -3,6 +3,7 @@ layout: page
 permalink: /study/deutsch/bucher-1/lektion-5/wortschatz
 title: Deutsch - Bucher Eins - Lektion #5 - Wortschats
 excerpt: ""
+description: ""
 ---
 
 ## Deutsch - Lektion #5

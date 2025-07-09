@@ -3,6 +3,7 @@ layout: page
 permalink: /about/
 title: "Who am I?"
 excerpt: "Matheus Costa Vieira: A journey of a Dad, a Husband, and a Software Engineer"
+description: ""
 ---
 
 {% assign current_year = 'now' | date: '%Y' %}

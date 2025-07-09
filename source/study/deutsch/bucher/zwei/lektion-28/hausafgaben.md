@@ -3,6 +3,7 @@ layout: page
 permalink: /study/deutsch/bucher/zwei/lektion-28/hausaufgaben
 title: Deutsch - Bucher Zwei - Lektion #28 - Hausaufgaben
 excerpt: ""
+description: ""
 ---
 
 > ### Lektion 28 **Hausaufgaben**

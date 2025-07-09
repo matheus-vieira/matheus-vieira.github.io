@@ -3,6 +3,7 @@ layout: page
 permalink: /study/deutsch/bucher/vier/
 title: Deutsch - Buch vier Lektion zehn
 excerpt: ""
+description: ""
 ---
 
 ## Lektion 10
