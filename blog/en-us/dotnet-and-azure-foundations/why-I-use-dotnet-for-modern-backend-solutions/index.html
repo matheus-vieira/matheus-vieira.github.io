@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+  <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Cache-Control" content="only-if-cached"/>
+<meta http-equiv="Cache-Control" content="max-age=120"/>
+
+<title>Why I Use .NET 8 for Modern Backend Solutions</title>
+
+<meta name="description" content="In my experience building scalable backend systems for enterprises across industries like finance, retail, and tech, one thing has remained consistent: the n...">
+
+<link rel="stylesheet" href="/css/main.css">
+<link rel="canonical" href="http://matheus-vieira.github.io/blog/en-us/dotnet-and-azure-foundations/why-I-use-dotnet-for-modern-backend-solutions/">
+<link rel="alternate" type="application/rss+xml" title="Matheus Costa Vieira - Senior Software Engineer, Dad & Husband" href="http://matheus-vieira.github.io/feed.xml" />
+<link rel="shortcut icon" href="/images/favicon.ico" type="image/png">
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-174941014-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-174941014-1');
+</script>
+
+
+</head>
+<body>
+  <!-- Google Tag Manager (noscript) - Temporariamente desabilitado -->
+  
+  <!-- End Google Tag Manager (noscript) -->
+  <header class="site-header">
+  <div class="container">
+    <label title="Toggle menu checkbox"></label>
+      <input type="checkbox" id="toggleNavbar">
+    </label>
+    <div class="logo">
+      <a href="/" alt="mvieira" title="mvieira">
+        mvieira
+      </a>
+    </div>
+    <label for="toggleNavbar" role="button" class="toggle-navbar-button" title="Toggle menu button">
+      <i class="icon icon-menu"></i>
+      <i class="icon icon-cross"></i>
+    </label>
+    <nav class="navbar">
+      <ul>
+        
+          <li>
+            <a href="/about" title="About">
+              About
+            </a>
+          </li>
+        
+          <li>
+            <a href="/blog" title="Blog">
+              Blog
+            </a>
+          </li>
+        
+          <li>
+            <a href="/contact" title="Contact">
+              Contact
+            </a>
+          </li>
+        
+          <li>
+            <a href="/courses" title="Courses">
+              Courses
+            </a>
+          </li>
+        
+          <li>
+            <a href="/resume" title="Resume">
+              Resume
+            </a>
+          </li>
+        
+          <li>
+            <a href="/study" title="Study">
+              Study
+            </a>
+          </li>
+        
+        <li>
+          <a href="/feed.xml" target="_blank" title="Site Feed">
+            <i class="icon icon-rss"></i>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+<main class="main-container">
+  <div class="container">
+    <article role="article" class="post">
+
+  <div class="card">
+    <header class="post-header">
+      <h1 class="post-title">Why I Use .NET 8 for Modern Backend Solutions</h1>
+      <em class="post-meta">
+        <time>Jun 6, 2025</time>
+      </em>
+    </header>
+
+    <div class="post-content">
+      
+        <figure class="post-thumbnail">
+          <img src="https://raw.githubusercontent.com/dotnet/brand/c7d0f51b8ec59531332d05fb27a5b758a7a3d689/logo/dotnet-logo.svg" alt="Why I Use .NET 8 for Modern Backend Solutions">
+        </figure>
+      
+      <p>In my experience building scalable backend systems for enterprises across industries like finance, retail, and tech, one thing has remained consistent: the need for performance, reliability, and maintainability. That’s why I’ve made .NET 8 my go-to framework for backend development.</p>
+
+<p>Let me share why .NET 8 has become a key part of my engineering toolkit—and why it might deserve a place in yours too.</p>
+
+<h2 id="-performance-that-meets-enterprise-demands">🚀 Performance that Meets Enterprise Demands</h2>
+
+<p>.NET 8 introduced significant performance improvements over previous versions. Whether it’s through Just-In-Time (JIT) compiler optimizations or native AOT (ahead-of-time) compilation, this version of .NET handles high-throughput scenarios with ease. In production systems handling millions of records per day, I’ve seen clear gains in memory usage and execution speed—without needing to rewrite existing codebases.</p>
+
+<p>In real-world use cases, like data ingestion systems I’ve built for financial institutions, shaving off milliseconds per request translated into substantial infrastructure savings and better user responsiveness.</p>
+
+<h2 id="️-modern-language-features--cleaner-code">🛠️ Modern Language Features = Cleaner Code</h2>
+
+<p>C# 12, which ships with .NET 8, continues to simplify developer experience. Features like primary constructors for classes and collection expressions let us write more expressive and compact code. Combined with nullable reference types and pattern matching enhancements, these additions contribute directly to cleaner, safer backend logic.</p>
+
+<p>I’ve noticed this helps onboard junior developers more quickly too. The language encourages writing intention-revealing code, which is essential when working in cross-functional teams or handing off projects between squads.</p>
+
+<h2 id="️-seamless-cloud-integration-with-azure">☁️ Seamless Cloud Integration with Azure</h2>
+
+<p>One of .NET 8’s greatest strengths is its deep integration with Microsoft Azure. Whether I’m implementing Azure Functions, Durable Functions for long-running workflows, or Event Grid to decouple microservices, the tooling and SDK support in .NET is unmatched.</p>
+
+<p>I’ve built systems using .NET 8 that scale from zero to thousands of requests per second using Azure Functions, while maintaining observability through Application Insights and logging via Serilog + ELK Stack. These integrations save time and reduce the risk of deployment errors significantly.</p>
+
+<h2 id="-first-class-testing-and-observability">🧪 First-Class Testing and Observability</h2>
+
+<p>.NET’s built-in support for unit testing (via xUnit, MSTest, or NUnit) is mature and well-documented. Combined with mocking libraries like Moq and FluentAssertions, I can ensure my services are covered by meaningful, maintainable tests. .NET 8 makes it easier than ever to integrate testing into CI/CD pipelines using GitHub Actions or Azure DevOps.</p>
+
+<p>On the observability side, structured logging with Serilog and the integration with OpenTelemetry allow me to trace requests end-to-end—even across distributed services.</p>
+
+<h2 id="-long-term-support-and-ecosystem-stability">🔄 Long-Term Support and Ecosystem Stability</h2>
+
+<p>As a senior engineer, I need to build systems that aren’t just functional today, but maintainable and secure long into the future. .NET 8 is an LTS (Long-Term Support) release, making it a reliable choice for enterprise-grade applications. I don’t have to worry about deprecated APIs or unstable community packages—Microsoft’s ecosystem and NuGet library maturity give me peace of mind.</p>
+
+<h2 id="-the-verdict">✅ The Verdict</h2>
+
+<p>.NET 8 isn’t just a version bump. It’s a milestone in a mature, battle-tested platform that continues to evolve in the right direction. It balances performance, productivity, and stability—three pillars of great software engineering.</p>
+
+<p>For developers focused on backend systems, especially in domains like finance, healthcare, or enterprise SaaS, .NET 8 offers a clean, modern foundation to build high-quality solutions.</p>
+
+    </div>
+
+    
+
+
+  </div>
+
+</article>
+
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <ul class="social">
+  <li><a href="mailto:matheus.costa.vieira@gmail.com" title="Personal mail" target="_blank"><i class="icon icon-mail"></i></a></li>
+  <li><a href="https://github.com/matheus-vieira" title="Github Profile" target="_blank"><i class="icon icon-github"></i></a></li>
+  <li><a href="https://twitter.com/macostavieira" title="Twitter Profile" target="_blank"><i class="icon icon-twitter"></i></a></li>
+  <li><a href="https://facebook.com/macovieira" title="Facebook Profile" target="_blank"><i class="icon icon-facebook"></i></a></li>
+  <li><a href="https://linkedin.com/in/macostavieira" title="LinkedIn Profile" target="_blank"><i class="icon icon-linkedin"></i></a></li>
+  <li><a href="https://api.whatsapp.com/send?phone=5541988024599&text=E ae!" title="Send me an whatsapp" target="_blank"><i class="icon icon-whatsapp"></i></a></li>
+  <li><a href="tel:5541988024599" title="Call me" target="_blank"><i class="icon icon-phone"></i></a></li>
+  <li><a href="/tools/" title="Tools"><i class="icon icon-wrench"></i></a></li>
+  <li><a href="/tools/questions/" title="Questions"><i class="icon icon-question"></i></a></li>
+</ul>
+    <p class="txt-medium-gray">
+      <small>&copy;mvieira 2025 All rights reserved. Made with <a href="http://jekyllrb.com/" target="_blank">Jekyll</a> and ♥</small>
+    </p>
+  </div>
+</footer>
+
+
+  <a href="https://github.com/matheus-vieira/matheus-vieira.github.io" target="_blank" class="github-corner" title="mvieira github repository">
+    <svg width="80" height="80" viewBox="0 0 250 250">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path
+            d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+            fill="currentColor" class="octo-arm"></path>
+        <path
+            d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+            fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+</body>
+</html>

@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+  <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Cache-Control" content="only-if-cached"/>
+<meta http-equiv="Cache-Control" content="max-age=120"/>
+
+<title>Design Patterns I Use Daily in .NET Backend Development</title>
+
+<meta name="description" content="Exploring three essential design patterns that make .NET backend development more maintainable and scalable: Repository, Strategy, and Mediator patterns.">
+
+<link rel="stylesheet" href="/css/main.css">
+<link rel="canonical" href="http://matheus-vieira.github.io/blog/dotnet/design-patterns/backend/design-patterns-i-use-daily-in-dotnet-backend-development/">
+<link rel="alternate" type="application/rss+xml" title="Matheus Costa Vieira - Senior Software Engineer, Dad & Husband" href="http://matheus-vieira.github.io/feed.xml" />
+<link rel="shortcut icon" href="/images/favicon.ico" type="image/png">
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-174941014-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-174941014-1');
+</script>
+
+
+</head>
+<body>
+  <!-- Google Tag Manager (noscript) - Temporariamente desabilitado -->
+  
+  <!-- End Google Tag Manager (noscript) -->
+  <header class="site-header">
+  <div class="container">
+    <label title="Toggle menu checkbox"></label>
+      <input type="checkbox" id="toggleNavbar">
+    </label>
+    <div class="logo">
+      <a href="/" alt="mvieira" title="mvieira">
+        mvieira
+      </a>
+    </div>
+    <label for="toggleNavbar" role="button" class="toggle-navbar-button" title="Toggle menu button">
+      <i class="icon icon-menu"></i>
+      <i class="icon icon-cross"></i>
+    </label>
+    <nav class="navbar">
+      <ul>
+        
+          <li>
+            <a href="/about" title="About">
+              About
+            </a>
+          </li>
+        
+          <li>
+            <a href="/blog" title="Blog">
+              Blog
+            </a>
+          </li>
+        
+          <li>
+            <a href="/contact" title="Contact">
+              Contact
+            </a>
+          </li>
+        
+          <li>
+            <a href="/courses" title="Courses">
+              Courses
+            </a>
+          </li>
+        
+          <li>
+            <a href="/resume" title="Resume">
+              Resume
+            </a>
+          </li>
+        
+          <li>
+            <a href="/study" title="Study">
+              Study
+            </a>
+          </li>
+        
+        <li>
+          <a href="/feed.xml" target="_blank" title="Site Feed">
+            <i class="icon icon-rss"></i>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+<main class="main-container">
+  <div class="container">
+    <article role="article" class="post">
+
+  <div class="card">
+    <header class="post-header">
+      <h1 class="post-title">Design Patterns I Use Daily in .NET Backend Development</h1>
+      <em class="post-meta">
+        <time>Jul 1, 2025</time>
+      </em>
+    </header>
+
+    <div class="post-content">
+      
+        <figure class="post-thumbnail">
+          <img src="/images/posts/design-patterns-dotnet.svg" alt="Design Patterns I Use Daily in .NET Backend Development">
+        </figure>
+      
+      <p>As a .NET backend developer, I’ve discovered that certain design patterns consistently prove their worth in real-world applications. Today, I want to share three patterns that have become essential tools in my development arsenal: <strong>Repository</strong>, <strong>Strategy</strong>, and <strong>Mediator</strong> patterns.</p>
+
+<p>These aren’t just theoretical concepts—they’re practical solutions that I implement daily to create more maintainable, testable, and scalable applications.</p>
+
+<h2 id="1-repository-pattern-clean-data-access">1. Repository Pattern: Clean Data Access</h2>
+
+<p>The Repository pattern creates a uniform interface for accessing data, regardless of the underlying storage mechanism.</p>
+
+<h3 id="why-repository-pattern-works">Why Repository Pattern Works</h3>
+
+<ul>
+  <li><strong>Testability</strong>: Easy to mock for unit tests</li>
+  <li><strong>Separation of Concerns</strong>: Business logic stays independent of data access</li>
+  <li><strong>Flexibility</strong>: Switch between different data sources without breaking business logic</li>
+</ul>
+
+<h3 id="repository-implementation-example">Repository Implementation Example</h3>
+
+<pre><code class="language-csharp">public interface IUserRepository
+{
+    Task&lt;User&gt; GetByIdAsync(int id);
+    Task&lt;IEnumerable&lt;User&gt;&gt; GetAllAsync();
+    Task&lt;User&gt; CreateAsync(User user);
+    Task UpdateAsync(User user);
+    Task DeleteAsync(int id);
+}
+
+public class UserRepository : IUserRepository
+{
+    private readonly ApplicationDbContext _context;
+
+    public UserRepository(ApplicationDbContext context)
+    {
+        _context = context;
+    }
+
+    public async Task&lt;User&gt; GetByIdAsync(int id)
+    {
+        return await _context.Users
+            .FirstOrDefaultAsync(u =&gt; u.Id == id);
+    }
+
+    public async Task&lt;IEnumerable&lt;User&gt;&gt; GetAllAsync()
+    {
+        return await _context.Users
+            .ToListAsync();
+    }
+
+    // Other methods...
+}
+</code></pre>
+
+<h3 id="repository-pattern-benefits">Repository Pattern Benefits</h3>
+
+<p>In a recent project, we needed to migrate from SQL Server to CosmosDB. Thanks to the Repository pattern, we only had to implement a new repository class—zero changes to business logic.</p>
+
+<h2 id="2-strategy-pattern-flexible-business-logic">2. Strategy Pattern: Flexible Business Logic</h2>
+
+<p>The Strategy pattern allows you to define a family of algorithms, encapsulate them, and make them interchangeable at runtime.</p>
+
+<h3 id="why-strategy-pattern-excels">Why Strategy Pattern Excels</h3>
+
+<ul>
+  <li><strong>Open/Closed Principle</strong>: Add new strategies without modifying existing code</li>
+  <li><strong>Runtime Flexibility</strong>: Choose algorithms based on context</li>
+  <li><strong>Testability</strong>: Test each strategy in isolation</li>
+</ul>
+
+<h3 id="strategy-implementation-example">Strategy Implementation Example</h3>
+
+<pre><code class="language-csharp">public interface IPaymentProcessor
+{
+    Task&lt;PaymentResult&gt; ProcessAsync(PaymentRequest request);
+    bool CanProcess(PaymentMethod method);
+}
+
+public class CreditCardProcessor : IPaymentProcessor
+{
+    public async Task&lt;PaymentResult&gt; ProcessAsync(PaymentRequest request)
+    {
+        // Credit card processing logic
+        return await ProcessCreditCardAsync(request);
+    }
+
+    public bool CanProcess(PaymentMethod method)
+        =&gt; method == PaymentMethod.CreditCard;
+}
+
+public class PixProcessor : IPaymentProcessor
+{
+    public async Task&lt;PaymentResult&gt; ProcessAsync(PaymentRequest request)
+    {
+        // PIX processing logic
+        return await ProcessPixAsync(request);
+    }
+
+    public bool CanProcess(PaymentMethod method)
+        =&gt; method == PaymentMethod.Pix;
+}
+
+public class PaymentService
+{
+    private readonly IEnumerable&lt;IPaymentProcessor&gt; _processors;
+
+    public PaymentService(IEnumerable&lt;IPaymentProcessor&gt; processors)
+    {
+        _processors = processors;
+    }
+
+    public async Task&lt;PaymentResult&gt; ProcessPaymentAsync(PaymentRequest request)
+    {
+        var processor = _processors
+            .FirstOrDefault(p =&gt; p.CanProcess(request.Method));
+
+        if (processor == null)
+            throw new NotSupportedException($"Payment method {request.Method} not supported");
+
+        return await processor.ProcessAsync(request);
+    }
+}
+</code></pre>
+
+<h3 id="strategy-pattern-benefits">Strategy Pattern Benefits</h3>
+
+<p>When we needed to add new payment methods, we simply created new processor classes. The existing code remained untouched, and testing was straightforward since each processor is independent.</p>
+
+<h2 id="3-mediator-pattern-decoupled-communication">3. Mediator Pattern: Decoupled Communication</h2>
+
+<p>The Mediator pattern defines how a set of objects interact with each other, promoting loose coupling by preventing objects from referring to each other explicitly.</p>
+
+<h3 id="why-mediator-pattern-works">Why Mediator Pattern Works</h3>
+
+<ul>
+  <li><strong>Decoupling</strong>: Components don’t need to know about each other</li>
+  <li><strong>Single Responsibility</strong>: Each handler focuses on one specific task</li>
+  <li><strong>Cross-cutting Concerns</strong>: Easy to add validation, logging, caching through behaviors</li>
+</ul>
+
+<h3 id="implementation-with-mediatr">Implementation with MediatR</h3>
+
+<pre><code class="language-csharp">public class CreateUserCommand : IRequest&lt;UserDto&gt;
+{
+    public string Name { get; set; }
+    public string Email { get; set; }
+}
+
+public class CreateUserCommandHandler : IRequestHandler&lt;CreateUserCommand, UserDto&gt;
+{
+    private readonly IUserRepository _userRepository;
+    private readonly IMapper _mapper;
+
+    public CreateUserCommandHandler(IUserRepository userRepository, IMapper mapper)
+    {
+        _userRepository = userRepository;
+        _mapper = mapper;
+    }
+
+    public async Task&lt;UserDto&gt; Handle(CreateUserCommand request, CancellationToken cancellationToken)
+    {
+        var user = new User
+        {
+            Name = request.Name,
+            Email = request.Email,
+            CreatedAt = DateTime.UtcNow
+        };
+
+        var createdUser = await _userRepository.CreateAsync(user);
+        return _mapper.Map&lt;UserDto&gt;(createdUser);
+    }
+}
+
+// In your controller
+[ApiController]
+[Route("api/[controller]")]
+public class UsersController : ControllerBase
+{
+    private readonly IMediator _mediator;
+
+    public UsersController(IMediator mediator)
+    {
+        _mediator = mediator;
+    }
+
+    [HttpPost]
+    public async Task&lt;ActionResult&lt;UserDto&gt;&gt; CreateUser(CreateUserCommand command)
+    {
+        var result = await _mediator.Send(command);
+        return Ok(result);
+    }
+}
+</code></pre>
+
+<h3 id="adding-cross-cutting-concerns">Adding Cross-Cutting Concerns</h3>
+
+<pre><code class="language-csharp">public class LoggingBehavior&lt;TRequest, TResponse&gt; : IPipelineBehavior&lt;TRequest, TResponse&gt;
+{
+    private readonly ILogger&lt;LoggingBehavior&lt;TRequest, TResponse&gt;&gt; _logger;
+
+    public LoggingBehavior(ILogger&lt;LoggingBehavior&lt;TRequest, TResponse&gt;&gt; logger)
+    {
+        _logger = logger;
+    }
+
+    public async Task&lt;TResponse&gt; Handle(TRequest request, RequestHandlerDelegate&lt;TResponse&gt; next, CancellationToken cancellationToken)
+    {
+        _logger.LogInformation("Handling {RequestName}", typeof(TRequest).Name);
+        var response = await next();
+        _logger.LogInformation("Handled {RequestName}", typeof(TRequest).Name);
+        return response;
+    }
+}
+</code></pre>
+
+<h3 id="mediator-pattern-benefits">Mediator Pattern Benefits</h3>
+
+<p>The Mediator pattern transformed our controllers from fat, complex classes into thin coordinators. Adding logging, validation, and caching became trivial through pipeline behaviors.</p>
+
+<h2 id="dependency-injection-setup">Dependency Injection Setup</h2>
+
+<p>Here’s how I typically register these patterns in <code>Program.cs</code>:</p>
+
+<pre><code class="language-csharp">// Repository Pattern
+builder.Services.AddScoped&lt;IUserRepository, UserRepository&gt;();
+
+// Strategy Pattern
+builder.Services.AddScoped&lt;IPaymentProcessor, CreditCardProcessor&gt;();
+builder.Services.AddScoped&lt;IPaymentProcessor, PixProcessor&gt;();
+builder.Services.AddScoped&lt;PaymentService&gt;();
+
+// Mediator Pattern
+builder.Services.AddMediatR(cfg =&gt; cfg.RegisterServicesFromAssembly(typeof(Program).Assembly));
+builder.Services.AddTransient(typeof(IPipelineBehavior&lt;,&gt;), typeof(LoggingBehavior&lt;,&gt;));
+</code></pre>
+
+<h2 id="when-not-to-use-these-patterns">When NOT to Use These Patterns</h2>
+
+<p><strong>Repository Pattern</strong>: Skip it if you’re using Entity Framework with a simple CRUD application. EF already provides abstraction.</p>
+
+<p><strong>Strategy Pattern</strong>: Don’t overcomplicate simple if/else scenarios. Use it when you have complex algorithms or expect frequent changes.</p>
+
+<p><strong>Mediator Pattern</strong>: Avoid it for very simple applications. The overhead might not be worth it if you don’t have complex business logic.</p>
+
+<h2 id="key-takeaways">Key Takeaways</h2>
+
+<ol>
+  <li><strong>Repository Pattern</strong> provides clean data access abstraction</li>
+  <li><strong>Strategy Pattern</strong> enables flexible, runtime-configurable algorithms</li>
+  <li><strong>Mediator Pattern</strong> decouples components and centralizes business logic</li>
+</ol>
+
+<p>These patterns have consistently made my .NET applications more maintainable, testable, and adaptable to changing requirements. They’re not silver bullets, but when applied appropriately, they can significantly improve your codebase quality.</p>
+
+<h2 id="whats-next">What’s Next?</h2>
+
+<p>In my next post, I’ll dive deeper into building event-driven ingestion pipelines in .NET, showing how these patterns work together in a real-world architecture.</p>
+
+<p>Have you used these patterns in your projects? What other patterns do you find essential in .NET development? Let me know in the comments!</p>
+
+<hr />
+
+<p><em>This post is part of my “.NET &amp; Azure Foundations” series. Follow along as I share practical insights from building scalable backend systems.</em></p>
+
+    </div>
+
+    
+
+
+  </div>
+
+</article>
+
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <ul class="social">
+  <li><a href="mailto:matheus.costa.vieira@gmail.com" title="Personal mail" target="_blank"><i class="icon icon-mail"></i></a></li>
+  <li><a href="https://github.com/matheus-vieira" title="Github Profile" target="_blank"><i class="icon icon-github"></i></a></li>
+  <li><a href="https://twitter.com/macostavieira" title="Twitter Profile" target="_blank"><i class="icon icon-twitter"></i></a></li>
+  <li><a href="https://facebook.com/macovieira" title="Facebook Profile" target="_blank"><i class="icon icon-facebook"></i></a></li>
+  <li><a href="https://linkedin.com/in/macostavieira" title="LinkedIn Profile" target="_blank"><i class="icon icon-linkedin"></i></a></li>
+  <li><a href="https://api.whatsapp.com/send?phone=5541988024599&text=E ae!" title="Send me an whatsapp" target="_blank"><i class="icon icon-whatsapp"></i></a></li>
+  <li><a href="tel:5541988024599" title="Call me" target="_blank"><i class="icon icon-phone"></i></a></li>
+  <li><a href="/tools/" title="Tools"><i class="icon icon-wrench"></i></a></li>
+  <li><a href="/tools/questions/" title="Questions"><i class="icon icon-question"></i></a></li>
+</ul>
+    <p class="txt-medium-gray">
+      <small>&copy;mvieira 2025 All rights reserved. Made with <a href="http://jekyllrb.com/" target="_blank">Jekyll</a> and ♥</small>
+    </p>
+  </div>
+</footer>
+
+
+  <a href="https://github.com/matheus-vieira/matheus-vieira.github.io" target="_blank" class="github-corner" title="mvieira github repository">
+    <svg width="80" height="80" viewBox="0 0 250 250">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path
+            d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+            fill="currentColor" class="octo-arm"></path>
+        <path
+            d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+            fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+</body>
+</html>

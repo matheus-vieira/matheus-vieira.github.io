@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+  <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Cache-Control" content="only-if-cached"/>
+<meta http-equiv="Cache-Control" content="max-age=120"/>
+
+<title>Azure Functions vs Durable Functions — A Real-World Use Case</title>
+
+<meta name="description" content="As a senior software engineer, I’ve often faced the decision of choosing between Azure Functions and Durable Functions for cloud-native solutions. While both...">
+
+<link rel="stylesheet" href="/css/main.css">
+<link rel="canonical" href="http://matheus-vieira.github.io/blog/en-us/dotnet-and-azure-foundations/azure-function-vs-durable-functions/">
+<link rel="alternate" type="application/rss+xml" title="Matheus Costa Vieira - Senior Software Engineer, Dad & Husband" href="http://matheus-vieira.github.io/feed.xml" />
+<link rel="shortcut icon" href="/images/favicon.ico" type="image/png">
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-174941014-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-174941014-1');
+</script>
+
+
+</head>
+<body>
+  <!-- Google Tag Manager (noscript) - Temporariamente desabilitado -->
+  
+  <!-- End Google Tag Manager (noscript) -->
+  <header class="site-header">
+  <div class="container">
+    <label title="Toggle menu checkbox"></label>
+      <input type="checkbox" id="toggleNavbar">
+    </label>
+    <div class="logo">
+      <a href="/" alt="mvieira" title="mvieira">
+        mvieira
+      </a>
+    </div>
+    <label for="toggleNavbar" role="button" class="toggle-navbar-button" title="Toggle menu button">
+      <i class="icon icon-menu"></i>
+      <i class="icon icon-cross"></i>
+    </label>
+    <nav class="navbar">
+      <ul>
+        
+          <li>
+            <a href="/about" title="About">
+              About
+            </a>
+          </li>
+        
+          <li>
+            <a href="/blog" title="Blog">
+              Blog
+            </a>
+          </li>
+        
+          <li>
+            <a href="/contact" title="Contact">
+              Contact
+            </a>
+          </li>
+        
+          <li>
+            <a href="/courses" title="Courses">
+              Courses
+            </a>
+          </li>
+        
+          <li>
+            <a href="/resume" title="Resume">
+              Resume
+            </a>
+          </li>
+        
+          <li>
+            <a href="/study" title="Study">
+              Study
+            </a>
+          </li>
+        
+        <li>
+          <a href="/feed.xml" target="_blank" title="Site Feed">
+            <i class="icon icon-rss"></i>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+<main class="main-container">
+  <div class="container">
+    <article role="article" class="post">
+
+  <div class="card">
+    <header class="post-header">
+      <h1 class="post-title">Azure Functions vs Durable Functions — A Real-World Use Case</h1>
+      <em class="post-meta">
+        <time>Jun 12, 2025</time>
+      </em>
+    </header>
+
+    <div class="post-content">
+      
+        <figure class="post-thumbnail">
+          <img src="https://raw.githubusercontent.com/dotnet/brand/c7d0f51b8ec59531332d05fb27a5b758a7a3d689/logo/dotnet-logo.svg" alt="Azure Functions vs Durable Functions — A Real-World Use Case">
+        </figure>
+      
+      <p>As a senior software engineer, I’ve often faced the decision of choosing between <strong>Azure Functions</strong> and <strong>Durable Functions</strong> for cloud-native solutions. While both are powerful, understanding their strengths is crucial—especially when your requirements go beyond simple event processing.</p>
+
+<h2 id="the-use-case-order-processing-workflow">The Use Case: Order Processing Workflow</h2>
+
+<p>Let’s consider a real-world scenario: processing customer orders in an e-commerce system. The workflow involves several steps:</p>
+
+<ol>
+  <li><strong>Receive the order</strong> (HTTP trigger)</li>
+  <li><strong>Validate payment</strong> (external API call)</li>
+  <li><strong>Check inventory</strong> (database query)</li>
+  <li><strong>Reserve stock</strong></li>
+  <li><strong>Initiate shipping</strong></li>
+  <li><strong>Send confirmation to the customer</strong></li>
+</ol>
+
+<p>Each step may take time, depend on external systems, or require retries.</p>
+
+<h2 id="why-not-just-use-azure-functions">Why Not Just Use Azure Functions?</h2>
+
+<p>At first glance, you might try to implement this with a single Azure Function or a chain of functions triggered by events (e.g., queues or HTTP requests). However, this approach quickly runs into limitations:</p>
+
+<ul>
+  <li><strong>State Management:</strong> Azure Functions are stateless. You’d need to persist state externally (e.g., in a database) and manage workflow progress yourself.</li>
+  <li><strong>Long-Running Operations:</strong> Azure Functions have execution timeouts (typically 5-10 minutes). If payment validation or shipping takes longer, the function fails.</li>
+  <li><strong>Error Handling:</strong> Implementing retries, compensation, and recovery logic across multiple functions becomes complex and error-prone.</li>
+  <li><strong>Orchestration:</strong> Chaining functions and handling dependencies (e.g., don’t ship before payment is confirmed) requires manual coordination, often leading to “spaghetti code.”</li>
+</ul>
+
+<h2 id="why-durable-functions-are-the-right-fit">Why Durable Functions Are the Right Fit</h2>
+
+<p><strong>Durable Functions</strong> solve these challenges by providing:</p>
+
+<ul>
+  <li><strong>Built-in Orchestration:</strong> Define the workflow as code using orchestrator functions. Each step is a separate activity function, and dependencies are explicit.</li>
+  <li><strong>Stateful Execution:</strong> The framework manages state, checkpoints, and restarts automatically—even across failures or restarts.</li>
+  <li><strong>Long-Running Support:</strong> Workflows can run for hours or days, waiting for external events (e.g., payment confirmation) without holding resources.</li>
+  <li><strong>Robust Error Handling:</strong> Built-in support for retries, compensation, and error propagation.</li>
+</ul>
+
+<p><strong>Example Orchestrator (C#):</strong></p>
+
+<pre><code class="language-csharp">[FunctionName("OrderProcessingOrchestrator")]
+public async Task RunOrchestrator(
+    [OrchestrationTrigger] IDurableOrchestrationContext context)
+{
+    var order = context.GetInput&lt;Order&gt;();
+    await context.CallActivityAsync("ValidatePayment", order);
+    await context.CallActivityAsync("CheckInventory", order);
+    await context.CallActivityAsync("ReserveStock", order);
+    await context.CallActivityAsync("InitiateShipping", order);
+    await context.CallActivityAsync("SendConfirmation", order);
+}
+</code></pre>
+
+<h2 id="key-differences">Key Differences</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Feature</th>
+      <th>Azure Functions</th>
+      <th>Durable Functions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>State Management</td>
+      <td>Stateless</td>
+      <td>Stateful (managed by framework)</td>
+    </tr>
+    <tr>
+      <td>Workflow Orchestration</td>
+      <td>Manual</td>
+      <td>Built-in (orchestrator functions)</td>
+    </tr>
+    <tr>
+      <td>Long-running Support</td>
+      <td>Limited (timeout)</td>
+      <td>Yes (can run for days)</td>
+    </tr>
+    <tr>
+      <td>Error Handling</td>
+      <td>Basic</td>
+      <td>Advanced (retries, checkpoints)</td>
+    </tr>
+    <tr>
+      <td>Fan-out/Fan-in</td>
+      <td>Manual</td>
+      <td>Built-in patterns</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>For simple, stateless, and short-lived tasks, <strong>Azure Functions</strong> are ideal. But when your workflow involves multiple steps, external dependencies, and long-running operations—like our order processing example—<strong>Durable Functions</strong> provide the orchestration, reliability, and maintainability you need. Choosing the right tool ensures your cloud solutions are robust and scalable.</p>
+
+    </div>
+
+    
+
+
+  </div>
+
+</article>
+
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <ul class="social">
+  <li><a href="mailto:matheus.costa.vieira@gmail.com" title="Personal mail" target="_blank"><i class="icon icon-mail"></i></a></li>
+  <li><a href="https://github.com/matheus-vieira" title="Github Profile" target="_blank"><i class="icon icon-github"></i></a></li>
+  <li><a href="https://twitter.com/macostavieira" title="Twitter Profile" target="_blank"><i class="icon icon-twitter"></i></a></li>
+  <li><a href="https://facebook.com/macovieira" title="Facebook Profile" target="_blank"><i class="icon icon-facebook"></i></a></li>
+  <li><a href="https://linkedin.com/in/macostavieira" title="LinkedIn Profile" target="_blank"><i class="icon icon-linkedin"></i></a></li>
+  <li><a href="https://api.whatsapp.com/send?phone=5541988024599&text=E ae!" title="Send me an whatsapp" target="_blank"><i class="icon icon-whatsapp"></i></a></li>
+  <li><a href="tel:5541988024599" title="Call me" target="_blank"><i class="icon icon-phone"></i></a></li>
+  <li><a href="/tools/" title="Tools"><i class="icon icon-wrench"></i></a></li>
+  <li><a href="/tools/questions/" title="Questions"><i class="icon icon-question"></i></a></li>
+</ul>
+    <p class="txt-medium-gray">
+      <small>&copy;mvieira 2025 All rights reserved. Made with <a href="http://jekyllrb.com/" target="_blank">Jekyll</a> and ♥</small>
+    </p>
+  </div>
+</footer>
+
+
+  <a href="https://github.com/matheus-vieira/matheus-vieira.github.io" target="_blank" class="github-corner" title="mvieira github repository">
+    <svg width="80" height="80" viewBox="0 0 250 250">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path
+            d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+            fill="currentColor" class="octo-arm"></path>
+        <path
+            d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+            fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+</body>
+</html>
