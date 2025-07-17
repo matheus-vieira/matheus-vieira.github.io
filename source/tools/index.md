@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Tools
-permalink: /tools
+permalink: /tools/
 excerpt: "Tools that I developed to use on this personal page"
 description: ""
 ---
