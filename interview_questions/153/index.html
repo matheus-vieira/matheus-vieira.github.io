@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+  <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Cache-Control" content="only-if-cached"/>
+<meta http-equiv="Cache-Control" content="max-age=120"/>
+
+<title>Diferenças entre SQL Server e PostgreSQL e quando usar cada um</title>
+
+<meta name="description" content="Introdução">
+
+<link rel="stylesheet" href="/css/main.css">
+<link rel="canonical" href="http://matheus-vieira.github.io/interview_questions/153/">
+<link rel="alternate" type="application/rss+xml" title="Matheus Costa Vieira - Senior Software Engineer, Dad & Husband" href="http://matheus-vieira.github.io/feed.xml" />
+<link rel="shortcut icon" href="/images/favicon.ico" type="image/png">
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-174941014-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-174941014-1');
+</script>
+
+
+</head>
+<body>
+  <!-- Google Tag Manager (noscript) - Temporariamente desabilitado -->
+  
+  <!-- End Google Tag Manager (noscript) -->
+  <header class="site-header">
+  <div class="container">
+    <label title="Toggle menu checkbox"></label>
+      <input type="checkbox" id="toggleNavbar">
+    </label>
+    <div class="logo">
+      <a href="/" alt="mvieira" title="mvieira">
+        mvieira
+      </a>
+    </div>
+    <label for="toggleNavbar" role="button" class="toggle-navbar-button" title="Toggle menu button">
+      <i class="icon icon-menu"></i>
+      <i class="icon icon-cross"></i>
+    </label>
+    <nav class="navbar">
+      <ul>
+        
+          <li>
+            <a href="/about" title="About">
+              About
+            </a>
+          </li>
+        
+          <li>
+            <a href="/blog" title="Blog">
+              Blog
+            </a>
+          </li>
+        
+          <li>
+            <a href="/contact" title="Contact">
+              Contact
+            </a>
+          </li>
+        
+          <li>
+            <a href="/courses" title="Courses">
+              Courses
+            </a>
+          </li>
+        
+          <li>
+            <a href="/resume" title="Resume">
+              Resume
+            </a>
+          </li>
+        
+          <li>
+            <a href="/study" title="Study">
+              Study
+            </a>
+          </li>
+        
+        <li>
+          <a href="/feed.xml" target="_blank" title="Site Feed">
+            <i class="icon icon-rss"></i>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+<main class="main-container">
+  <div class="container">
+    <article role="article" class="page card">
+  <header class="post-header">
+    <h1 class="post-title">Diferenças entre SQL Server e PostgreSQL e quando usar cada um</h1>
+  </header>
+
+  <div class="post-content">
+    
+
+
+
+
+
+
+
+<article role="article" class="post">
+    <div class="card">
+        <header class="post-header">
+            <p>
+            <h2><strong>Question</strong> &mdash; <span class="question-order">153</span></h2>
+            </p>
+            
+            <p>
+            <h3><strong>Tags</strong> &mdash; <span class="question-tags">sql-server, postgresql, database, rdbms, comparison, performance, licensing, features</span></h3>
+            </p>
+            
+        </header>
+    </div>
+    <div class="post-content">
+        <h2 id="introdução">Introdução</h2>
+
+<p>SQL Server e PostgreSQL são dois dos principais sistemas de gerenciamento de banco de dados relacionais (RDBMS) do mercado. Enquanto o SQL Server é um produto comercial da Microsoft, o PostgreSQL é um banco de dados open-source. Cada um possui características únicas que os tornam adequados para diferentes cenários e necessidades empresariais.</p>
+
+<h2 id="conceito-chave">Conceito-chave</h2>
+
+<p>A escolha entre SQL Server e PostgreSQL deve considerar fatores como licenciamento, performance, recursos específicos, ecossistema tecnológico, suporte da comunidade, e requisitos de compliance. Ambos são robustos e adequados para aplicações enterprise, mas diferem significativamente em filosofia, custo e características técnicas.</p>
+
+<h2 id="tópicos-relevantes">Tópicos Relevantes</h2>
+
+<h3 id="licenciamento-e-custo">Licenciamento e Custo</h3>
+
+<p><strong>SQL Server:</strong></p>
+<ul>
+  <li>Licenciamento comercial da Microsoft</li>
+  <li>Modelos de licenciamento: Core-based, Server+CAL</li>
+  <li>Versões: Express (gratuita com limitações), Standard, Enterprise</li>
+  <li>Custos podem ser significativos para implementações grandes</li>
+</ul>
+
+<p><strong>PostgreSQL:</strong></p>
+<ul>
+  <li>Completamente open-source (licença PostgreSQL)</li>
+  <li>Gratuito para uso comercial</li>
+  <li>Sem limitações de funcionalidades por licença</li>
+  <li>Custos relacionados apenas a suporte e infraestrutura</li>
+</ul>
+
+<h3 id="performance-e-escalabilidade">Performance e Escalabilidade</h3>
+
+<pre><code class="language-sql">-- SQL Server - Recursos avançados de performance
+-- Columnstore indexes para analytics
+CREATE CLUSTERED COLUMNSTORE INDEX CCI_Sales 
+ON Sales.SalesOrderDetail;
+
+-- Query hints específicos
+SELECT * FROM Sales.Customer WITH (NOLOCK)
+WHERE CustomerID = 123;
+
+-- Particionamento avançado
+CREATE PARTITION FUNCTION PF_Date (datetime2)
+AS RANGE RIGHT FOR VALUES 
+('2023-01-01', '2023-02-01', '2023-03-01');
+</code></pre>
+
+<pre><code class="language-sql">-- PostgreSQL - Recursos de performance
+-- Índices avançados (GiST, GIN, BRIN)
+CREATE INDEX CONCURRENTLY idx_products_search 
+ON products USING GIN(to_tsvector('english', description));
+
+-- Particionamento declarativo (PostgreSQL 10+)
+CREATE TABLE sales_2023 PARTITION OF sales
+FOR VALUES FROM ('2023-01-01') TO ('2024-01-01');
+
+-- Parallel queries automáticas
+SET max_parallel_workers_per_gather = 4;
+</code></pre>
+
+<h3 id="recursos-específicos">Recursos específicos</h3>
+
+<p><strong>SQL Server características únicas:</strong></p>
+<pre><code class="language-sql">-- T-SQL com recursos avançados
+-- Common Table Expressions recursivas
+WITH HierarchyData AS (
+    SELECT EmployeeID, ManagerID, Name, 0 as Level
+    FROM Employees
+    WHERE ManagerID IS NULL
+    
+    UNION ALL
+    
+    SELECT e.EmployeeID, e.ManagerID, e.Name, h.Level + 1
+    FROM Employees e
+    INNER JOIN HierarchyData h ON e.ManagerID = h.EmployeeID
+)
+SELECT * FROM HierarchyData;
+
+-- MERGE statement
+MERGE Sales.Target AS target
+USING Sales.Source AS source
+ON target.ID = source.ID
+WHEN MATCHED THEN
+    UPDATE SET target.Amount = source.Amount
+WHEN NOT MATCHED THEN
+    INSERT (ID, Amount) VALUES (source.ID, source.Amount);
+
+-- XML nativo
+SELECT customer_data.value('(/Customer/Name)[1]', 'varchar(50)') as CustomerName
+FROM CustomerXML;
+</code></pre>
+
+<p><strong>PostgreSQL características únicas:</strong></p>
+<pre><code class="language-sql">-- Arrays nativos
+CREATE TABLE products (
+    id SERIAL PRIMARY KEY,
+    tags TEXT[],
+    prices DECIMAL[]
+);
+
+INSERT INTO products (tags, prices) 
+VALUES (ARRAY['electronics', 'mobile'], ARRAY[999.99, 1299.99]);
+
+-- JSON/JSONB nativo
+CREATE TABLE events (
+    id SERIAL PRIMARY KEY,
+    data JSONB
+);
+
+SELECT data-&gt;&gt;'event_type' as event_type,
+       data-&gt;'user'-&gt;&gt;'name' as user_name
+FROM events
+WHERE data @&gt; '{"status": "active"}';
+
+-- Window functions avançadas
+SELECT 
+    product_name,
+    sales_amount,
+    PERCENT_RANK() OVER (ORDER BY sales_amount) as percentile,
+    CUME_DIST() OVER (ORDER BY sales_amount) as cumulative_dist
+FROM sales;
+
+-- Extensões customizadas
+CREATE EXTENSION IF NOT EXISTS postgis; -- Para dados geoespaciais
+CREATE EXTENSION IF NOT EXISTS pg_trgm; -- Para busca fuzzy
+</code></pre>
+
+<h3 id="integração-com-ecossistemas">Integração com ecossistemas</h3>
+
+<p><strong>SQL Server - Ecossistema Microsoft:</strong></p>
+<pre><code class="language-csharp">// Entity Framework Core com SQL Server
+public class ApplicationDbContext : DbContext
+{
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        optionsBuilder.UseSqlServer(connectionString);
+    }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        // Recursos específicos do SQL Server
+        modelBuilder.Entity&lt;Customer&gt;()
+            .Property(e =&gt; e.CustomerData)
+            .HasColumnType("xml");
+            
+        modelBuilder.Entity&lt;Product&gt;()
+            .HasIndex(e =&gt; e.Description)
+            .HasMethod("FULLTEXT");
+    }
+}
+</code></pre>
+
+<p><strong>PostgreSQL - Multiplataforma:</strong></p>
+<pre><code class="language-python"># Python com PostgreSQL
+import psycopg2
+from sqlalchemy import create_engine
+import pandas as pd
+
+# Conexão direta
+conn = psycopg2.connect(
+    host="localhost",
+    database="myapp",
+    user="postgres",
+    password="password"
+)
+
+# Com SQLAlchemy
+engine = create_engine('postgresql://user:password@localhost/dbname')
+
+# Aproveitando recursos específicos do PostgreSQL
+query = """
+SELECT 
+    product_name,
+    similarity(product_name, 'smartphone') as similarity_score
+FROM products
+WHERE product_name % 'smartphone'
+ORDER BY similarity_score DESC;
+"""
+
+df = pd.read_sql(query, engine)
+</code></pre>
+
+<h2 id="exemplo-prático">Exemplo Prático</h2>
+
+<p>Comparação de implementação de um sistema de auditoria:</p>
+
+<h3 id="sql-server-implementation">SQL Server Implementation</h3>
+<pre><code class="language-sql">-- Criação de tabela com recursos do SQL Server
+CREATE TABLE AuditLog (
+    ID bigint IDENTITY(1,1) PRIMARY KEY,
+    TableName nvarchar(128) NOT NULL,
+    Operation char(1) NOT NULL, -- I, U, D
+    OldValues xml,
+    NewValues xml,
+    ChangedBy nvarchar(256) DEFAULT SUSER_SNAME(),
+    ChangedDate datetime2 DEFAULT GETUTCDATE(),
+    SessionInfo xml DEFAULT (
+        SELECT 
+            @@SPID as SessionID,
+            APP_NAME() as ApplicationName,
+            HOST_NAME() as HostName
+        FOR XML PATH('Session')
+    )
+);
+
+-- Trigger de auditoria
+CREATE TRIGGER tr_Customer_Audit
+ON Customers
+AFTER INSERT, UPDATE, DELETE
+AS
+BEGIN
+    SET NOCOUNT ON;
+    
+    -- INSERT
+    IF EXISTS(SELECT 1 FROM inserted) AND NOT EXISTS(SELECT 1 FROM deleted)
+    BEGIN
+        INSERT INTO AuditLog (TableName, Operation, NewValues)
+        SELECT 'Customers', 'I', 
+               (SELECT * FROM inserted FOR XML PATH('Row'))
+    END
+    
+    -- UPDATE
+    IF EXISTS(SELECT 1 FROM inserted) AND EXISTS(SELECT 1 FROM deleted)
+    BEGIN
+        INSERT INTO AuditLog (TableName, Operation, OldValues, NewValues)
+        SELECT 'Customers', 'U',
+               (SELECT * FROM deleted FOR XML PATH('Row')),
+               (SELECT * FROM inserted FOR XML PATH('Row'))
+    END
+    
+    -- DELETE
+    IF NOT EXISTS(SELECT 1 FROM inserted) AND EXISTS(SELECT 1 FROM deleted)
+    BEGIN
+        INSERT INTO AuditLog (TableName, Operation, OldValues)
+        SELECT 'Customers', 'D',
+               (SELECT * FROM deleted FOR XML PATH('Row'))
+    END
+END;
+</code></pre>
+
+<h3 id="postgresql-implementation">PostgreSQL Implementation</h3>
+<pre><code class="language-sql">-- Criação de tabela com recursos do PostgreSQL
+CREATE TABLE audit_log (
+    id BIGSERIAL PRIMARY KEY,
+    table_name TEXT NOT NULL,
+    operation CHAR(1) NOT NULL,
+    old_values JSONB,
+    new_values JSONB,
+    changed_by TEXT DEFAULT current_user,
+    changed_date TIMESTAMPTZ DEFAULT now(),
+    session_info JSONB DEFAULT jsonb_build_object(
+        'pid', pg_backend_pid(),
+        'application_name', current_setting('application_name'),
+        'client_addr', inet_client_addr()
+    )
+);
+
+-- Função de auditoria genérica
+CREATE OR REPLACE FUNCTION audit_trigger_function()
+RETURNS TRIGGER AS $$
+BEGIN
+    IF TG_OP = 'INSERT' THEN
+        INSERT INTO audit_log (table_name, operation, new_values)
+        VALUES (TG_TABLE_NAME, 'I', row_to_json(NEW)::jsonb);
+        RETURN NEW;
+    ELSIF TG_OP = 'UPDATE' THEN
+        INSERT INTO audit_log (table_name, operation, old_values, new_values)
+        VALUES (TG_TABLE_NAME, 'U', 
+                row_to_json(OLD)::jsonb, 
+                row_to_json(NEW)::jsonb);
+        RETURN NEW;
+    ELSIF TG_OP = 'DELETE' THEN
+        INSERT INTO audit_log (table_name, operation, old_values)
+        VALUES (TG_TABLE_NAME, 'D', row_to_json(OLD)::jsonb);
+        RETURN OLD;
+    END IF;
+    RETURN NULL;
+END;
+$$ LANGUAGE plpgsql;
+
+-- Aplicar trigger a qualquer tabela
+CREATE TRIGGER customers_audit_trigger
+    AFTER INSERT OR UPDATE OR DELETE ON customers
+    FOR EACH ROW EXECUTE FUNCTION audit_trigger_function();
+
+-- Consulta avançada com JSONB
+SELECT 
+    table_name,
+    operation,
+    changed_date,
+    new_values-&gt;&gt;'customer_name' as customer_name,
+    new_values-&gt;&gt;'email' as email
+FROM audit_log
+WHERE table_name = 'customers'
+  AND operation = 'I'
+  AND new_values @&gt; '{"status": "active"}'
+  AND changed_date &gt;= now() - interval '7 days'
+ORDER BY changed_date DESC;
+</code></pre>
+
+<h2 id="benefícios">Benefícios</h2>
+
+<h3 id="sql-server">SQL Server</h3>
+
+<p><strong>Vantagens:</strong></p>
+<ul>
+  <li>Integração profunda com ecossistema Microsoft</li>
+  <li>Ferramentas administrativas robustas (SSMS, SSRS, SSIS)</li>
+  <li>Suporte empresarial completo da Microsoft</li>
+  <li>Performance excelente para workloads Windows</li>
+  <li>Recursos avançados de BI e Analytics</li>
+  <li>AlwaysOn Availability Groups para alta disponibilidade</li>
+</ul>
+
+<p><strong>Quando usar:</strong></p>
+<ul>
+  <li>Ambiente predominantemente Microsoft</li>
+  <li>Necessidade de suporte empresarial garantido</li>
+  <li>Integração com Active Directory essencial</li>
+  <li>Uso intensivo de ferramentas Microsoft BI</li>
+  <li>Aplicações .NET que se beneficiam da integração nativa</li>
+</ul>
+
+<h3 id="postgresql">PostgreSQL</h3>
+
+<p><strong>Vantagens:</strong></p>
+<ul>
+  <li>Completamente gratuito e open-source</li>
+  <li>Extensibilidade através de plugins</li>
+  <li>Conformidade rigorosa com padrões SQL</li>
+  <li>Excelente para dados semi-estruturados (JSON)</li>
+  <li>Comunidade ativa e inovadora</li>
+  <li>Multiplataforma (Linux, Windows, macOS)</li>
+  <li>Recursos avançados de geometria e full-text search</li>
+</ul>
+
+<p><strong>Quando usar:</strong></p>
+<ul>
+  <li>Orçamento limitado ou preferência por open-source</li>
+  <li>Ambiente multi-plataforma</li>
+  <li>Necessidade de tipos de dados avançados</li>
+  <li>Aplicações com dados semi-estruturados</li>
+  <li>Sistemas que se beneficiam de extensões customizadas</li>
+  <li>Projetos que valorizam conformidade com padrões SQL</li>
+</ul>
+
+<h3 id="comparação-de-performance">Comparação de Performance</h3>
+
+<p><strong>SQL Server:</strong></p>
+<ul>
+  <li>Otimizado para Windows</li>
+  <li>Excelente performance em workloads OLTP</li>
+  <li>Columnstore para analytics</li>
+  <li>In-Memory OLTP para cargas críticas</li>
+</ul>
+
+<p><strong>PostgreSQL:</strong></p>
+<ul>
+  <li>Performance consistente em múltiplas plataformas</li>
+  <li>Excelente para queries complexas</li>
+  <li>Paralelização automática de queries</li>
+  <li>Extensões para casos específicos (TimescaleDB para time-series)</li>
+</ul>
+
+<h3 id="considerações-de-deploy">Considerações de Deploy</h3>
+
+<p><strong>SQL Server:</strong></p>
+<ul>
+  <li>Licenciamento pode ser complexo</li>
+  <li>Custos podem escalar significativamente</li>
+  <li>Dependência do ecossistema Microsoft</li>
+  <li>Ferramentas administrativas amadurecidas</li>
+</ul>
+
+<p><strong>PostgreSQL:</strong></p>
+<ul>
+  <li>Deploy mais flexível e econômico</li>
+  <li>Maior variedade de opções de hosting</li>
+  <li>Requer mais conhecimento técnico para otimização</li>
+  <li>Comunidade forte mas suporte comercial opcional</li>
+</ul>
+
+    </div>
+    <nav class="pagination">
+        
+        <a href="/interview_questions/152/" class="previous button button-ghost"
+            aria-label="Previous question">&laquo; Question 152</a>
+        
+        <a href="/blog/pt-br/interview/questoes-para-entrevistas/" class="all-questions button button-ghost"
+            aria-label="All questions">All Questions</a>
+        
+        <a href="/interview_questions/154/" class="next button button-ghost" aria-label="Next question">Question 154 &raquo;</a>
+        
+    </nav>
+</article>
+  </div>
+</article>
+
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <ul class="social">
+  <li><a href="mailto:matheus.costa.vieira@gmail.com" title="Personal mail" target="_blank"><i class="icon icon-mail"></i></a></li>
+  <li><a href="https://github.com/matheus-vieira" title="Github Profile" target="_blank"><i class="icon icon-github"></i></a></li>
+  <li><a href="https://twitter.com/macostavieira" title="Twitter Profile" target="_blank"><i class="icon icon-twitter"></i></a></li>
+  <li><a href="https://facebook.com/macovieira" title="Facebook Profile" target="_blank"><i class="icon icon-facebook"></i></a></li>
+  <li><a href="https://linkedin.com/in/macostavieira" title="LinkedIn Profile" target="_blank"><i class="icon icon-linkedin"></i></a></li>
+  <li><a href="https://api.whatsapp.com/send?phone=5541988024599&text=E ae!" title="Send me an whatsapp" target="_blank"><i class="icon icon-whatsapp"></i></a></li>
+  <li><a href="tel:5541988024599" title="Call me" target="_blank"><i class="icon icon-phone"></i></a></li>
+  <li><a href="/tools/" title="Tools"><i class="icon icon-wrench"></i></a></li>
+  <li><a href="/tools/questions/" title="Questions"><i class="icon icon-question"></i></a></li>
+</ul>
+    <p class="txt-medium-gray">
+      <small>&copy;mvieira 2025 All rights reserved. Made with <a href="http://jekyllrb.com/" target="_blank">Jekyll</a> and ♥</small>
+    </p>
+  </div>
+</footer>
+
+
+  <a href="https://github.com/matheus-vieira/matheus-vieira.github.io" target="_blank" class="github-corner" title="mvieira github repository">
+    <svg width="80" height="80" viewBox="0 0 250 250">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path
+            d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+            fill="currentColor" class="octo-arm"></path>
+        <path
+            d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+            fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+</body>
+</html>

@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+  <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Cache-Control" content="only-if-cached"/>
+<meta http-equiv="Cache-Control" content="max-age=120"/>
+
+<title>Como implementar o padrão Observer de forma eficiente e thread-safe</title>
+
+<meta name="description" content="Introdução">
+
+<link rel="stylesheet" href="/css/main.css">
+<link rel="canonical" href="http://matheus-vieira.github.io/interview_questions/154/">
+<link rel="alternate" type="application/rss+xml" title="Matheus Costa Vieira - Senior Software Engineer, Dad & Husband" href="http://matheus-vieira.github.io/feed.xml" />
+<link rel="shortcut icon" href="/images/favicon.ico" type="image/png">
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-174941014-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-174941014-1');
+</script>
+
+
+</head>
+<body>
+  <!-- Google Tag Manager (noscript) - Temporariamente desabilitado -->
+  
+  <!-- End Google Tag Manager (noscript) -->
+  <header class="site-header">
+  <div class="container">
+    <label title="Toggle menu checkbox"></label>
+      <input type="checkbox" id="toggleNavbar">
+    </label>
+    <div class="logo">
+      <a href="/" alt="mvieira" title="mvieira">
+        mvieira
+      </a>
+    </div>
+    <label for="toggleNavbar" role="button" class="toggle-navbar-button" title="Toggle menu button">
+      <i class="icon icon-menu"></i>
+      <i class="icon icon-cross"></i>
+    </label>
+    <nav class="navbar">
+      <ul>
+        
+          <li>
+            <a href="/about" title="About">
+              About
+            </a>
+          </li>
+        
+          <li>
+            <a href="/blog" title="Blog">
+              Blog
+            </a>
+          </li>
+        
+          <li>
+            <a href="/contact" title="Contact">
+              Contact
+            </a>
+          </li>
+        
+          <li>
+            <a href="/courses" title="Courses">
+              Courses
+            </a>
+          </li>
+        
+          <li>
+            <a href="/resume" title="Resume">
+              Resume
+            </a>
+          </li>
+        
+          <li>
+            <a href="/study" title="Study">
+              Study
+            </a>
+          </li>
+        
+        <li>
+          <a href="/feed.xml" target="_blank" title="Site Feed">
+            <i class="icon icon-rss"></i>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+<main class="main-container">
+  <div class="container">
+    <article role="article" class="page card">
+  <header class="post-header">
+    <h1 class="post-title">Como implementar o padrão Observer de forma eficiente e thread-safe</h1>
+  </header>
+
+  <div class="post-content">
+    
+
+
+
+
+
+
+
+<article role="article" class="post">
+    <div class="card">
+        <header class="post-header">
+            <p>
+            <h2><strong>Question</strong> &mdash; <span class="question-order">154</span></h2>
+            </p>
+            
+            <p>
+            <h3><strong>Tags</strong> &mdash; <span class="question-tags">design-patterns, observer, gof, behavioral-patterns, events, thread-safety, performance, notifications</span></h3>
+            </p>
+            
+        </header>
+    </div>
+    <div class="post-content">
+        <h2 id="introdução">Introdução</h2>
+
+<p>O padrão Observer é um padrão comportamental que define uma relação de dependência um-para-muitos entre objetos, permitindo que múltiplos objetos sejam automaticamente notificados quando o estado de um objeto observado muda. A implementação eficiente e thread-safe é crucial em ambientes concorrentes modernos.</p>
+
+<h2 id="conceito-chave">Conceito-chave</h2>
+
+<p>O Observer estabelece um mecanismo de notificação loose-coupled onde o subject (observado) mantém uma lista de observers (observadores) e os notifica automaticamente sobre mudanças de estado. A eficiência e thread-safety são alcançadas através de técnicas como copy-on-iteration, weak references, e mecanismos de sincronização adequados.</p>
+
+<h2 id="tópicos-relevantes">Tópicos Relevantes</h2>
+
+<h3 id="implementação-básica-thread-safe">Implementação básica thread-safe</h3>
+
+<pre><code class="language-csharp">// Interface do Observer
+public interface IObserver&lt;T&gt;
+{
+    void Update(T data);
+}
+
+// Interface do Subject
+public interface ISubject&lt;T&gt;
+{
+    void Subscribe(IObserver&lt;T&gt; observer);
+    void Unsubscribe(IObserver&lt;T&gt; observer);
+    void Notify(T data);
+}
+
+// Implementação thread-safe com ReaderWriterLockSlim
+public class ThreadSafeSubject&lt;T&gt; : ISubject&lt;T&gt;
+{
+    private readonly HashSet&lt;IObserver&lt;T&gt;&gt; _observers;
+    private readonly ReaderWriterLockSlim _lock;
+
+    public ThreadSafeSubject()
+    {
+        _observers = new HashSet&lt;IObserver&lt;T&gt;&gt;();
+        _lock = new ReaderWriterLockSlim(LockRecursionPolicy.NoRecursion);
+    }
+
+    public void Subscribe(IObserver&lt;T&gt; observer)
+    {
+        if (observer == null) throw new ArgumentNullException(nameof(observer));
+
+        _lock.EnterWriteLock();
+        try
+        {
+            _observers.Add(observer);
+        }
+        finally
+        {
+            _lock.ExitWriteLock();
+        }
+    }
+
+    public void Unsubscribe(IObserver&lt;T&gt; observer)
+    {
+        if (observer == null) return;
+
+        _lock.EnterWriteLock();
+        try
+        {
+            _observers.Remove(observer);
+        }
+        finally
+        {
+            _lock.ExitWriteLock();
+        }
+    }
+
+    public void Notify(T data)
+    {
+        // Copy-on-iteration pattern para thread-safety
+        IObserver&lt;T&gt;[] observersCopy;
+        
+        _lock.EnterReadLock();
+        try
+        {
+            observersCopy = _observers.ToArray();
+        }
+        finally
+        {
+            _lock.ExitReadLock();
+        }
+
+        // Notificar fora do lock para evitar deadlocks
+        foreach (var observer in observersCopy)
+        {
+            try
+            {
+                observer.Update(data);
+            }
+            catch (Exception ex)
+            {
+                // Log exception mas continue notificando outros observers
+                OnObserverException?.Invoke(observer, ex);
+            }
+        }
+    }
+
+    public event Action&lt;IObserver&lt;T&gt;, Exception&gt; OnObserverException;
+
+    public void Dispose()
+    {
+        _lock?.EnterWriteLock();
+        try
+        {
+            _observers?.Clear();
+        }
+        finally
+        {
+            _lock?.ExitWriteLock();
+            _lock?.Dispose();
+        }
+    }
+}
+</code></pre>
+
+<h3 id="implementação-com-weak-references">Implementação com Weak References</h3>
+
+<pre><code class="language-csharp">// Observer com weak references para evitar vazamentos de memória
+public class WeakReferenceSubject&lt;T&gt; : ISubject&lt;T&gt;
+{
+    private readonly List&lt;WeakReference&lt;IObserver&lt;T&gt;&gt;&gt; _observers;
+    private readonly object _lock = new object();
+
+    public WeakReferenceSubject()
+    {
+        _observers = new List&lt;WeakReference&lt;IObserver&lt;T&gt;&gt;&gt;();
+    }
+
+    public void Subscribe(IObserver&lt;T&gt; observer)
+    {
+        if (observer == null) throw new ArgumentNullException(nameof(observer));
+
+        lock (_lock)
+        {
+            // Remove referencias mortas antes de adicionar nova
+            CleanupDeadReferences();
+            _observers.Add(new WeakReference&lt;IObserver&lt;T&gt;&gt;(observer));
+        }
+    }
+
+    public void Unsubscribe(IObserver&lt;T&gt; observer)
+    {
+        if (observer == null) return;
+
+        lock (_lock)
+        {
+            for (int i = _observers.Count - 1; i &gt;= 0; i--)
+            {
+                if (_observers[i].TryGetTarget(out var target) &amp;&amp; 
+                    ReferenceEquals(target, observer))
+                {
+                    _observers.RemoveAt(i);
+                    break;
+                }
+            }
+        }
+    }
+
+    public void Notify(T data)
+    {
+        List&lt;IObserver&lt;T&gt;&gt; activeObservers;
+
+        lock (_lock)
+        {
+            activeObservers = new List&lt;IObserver&lt;T&gt;&gt;(_observers.Count);
+            
+            for (int i = _observers.Count - 1; i &gt;= 0; i--)
+            {
+                if (_observers[i].TryGetTarget(out var observer))
+                {
+                    activeObservers.Add(observer);
+                }
+                else
+                {
+                    // Remove referência morta
+                    _observers.RemoveAt(i);
+                }
+            }
+        }
+
+        // Notificar fora do lock
+        Parallel.ForEach(activeObservers, observer =&gt;
+        {
+            try
+            {
+                observer.Update(data);
+            }
+            catch (Exception ex)
+            {
+                OnObserverException?.Invoke(observer, ex);
+            }
+        });
+    }
+
+    private void CleanupDeadReferences()
+    {
+        for (int i = _observers.Count - 1; i &gt;= 0; i--)
+        {
+            if (!_observers[i].TryGetTarget(out _))
+            {
+                _observers.RemoveAt(i);
+            }
+        }
+    }
+
+    public event Action&lt;IObserver&lt;T&gt;, Exception&gt; OnObserverException;
+}
+</code></pre>
+
+<h3 id="implementação-com-asyncawait">Implementação com Async/Await</h3>
+
+<pre><code class="language-csharp">// Observer assíncrono
+public interface IAsyncObserver&lt;T&gt;
+{
+    Task UpdateAsync(T data, CancellationToken cancellationToken = default);
+}
+
+public class AsyncSubject&lt;T&gt; : IDisposable
+{
+    private readonly ConcurrentBag&lt;IAsyncObserver&lt;T&gt;&gt; _observers;
+    private readonly SemaphoreSlim _semaphore;
+
+    public AsyncSubject()
+    {
+        _observers = new ConcurrentBag&lt;IAsyncObserver&lt;T&gt;&gt;();
+        _semaphore = new SemaphoreSlim(1, 1);
+    }
+
+    public async Task SubscribeAsync(IAsyncObserver&lt;T&gt; observer)
+    {
+        if (observer == null) throw new ArgumentNullException(nameof(observer));
+
+        await _semaphore.WaitAsync();
+        try
+        {
+            _observers.Add(observer);
+        }
+        finally
+        {
+            _semaphore.Release();
+        }
+    }
+
+    public async Task NotifyAsync(T data, CancellationToken cancellationToken = default)
+    {
+        var observers = _observers.ToArray();
+        
+        var tasks = observers.Select(async observer =&gt;
+        {
+            try
+            {
+                await observer.UpdateAsync(data, cancellationToken);
+            }
+            catch (Exception ex)
+            {
+                OnObserverException?.Invoke(observer, ex);
+            }
+        });
+
+        await Task.WhenAll(tasks);
+    }
+
+    public async Task NotifyAsync(T data, TimeSpan timeout)
+    {
+        using (var cts = new CancellationTokenSource(timeout))
+        {
+            await NotifyAsync(data, cts.Token);
+        }
+    }
+
+    public event Action&lt;IAsyncObserver&lt;T&gt;, Exception&gt; OnObserverException;
+
+    public void Dispose()
+    {
+        _semaphore?.Dispose();
+    }
+}
+</code></pre>
+
+<h2 id="exemplo-prático">Exemplo Prático</h2>
+
+<p>Sistema de monitoramento de preços de ações com diferentes tipos de observers:</p>
+
+<pre><code class="language-csharp">// Modelo de dados
+public class StockPrice
+{
+    public string Symbol { get; set; }
+    public decimal Price { get; set; }
+    public decimal Change { get; set; }
+    public DateTime Timestamp { get; set; }
+}
+
+// Observer para logging
+public class StockPriceLogger : IObserver&lt;StockPrice&gt;
+{
+    private readonly ILogger _logger;
+
+    public StockPriceLogger(ILogger logger)
+    {
+        _logger = logger;
+    }
+
+    public void Update(StockPrice data)
+    {
+        _logger.Log($"[{data.Timestamp}] {data.Symbol}: ${data.Price} ({data.Change:+0.00;-0.00;0.00})");
+    }
+}
+
+// Observer para alertas
+public class StockPriceAlertService : IAsyncObserver&lt;StockPrice&gt;
+{
+    private readonly INotificationService _notificationService;
+    private readonly Dictionary&lt;string, decimal&gt; _alertThresholds;
+
+    public StockPriceAlertService(INotificationService notificationService)
+    {
+        _notificationService = notificationService;
+        _alertThresholds = new Dictionary&lt;string, decimal&gt;();
+    }
+
+    public void SetAlert(string symbol, decimal threshold)
+    {
+        _alertThresholds[symbol] = threshold;
+    }
+
+    public async Task UpdateAsync(StockPrice data, CancellationToken cancellationToken = default)
+    {
+        if (_alertThresholds.TryGetValue(data.Symbol, out var threshold))
+        {
+            if (Math.Abs(data.Change) &gt;= threshold)
+            {
+                var message = $"ALERT: {data.Symbol} moved {data.Change:+0.00;-0.00;0.00} to ${data.Price}";
+                await _notificationService.SendAlertAsync(message, cancellationToken);
+            }
+        }
+    }
+}
+
+// Observer para cache/armazenamento
+public class StockPriceCache : IObserver&lt;StockPrice&gt;
+{
+    private readonly ConcurrentDictionary&lt;string, StockPrice&gt; _cache;
+    private readonly IRepository&lt;StockPrice&gt; _repository;
+
+    public StockPriceCache(IRepository&lt;StockPrice&gt; repository)
+    {
+        _cache = new ConcurrentDictionary&lt;string, StockPrice&gt;();
+        _repository = repository;
+    }
+
+    public void Update(StockPrice data)
+    {
+        // Atualizar cache
+        _cache.AddOrUpdate(data.Symbol, data, (key, oldValue) =&gt; data);
+
+        // Persistir de forma assíncrona (fire-and-forget)
+        Task.Run(async () =&gt;
+        {
+            try
+            {
+                await _repository.SaveAsync(data);
+            }
+            catch (Exception ex)
+            {
+                // Log error but don't throw
+                Console.WriteLine($"Error saving stock price: {ex.Message}");
+            }
+        });
+    }
+
+    public StockPrice GetLatestPrice(string symbol)
+    {
+        _cache.TryGetValue(symbol, out var price);
+        return price;
+    }
+}
+
+// Sistema principal de monitoramento
+public class StockPriceMonitor : IDisposable
+{
+    private readonly ThreadSafeSubject&lt;StockPrice&gt; _syncSubject;
+    private readonly AsyncSubject&lt;StockPrice&gt; _asyncSubject;
+    private readonly Timer _priceUpdateTimer;
+    private readonly Random _random = new Random();
+
+    public StockPriceMonitor()
+    {
+        _syncSubject = new ThreadSafeSubject&lt;StockPrice&gt;();
+        _asyncSubject = new AsyncSubject&lt;StockPrice&gt;();
+        
+        // Simular atualizações de preço
+        _priceUpdateTimer = new Timer(SimulatePriceUpdate, null, 
+            TimeSpan.FromSeconds(1), TimeSpan.FromSeconds(1));
+    }
+
+    public void SubscribeSync(IObserver&lt;StockPrice&gt; observer)
+    {
+        _syncSubject.Subscribe(observer);
+    }
+
+    public async Task SubscribeAsync(IAsyncObserver&lt;StockPrice&gt; observer)
+    {
+        await _asyncSubject.SubscribeAsync(observer);
+    }
+
+    private async void SimulatePriceUpdate(object state)
+    {
+        var symbols = new[] { "AAPL", "GOOGL", "MSFT", "AMZN" };
+        var symbol = symbols[_random.Next(symbols.Length)];
+        
+        var price = new StockPrice
+        {
+            Symbol = symbol,
+            Price = 100 + _random.Next(-50, 51),
+            Change = (_random.NextDouble() - 0.5) * 10,
+            Timestamp = DateTime.UtcNow
+        };
+
+        // Notificar observers síncronos
+        _syncSubject.Notify(price);
+
+        // Notificar observers assíncronos
+        await _asyncSubject.NotifyAsync(price, TimeSpan.FromSeconds(5));
+    }
+
+    public void Dispose()
+    {
+        _priceUpdateTimer?.Dispose();
+        _syncSubject?.Dispose();
+        _asyncSubject?.Dispose();
+    }
+}
+
+// Uso do sistema
+public class StockMonitoringService
+{
+    public async Task StartMonitoringAsync()
+    {
+        var monitor = new StockPriceMonitor();
+        var logger = new ConsoleLogger();
+        var notificationService = new EmailNotificationService();
+        var repository = new SqlStockPriceRepository();
+
+        // Configurar observers
+        var priceLogger = new StockPriceLogger(logger);
+        var alertService = new StockPriceAlertService(notificationService);
+        var priceCache = new StockPriceCache(repository);
+
+        // Configurar alertas
+        alertService.SetAlert("AAPL", 5.0m);
+        alertService.SetAlert("GOOGL", 10.0m);
+
+        // Registrar observers
+        monitor.SubscribeSync(priceLogger);
+        monitor.SubscribeSync(priceCache);
+        await monitor.SubscribeAsync(alertService);
+
+        // Manter sistema rodando
+        Console.WriteLine("Monitoramento iniciado. Pressione qualquer tecla para parar...");
+        Console.ReadKey();
+
+        monitor.Dispose();
+    }
+}
+</code></pre>
+
+<h2 id="benefícios">Benefícios</h2>
+
+<h3 id="1-thread-safety">1. <strong>Thread-Safety</strong></h3>
+
+<ul>
+  <li>ReaderWriterLockSlim para performance otimizada em cenários read-heavy</li>
+  <li>Copy-on-iteration previne modificações concorrentes durante notificação</li>
+  <li>Tratamento de exceções isolado evita corrupção de estado</li>
+</ul>
+
+<h3 id="2-gerenciamento-de-memória">2. <strong>Gerenciamento de Memória</strong></h3>
+
+<ul>
+  <li>Weak references previnem vazamentos de memória</li>
+  <li>Cleanup automático de referências mortas</li>
+  <li>Disposable pattern para liberação adequada de recursos</li>
+</ul>
+
+<h3 id="3-performance">3. <strong>Performance</strong></h3>
+
+<ul>
+  <li>Paralelização de notificações quando apropriado</li>
+  <li>Minimização de tempo em locks críticos</li>
+  <li>Otimizações para cenários read-heavy vs write-heavy</li>
+</ul>
+
+<h3 id="4-robustez">4. <strong>Robustez</strong></h3>
+
+<ul>
+  <li>Tratamento de exceções não afeta outros observers</li>
+  <li>Timeouts para operações assíncronas</li>
+  <li>Cancellation tokens para operações longas</li>
+</ul>
+
+<h3 id="5-flexibilidade">5. <strong>Flexibilidade</strong></h3>
+
+<ul>
+  <li>Suporte tanto para operações síncronas quanto assíncronas</li>
+  <li>Diferentes estratégias de notificação</li>
+  <li>Extensibilidade através de interfaces bem definidas</li>
+</ul>
+
+<h2 id="considerações-de-implementação">Considerações de Implementação</h2>
+
+<h3 id="escolha-da-estratégia-de-sincronização"><strong>Escolha da estratégia de sincronização:</strong></h3>
+<ul>
+  <li><code>lock</code> simples para casos básicos</li>
+  <li><code>ReaderWriterLockSlim</code> para cenários read-heavy</li>
+  <li><code>ConcurrentCollection</code> para operações lock-free quando possível</li>
+</ul>
+
+<h3 id="weak-vs-strong-references"><strong>Weak vs Strong References:</strong></h3>
+<ul>
+  <li>Weak references para prevenir vazamentos de memória</li>
+  <li>Strong references quando lifecycle é controlado explicitamente</li>
+</ul>
+
+<h3 id="notificação-síncrona-vs-assíncrona"><strong>Notificação Síncrona vs Assíncrona:</strong></h3>
+<ul>
+  <li>Síncrona para operações rápidas e determinísticas</li>
+  <li>Assíncrona para operações I/O ou processamento pesado</li>
+</ul>
+
+<h3 id="tratamento-de-exceções"><strong>Tratamento de Exceções:</strong></h3>
+<ul>
+  <li>Isolamento de falhas entre observers</li>
+  <li>Logging adequado para debugging</li>
+  <li>Recovery gracioso quando possível</li>
+</ul>
+
+    </div>
+    <nav class="pagination">
+        
+        <a href="/interview_questions/153/" class="previous button button-ghost"
+            aria-label="Previous question">&laquo; Question 153</a>
+        
+        <a href="/blog/pt-br/interview/questoes-para-entrevistas/" class="all-questions button button-ghost"
+            aria-label="All questions">All Questions</a>
+        
+        <a href="/interview_questions/155/" class="next button button-ghost" aria-label="Next question">Question 155 &raquo;</a>
+        
+    </nav>
+</article>
+  </div>
+</article>
+
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <ul class="social">
+  <li><a href="mailto:matheus.costa.vieira@gmail.com" title="Personal mail" target="_blank"><i class="icon icon-mail"></i></a></li>
+  <li><a href="https://github.com/matheus-vieira" title="Github Profile" target="_blank"><i class="icon icon-github"></i></a></li>
+  <li><a href="https://twitter.com/macostavieira" title="Twitter Profile" target="_blank"><i class="icon icon-twitter"></i></a></li>
+  <li><a href="https://facebook.com/macovieira" title="Facebook Profile" target="_blank"><i class="icon icon-facebook"></i></a></li>
+  <li><a href="https://linkedin.com/in/macostavieira" title="LinkedIn Profile" target="_blank"><i class="icon icon-linkedin"></i></a></li>
+  <li><a href="https://api.whatsapp.com/send?phone=5541988024599&text=E ae!" title="Send me an whatsapp" target="_blank"><i class="icon icon-whatsapp"></i></a></li>
+  <li><a href="tel:5541988024599" title="Call me" target="_blank"><i class="icon icon-phone"></i></a></li>
+  <li><a href="/tools/" title="Tools"><i class="icon icon-wrench"></i></a></li>
+  <li><a href="/tools/questions/" title="Questions"><i class="icon icon-question"></i></a></li>
+</ul>
+    <p class="txt-medium-gray">
+      <small>&copy;mvieira 2025 All rights reserved. Made with <a href="http://jekyllrb.com/" target="_blank">Jekyll</a> and ♥</small>
+    </p>
+  </div>
+</footer>
+
+
+  <a href="https://github.com/matheus-vieira/matheus-vieira.github.io" target="_blank" class="github-corner" title="mvieira github repository">
+    <svg width="80" height="80" viewBox="0 0 250 250">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path
+            d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+            fill="currentColor" class="octo-arm"></path>
+        <path
+            d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+            fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+</body>
+</html>

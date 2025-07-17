@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+  <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Cache-Control" content="only-if-cached"/>
+<meta http-equiv="Cache-Control" content="max-age=120"/>
+
+<title>RabbitMQ: Gerenciando Alto Volume sem Perder o Controle</title>
+
+<meta name="description" content="Quando você está desenvolvendo sistemas backend que precisam processar milhares ou milhões de mensagens diariamente, ter uma infraestrutura de mensageria rob...">
+
+<link rel="stylesheet" href="/css/main.css">
+<link rel="canonical" href="http://matheus-vieira.github.io/blog/pt-br/dotnet-e-fundamentos-azure/rabbitmq-gerenciando-alto-volume-sem-perder-controle/">
+<link rel="alternate" type="application/rss+xml" title="Matheus Costa Vieira - Senior Software Engineer, Dad & Husband" href="http://matheus-vieira.github.io/feed.xml" />
+<link rel="shortcut icon" href="/images/favicon.ico" type="image/png">
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-174941014-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-174941014-1');
+</script>
+
+
+</head>
+<body>
+  <!-- Google Tag Manager (noscript) - Temporariamente desabilitado -->
+  
+  <!-- End Google Tag Manager (noscript) -->
+  <header class="site-header">
+  <div class="container">
+    <label title="Toggle menu checkbox"></label>
+      <input type="checkbox" id="toggleNavbar">
+    </label>
+    <div class="logo">
+      <a href="/" alt="mvieira" title="mvieira">
+        mvieira
+      </a>
+    </div>
+    <label for="toggleNavbar" role="button" class="toggle-navbar-button" title="Toggle menu button">
+      <i class="icon icon-menu"></i>
+      <i class="icon icon-cross"></i>
+    </label>
+    <nav class="navbar">
+      <ul>
+        
+          <li>
+            <a href="/about" title="About">
+              About
+            </a>
+          </li>
+        
+          <li>
+            <a href="/blog" title="Blog">
+              Blog
+            </a>
+          </li>
+        
+          <li>
+            <a href="/contact" title="Contact">
+              Contact
+            </a>
+          </li>
+        
+          <li>
+            <a href="/courses" title="Courses">
+              Courses
+            </a>
+          </li>
+        
+          <li>
+            <a href="/resume" title="Resume">
+              Resume
+            </a>
+          </li>
+        
+          <li>
+            <a href="/study" title="Study">
+              Study
+            </a>
+          </li>
+        
+        <li>
+          <a href="/feed.xml" target="_blank" title="Site Feed">
+            <i class="icon icon-rss"></i>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+<main class="main-container">
+  <div class="container">
+    <article role="article" class="post">
+
+  <div class="card">
+    <header class="post-header">
+      <h1 class="post-title">RabbitMQ: Gerenciando Alto Volume sem Perder o Controle</h1>
+      <em class="post-meta">
+        <time>Jun 20, 2025</time>
+      </em>
+    </header>
+
+    <div class="post-content">
+      
+        <figure class="post-thumbnail">
+          <img src="https://www.rabbitmq.com/img/rabbitmq-logo.svg" alt="RabbitMQ: Gerenciando Alto Volume sem Perder o Controle">
+        </figure>
+      
+      <p>Quando você está desenvolvendo sistemas backend que precisam processar milhares ou milhões de mensagens diariamente, ter uma infraestrutura de mensageria robusta torna-se crítica. Na minha experiência arquitetando sistemas distribuídos para plataformas financeiras e de e-commerce, o RabbitMQ provou ser uma ferramenta confiável para gerenciar processamento de mensagens de alto volume sem perder o controle sobre a confiabilidade do sistema.</p>
+
+<p>Vou compartilhar uma arquitetura real e implementação prática que processou com sucesso picos de carga de mais de 100.000 mensagens por minuto em produção.</p>
+
+<h2 id="️-a-arquitetura-processamento-de-transações-financeiras">🏗️ A Arquitetura: Processamento de Transações Financeiras</h2>
+
+<p>Aqui está um diagrama simplificado de um sistema de processamento de transações financeiras que implementei:</p>
+
+<pre><code class="language-text">[Web API] → [RabbitMQ Exchange] → [Múltiplas Filas] → [Worker Services]
+    ↓              ↓                    ↓               ↓
+[Validação]   [Roteamento]         [Buffer]        [Processamento]
+    ↓              ↓                    ↓               ↓
+[Database]     [Dead Letter]      [Retry Logic]   [Notificações]
+</code></pre>
+
+<p><strong>Componentes Principais:</strong></p>
+
+<ul>
+  <li><strong>Topic Exchange</strong>: Roteia mensagens baseado no tipo e prioridade da transação</li>
+  <li><strong>Filas Duráveis</strong>: Garante persistência de mensagens durante reinicializações</li>
+  <li><strong>Múltiplos Worker Services</strong>: Escalabilidade horizontal para capacidade de processamento</li>
+  <li><strong>Dead Letter Queues</strong>: Trata mensagens com falha graciosamente</li>
+  <li><strong>Circuit Breakers</strong>: Previne falhas em cascata</li>
+</ul>
+
+<h2 id="-implementação-worker-services-net-core">🚀 Implementação: Worker Services .NET Core</h2>
+
+<p>Aqui está como implemento os componentes principais:</p>
+
+<h3 id="1-publisher-de-mensagens-web-api">1. Publisher de Mensagens (Web API)</h3>
+
+<pre><code class="language-csharp">public class TransactionPublisher
+{
+    private readonly IConnection _connection;
+    private readonly IModel _channel;
+    
+    public TransactionPublisher(IConfiguration config)
+    {
+        var factory = new ConnectionFactory()
+        {
+            HostName = config["RabbitMQ:Host"],
+            Port = config.GetValue&lt;int&gt;("RabbitMQ:Port"),
+            UserName = config["RabbitMQ:Username"],
+            Password = config["RabbitMQ:Password"],
+            VirtualHost = config["RabbitMQ:VirtualHost"]
+        };
+        
+        _connection = factory.CreateConnection();
+        _channel = _connection.CreateModel();
+        
+        // Declarar exchange
+        _channel.ExchangeDeclare(
+            exchange: "transactions.topic",
+            type: ExchangeType.Topic,
+            durable: true
+        );
+    }
+
+    public async Task PublishTransactionAsync(TransactionRequest transaction)
+    {
+        var routingKey = $"transaction.{transaction.Type}.{transaction.Priority}";
+        var message = JsonSerializer.Serialize(transaction);
+        var body = Encoding.UTF8.GetBytes(message);
+
+        var properties = _channel.CreateBasicProperties();
+        properties.Persistent = true; // Mensagem sobrevive a restart do broker
+        properties.MessageId = Guid.NewGuid().ToString();
+        properties.Timestamp = new AmqpTimestamp(DateTimeOffset.UtcNow.ToUnixTimeSeconds());
+
+        _channel.BasicPublish(
+            exchange: "transactions.topic",
+            routingKey: routingKey,
+            basicProperties: properties,
+            body: body
+        );
+
+        // Opcional: Confirmar publicação
+        _channel.WaitForConfirmsOrDie(TimeSpan.FromSeconds(5));
+    }
+}
+</code></pre>
+
+<h3 id="2-configuração-de-filas">2. Configuração de Filas</h3>
+
+<pre><code class="language-csharp">public class QueueConfiguration
+{
+    public static void ConfigureQueues(IModel channel)
+    {
+        // Fila de transações de alta prioridade
+        var highPriorityArgs = new Dictionary&lt;string, object&gt;
+        {
+            {"x-message-ttl", 300000}, // TTL de 5 minutos
+            {"x-dead-letter-exchange", "transactions.dlx"},
+            {"x-dead-letter-routing-key", "high-priority.failed"},
+            {"x-max-retries", 3}
+        };
+
+        channel.QueueDeclare(
+            queue: "transactions.high-priority",
+            durable: true,
+            exclusive: false,
+            autoDelete: false,
+            arguments: highPriorityArgs
+        );
+
+        // Fila de transações de prioridade normal
+        var normalPriorityArgs = new Dictionary&lt;string, object&gt;
+        {
+            {"x-message-ttl", 600000}, // TTL de 10 minutos
+            {"x-dead-letter-exchange", "transactions.dlx"},
+            {"x-dead-letter-routing-key", "normal.failed"},
+            {"x-max-retries", 5}
+        };
+
+        channel.QueueDeclare(
+            queue: "transactions.normal-priority",
+            durable: true,
+            exclusive: false,
+            autoDelete: false,
+            arguments: normalPriorityArgs
+        );
+
+        // Vincular filas ao exchange
+        channel.QueueBind("transactions.high-priority", "transactions.topic", "transaction.*.high");
+        channel.QueueBind("transactions.normal-priority", "transactions.topic", "transaction.*.normal");
+        channel.QueueBind("transactions.normal-priority", "transactions.topic", "transaction.*.low");
+    }
+}
+</code></pre>
+
+<h3 id="3-consumer-de-alta-performance">3. Consumer de Alta Performance</h3>
+
+<pre><code class="language-csharp">public class TransactionWorkerService : BackgroundService
+{
+    private readonly ILogger&lt;TransactionWorkerService&gt; _logger;
+    private readonly IServiceProvider _serviceProvider;
+    private IConnection _connection;
+    private IModel _channel;
+    private readonly SemaphoreSlim _semaphore;
+
+    public TransactionWorkerService(
+        ILogger&lt;TransactionWorkerService&gt; logger,
+        IServiceProvider serviceProvider)
+    {
+        _logger = logger;
+        _serviceProvider = serviceProvider;
+        _semaphore = new SemaphoreSlim(Environment.ProcessorCount * 2); // Limita processamento concorrente
+    }
+
+    protected override async Task ExecuteAsync(CancellationToken stoppingToken)
+    {
+        InitializeRabbitMQ();
+
+        var consumer = new AsyncEventingBasicConsumer(_channel);
+        consumer.Received += async (model, ea) =&gt;
+        {
+            await _semaphore.WaitAsync(stoppingToken);
+            
+            try
+            {
+                await ProcessMessageAsync(ea);
+                _channel.BasicAck(ea.DeliveryTag, false);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Erro processando mensagem {MessageId}", ea.BasicProperties.MessageId);
+                
+                // Implementar lógica de retry
+                var shouldRetry = ShouldRetry(ea);
+                // se shouldRetry true -&gt; Reenviar
+                // se shouldRetry false -&gt; Enviar para DLQ
+                _channel.BasicNack(ea.DeliveryTag, false, shouldRetry);
+                _channel.BasicNack(ea.DeliveryTag, false, shouldRetry);
+            }
+            finally
+            {
+                _semaphore.Release();
+            }
+        };
+
+        _channel.BasicConsume(
+            queue: "transactions.high-priority",
+            autoAck: false, // Acknowledgment manual para confiabilidade
+            consumer: consumer
+        );
+
+        // Manter o serviço rodando
+        while (!stoppingToken.IsCancellationRequested)
+        {
+            await Task.Delay(1000, stoppingToken);
+        }
+    }
+
+    private async Task ProcessMessageAsync(BasicDeliverEventArgs ea)
+    {
+        using var scope = _serviceProvider.CreateScope();
+        var processor = scope.ServiceProvider.GetRequiredService&lt;ITransactionProcessor&gt;();
+        
+        var body = ea.Body.ToArray();
+        var message = Encoding.UTF8.GetString(body);
+        var transaction = JsonSerializer.Deserialize&lt;TransactionRequest&gt;(message);
+
+        await processor.ProcessAsync(transaction);
+    }
+
+    private bool ShouldRetry(BasicDeliverEventArgs ea)
+    {
+        // Verificar contagem de retry dos headers
+        var retryCount = ea.BasicProperties.Headers?.ContainsKey("x-retry-count") == true
+            ? (int)ea.BasicProperties.Headers["x-retry-count"]
+            : 0;
+
+        return retryCount &lt; 3;
+    }
+}
+</code></pre>
+
+<h2 id="-monitoramento-e-observabilidade">📊 Monitoramento e Observabilidade</h2>
+
+<p>Monitorar sistemas de alto volume é crucial. Assim implemento observabilidade abrangente:</p>
+
+<pre><code class="language-csharp">public class RabbitMQMetrics
+{
+    private readonly ILogger&lt;RabbitMQMetrics&gt; _logger;
+    private readonly IMetrics _metrics;
+
+    public void RecordMessagePublished(string queueName)
+    {
+        _metrics.Measure.Counter.Increment("rabbitmq.messages.published", 
+            new MetricTags("queue", queueName));
+    }
+
+    public void RecordMessageProcessed(string queueName, TimeSpan processingTime)
+    {
+        _metrics.Measure.Counter.Increment("rabbitmq.messages.processed",
+            new MetricTags("queue", queueName));
+        
+        _metrics.Measure.Timer.Time("rabbitmq.processing.duration",
+            processingTime, new MetricTags("queue", queueName));
+    }
+
+    public void RecordMessageFailed(string queueName, string errorType)
+    {
+        _metrics.Measure.Counter.Increment("rabbitmq.messages.failed",
+            new MetricTags("queue", queueName, "error_type", errorType));
+    }
+}
+</code></pre>
+
+<h2 id="️-melhores-práticas-para-processamento-de-alto-volume">🛡️ Melhores Práticas para Processamento de Alto Volume</h2>
+
+<h3 id="1-gerenciamento-de-conexões">1. Gerenciamento de Conexões</h3>
+
+<pre><code class="language-csharp">// Use pool de conexões para cenários de alto throughput
+public class RabbitMQConnectionPool
+{
+    private readonly ConcurrentQueue&lt;IConnection&gt; _connections = new();
+    private readonly SemaphoreSlim _semaphore;
+
+    public async Task&lt;IConnection&gt; GetConnectionAsync()
+    {
+        await _semaphore.WaitAsync();
+        
+        if (_connections.TryDequeue(out var connection) &amp;&amp; connection.IsOpen)
+        {
+            return connection;
+        }
+
+        return CreateNewConnection();
+    }
+
+    public void ReturnConnection(IConnection connection)
+    {
+        if (connection.IsOpen)
+        {
+            _connections.Enqueue(connection);
+        }
+        
+        _semaphore.Release();
+    }
+}
+</code></pre>
+
+<h3 id="2-processamento-em-lote">2. Processamento em Lote</h3>
+
+<pre><code class="language-csharp">public class BatchTransactionProcessor
+{
+    private readonly List&lt;TransactionRequest&gt; _batch = new();
+    private readonly Timer _flushTimer;
+
+    public async Task AddToBatchAsync(TransactionRequest transaction)
+    {
+        lock (_batch)
+        {
+            _batch.Add(transaction);
+            
+            if (_batch.Count &gt;= 100) // Tamanho do lote
+            {
+                _ = Task.Run(FlushBatchAsync);
+            }
+        }
+    }
+
+    private async Task FlushBatchAsync()
+    {
+        List&lt;TransactionRequest&gt; currentBatch;
+        
+        lock (_batch)
+        {
+            currentBatch = new List&lt;TransactionRequest&gt;(_batch);
+            _batch.Clear();
+        }
+
+        if (currentBatch.Any())
+        {
+            await ProcessBatchAsync(currentBatch);
+        }
+    }
+}
+</code></pre>
+
+<h2 id="-configuração-para-produção">🔧 Configuração para Produção</h2>
+
+<h3 id="configuração-do-rabbitmq">Configuração do RabbitMQ</h3>
+
+<pre><code class="language-json">{
+  "RabbitMQ": {
+    "Host": "localhost",
+    "Port": 5672,
+    "Username": "guest",
+    "Password": "guest",
+    "VirtualHost": "/",
+    "ConnectionPoolSize": 10,
+    "ChannelPoolSize": 50,
+    "PrefetchCount": 100,
+    "ConfirmSelect": true,
+    "Heartbeat": 60
+  }
+}
+</code></pre>
+
+<h3 id="escalabilidade-do-worker-service">Escalabilidade do Worker Service</h3>
+
+<pre><code class="language-yaml"># Docker Compose para escalonamento horizontal
+version: '3.8'
+services:
+  transaction-worker:
+    image: transaction-worker:latest
+    scale: 5  # Múltiplas instâncias
+    environment:
+      - RABBITMQ_HOST=rabbitmq
+      - WORKER_CONCURRENCY=10
+    depends_on:
+      - rabbitmq
+</code></pre>
+
+<h2 id="-resultados-e-benefícios">📈 Resultados e Benefícios</h2>
+
+<p>Em produção, esta arquitetura entregou:</p>
+
+<ul>
+  <li><strong>Throughput</strong>: Mais de 100.000 mensagens/minuto durante picos de carga</li>
+  <li><strong>Latência</strong>: Tempo médio de processamento abaixo de 50ms</li>
+  <li><strong>Confiabilidade</strong>: Taxa de sucesso de entrega de mensagens de 99,9%</li>
+  <li><strong>Escalabilidade</strong>: Escalamento linear adicionando instâncias de worker</li>
+  <li><strong>Observabilidade</strong>: Visibilidade completa do fluxo de mensagens e saúde do sistema</li>
+</ul>
+
+<h2 id="-principais-aprendizados">🎯 Principais Aprendizados</h2>
+
+<ol>
+  <li><strong>Projete para Falhas</strong>: Sempre implemente dead letter queues e mecanismos de retry</li>
+  <li><strong>Monitore Tudo</strong>: Acompanhe fluxo de mensagens, tempos de processamento e taxas de erro</li>
+  <li><strong>Escale Horizontalmente</strong>: Use múltiplas instâncias de worker ao invés de aumentar capacidade de instância única</li>
+  <li><strong>Use Lotes Quando Possível</strong>: Agrupe operações para melhorar eficiência de banco de dados e APIs externas</li>
+  <li><strong>Teste Sob Carga</strong>: Use ferramentas como NBomber ou Artillery para validar sua arquitetura</li>
+</ol>
+
+<p>A robustez do RabbitMQ combinada com a performance do .NET torna esta uma excelente escolha para construir sistemas de mensageria confiáveis e de alto volume. A chave é projetar considerando cenários de falha e implementar monitoramento abrangente desde o primeiro dia.</p>
+
+<p>Quer se aprofundar em algum aspecto específico desta arquitetura? Fique à vontade para entrar em contato—sempre fico feliz em discutir design de sistemas distribuídos!</p>
+
+    </div>
+
+    
+
+
+  </div>
+
+</article>
+
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <ul class="social">
+  <li><a href="mailto:matheus.costa.vieira@gmail.com" title="Personal mail" target="_blank"><i class="icon icon-mail"></i></a></li>
+  <li><a href="https://github.com/matheus-vieira" title="Github Profile" target="_blank"><i class="icon icon-github"></i></a></li>
+  <li><a href="https://twitter.com/macostavieira" title="Twitter Profile" target="_blank"><i class="icon icon-twitter"></i></a></li>
+  <li><a href="https://facebook.com/macovieira" title="Facebook Profile" target="_blank"><i class="icon icon-facebook"></i></a></li>
+  <li><a href="https://linkedin.com/in/macostavieira" title="LinkedIn Profile" target="_blank"><i class="icon icon-linkedin"></i></a></li>
+  <li><a href="https://api.whatsapp.com/send?phone=5541988024599&text=E ae!" title="Send me an whatsapp" target="_blank"><i class="icon icon-whatsapp"></i></a></li>
+  <li><a href="tel:5541988024599" title="Call me" target="_blank"><i class="icon icon-phone"></i></a></li>
+  <li><a href="/tools/" title="Tools"><i class="icon icon-wrench"></i></a></li>
+  <li><a href="/tools/questions/" title="Questions"><i class="icon icon-question"></i></a></li>
+</ul>
+    <p class="txt-medium-gray">
+      <small>&copy;mvieira 2025 All rights reserved. Made with <a href="http://jekyllrb.com/" target="_blank">Jekyll</a> and ♥</small>
+    </p>
+  </div>
+</footer>
+
+
+  <a href="https://github.com/matheus-vieira/matheus-vieira.github.io" target="_blank" class="github-corner" title="mvieira github repository">
+    <svg width="80" height="80" viewBox="0 0 250 250">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path
+            d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+            fill="currentColor" class="octo-arm"></path>
+        <path
+            d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+            fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+</body>
+</html>

@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+  <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Cache-Control" content="only-if-cached"/>
+<meta http-equiv="Cache-Control" content="max-age=120"/>
+
+<title>O que é Managed Identity no Azure e qual sua importância para segurança?</title>
+
+<meta name="description" content="A Managed Identity é um recurso fundamental do Azure que simplifica e fortalece a autenticação de aplicações e serviços, eliminando a necessidade de gerencia...">
+
+<link rel="stylesheet" href="/css/main.css">
+<link rel="canonical" href="http://matheus-vieira.github.io/interview_questions/12/">
+<link rel="alternate" type="application/rss+xml" title="Matheus Costa Vieira - Senior Software Engineer, Dad & Husband" href="http://matheus-vieira.github.io/feed.xml" />
+<link rel="shortcut icon" href="/images/favicon.ico" type="image/png">
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-174941014-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-174941014-1');
+</script>
+
+
+</head>
+<body>
+  <!-- Google Tag Manager (noscript) - Temporariamente desabilitado -->
+  
+  <!-- End Google Tag Manager (noscript) -->
+  <header class="site-header">
+  <div class="container">
+    <label title="Toggle menu checkbox"></label>
+      <input type="checkbox" id="toggleNavbar">
+    </label>
+    <div class="logo">
+      <a href="/" alt="mvieira" title="mvieira">
+        mvieira
+      </a>
+    </div>
+    <label for="toggleNavbar" role="button" class="toggle-navbar-button" title="Toggle menu button">
+      <i class="icon icon-menu"></i>
+      <i class="icon icon-cross"></i>
+    </label>
+    <nav class="navbar">
+      <ul>
+        
+          <li>
+            <a href="/about" title="About">
+              About
+            </a>
+          </li>
+        
+          <li>
+            <a href="/blog" title="Blog">
+              Blog
+            </a>
+          </li>
+        
+          <li>
+            <a href="/contact" title="Contact">
+              Contact
+            </a>
+          </li>
+        
+          <li>
+            <a href="/courses" title="Courses">
+              Courses
+            </a>
+          </li>
+        
+          <li>
+            <a href="/resume" title="Resume">
+              Resume
+            </a>
+          </li>
+        
+          <li>
+            <a href="/study" title="Study">
+              Study
+            </a>
+          </li>
+        
+        <li>
+          <a href="/feed.xml" target="_blank" title="Site Feed">
+            <i class="icon icon-rss"></i>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+<main class="main-container">
+  <div class="container">
+    <article role="article" class="page card">
+  <header class="post-header">
+    <h1 class="post-title">O que é Managed Identity no Azure e qual sua importância para segurança?</h1>
+  </header>
+
+  <div class="post-content">
+    
+
+
+
+
+
+
+
+<article role="article" class="post">
+    <div class="card">
+        <header class="post-header">
+            <p>
+            <h2><strong>Question</strong> &mdash; <span class="question-order">12</span></h2>
+            </p>
+            
+            <p>
+            <h3><strong>Tags</strong> &mdash; <span class="question-tags">Azure, Managed Identity, Security</span></h3>
+            </p>
+            
+        </header>
+    </div>
+    <div class="post-content">
+        <p>A Managed Identity é um recurso fundamental do Azure que simplifica e fortalece a autenticação de aplicações e serviços, eliminando a necessidade de gerenciar credenciais sensíveis manualmente.</p>
+
+<h3 id="managed-identity--conceito-chave-identidade-gerenciada-para-aplicações">[Managed Identity] — Conceito-chave: Identidade Gerenciada para Aplicações</h3>
+
+<p>Managed Identity fornece uma identidade gerenciada automaticamente pelo Azure Active Directory (Azure AD) para recursos como máquinas virtuais, App Services, Function Apps, entre outros. Essa identidade pode ser usada para autenticar-se de forma segura em qualquer serviço do Azure que suporte autenticação via Azure AD, como Key Vault, Storage, SQL Database, sem a necessidade de armazenar senhas, chaves ou strings de conexão no código ou em arquivos de configuração.</p>
+
+<h4 id="tipos-de-managed-identity">Tipos de Managed Identity</h4>
+
+<ul>
+  <li><strong>System-assigned</strong>: Criada e vinculada a um único recurso. O ciclo de vida da identidade está atrelado ao recurso — ao deletar o recurso, a identidade é removida automaticamente.</li>
+  <li><strong>User-assigned</strong>: Criada independentemente e pode ser associada a múltiplos recursos, permitindo maior flexibilidade e reutilização.</li>
+</ul>
+
+<h4 id="por-que-managed-identity-é-importante-para-segurança">Por que Managed Identity é importante para segurança?</h4>
+
+<ul>
+  <li><strong>Elimina segredos em código</strong>: Remove a necessidade de armazenar credenciais sensíveis em arquivos, variáveis de ambiente ou pipelines, reduzindo riscos de vazamento.</li>
+  <li><strong>Autenticação segura e automatizada</strong>: O Azure gerencia todo o ciclo de vida da identidade, incluindo rotação e proteção das credenciais.</li>
+  <li><strong>Integração nativa com serviços Azure</strong>: Facilita a implementação de autenticação baseada em Azure AD, alinhando-se às melhores práticas de segurança e compliance.</li>
+  <li><strong>Governança e rastreabilidade</strong>: Permite controlar e auditar acessos de aplicações a recursos críticos, promovendo maior governança.</li>
+</ul>
+
+<h4 id="managed-identity--exemplo-prático">[Managed Identity] — Exemplo prático</h4>
+
+<p>Imagine uma Azure Function que precisa acessar segredos armazenados no Azure Key Vault. Ao habilitar uma Managed Identity para a Function e conceder permissão de leitura no Key Vault, a Function pode autenticar-se automaticamente via Azure AD e acessar os segredos necessários, sem expor nenhuma credencial sensível. Isso garante segurança, conformidade e simplifica a gestão de acessos em ambientes cloud-native.</p>
+
+    </div>
+    <nav class="pagination">
+        
+        <a href="/interview_questions/11/" class="previous button button-ghost"
+            aria-label="Previous question">&laquo; Question 11</a>
+        
+        <a href="/blog/pt-br/interview/questoes-para-entrevistas/" class="all-questions button button-ghost"
+            aria-label="All questions">All Questions</a>
+        
+        <a href="/interview_questions/13/" class="next button button-ghost" aria-label="Next question">Question 13 &raquo;</a>
+        
+    </nav>
+</article>
+  </div>
+</article>
+
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <ul class="social">
+  <li><a href="mailto:matheus.costa.vieira@gmail.com" title="Personal mail" target="_blank"><i class="icon icon-mail"></i></a></li>
+  <li><a href="https://github.com/matheus-vieira" title="Github Profile" target="_blank"><i class="icon icon-github"></i></a></li>
+  <li><a href="https://twitter.com/macostavieira" title="Twitter Profile" target="_blank"><i class="icon icon-twitter"></i></a></li>
+  <li><a href="https://facebook.com/macovieira" title="Facebook Profile" target="_blank"><i class="icon icon-facebook"></i></a></li>
+  <li><a href="https://linkedin.com/in/macostavieira" title="LinkedIn Profile" target="_blank"><i class="icon icon-linkedin"></i></a></li>
+  <li><a href="https://api.whatsapp.com/send?phone=5541988024599&text=E ae!" title="Send me an whatsapp" target="_blank"><i class="icon icon-whatsapp"></i></a></li>
+  <li><a href="tel:5541988024599" title="Call me" target="_blank"><i class="icon icon-phone"></i></a></li>
+  <li><a href="/tools/" title="Tools"><i class="icon icon-wrench"></i></a></li>
+  <li><a href="/tools/questions/" title="Questions"><i class="icon icon-question"></i></a></li>
+</ul>
+    <p class="txt-medium-gray">
+      <small>&copy;mvieira 2025 All rights reserved. Made with <a href="http://jekyllrb.com/" target="_blank">Jekyll</a> and ♥</small>
+    </p>
+  </div>
+</footer>
+
+
+  <a href="https://github.com/matheus-vieira/matheus-vieira.github.io" target="_blank" class="github-corner" title="mvieira github repository">
+    <svg width="80" height="80" viewBox="0 0 250 250">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path
+            d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+            fill="currentColor" class="octo-arm"></path>
+        <path
+            d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+            fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+</body>
+</html>
