@@ -19,7 +19,7 @@
   "devDependencies": {
     "@axe-core/playwright": "^4.8.0",
     "@lhci/cli": "^0.15.1",
-    "@playwright/test": "^1.40.0",
+    "@playwright/test": "^1.56.1",
     "axe-core": "^4.8.0",
     "cheerio": "^1.0.0-rc.12",
     "cross-env": "^7.0.3",
