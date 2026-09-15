@@ -12,15 +12,15 @@ en-us:
   jobtitle: Senior IT System Analyst
   description: |
     <ul>
-      <li>Built integration systems for payment processing in notary offices.</li>
-      <li>Reduced evaluation time by 30% through automation and asynchronous processing.</li>
+      <li>Developed integration systems for payment processing in notary offices, improving operational consistency and compliance with financial workflows.</li>
+      <li>Reduced processing time by 30% through automation, asynchronous job orchestration, and optimized backend logic.</li>
     </ul>
 pt-br:
   jobtitle: Analista de Sistemas Sênior
   description: |
     <ul>
-      <li>Desenvolvimento de sistemas de integração para processamento de pagamentos em cartórios.</li>
-      <li>Redução de tempo de processamento em 30% via automação e processamento assíncrono.</li>
+      <li>Desenvolvi sistemas de integração para processamento de pagamentos em cartórios, melhorando a consistência operacional e a conformidade com fluxos financeiros.</li>
+      <li>Reduzi o tempo de processamento em 30% por meio de automação, orquestração assíncrona e otimização da lógica de backend.</li>
     </ul>
 ---
 

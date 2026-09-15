@@ -13,19 +13,19 @@ en-us:
   jobtitle: System Analyst
   description: |
     <ul>
-      <li>Led team and technical interviews for new hires.</li>
-      <li>Architected and developed real-time systems for logistics and vehicle tracking.</li>
-      <li>Implemented dashboards and data mining solutions.</li>
-      <li>Applied advanced design patterns (GoF, GRASP) and multithreading.</li>
+      <li>Led technical interviews and team onboarding, helping shape a high-performance engineering team.</li>
+      <li>Architected and developed real-time logistics and vehicle-tracking systems, supporting critical operational processes.</li>
+      <li>Implemented dashboards and data-mining solutions to improve visibility, decision-making, and operational monitoring.</li>
+      <li>Applied advanced design patterns, multithreading, and performance-oriented engineering practices to support robust, high-scale solutions.</li>
     </ul>
 pt-br:
   jobtitle: Analista de Sistemas
   description: |
     <ul>
-      <li>Liderança de equipe e condução de entrevistas técnicas para novas contratações.</li>
-      <li>Arquitetura e desenvolvimento de sistemas em tempo real para logística e rastreamento de veículos.</li>
-      <li>Implementação de dashboards e soluções de mineração de dados.</li>
-      <li>Aplicação de padrões de projeto avançados (GoF, GRASP) e multithreading.</li>
+      <li>Liderei entrevistas técnicas e onboarding da equipe, contribuindo para a formação de uma equipe de engenharia de alto desempenho.</li>
+      <li>Arquitetura e desenvolvi sistemas em tempo real para logística e rastreamento de veículos, apoiando processos operacionais críticos.</li>
+      <li>Implementei dashboards e soluções de mineração de dados para melhorar visibilidade, tomada de decisão e monitoramento operacional.</li>
+      <li>Aplicação de padrões avançados de projeto, multithreading e práticas de engenharia orientadas a performance para sustentar soluções robustas e de alta escala.</li>
     </ul>
 ---
 

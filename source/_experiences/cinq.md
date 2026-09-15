@@ -11,15 +11,15 @@ en-us:
   jobtitle: System Analyst
   description: |
     <ul>
-      <li>Developed with Node.js, Selenium, and Dojo for test automation.</li>
-      <li>Participated in international projects with clients in the USA.</li>
+      <li>Built and maintained automated test solutions with Node.js, Selenium, and Dojo to improve software quality and reduce regression risk.</li>
+      <li>Worked on international projects with clients in the United States, supporting delivery, communication, and continuous integration across distributed teams.</li>
     </ul>
 pt-br:
   jobtitle: Analista de sistemas
   description: |
     <ul>
-      <li>Desenvolvimento com Node.js, Selenium e Dojo para automação de testes.</li>
-      <li>Projetos internacionais, reuniões e entregas para clientes nos EUA.</li>
+      <li>Construi e mantive soluções de automação de testes com Node.js, Selenium e Dojo para melhorar a qualidade do software e reduzir riscos de regressão.</li>
+      <li>Atuei em projetos internacionais com clientes nos Estados Unidos, apoiando entrega, comunicação e integração contínua em times distribuídos.</li>
     </ul>
 ---
 

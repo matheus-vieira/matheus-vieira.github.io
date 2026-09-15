@@ -12,17 +12,17 @@ en-us:
   jobtitle: Senior Software Developer
   description: |
     <ul>
-      <li>Modernized legacy web services using .NET.</li>
-      <li>Defined architecture and development processes.</li>
-      <li>Mentored junior developers.</li>
+      <li>Modernized legacy web services using .NET, improving maintainability and reducing operational risk in critical business flows.</li>
+      <li>Defined the application architecture and development standards, supporting faster delivery and more consistent engineering practices.</li>
+      <li>Mentored junior developers and promoted clean coding, testing, and agile delivery practices across the team.</li>
     </ul>
 pt-br:
   jobtitle: Desenvolvedor Sênior
   description: |
     <ul>
-      <li>Modernização de web services legados com .NET.</li>
-      <li>Definição de arquitetura e processos de desenvolvimento.</li>
-      <li>Mentoria para desenvolvedores juniores.</li>
+      <li>Modernizei web services legados com .NET, melhorando a manutenibilidade e reduzindo riscos operacionais em fluxos críticos do negócio.</li>
+      <li>Defini a arquitetura da aplicação e os padrões de desenvolvimento, apoiando entregas mais rápidas e práticas de engenharia mais consistentes.</li>
+      <li>Mentorei desenvolvedores juniores e promovi práticas de código limpo, testes e entrega ágil em toda a equipe.</li>
     </ul>
 ---
 
