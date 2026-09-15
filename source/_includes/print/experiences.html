@@ -20,7 +20,7 @@
     - {{ site.messages[lang].print-resume.title.current }}
     {% endif %}
   </p>
-  <p itemprop="description">Main responsibilities and achievements:</p>
+  <p itemprop="description">{{ site.messages[lang].print-resume.title.responsibilities }}:</p>
   {{ list[i][lang].description }}
 </article>
 {% endif %}

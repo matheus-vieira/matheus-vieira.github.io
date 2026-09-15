@@ -12,17 +12,17 @@ en-us:
   jobtitle: Senior Software Engineer
   description: |
     <ul>
-      <li>Update legacy frontend systems to modern UI.</li>
-      <li>Leading frontend architecture with React library.</li>
-      <li>Using Github Copilot to manage Spec-Drive development.</li>
+      <li>Modernized legacy frontend applications by introducing a more maintainable, user-focused UI.</li>
+      <li>Led frontend architecture decisions using React and TypeScript to improve scalability and delivery speed.</li>
+      <li>Used GitHub Copilot to support specification-driven development and accelerate implementation.</li>
     </ul>
 pt-br:
   jobtitle: Engenheiro de Software Sênior
   description: |
     <ul>
-      <li>Atualizaçao de sistemas de front legado para um UI moderna.</li>
-      <li>Liderar arquitetura de frontend com a biblioteca do React.</li>
-      <li>Utilizaçao de Github Copilot para gerenciar desenvolvimento orientado a especificações.</li>
+      <li>Modernizei sistemas de frontend legados, introduzindo uma interface mais sustentável e centrada no usuário.</li>
+      <li>Liderei a arquitetura de frontend com React e TypeScript para melhorar escalabilidade e velocidade de entrega.</li>
+      <li>Usei GitHub Copilot para apoiar o desenvolvimento orientado por especificações e acelerar a implementação.</li>
     </ul>
 ---
 

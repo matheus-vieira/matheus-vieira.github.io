@@ -1,6 +1,6 @@
 ---
 layout: js
-jobtitle: "Senior Software Engeenier"
+jobtitle: "Senior Software Engineer"
 admissiondate: 2016-10-22
 resignationdate:
 company: End2End Systems

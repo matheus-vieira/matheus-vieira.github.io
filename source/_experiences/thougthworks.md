@@ -12,17 +12,17 @@ en-us:
   jobtitle: Senior Software Engineer
   description: |
     <ul>
-      <li>Updated legacy systems to microservices architecture.</li>
-      <li>Leading architecture based on microservices with GCP cloud.</li>
-      <li>Tech Lead for international team. Building systems com .NET, Go, React and Typescript</li>
+      <li>Modernized legacy systems by transitioning them to a microservices architecture.</li>
+      <li>Led microservices-based architecture initiatives on GCP while guiding technical decisions across the platform.</li>
+      <li>Served as a technical lead for an international team, delivering solutions with .NET, Go, React, and TypeScript.</li>
     </ul>
 pt-br:
   jobtitle: Engenheiro de Software Sênior
   description: |
     <ul>
-      <li>Atualizaçao de sistemas legado para um arquitetura de micro serviços.</li>
-      <li>Arquiteturar sistemas baseado em microserviços utilizando GCP.</li>
-      <li>Líder técnico de times internacionais. Desenvolvimento de sistemas utilizar .NET, Go, React e Typescript.</li>
+      <li>Modernizei sistemas legados ao migrá-los para uma arquitetura de microsserviços.</li>
+      <li>Liderei iniciativas de arquitetura baseadas em microsserviços no GCP, orientando decisões técnicas da plataforma.</li>
+      <li>Atuei como líder técnico de uma equipe internacional, entregando soluções com .NET, Go, React e TypeScript.</li>
     </ul>
 ---
 
