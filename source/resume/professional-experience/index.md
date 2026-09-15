@@ -6,14 +6,10 @@ excerpt: "All my professional experiences"
 description: ""
 ---
 
-{% assign sorted_experiences = site.experiences | sort: 'admissiondate' | reverse %}
-{% assign end2end = sorted_experiences | where_exp: "item", "item.company contains 'End2End'" | first %}
-{% assign other_experiences = sorted_experiences | where_exp: "item", "item.company != 'End2End Systems'" %}
+{% assign current_experiences = site.experiences | where_exp: "item", "item.resignationdate == nil" | sort: 'admissiondate' %}
+{% assign past_experiences = site.experiences | where_exp: "item", "item.resignationdate != nil" | sort: 'resignationdate' | reverse %}
+{% assign sorted_experiences = current_experiences | concat: past_experiences %}
 
-{% if end2end %}
-  {{ end2end.output }}
-{% endif %}
-
-{% for experience in other_experiences %}
+{% for experience in sorted_experiences %}
   {{ experience.output }}
 {% endfor %}

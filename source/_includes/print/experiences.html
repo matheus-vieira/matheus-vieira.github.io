@@ -2,14 +2,9 @@
 
 <h2>{{ site.messages[lang].print-resume.title.experiences }}</h2>
 
-{% assign sorted = site.experiences | sort: 'resignationdate' | reverse %}
-{% assign end2end = sorted | where_exp: "item", "item.company contains 'End2End'" | first %}
-{% assign other_experiences = sorted %}
-{% assign list = "" | split: "" %}
-{% if end2end %}
-{% assign list = list | push: end2end %}
-{% endif %}
-{% assign list = list | concat: other_experiences %}
+{% assign current_experiences = site.experiences | where_exp: "item", "item.resignationdate == nil" | sort: 'admissiondate' %}
+{% assign past_experiences = site.experiences | where_exp: "item", "item.resignationdate != nil" | sort: 'resignationdate' | reverse %}
+{% assign list = current_experiences | concat: past_experiences %}
 
 {% for i in (0..site.max_experiences) %}
 {% if list[i] %}
