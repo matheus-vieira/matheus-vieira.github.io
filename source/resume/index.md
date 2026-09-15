@@ -6,9 +6,14 @@ excerpt: "Resume for Matheus Costa Vieira"
 description: ""
 ---
 
+{% assign first_experience = site.experiences | sort: "admissiondate" | first %}
+{% assign first_experience_year = first_experience.admissiondate | date: "%Y" %}
+{% assign current_year = "now" | date: "%Y" %}
+{% assign experience_years = current_year | minus: first_experience_year %}
+
 ## Executive Summary
 
-Senior Software Engineer and Technical Leader with 16+ years of experience designing, delivering, and modernizing enterprise-scale distributed systems. Skilled in .NET, Azure, microservices, cloud-native architecture, React, Kubernetes, Elasticsearch, and CI/CD. Proven track record leading cross-functional teams, modernizing legacy platforms, and improving system performance, reliability, scalability, and engineering quality.
+Senior Software Engineer and Technical Leader with {{ experience_years }}+ years of experience designing, delivering, and modernizing enterprise-scale distributed systems. Skilled in .NET, Azure, microservices, cloud-native architecture, React, Kubernetes, Elasticsearch, and CI/CD. Proven track record leading cross-functional teams, modernizing legacy platforms, and improving system performance, reliability, scalability, and engineering quality.
 
 ## Print versions of my curriculum
 

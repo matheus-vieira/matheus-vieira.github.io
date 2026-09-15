@@ -1,3 +1,12 @@
+{% assign first_experience = site.experiences | sort: "admissiondate" | first %}
+{% assign first_experience_year = first_experience.admissiondate | date: "%Y" %}
+{% assign current_year = "now" | date: "%Y" %}
+{% assign experience_years = current_year | minus: first_experience_year %}
+
 <h2>{{ site.messages[lang].print-resume.title.goal }}</h2>
 
-<p>{{ site.messages[lang].print-resume.goal }}</p>
+{% if lang == "pt-br" %}
+<p>Engenheiro de Software Sênior com {{ experience_years }}+ anos de experiência em arquitetura, desenvolvimento e modernização de sistemas escaláveis e de alto desempenho. Especialista em .NET, Azure, microsserviços, React, Kubernetes, Elasticsearch e pipelines de CI/CD, com trajetória comprovada em liderança técnica, modernização de sistemas legados e melhoria contínua de performance, confiabilidade e qualidade.</p>
+{% else %}
+<p>Senior Software Engineer with {{ experience_years }}+ years of experience in designing, developing, and modernizing scalable, high-performance systems. Specialist in .NET, Azure, microservices, React, Kubernetes, Elasticsearch, and CI/CD pipelines, with a proven track record in technical leadership, legacy modernization, and continuous improvement of reliability, performance, and engineering quality.</p>
+{% endif %}
