@@ -85,7 +85,7 @@ messages:
     main-container: Conteúdo principal do currículo
     print-alert: "Opcionalmente remova o cabeçalho nas opções de impressão"
     print-resume:
-      location: "São Paulo - SP - Brasil"
+      location: "Fazenda Rio Grande - PR - Brasil"
       title:
         goal: "Resumo Profissional"
         education: "Formação"
@@ -107,6 +107,7 @@ messages:
         databases: "Banco de Dados"
         messaging-caching: "Mensageria e Cache"
         testing-quality: "Teste e Qualidade"
+        ai-assisted-development: "Desenvolvimento Assistido por IA"
         observability: "Observabilidade"
         version-control: "Controle de Versão"
         professional-goals: "Objetivos Profissionais"
@@ -118,6 +119,7 @@ messages:
       databases: "SQL Server, Oracle, MongoDB, Elasticsearch"
       messaging-caching: "RabbitMQ, Redis"
       testing-quality: "Unit Testing, Automated Testing, Design Patterns, SOLID Principles, GRASP"
+      ai-assisted-development: "GitHub Copilot, Spec-Driven Development"
       observability: "Serilog, ELK Stack, Application Insights"
       version-control: "Git, GitLab, TFS, SVN"
       professional-goals: "Projetar soluções inovadoras aplicando princípios de design de software e padrões de arquitetura. Entregar aplicações de alta qualidade apoiadas por testes automatizados e com forte foco na experiência do usuário e na resolução de problemas."
@@ -127,7 +129,7 @@ messages:
     main-container: Main content of the resume
     print-alert: "Optionally remove header in print options"
     print-resume:
-      location: "São Paulo - SP - Brazil"
+      location: "Fazenda Rio Grande - PR - Brazil"
       title:
         goal: "Professional Summary"
         education: "Education"
@@ -149,6 +151,7 @@ messages:
         databases: "Databases"
         messaging-caching: "Messaging & Caching"
         testing-quality: "Testing & Quality"
+        ai-assisted-development: "AI-Assisted Development"
         observability: "Observability"
         version-control: "Version Control"
         professional-goals: "Professional Goals"
@@ -160,6 +163,7 @@ messages:
       databases: "SQL Server, Oracle, MongoDB, Elasticsearch"
       messaging-caching: "RabbitMQ, Redis"
       testing-quality: "Unit Testing, Automated Testing, Design Patterns, SOLID Principles, GRASP"
+      ai-assisted-development: "GitHub Copilot, Spec-Driven Development"
       observability: "Serilog, ELK Stack, Application Insights"
       version-control: "Git, GitLab, TFS, SVN"
       professional-goals: "To design innovative solutions by applying software design principles and architecture patterns. To deliver high-quality applications backed by automated testing and a strong focus on user experience and problem-solving."
