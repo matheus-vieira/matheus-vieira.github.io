@@ -46,15 +46,19 @@ My career has been focused on building scalable, distributed systems and leading
 
 ### Current Position
 
-* **Founder & Senior Software Engineer** - <small>***[End2End Systems](https://end2end.com.br/)*** *(2016 - Present)*</small>  
+* **Founder & Senior Software Engineer** - <small>***[End2End Systems](https://end2end.com.br/)*** *(2016 - Present)*</small>
   My consultancy company specializing in cloud-native solutions, Azure architecture, and digital transformation for enterprise clients.
 
 ### Recent Corporate Experience
 
-* **Senior Software Engineer** - <small>***[Dell Technologies](https://www.dell.com/)*** *(Oct 2022 - Mar 2025)*</small>  
-  Architected global microservices ecosystem, led legacy system modernization (10+ year address system), and implemented multi-country support with 24/7 availability. Specialized in Oracle + Elasticsearch integration and Kubernetes migration.
-* **Senior Software Engineer** - <small>***[GFT Brasil](https://www.gft.com/)*** *(Aug 2021 - Aug 2024)*</small>  
-  Migrated critical batch processes to event-driven microservices, achieving 50% throughput improvement and 85%+ automated test coverage. Focused on Azure Functions, RabbitMQ, and frontend optimization.
+* **Senior Software Engineer** - <small>***[Bluecielo do Brasil](https://www.bluecielo.com/)*** *(Oct 2024 - Present)*</small>
+  Modernized legacy frontend platforms with React and TypeScript, improving maintainability, user experience, and release velocity. Collaborated with cross-functional teams to drive specification-driven development and scalable .NET-based backend delivery.
+* **Senior Software Engineer** - <small>***[ThoughtWorks Brasil](https://www.thoughtworks.com/)*** *(Oct 2025 - Aug 2026)*</small>
+  Led modernization of legacy systems toward a microservices architecture on GCP, guiding technical decisions for an international delivery team. Delivered high-scale .NET, Go, React, and TypeScript solutions using event-driven patterns, cloud-native design, and strong engineering governance.
+* **Senior Software Engineer** - <small>***[Dell Technologies](https://www.dell.com/)*** *(Oct 2022 - Mar 2025)*</small>
+  Architected and led a global address validation platform across multiple countries with 24/7 availability, supporting high-volume transactional workflows. Rebuilt a 10+ year legacy system using SOLID principles, Oracle + Elasticsearch, reusable NuGet packages, and Kubernetes-based deployment models.
+* **Senior Software Engineer** - <small>***[GFT Brasil](https://www.gft.com/)*** *(Aug 2021 - Aug 2024)*</small>
+  Migrated critical batch ingestion pipelines to event-driven microservices on Azure, increasing throughput by 50% and reaching 85%+ automated test coverage. Improved AngularJS frontend performance and delivered scalable backend APIs with Azure Functions, RabbitMQ, and CI/CD automation.
 
 ## [Skills]({{ '/resume/skills/' }})
 
